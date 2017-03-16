@@ -41,7 +41,6 @@
 		27E6B8941CF34F5C00DD6418 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E6B8931CF34F5C00DD6418 /* MessageUI.framework */; };
 		2E025BD51DBFBC09002687EF /* loginResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E025BD41DBFBC09002687EF /* loginResultModel.swift */; };
 		2E025BD81DC10A31002687EF /* AppResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E025BD71DC10A31002687EF /* AppResultModel.swift */; };
-		2E025C0D1DC6FD02002687EF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E025C0C1DC6FD02002687EF /* Default-568h@2x.png */; };
 		2E12CA1F1E6F1D88009527BA /* AFNHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CA061E6F1D88009527BA /* AFNHelper.swift */; };
 		2E12CA201E6F1D88009527BA /* CommonFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CA071E6F1D88009527BA /* CommonFunction.swift */; };
 		2E12CA211E6F1D88009527BA /* GlobalClassSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2E12CA081E6F1D88009527BA /* GlobalClassSettings.bundle */; };
@@ -214,6 +213,7 @@
 		2EFB8CBB1E764BB500BC032F /* ScenicSpotMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB8CBA1E764BB500BC032F /* ScenicSpotMain.swift */; };
 		327B11301D58E414236AC24B /* Pods_ProjectFramework_Tourism.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6212B5E39C475CB11281041 /* Pods_ProjectFramework_Tourism.framework */; };
 		6FA646021E77CB91002EE63E /* ScenicSpotMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FA646011E77CB91002EE63E /* ScenicSpotMain.storyboard */; };
+		6FA968F41E7A76EF00B05E53 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA968F31E7A76EF00B05E53 /* Default-568h@2x.png */; };
 		6FDBB71A1E77ED3C004E9DC2 /* TicketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDBB7191E77ED3C004E9DC2 /* TicketCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -279,7 +279,6 @@
 		27E6B8931CF34F5C00DD6418 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		2E025BD41DBFBC09002687EF /* loginResultModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginResultModel.swift; sourceTree = "<group>"; };
 		2E025BD71DC10A31002687EF /* AppResultModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppResultModel.swift; sourceTree = "<group>"; };
-		2E025C0C1DC6FD02002687EF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		2E12CA061E6F1D88009527BA /* AFNHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AFNHelper.swift; sourceTree = "<group>"; };
 		2E12CA071E6F1D88009527BA /* CommonFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunction.swift; sourceTree = "<group>"; };
 		2E12CA081E6F1D88009527BA /* GlobalClassSettings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GlobalClassSettings.bundle; sourceTree = "<group>"; };
@@ -570,6 +569,7 @@
 		2EFB8CB81E763F2B00BC032F /* Specialty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Specialty.swift; sourceTree = "<group>"; };
 		2EFB8CBA1E764BB500BC032F /* ScenicSpotMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScenicSpotMain.swift; sourceTree = "<group>"; };
 		6FA646011E77CB91002EE63E /* ScenicSpotMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ScenicSpotMain.storyboard; sourceTree = "<group>"; };
+		6FA968F31E7A76EF00B05E53 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		6FDBB7191E77ED3C004E9DC2 /* TicketCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketCell.swift; sourceTree = "<group>"; };
 		C9D5BC7A35D61CCFAD13225E /* Pods-ProjectFramework_Tourism.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectFramework_Tourism.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectFramework_Tourism/Pods-ProjectFramework_Tourism.release.xcconfig"; sourceTree = "<group>"; };
 		F6212B5E39C475CB11281041 /* Pods_ProjectFramework_Tourism.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjectFramework_Tourism.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -633,7 +633,7 @@
 		27609BC31CB257810041E8B7 = {
 			isa = PBXGroup;
 			children = (
-				2E025C0C1DC6FD02002687EF /* Default-568h@2x.png */,
+				6FA968F31E7A76EF00B05E53 /* Default-568h@2x.png */,
 				27609BFD1CB257E40041E8B7 /* Podfile */,
 				27609BCE1CB257810041E8B7 /* ProjectFramework */,
 				27609BE31CB257810041E8B7 /* ProjectFrameworkTests */,
@@ -1696,6 +1696,7 @@
 				271653BA1CF6152E0028C465 /* SB_Register.storyboard in Resources */,
 				2E12CA211E6F1D88009527BA /* GlobalClassSettings.bundle in Resources */,
 				2E12CABA1E6F1E67009527BA /* MBProgressHUD.bundle in Resources */,
+				6FA968F41E7A76EF00B05E53 /* Default-568h@2x.png in Resources */,
 				2E2A3AFD1E723B6D00A70153 /* TravelAcy.storyboard in Resources */,
 				2E12CB041E6F1E6F009527BA /* MHSheetFoot.xib in Resources */,
 				2E2611A21E5FBB2300CC70F9 /* Meeting.storyboard in Resources */,
@@ -1704,7 +1705,6 @@
 				2E2A3AF11E721D1900A70153 /* Restaurant.storyboard in Resources */,
 				2E2611921E5FB5B100CC70F9 /* Travel.storyboard in Resources */,
 				2E12CAAA1E6F1E67009527BA /* AlipaySDK.bundle in Resources */,
-				2E025C0D1DC6FD02002687EF /* Default-568h@2x.png in Resources */,
 				2EFB8C831E7325AB00BC032F /* Conference.storyboard in Resources */,
 				2E596AB41DD23F720027E03C /* loading.gif in Resources */,
 				2E2611A01E5FBB0B00CC70F9 /* TravelAgency.storyboard in Resources */,
