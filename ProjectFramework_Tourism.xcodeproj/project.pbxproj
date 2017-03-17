@@ -215,6 +215,7 @@
 		6F0ED2EB1E7A983B00A8E4FC /* ScenicSpotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0ED2E51E7A983B00A8E4FC /* ScenicSpotCell.swift */; };
 		6F0ED2EC1E7A983B00A8E4FC /* ScenicSpotMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F0ED2E61E7A983B00A8E4FC /* ScenicSpotMain.storyboard */; };
 		6F0ED2ED1E7A983B00A8E4FC /* TicketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0ED2E71E7A983B00A8E4FC /* TicketCell.swift */; };
+		6F0ED2EF1E7B6F4A00A8E4FC /* html.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6F0ED2EE1E7B6F4A00A8E4FC /* html.txt */; };
 		6FA968F41E7A76EF00B05E53 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA968F31E7A76EF00B05E53 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
@@ -572,6 +573,7 @@
 		6F0ED2E51E7A983B00A8E4FC /* ScenicSpotCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScenicSpotCell.swift; sourceTree = "<group>"; };
 		6F0ED2E61E7A983B00A8E4FC /* ScenicSpotMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ScenicSpotMain.storyboard; sourceTree = "<group>"; };
 		6F0ED2E71E7A983B00A8E4FC /* TicketCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketCell.swift; sourceTree = "<group>"; };
+		6F0ED2EE1E7B6F4A00A8E4FC /* html.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = html.txt; sourceTree = "<group>"; };
 		6FA968F31E7A76EF00B05E53 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C9D5BC7A35D61CCFAD13225E /* Pods-ProjectFramework_Tourism.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectFramework_Tourism.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectFramework_Tourism/Pods-ProjectFramework_Tourism.release.xcconfig"; sourceTree = "<group>"; };
 		F6212B5E39C475CB11281041 /* Pods_ProjectFramework_Tourism.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjectFramework_Tourism.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -636,6 +638,7 @@
 			isa = PBXGroup;
 			children = (
 				6FA968F31E7A76EF00B05E53 /* Default-568h@2x.png */,
+				6F0ED2EE1E7B6F4A00A8E4FC /* html.txt */,
 				27609BFD1CB257E40041E8B7 /* Podfile */,
 				27609BCE1CB257810041E8B7 /* ProjectFramework */,
 				27609BE31CB257810041E8B7 /* ProjectFrameworkTests */,
@@ -1085,12 +1088,12 @@
 		2E2302691E71D71700B05279 /* Scenic */ = {
 			isa = PBXGroup;
 			children = (
-				6F0ED2E31E7A983B00A8E4FC /* ScenicIntroduceCell.swift */,
-				6F0ED2E41E7A983B00A8E4FC /* ScenicSpot.storyboard */,
+				6F0ED2E21E7A983B00A8E4FC /* HotScenicSpotCell.swift */,
 				6F0ED2E51E7A983B00A8E4FC /* ScenicSpotCell.swift */,
+				6F0ED2E41E7A983B00A8E4FC /* ScenicSpot.storyboard */,
 				6F0ED2E61E7A983B00A8E4FC /* ScenicSpotMain.storyboard */,
 				6F0ED2E71E7A983B00A8E4FC /* TicketCell.swift */,
-				6F0ED2E21E7A983B00A8E4FC /* HotScenicSpotCell.swift */,
+				6F0ED2E31E7A983B00A8E4FC /* ScenicIntroduceCell.swift */,
 			);
 			path = Scenic;
 			sourceTree = "<group>";
@@ -1713,6 +1716,7 @@
 				2E2611A01E5FBB0B00CC70F9 /* TravelAgency.storyboard in Resources */,
 				2E2611A61E5FBB5700CC70F9 /* TourGuide.storyboard in Resources */,
 				2E12CB021E6F1E6F009527BA /* MHSheetCell.xib in Resources */,
+				6F0ED2EF1E7B6F4A00A8E4FC /* html.txt in Resources */,
 				2E26119A1E5FBA6800CC70F9 /* Scenic.storyboard in Resources */,
 				2E2611651E52BD8F00CC70F9 /* HoneMain.storyboard in Resources */,
 				2EFB8C911E737FC300BC032F /* ParkingPlace.storyboard in Resources */,

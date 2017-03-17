@@ -47,20 +47,25 @@ class ScenicSpotMain: CustomTemplateViewController {
     }()
 
     let identiFier  = "TicketCell"
+    let identifier2 = "ScenicIntroduceCell"
+    
     var CustomNavBar:UINavigationBar!=nil
     var backBtn:UIButton!=nil
     var cellectionBtn:UIButton!=nil
     var shareBtn:UIButton!=nil
     var alph: CGFloat = 0
     var head: UIView! = nil
+    var HTMLString: String! = nil
+    var height: CGFloat = 0
+    var flag: Bool = false
     
-
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.getData()
         self.setNavBar()
         self.setHeadView()
         self.initUI()
@@ -73,6 +78,20 @@ class ScenicSpotMain: CustomTemplateViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
+    //MARK: 获取数据/Users/zhupenggouyou/Documents/ProjectFramework_Tourism/html.txt
+    
+    func getData() -> Void {
+        do {
+            let str=try NSString(contentsOfFile: "/Users/zhupenggouyou/Documents/ProjectFramework_Tourism/html.txt",encoding: String.Encoding.utf8.rawValue)
+            HTMLString = str as String! 
+        }
+        catch {
+            
+        }
+      
+    }
+    
+    
     //MARK: 设置头部
     func setHeadView() -> Void {
         let titleArray: Array=["购票","景点介绍","用户点评"]
@@ -98,11 +117,14 @@ class ScenicSpotMain: CustomTemplateViewController {
             buttonBar.addSubview(button)
         }
     }
+    
+  
     //MARK: 设置导航栏
     func setNavBar() -> Void {
         CustomNavBar = UINavigationBar(frame: CGRect.init(x: 0, y: 0, width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight))
         //把导航栏渐变效果移除 
         CustomNavBar.setBackgroundImage(UIImage().ImageWithColor(color: CommonFunction.SystemColor().withAlphaComponent(alph), size: CGSize(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)), for: .default)
+        CustomNavBar.clipsToBounds=true
         self.view.addSubview(CustomNavBar)
         
         let CustomNavItem = UINavigationItem()
@@ -132,8 +154,7 @@ class ScenicSpotMain: CustomTemplateViewController {
         shareBtn.addTarget(self, action:#selector(buttonClick) , for: .touchUpInside)
         
         CustomNavItem.leftBarButtonItem=UIBarButtonItem.init(customView: backBtn)
-        CustomNavItem.rightBarButtonItems=[UIBarButtonItem.init(customView: shareBtn),UIBarButtonItem.init(customView: cellectionBtn)
-]
+        CustomNavItem.rightBarButtonItems=[UIBarButtonItem.init(customView: shareBtn),UIBarButtonItem.init(customView: cellectionBtn)]
 
         
         CustomNavBar.pushItem(CustomNavItem, animated: true)
@@ -228,7 +249,7 @@ class ScenicSpotMain: CustomTemplateViewController {
             return 100
         }
         else if (indexPath.section == 2){
-            return 300
+            return height
         }
         else{
             return 50
@@ -255,13 +276,26 @@ class ScenicSpotMain: CustomTemplateViewController {
             return 0
         }
     }
+    //数据源
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.section == 1){
             let cell = tableView.dequeueReusableCell(withIdentifier: identiFier, for: indexPath) as! TicketCell
             return cell
         }
         if (indexPath.section == 2) {
-            return UITableViewCell()
+            var cell  = tableView.dequeueReusableCell(withIdentifier: identifier2) as! ScenicIntroduceCell
+            if (flag == false) {
+                cell = ScenicIntroduceCell.init(style: .subtitle, reuseIdentifier: identifier2)
+                cell.selectionStyle = .none
+                cell.InitConfig(HTMLString)
+            }
+            //标记  不给WKwebViw一直加载
+            flag = true
+            cell.FuncCallbackValue(value: { [weak self]( height) -> Void in
+                self?.height = height
+                self?.tableView.reloadSections(NSIndexSet.init(index: 2) as IndexSet, with: .none)
+            })
+            return cell
         }
         else{
             let cell = UITableViewCell()
