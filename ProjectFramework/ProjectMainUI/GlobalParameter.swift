@@ -74,10 +74,10 @@ var Global_UserInfo=MyInfoModel()          //我的信息全局
 let StartOneImageList:[String] = ["index1","index2","index3","index4"]       //第一次启动引导页图片
 
 /// TabBarController 全局参数变量
-let TabBar_Title = ["首页","分类","游记","景点","我的"]      //标题
+let TabBar_Title = ["首页","频道","游记","景点","我的"]      //标题
 let TabBar_StoryName = ["HoneMain","ClassifCation","Travel","Attractions","My"]  //sb名称（UI)
-let TabBar_SelectedImage = ["Home_Click","Home_Click","Home_Click","Home_Click","Home_Click"]        //选择的图片
-let TabBar_NoSelectedImage = ["Home_Default","Home_Default","Home_Default","Home_Default","Home_Default"]      //未选择图片
+let TabBar_SelectedImage = ["Home_Click","ClassifCation_Click","Travel_Click","Attractions_Click","My_Click"]        //选择的图片
+let TabBar_NoSelectedImage = ["Home_Default","ClassifCation_Default","Travel_Default","Attractions_Default","My_Default"]      //未选择图片
 
  
 
