@@ -18,4 +18,5 @@ class HotScenicSpotCell: UICollectionViewCell {
     override func InitConfig(_ cell: Any) {
         
     }
+    
 }

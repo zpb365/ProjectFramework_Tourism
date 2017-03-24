@@ -20,5 +20,7 @@ class ScenicSpotCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    override func InitConfig(_ cell: Any) {
+        
+    }
 }

@@ -212,6 +212,8 @@
 		6F06CAF51E83C3D8005F2979 /* PulickIntroduceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F06CAF21E83C3D8005F2979 /* PulickIntroduceCell.swift */; };
 		6F06CAF61E83C3D8005F2979 /* PulickIntroduceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F06CAF31E83C3D8005F2979 /* PulickIntroduceView.swift */; };
 		6F06CAF71E83C3D8005F2979 /* UserCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F06CAF41E83C3D8005F2979 /* UserCommentCell.swift */; };
+		6F06CAF91E84F501005F2979 /* RestaurantDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F06CAF81E84F501005F2979 /* RestaurantDetail.swift */; };
+		6F06CAFB1E84F71D005F2979 /* RestaurantDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F06CAFA1E84F71D005F2979 /* RestaurantDetail.storyboard */; };
 		6F0ED2E01E7A981300A8E4FC /* ScenicSpot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0ED2DE1E7A981300A8E4FC /* ScenicSpot.swift */; };
 		6F0ED2E11E7A981300A8E4FC /* ScenicSpotMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0ED2DF1E7A981300A8E4FC /* ScenicSpotMain.swift */; };
 		6F0ED2E81E7A983B00A8E4FC /* HotScenicSpotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0ED2E21E7A983B00A8E4FC /* HotScenicSpotCell.swift */; };
@@ -589,6 +591,8 @@
 		6F06CAF21E83C3D8005F2979 /* PulickIntroduceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulickIntroduceCell.swift; sourceTree = "<group>"; };
 		6F06CAF31E83C3D8005F2979 /* PulickIntroduceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulickIntroduceView.swift; sourceTree = "<group>"; };
 		6F06CAF41E83C3D8005F2979 /* UserCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCommentCell.swift; sourceTree = "<group>"; };
+		6F06CAF81E84F501005F2979 /* RestaurantDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDetail.swift; sourceTree = "<group>"; };
+		6F06CAFA1E84F71D005F2979 /* RestaurantDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RestaurantDetail.storyboard; sourceTree = "<group>"; };
 		6F0ED2DE1E7A981300A8E4FC /* ScenicSpot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScenicSpot.swift; sourceTree = "<group>"; };
 		6F0ED2DF1E7A981300A8E4FC /* ScenicSpotMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScenicSpotMain.swift; sourceTree = "<group>"; };
 		6F0ED2E21E7A983B00A8E4FC /* HotScenicSpotCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotScenicSpotCell.swift; sourceTree = "<group>"; };
@@ -1427,6 +1431,7 @@
 			children = (
 				2E2A3AF01E721D1900A70153 /* Restaurant.storyboard */,
 				2E2A3AF41E721D5100A70153 /* RestaurantCell.swift */,
+				6F06CAFA1E84F71D005F2979 /* RestaurantDetail.storyboard */,
 			);
 			path = Restaurant;
 			sourceTree = "<group>";
@@ -1518,6 +1523,7 @@
 			isa = PBXGroup;
 			children = (
 				2EFB8CA91E763DE300BC032F /* Restaurant.swift */,
+				6F06CAF81E84F501005F2979 /* RestaurantDetail.swift */,
 			);
 			path = RestaurantController;
 			sourceTree = "<group>";
@@ -1776,6 +1782,7 @@
 				2E12CAAA1E6F1E67009527BA /* AlipaySDK.bundle in Resources */,
 				2EFB8C831E7325AB00BC032F /* Conference.storyboard in Resources */,
 				2E596AB41DD23F720027E03C /* loading.gif in Resources */,
+				6F06CAFB1E84F71D005F2979 /* RestaurantDetail.storyboard in Resources */,
 				2E2611A01E5FBB0B00CC70F9 /* TravelAgency.storyboard in Resources */,
 				2E2611A61E5FBB5700CC70F9 /* TourGuide.storyboard in Resources */,
 				2E12CB021E6F1E6F009527BA /* MHSheetCell.xib in Resources */,
@@ -1957,6 +1964,7 @@
 				2E12CA261E6F1D88009527BA /* Double+Extension.swift in Sources */,
 				27137D521CFB0336009E0B37 /* RegionViewController.swift in Sources */,
 				2E2A3AF51E721D5100A70153 /* RestaurantCell.swift in Sources */,
+				6F06CAF91E84F501005F2979 /* RestaurantDetail.swift in Sources */,
 				2E2611981E5FB5DA00CC70F9 /* Attractions.swift in Sources */,
 				2E12CA201E6F1D88009527BA /* CommonFunction.swift in Sources */,
 				2E2611B81E5FBBD600CC70F9 /* Shopping.swift in Sources */,
