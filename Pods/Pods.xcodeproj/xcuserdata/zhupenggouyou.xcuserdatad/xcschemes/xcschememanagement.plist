@@ -69,6 +69,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SnapKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SwiftTheme.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -92,12 +97,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>251BAD17812F7EBF6532EACF66F941C3</key>
+		<key>1FA7319329776889DA71C2CB1BE2E1BA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>439A6B7DA12ED8F8F37B95FF110858EB</key>
+		<key>251BAD17812F7EBF6532EACF66F941C3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -117,12 +122,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6F27E546C819A88096C7A3CE2F0B95B2</key>
+		<key>61C3F7639E7776B1C9C84F01439980DE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7458039D9DFE7A715140044979D2F192</key>
+		<key>6ABA7C041DDD29C6F14BA3E4CD1D7DB3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AB1D82337AE787D27C83AAE1067322CC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -132,12 +142,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C7CE3C183C27C44321A5EF4BA0D921E5</key>
+		<key>CF671F7E57B92905F1CC91D036D6B4A7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CF671F7E57B92905F1CC91D036D6B4A7</key>
+		<key>D030ABA4247B208998BFC267AD4422B6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -147,17 +157,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DA590998481F639E1BB0F81B9043A767</key>
+		<key>D596B362B0CB5611B3E5A8848ACEFB4D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DBEC9718D13A53977BE184369135225E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>E14A62900910444707A5504D25EC98DC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E550B8BD5E45833EF2AC8A6A2D025E1B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

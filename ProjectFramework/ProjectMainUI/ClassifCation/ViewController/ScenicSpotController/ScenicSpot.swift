@@ -77,7 +77,7 @@ class ScenicSpot: CustomTemplateViewController,UICollectionViewDelegateFlowLayou
         self.tableView.separatorColor = UIColor().TransferStringToColor("D6D6D6")
         self.numberOfRowsInSection=8//显示的个数
         self.numberOfSections=1//显示行数
-        self.tableViewheightForRowAt=140//行高
+        self.tableViewheightForRowAt=120//行高
         //collectionView
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
@@ -116,7 +116,7 @@ class ScenicSpot: CustomTemplateViewController,UICollectionViewDelegateFlowLayou
     // size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
         
-        return CGSize(width: 130, height: 120)
+        return CGSize(width: 120, height: 110)
     }
     //sectin
     override func numberOfSections(in collectionView: UICollectionView) -> Int {

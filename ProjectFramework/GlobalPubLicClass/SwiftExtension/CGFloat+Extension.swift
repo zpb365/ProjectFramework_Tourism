@@ -16,5 +16,7 @@ extension CGFloat{
     func ToFloat() -> Float {
         return Float(self)
     }
+   
+    
 }
                                              

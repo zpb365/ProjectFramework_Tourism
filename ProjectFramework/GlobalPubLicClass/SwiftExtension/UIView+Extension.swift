@@ -37,6 +37,25 @@ extension UIView{
         
         return view
     }
+    func initSectionView(text:String) -> UIView {
+        let view = UIView.init(frame: CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: 50))
+            view.backgroundColor = UIColor.white
+        
+        let lable = UILabel.init(frame: CommonFunction.CGRect_fram(0, y: 0, w: 120, h: 30))
+        lable.center.x = view.center.x
+        lable.center.y = view.center.y
+        lable.backgroundColor = UIColor().TransferStringToColor("#738FFE")
+        lable.textAlignment = .center
+        lable.font = UIFont.systemFont(ofSize: 12)
+        lable.textColor = UIColor.white
+        lable.layer.cornerRadius = 5
+        lable.clipsToBounds = true
+        lable.text = text
+        
+        view.addSubview(lable)
+        
+        return view
+    }
 }
 
                                             

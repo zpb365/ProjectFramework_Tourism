@@ -33,6 +33,13 @@ extension  String {
         return self.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName : font], context: nil).size
     }
     
+    /// 获取当前字符串的宽度
+    ///
+    /// - Parameter font: 字体
+    /// - Returns: 宽度
+    func getContenSizeWidth(font:UIFont) -> CGFloat {
+        return self.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName : font], context: nil).size.width
+    }
     ///字符串时间转换（返回 x分钟前/x小时前/昨天/x天前/x个月前/x年前
     ///注意，格式必须正确 只接受 yyyy-MM-dd HH:mm:ss 类型字符 否则转换出错
     func CompareCurretTime()->String{

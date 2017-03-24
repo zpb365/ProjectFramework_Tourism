@@ -38,9 +38,12 @@ class HotelReserve: CustomTemplateViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: identFier, for: indexPath) as! HotelReserveCell
-       
         return cell
         
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = CommonFunction.ViewControllerWithStoryboardName("HotelDetail", Identifier: "HotelDetail") as! HotelDetail
+        self.navigationController?.show(vc, sender: self  )
     }
     // MARK: 设置导航栏
     func setNavbar(){

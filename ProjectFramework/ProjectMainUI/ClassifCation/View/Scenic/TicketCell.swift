@@ -10,9 +10,12 @@ import UIKit
 
 class TicketCell: UITableViewCell {
 
+    @IBOutlet weak var buyButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        buyButton.layer.borderWidth = 0.5
+        buyButton.layer.borderColor = UIColor.gray.cgColor
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

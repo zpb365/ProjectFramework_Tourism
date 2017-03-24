@@ -6,7 +6,7 @@
 //  Copyright © 2017年 HCY. All rights reserved.
 //
 
-import UIKit
+import UIKit 
 
 class ScenicSpotMain: CustomTemplateViewController {
     
@@ -25,7 +25,7 @@ class ScenicSpotMain: CustomTemplateViewController {
         rightImage.addTarget(self, action: #selector(footerTap), for: .touchUpInside)
         return rightImage
     }()
-    ///组尾
+    ///组尾 购票
     lazy var sectionFooter:UIView = {
         let sectionFooter = UIView.init(frame: CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: 50))
         sectionFooter.backgroundColor = UIColor.white
@@ -38,28 +38,38 @@ class ScenicSpotMain: CustomTemplateViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         button.isUserInteractionEnabled = false
         button.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -10)
-        
+        button.adjustsImageWhenHighlighted = false
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(footerTap))
         sectionFooter.addGestureRecognizer(tap)
         sectionFooter.addSubview(button)
         
         return  sectionFooter
     }()
-
+    lazy var scenicIntroduce:UIView = {
+        let scenicIntroduce = UIView().headView(width: CommonFunction.kScreenWidth, height: 40, leftViewColor: UIColor().TransferStringToColor("#00C7D8"), title: "景区介绍")
+        return scenicIntroduce
+    }()
+    lazy var sectionConment:UIView = {
+        let sectionConment = Bundle.main.loadNibNamed("CommentSectionView", owner: self, options: nil)?.last
+        
+        return sectionConment as! UIView
+    }()
+    
     let identiFier  = "TicketCell"
     let identifier2 = "ScenicIntroduceCell"
+    let identifier3 = "UserCommentCell"
     
     var CustomNavBar:UINavigationBar!=nil
     var backBtn:UIButton!=nil
+    
     var cellectionBtn:UIButton!=nil
     var shareBtn:UIButton!=nil
     var alph: CGFloat = 0
-    var head: UIView! = nil
     var HTMLString: String! = nil
-    var height: CGFloat = 0
+    var height: CGFloat = 50
     var flag: Bool = false
-    
-    
+    var modelArray = Array<Any>()
+    var isChange: Bool = false
     
     
     override func viewDidLoad() {
@@ -82,13 +92,16 @@ class ScenicSpotMain: CustomTemplateViewController {
     
     func getData() -> Void {
         do {
+            //发现此方法在iOS9会闪退
             let str=try NSString(contentsOfFile: "/Users/zhupenggouyou/Documents/ProjectFramework_Tourism/html.txt",encoding: String.Encoding.utf8.rawValue)
-            HTMLString = str as String! 
+            HTMLString = str as String!
+            print("我执行这里了1")
         }
         catch {
-            
+            HTMLString = ""
+            print("我执行这里了2")
         }
-      
+        
     }
     
     
@@ -105,7 +118,7 @@ class ScenicSpotMain: CustomTemplateViewController {
             button.titleLabel?.font = UIFont.systemFont(ofSize: 13)
             button.setTitleColor(UIColor.black, for: .normal)
             button.addTarget(self, action:#selector(headerClick), for: .touchUpInside)
-            
+            button.adjustsImageWhenHighlighted = false
             if (i == 0) {
                 let bottomLine = UIView()
                 bottomLine.tag = 666
@@ -139,6 +152,7 @@ class ScenicSpotMain: CustomTemplateViewController {
         //收藏
         cellectionBtn = UIButton(type: .custom)
         cellectionBtn.frame = CommonFunction.CGRect_fram(0, y: 0, w: 30, h: 30)
+        cellectionBtn.adjustsImageWhenHighlighted = false
         cellectionBtn.tag = 101
         cellectionBtn.backgroundColor = UIColor.gray
         cellectionBtn.layer.cornerRadius = 15
@@ -148,6 +162,7 @@ class ScenicSpotMain: CustomTemplateViewController {
         shareBtn = UIButton(type: .custom)
         shareBtn.frame = CommonFunction.CGRect_fram(0, y: 0, w: 30, h: 30)
         shareBtn.tag = 102
+        shareBtn.adjustsImageWhenHighlighted = false
         shareBtn.backgroundColor = UIColor.gray
         shareBtn.layer.cornerRadius = 15
         shareBtn.setImage(UIImage(named: "scanning"), for: .normal)
@@ -159,7 +174,7 @@ class ScenicSpotMain: CustomTemplateViewController {
         
         CustomNavBar.pushItem(CustomNavItem, animated: true)
     }
-    //返回按钮方法
+    //导航栏按钮方法
     func buttonClick(_ button: UIButton){
         switch button.tag {
         case 100:
@@ -180,12 +195,19 @@ class ScenicSpotMain: CustomTemplateViewController {
     //MARK: initUI
     
     func initUI(){
+        
+        let model = UserCommentModel()
+        model.comment = "呵呵呵呵呵呵呵呵呵呵额呵呵撒会受到hi欧委会IQ哦好滴哦我去hi噢hi噢hi噢hi哦我回去低耦合我我哦青海地区哦和我我odhqioifuheui手动切换为我哦亲hi殴打hi哦我去hi哦"
+        model.imageArray = ["icon0.jpg","icon0.jpg","icon0.jpg","icon0.jpg","icon0.jpg","icon0.jpg","icon0.jpg"]
+        model.nickName = "住朋购友"
+        modelArray.append(model)
         //组尾添加按钮
         sectionFooter.addSubview(rightImage)
         
         self.InitCongif(tableView)
         self.tableView.frame = CommonFunction.CGRect_fram(0, y:0, w: self.view.frame.width, h: self.view.frame.height)
         self.tableView.tableHeaderView = tableViewHead
+        self.tableView.register(UserCommentCell.self, forCellReuseIdentifier: identifier3)
         self.header.isHidden = true
         
         
@@ -193,6 +215,7 @@ class ScenicSpotMain: CustomTemplateViewController {
     //MARK: tableViewDelegate
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset: CGFloat = scrollView.contentOffset.y
+        //导航栏渐变
         if (offset <= 64) {
             CustomNavBar.setBackgroundImage(UIImage().ImageWithColor(color: CommonFunction.SystemColor().withAlphaComponent(0), size: CGSize(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)), for: .default)
             backBtn.backgroundColor = UIColor.gray
@@ -206,6 +229,7 @@ class ScenicSpotMain: CustomTemplateViewController {
             cellectionBtn.backgroundColor = UIColor.gray.withAlphaComponent(1-alph)
             shareBtn.backgroundColor = UIColor.gray.withAlphaComponent(1-alph)
         }
+        //筛选条悬浮效果
         if (offset > tableViewHead.frame.height - 64 - 40) {
             _ = self.view.subviews.map({
                 if(($0.viewWithTag(99)) != nil){
@@ -220,61 +244,76 @@ class ScenicSpotMain: CustomTemplateViewController {
             tableViewHead.addSubview(buttonBar)
             
         }
+        //是否是滑动判断
+        if isChange {
+            //筛选条底部线移动
+            if (offset < CGFloat (100 * (rightImage.isSelected ? 10 : 0)) + tableViewHead.frame.height){
+                //底部线滑动
+               self.btoomLineMove(tag: 1)
+            }
+            else if (offset > CGFloat (100 * (rightImage.isSelected ? 10 : 0)) + tableViewHead.frame.height && offset < CGFloat (100 * (rightImage.isSelected ? 10 : 0)) + tableViewHead.frame.height + height){
+                self.btoomLineMove(tag: 2)
+            }
+            else if (offset > CGFloat (100 * (rightImage.isSelected ? 10 : 0)) + tableViewHead.frame.height + height){
+               self.btoomLineMove(tag: 3)
+            }
+        }
     }
-    //组数
+    //滑线效果
+    func btoomLineMove(tag:Int) -> Void {
+        UIView.animate(withDuration: 0.3) {
+            let button = self.buttonBar.viewWithTag(tag) as! UIButton
+            let line = self.buttonBar.viewWithTag(666)
+            line?.center.x = button.center.x
+        }
+    }
+    //MARK: 开始拖动时调用的方法
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        isChange = true
+
+    }
+        //组数
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
+    var _numberOfRowsInSection = [0,0,1,5]
+    
     //组个数
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(section == 0){
-            return 0
-        }
-        else if(section == 1){
-            return rightImage.isSelected ? 10 : 0
-        }
-        else if(section == 2){
-            return 1
-        }
-        else{
-            return 5
-        }
+        _numberOfRowsInSection[1] = rightImage.isSelected ? 10 : 0
+        return _numberOfRowsInSection[section]
     }
+    var _heightForRowAt = [CGFloat(0),CGFloat(100),CGFloat(0),CGFloat(0)]
     //行高
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.section == 0) {
-            return 0
-        }
-        else if (indexPath.section == 1){
-            return 100
-        }
-        else if (indexPath.section == 2){
-            return height
-        }
-        else{
-            return 50
-        }
+        _heightForRowAt[2] =  height > CGFloat (50) ? height : CGFloat(50)
+        let model = self.modelArray[0] as! UserCommentModel
+        _heightForRowAt[3] = self.tableView.getHeightWithCell(lableWidth: CommonFunction.kScreenWidth - 35, commont: model.comment, imageArray: model.imageArray, showCount: model.imageArray.count, rowCount: 4, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10) + 48 + 10
+//        print("高度====",_heightForRowAt[3])
+        return _heightForRowAt[indexPath.section]
     }
-
+    var _heightForHeaderInSection = [0,0,40,50]
+    //组头高
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+      return CGFloat(_heightForHeaderInSection[section])
+    }
+    var _viewForHeaderInSection = [UIView(),UIView(),UIView(),UIView()]
+    //组头
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        _viewForHeaderInSection[2] = scenicIntroduce
+        _viewForHeaderInSection[3] = sectionConment
+        return _viewForHeaderInSection[section]
+    }
+    var _viewForFooterInSection = [UIView(),UIView(),UIView(),UIView()]
     //组尾
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if (section == 0) {
-
-            return sectionFooter
-        }
-        else{
-            return nil
-        }
+        _viewForFooterInSection[0]=sectionFooter
+        return _viewForFooterInSection[section]
     }
-
+    let _heightForFooterInSection = [50,0,0,0]
     //组尾高
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
-        if ( section == 0) {
-            return 50
-        }
-        else{
-            return 0
-        }
+        return CGFloat(_heightForFooterInSection[section])
     }
     //数据源
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -293,19 +332,23 @@ class ScenicSpotMain: CustomTemplateViewController {
             flag = true
             cell.FuncCallbackValue(value: { [weak self]( height) -> Void in
                 self?.height = height
-                self?.tableView.reloadSections(NSIndexSet.init(index: 2) as IndexSet, with: .none)
+                self?.tableView.reloadData()
             })
             return cell
         }
-        else{
-            let cell = UITableViewCell()
-            cell.selectionStyle = .none
-            cell.textLabel?.text = "用户评论" 
+        if (indexPath.section == 3) {
+//            let cell  = tableView.dequeueReusableCell(withIdentifier: identifier3) as! UserCommentCell
+            let cell = UserCommentCell.init(style: .subtitle, reuseIdentifier: identifier3)
+            cell.InitConfig(self.modelArray[0])
             return cell
+        }
+        else{
+            return UITableViewCell()
         }
     }
     //MARK: 组头按钮方法
     func headerClick(_ button: UIButton) {
+        isChange = false
         //底部线滑动
         UIView.animate(withDuration: 0.3) {
             let line = self.buttonBar.viewWithTag(666)
@@ -314,10 +357,10 @@ class ScenicSpotMain: CustomTemplateViewController {
         //0头  1 购票   2 景区介绍  3 评论
 
         if (button.tag == 1 && rightImage.isSelected == false){
+            self.tableView.setContentOffset(CGPoint.init(x: 0, y: tableViewHead.frame.height - 64 - 40), animated: true)
             return
         }
         self.tableView.scrollToRow(at: IndexPath(row: 0, section: button.tag), at: .middle, animated: true)
- 
         
     }
     //MARK: 折叠效果
@@ -325,6 +368,9 @@ class ScenicSpotMain: CustomTemplateViewController {
         //反选刷新数据
         rightImage.isSelected = !rightImage.isSelected
        self.tableView.reloadSections(NSIndexSet.init(index: 1) as IndexSet, with: .automatic)
-        
+    }
+    
+    deinit {
+        print("shifnagl")
     }
 }

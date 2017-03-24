@@ -207,6 +207,11 @@
 		2EFB8CB61E763F0400BC032F /* GuideBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB8CB51E763F0400BC032F /* GuideBook.swift */; };
 		2EFB8CB91E763F2B00BC032F /* Specialty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB8CB81E763F2B00BC032F /* Specialty.swift */; };
 		327B11301D58E414236AC24B /* Pods_ProjectFramework_Tourism.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6212B5E39C475CB11281041 /* Pods_ProjectFramework_Tourism.framework */; };
+		6F06CAEE1E839EFF005F2979 /* CommentSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F06CAEC1E839EFF005F2979 /* CommentSectionView.swift */; };
+		6F06CAEF1E839EFF005F2979 /* CommentSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F06CAED1E839EFF005F2979 /* CommentSectionView.xib */; };
+		6F06CAF51E83C3D8005F2979 /* PulickIntroduceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F06CAF21E83C3D8005F2979 /* PulickIntroduceCell.swift */; };
+		6F06CAF61E83C3D8005F2979 /* PulickIntroduceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F06CAF31E83C3D8005F2979 /* PulickIntroduceView.swift */; };
+		6F06CAF71E83C3D8005F2979 /* UserCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F06CAF41E83C3D8005F2979 /* UserCommentCell.swift */; };
 		6F0ED2E01E7A981300A8E4FC /* ScenicSpot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0ED2DE1E7A981300A8E4FC /* ScenicSpot.swift */; };
 		6F0ED2E11E7A981300A8E4FC /* ScenicSpotMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0ED2DF1E7A981300A8E4FC /* ScenicSpotMain.swift */; };
 		6F0ED2E81E7A983B00A8E4FC /* HotScenicSpotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0ED2E21E7A983B00A8E4FC /* HotScenicSpotCell.swift */; };
@@ -217,6 +222,20 @@
 		6F0ED2ED1E7A983B00A8E4FC /* TicketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0ED2E71E7A983B00A8E4FC /* TicketCell.swift */; };
 		6F0ED2EF1E7B6F4A00A8E4FC /* html.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6F0ED2EE1E7B6F4A00A8E4FC /* html.txt */; };
 		6FA968F41E7A76EF00B05E53 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA968F31E7A76EF00B05E53 /* Default-568h@2x.png */; };
+		6FEC4D5B1E80CDC8003117A0 /* PulickInformCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC4D5A1E80CDC8003117A0 /* PulickInformCell.swift */; };
+		6FEC4D5D1E80D1CE003117A0 /* ScenerySpotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC4D5C1E80D1CE003117A0 /* ScenerySpotCell.swift */; };
+		6FEC4D5F1E80D2AF003117A0 /* CommentPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC4D5E1E80D2AF003117A0 /* CommentPhotoView.swift */; };
+		6FEC4D611E811465003117A0 /* HotelDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC4D601E811465003117A0 /* HotelDetail.swift */; };
+		6FEC4D631E8114B0003117A0 /* HotelDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FEC4D621E8114B0003117A0 /* HotelDetail.storyboard */; };
+		6FEC4D651E81323D003117A0 /* HotelRoomReserveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC4D641E81323D003117A0 /* HotelRoomReserveCell.swift */; };
+		6FEC4D671E82538B003117A0 /* DateSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FEC4D661E82538B003117A0 /* DateSectionView.xib */; };
+		6FEC4D691E825412003117A0 /* DateSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC4D681E825412003117A0 /* DateSectionView.swift */; };
+		6FFD9FF41E7F88890064D50F /* UserCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFD9FF31E7F88890064D50F /* UserCommentModel.swift */; };
+		6FFD9FF91E7F929E0064D50F /* icon0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FFD9FF51E7F929E0064D50F /* icon0.jpg */; };
+		6FFD9FFA1E7F929E0064D50F /* icon2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FFD9FF61E7F929E0064D50F /* icon2.jpg */; };
+		6FFD9FFB1E7F929E0064D50F /* icon3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FFD9FF71E7F929E0064D50F /* icon3.jpg */; };
+		6FFD9FFC1E7F929E0064D50F /* icon4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FFD9FF81E7F929E0064D50F /* icon4.jpg */; };
+		6FFD9FFE1E7FB9420064D50F /* TableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFD9FFD1E7FB9420064D50F /* TableView+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -565,6 +584,11 @@
 		2EFB8CB21E763EFD00BC032F /* Conference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conference.swift; sourceTree = "<group>"; };
 		2EFB8CB51E763F0400BC032F /* GuideBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideBook.swift; sourceTree = "<group>"; };
 		2EFB8CB81E763F2B00BC032F /* Specialty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Specialty.swift; sourceTree = "<group>"; };
+		6F06CAEC1E839EFF005F2979 /* CommentSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentSectionView.swift; sourceTree = "<group>"; };
+		6F06CAED1E839EFF005F2979 /* CommentSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentSectionView.xib; sourceTree = "<group>"; };
+		6F06CAF21E83C3D8005F2979 /* PulickIntroduceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulickIntroduceCell.swift; sourceTree = "<group>"; };
+		6F06CAF31E83C3D8005F2979 /* PulickIntroduceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulickIntroduceView.swift; sourceTree = "<group>"; };
+		6F06CAF41E83C3D8005F2979 /* UserCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCommentCell.swift; sourceTree = "<group>"; };
 		6F0ED2DE1E7A981300A8E4FC /* ScenicSpot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScenicSpot.swift; sourceTree = "<group>"; };
 		6F0ED2DF1E7A981300A8E4FC /* ScenicSpotMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScenicSpotMain.swift; sourceTree = "<group>"; };
 		6F0ED2E21E7A983B00A8E4FC /* HotScenicSpotCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotScenicSpotCell.swift; sourceTree = "<group>"; };
@@ -575,6 +599,20 @@
 		6F0ED2E71E7A983B00A8E4FC /* TicketCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketCell.swift; sourceTree = "<group>"; };
 		6F0ED2EE1E7B6F4A00A8E4FC /* html.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = html.txt; sourceTree = "<group>"; };
 		6FA968F31E7A76EF00B05E53 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		6FEC4D5A1E80CDC8003117A0 /* PulickInformCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulickInformCell.swift; sourceTree = "<group>"; };
+		6FEC4D5C1E80D1CE003117A0 /* ScenerySpotCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScenerySpotCell.swift; sourceTree = "<group>"; };
+		6FEC4D5E1E80D2AF003117A0 /* CommentPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentPhotoView.swift; sourceTree = "<group>"; };
+		6FEC4D601E811465003117A0 /* HotelDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotelDetail.swift; sourceTree = "<group>"; };
+		6FEC4D621E8114B0003117A0 /* HotelDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HotelDetail.storyboard; sourceTree = "<group>"; };
+		6FEC4D641E81323D003117A0 /* HotelRoomReserveCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotelRoomReserveCell.swift; sourceTree = "<group>"; };
+		6FEC4D661E82538B003117A0 /* DateSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DateSectionView.xib; sourceTree = "<group>"; };
+		6FEC4D681E825412003117A0 /* DateSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateSectionView.swift; sourceTree = "<group>"; };
+		6FFD9FF31E7F88890064D50F /* UserCommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCommentModel.swift; sourceTree = "<group>"; };
+		6FFD9FF51E7F929E0064D50F /* icon0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon0.jpg; sourceTree = "<group>"; };
+		6FFD9FF61E7F929E0064D50F /* icon2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon2.jpg; sourceTree = "<group>"; };
+		6FFD9FF71E7F929E0064D50F /* icon3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon3.jpg; sourceTree = "<group>"; };
+		6FFD9FF81E7F929E0064D50F /* icon4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon4.jpg; sourceTree = "<group>"; };
+		6FFD9FFD1E7FB9420064D50F /* TableView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TableView+Extension.swift"; sourceTree = "<group>"; };
 		C9D5BC7A35D61CCFAD13225E /* Pods-ProjectFramework_Tourism.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectFramework_Tourism.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectFramework_Tourism/Pods-ProjectFramework_Tourism.release.xcconfig"; sourceTree = "<group>"; };
 		F6212B5E39C475CB11281041 /* Pods_ProjectFramework_Tourism.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjectFramework_Tourism.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -638,6 +676,10 @@
 			isa = PBXGroup;
 			children = (
 				6FA968F31E7A76EF00B05E53 /* Default-568h@2x.png */,
+				6FFD9FF51E7F929E0064D50F /* icon0.jpg */,
+				6FFD9FF61E7F929E0064D50F /* icon2.jpg */,
+				6FFD9FF71E7F929E0064D50F /* icon3.jpg */,
+				6FFD9FF81E7F929E0064D50F /* icon4.jpg */,
 				6F0ED2EE1E7B6F4A00A8E4FC /* html.txt */,
 				27609BFD1CB257E40041E8B7 /* Podfile */,
 				27609BCE1CB257810041E8B7 /* ProjectFramework */,
@@ -802,6 +844,7 @@
 				2E12CA1C1E6F1D88009527BA /* UIToolbar+Extension.swift */,
 				2E12CA1D1E6F1D88009527BA /* UIView+Extension.swift */,
 				2E12CA1E1E6F1D88009527BA /* UIViewController+Extension.swift */,
+				6FFD9FFD1E7FB9420064D50F /* TableView+Extension.swift */,
 			);
 			path = SwiftExtension;
 			sourceTree = "<group>";
@@ -1072,6 +1115,10 @@
 				2E12CAFC1E6F1E6F009527BA /* ScrollViewPageViewController.swift */,
 				2E12CAFD1E6F1E6F009527BA /* UpLoadPicManagerView.swift */,
 				2EFB8CA01E762DCA00BC032F /* MenuView.swift */,
+				6FEC4D5E1E80D2AF003117A0 /* CommentPhotoView.swift */,
+				6F06CAF41E83C3D8005F2979 /* UserCommentCell.swift */,
+				6F06CAF21E83C3D8005F2979 /* PulickIntroduceCell.swift */,
+				6F06CAF31E83C3D8005F2979 /* PulickIntroduceView.swift */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -1081,6 +1128,12 @@
 			children = (
 				2E2302651E71D6DE00B05279 /* HotelReserve.storyboard */,
 				2E2302661E71D6DE00B05279 /* HotelReserveCell.swift */,
+				6FEC4D621E8114B0003117A0 /* HotelDetail.storyboard */,
+				6FEC4D641E81323D003117A0 /* HotelRoomReserveCell.swift */,
+				6F06CAEC1E839EFF005F2979 /* CommentSectionView.swift */,
+				6F06CAED1E839EFF005F2979 /* CommentSectionView.xib */,
+				6FEC4D661E82538B003117A0 /* DateSectionView.xib */,
+				6FEC4D681E825412003117A0 /* DateSectionView.swift */,
 			);
 			path = HotelReserve;
 			sourceTree = "<group>";
@@ -1175,6 +1228,7 @@
 				2E2302721E71EC0B00B05279 /* ClassifCationModel.swift */,
 				2E2302701E71EA2000B05279 /* ScenicSpotModel.swift */,
 				2E2A3AE71E720B9100A70153 /* HotelReserveModel.swift */,
+				6FFD9FF31E7F88890064D50F /* UserCommentModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1330,6 +1384,8 @@
 			isa = PBXGroup;
 			children = (
 				2E2611951E5FB5CD00CC70F9 /* Attractions.storyboard */,
+				6FEC4D5A1E80CDC8003117A0 /* PulickInformCell.swift */,
+				6FEC4D5C1E80D1CE003117A0 /* ScenerySpotCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1453,6 +1509,7 @@
 			isa = PBXGroup;
 			children = (
 				2EFB8CA61E763DBD00BC032F /* HotelReserve.swift */,
+				6FEC4D601E811465003117A0 /* HotelDetail.swift */,
 			);
 			path = HotelReserveController;
 			sourceTree = "<group>";
@@ -1673,10 +1730,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FFD9FFB1E7F929E0064D50F /* icon3.jpg in Resources */,
 				2E2611C41E66312100CC70F9 /* Feedback.storyboard in Resources */,
 				2E5E84331D399B88008BAA08 /* TemplatesSettings.bundle in Resources */,
 				2E12CB061E6F1E6F009527BA /* MHSheetHead.xib in Resources */,
 				27609BD71CB257810041E8B7 /* Assets.xcassets in Resources */,
+				6FEC4D631E8114B0003117A0 /* HotelDetail.storyboard in Resources */,
 				2E26118A1E5FB54500CC70F9 /* ClassifCation.storyboard in Resources */,
 				6F0ED2EC1E7A983B00A8E4FC /* ScenicSpotMain.storyboard in Resources */,
 				2E26118E1E5FB58400CC70F9 /* My.storyboard in Resources */,
@@ -1685,11 +1744,13 @@
 				271653B81CF5F5A80028C465 /* SB_Login.storyboard in Resources */,
 				2750AF701D0D9610003D117E /* SB_forget+password.storyboard in Resources */,
 				2EFB8C9B1E738A2D00BC032F /* Specialty.storyboard in Resources */,
+				6FFD9FFC1E7F929E0064D50F /* icon4.jpg in Resources */,
 				2E12CB081E6F1E6F009527BA /* MHSheetView.xib in Resources */,
 				27E4D5561CB3A083002F32D1 /* LoginSettings.bundle in Resources */,
 				2E12CAFF1E6F1E6F009527BA /* CustomSettings.bundle in Resources */,
 				2E2611BC1E5FBCFD00CC70F9 /* HomePage.storyboard in Resources */,
 				2E12CB131E6F1E6F009527BA /* TZImagePickerController.bundle in Resources */,
+				6FEC4D671E82538B003117A0 /* DateSectionView.xib in Resources */,
 				2E2302671E71D6DE00B05279 /* HotelReserve.storyboard in Resources */,
 				2E12CB091E6F1E6F009527BA /* PYSearch.bundle in Resources */,
 				2E12CAFE1E6F1E6F009527BA /* CodeScan.bundle in Resources */,
@@ -1698,6 +1759,7 @@
 				2E2611C81E66312E00CC70F9 /* Myinfo.storyboard in Resources */,
 				2E2611961E5FB5CD00CC70F9 /* Attractions.storyboard in Resources */,
 				2E2611691E52D55F00CC70F9 /* Main.storyboard in Resources */,
+				6FFD9FFA1E7F929E0064D50F /* icon2.jpg in Resources */,
 				271653BA1CF6152E0028C465 /* SB_Register.storyboard in Resources */,
 				2E12CA211E6F1D88009527BA /* GlobalClassSettings.bundle in Resources */,
 				2E12CABA1E6F1E67009527BA /* MBProgressHUD.bundle in Resources */,
@@ -1707,6 +1769,7 @@
 				2E12CB041E6F1E6F009527BA /* MHSheetFoot.xib in Resources */,
 				2E2611A21E5FBB2300CC70F9 /* Meeting.storyboard in Resources */,
 				2E2611A41E5FBB3E00CC70F9 /* Parking.storyboard in Resources */,
+				6FFD9FF91E7F929E0064D50F /* icon0.jpg in Resources */,
 				2E26119E1E5FBAB100CC70F9 /* Diet.storyboard in Resources */,
 				2E2A3AF11E721D1900A70153 /* Restaurant.storyboard in Resources */,
 				2E2611921E5FB5B100CC70F9 /* Travel.storyboard in Resources */,
@@ -1716,6 +1779,7 @@
 				2E2611A01E5FBB0B00CC70F9 /* TravelAgency.storyboard in Resources */,
 				2E2611A61E5FBB5700CC70F9 /* TourGuide.storyboard in Resources */,
 				2E12CB021E6F1E6F009527BA /* MHSheetCell.xib in Resources */,
+				6F06CAEF1E839EFF005F2979 /* CommentSectionView.xib in Resources */,
 				6F0ED2EF1E7B6F4A00A8E4FC /* html.txt in Resources */,
 				2E26119A1E5FBA6800CC70F9 /* Scenic.storyboard in Resources */,
 				2E2611651E52BD8F00CC70F9 /* HoneMain.storyboard in Resources */,
@@ -1806,12 +1870,14 @@
 				2E12CA2F1E6F1D88009527BA /* UIImageView+Extension.swift in Sources */,
 				2E12CB1A1E6F1E6F009527BA /* CalendarViewController.swift in Sources */,
 				6F0ED2E81E7A983B00A8E4FC /* HotScenicSpotCell.swift in Sources */,
+				6FEC4D611E811465003117A0 /* HotelDetail.swift in Sources */,
 				2E12CAB31E6F1E67009527BA /* NSDataEx.m in Sources */,
 				2E12CABC1E6F1E67009527BA /* Reachability.m in Sources */,
 				2E12CB1F1E6F1E6F009527BA /* MCWebViewController.swift in Sources */,
 				2750AF7A1D0DADC9003D117E /* HttpsForget+Password.swift in Sources */,
 				2EFB8CB61E763F0400BC032F /* GuideBook.swift in Sources */,
 				2EF815BE1DB69AD100B6A378 /* GlobalParameter.swift in Sources */,
+				6F06CAF61E83C3D8005F2979 /* PulickIntroduceView.swift in Sources */,
 				2EFB8C871E732CDC00BC032F /* ConferenceCell.swift in Sources */,
 				2EFB8CAA1E763DE300BC032F /* Restaurant.swift in Sources */,
 				2E2611AE1E5FBBA100CC70F9 /* Diet.swift in Sources */,
@@ -1822,15 +1888,18 @@
 				2E025BD51DBFBC09002687EF /* loginResultModel.swift in Sources */,
 				2EFB8C951E7384C500BC032F /* ParkingPlaceCell.swift in Sources */,
 				2E12CA2A1E6F1D88009527BA /* UIButton+Extension.swift in Sources */,
+				6F06CAF71E83C3D8005F2979 /* UserCommentCell.swift in Sources */,
 				2E273D581DAB151A00457F75 /* CreatedbBase.swift in Sources */,
 				2750AF721D0D9669003D117E /* Forget+passwordViewController.swift in Sources */,
 				2E12CA231E6F1D88009527BA /* CGFloat+Extension.swift in Sources */,
 				2E12CA331E6F1D88009527BA /* UITextField+Extension.swift in Sources */,
+				6FEC4D651E81323D003117A0 /* HotelRoomReserveCell.swift in Sources */,
 				2E12CA221E6F1D88009527BA /* ShareView.swift in Sources */,
 				2E12CAAE1E6F1E67009527BA /* Order.m in Sources */,
 				2E12CA241E6F1D88009527BA /* Date+Extension.swift in Sources */,
 				2EFB8C9F1E739E6D00BC032F /* TravelCell.swift in Sources */,
 				2E12CB0F1E6F1E6F009527BA /* NSBundle+TZImagePicker.m in Sources */,
+				6FEC4D5D1E80D1CE003117A0 /* ScenerySpotCell.swift in Sources */,
 				2E12CB031E6F1E6F009527BA /* MHSheetFoot.m in Sources */,
 				2E12CA281E6F1D88009527BA /* String+Extension.swift in Sources */,
 				2E12CB1C1E6F1E6F009527BA /* CustomImageView.swift in Sources */,
@@ -1838,6 +1907,7 @@
 				2E12CB151E6F1E6F009527BA /* TZPhotoPickerController.m in Sources */,
 				2E12CA341E6F1D88009527BA /* UIToolbar+Extension.swift in Sources */,
 				2E12CB231E6F1E6F009527BA /* UpLoadPicManagerView.swift in Sources */,
+				6FFD9FFE1E7FB9420064D50F /* TableView+Extension.swift in Sources */,
 				2EFB8C9D1E738B6E00BC032F /* SpecialtyCell.swift in Sources */,
 				2E12CAB01E6F1E67009527BA /* DataSigner.m in Sources */,
 				2E3AB4901D1EE0F600F8BCFD /* ScreeningViewController.swift in Sources */,
@@ -1846,6 +1916,7 @@
 				2E12CB1B1E6F1E6F009527BA /* CAPSPageMenu.swift in Sources */,
 				2E2611C61E66312700CC70F9 /* FeedbackViewController.swift in Sources */,
 				2E12CA361E6F1D88009527BA /* UIViewController+Extension.swift in Sources */,
+				6FEC4D5F1E80D2AF003117A0 /* CommentPhotoView.swift in Sources */,
 				2E12CB211E6F1E6F009527BA /* QQScanViewController.swift in Sources */,
 				2E12CB051E6F1E6F009527BA /* MHSheetHead.m in Sources */,
 				2E2611941E5FB5C000CC70F9 /* Travel.swift in Sources */,
@@ -1854,12 +1925,15 @@
 				2E12CB121E6F1E6F009527BA /* TZImageManager.m in Sources */,
 				2E12CB071E6F1E6F009527BA /* MHSheetView.m in Sources */,
 				2E2A3AE81E720B9100A70153 /* HotelReserveModel.swift in Sources */,
+				6F06CAF51E83C3D8005F2979 /* PulickIntroduceCell.swift in Sources */,
 				2E12CB0E1E6F1E6F009527BA /* UIView+PYExtension.m in Sources */,
 				2E12CA291E6F1D88009527BA /* UIBarButtonItem+Extension.swift in Sources */,
 				2750AF761D0DAD35003D117E /* HttpsLogin.swift in Sources */,
 				2EFB8CA11E762DCA00BC032F /* MenuView.swift in Sources */,
+				6FEC4D5B1E80CDC8003117A0 /* PulickInformCell.swift in Sources */,
 				2E12CA301E6F1D88009527BA /* UINavigationBar+Extension.swift in Sources */,
 				2E2611C21E65E81A00CC70F9 /* MyHeadUIView.swift in Sources */,
+				6FFD9FF41E7F88890064D50F /* UserCommentModel.swift in Sources */,
 				2E26118C1E5FB56300CC70F9 /* ClassifCation.swift in Sources */,
 				2E2611B41E5FBBC200CC70F9 /* Parking.swift in Sources */,
 				2E2611C01E65E64400CC70F9 /* MyCell.swift in Sources */,
@@ -1887,12 +1961,14 @@
 				2E12CA201E6F1D88009527BA /* CommonFunction.swift in Sources */,
 				2E2611B81E5FBBD600CC70F9 /* Shopping.swift in Sources */,
 				2750AF741D0D9A4E003D117E /* LoginViewController.swift in Sources */,
+				6FEC4D691E825412003117A0 /* DateSectionView.swift in Sources */,
 				2E12CAB41E6F1E67009527BA /* openssl_wrapper.m in Sources */,
 				2E3CD6061D3086080057B7F2 /* LoginLogicViewModel.swift in Sources */,
 				2E273D5E1DAB151A00457F75 /* MainTabBarController.swift in Sources */,
 				6F0ED2ED1E7A983B00A8E4FC /* TicketCell.swift in Sources */,
 				271653BC1CF616530028C465 /* RegisterViewController.swift in Sources */,
 				2E12CA351E6F1D88009527BA /* UIView+Extension.swift in Sources */,
+				6F06CAEE1E839EFF005F2979 /* CommentSectionView.swift in Sources */,
 				2EFB8CB31E763EFD00BC032F /* Conference.swift in Sources */,
 				2E12CA2C1E6F1D88009527BA /* UIColor+Extension.swift in Sources */,
 				2E273D061DAB14D200457F75 /* MultilevelCategoriesTableViewController.swift in Sources */,
