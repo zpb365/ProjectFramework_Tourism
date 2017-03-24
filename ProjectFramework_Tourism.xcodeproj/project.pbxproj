@@ -222,7 +222,7 @@
 		6F0ED2EB1E7A983B00A8E4FC /* ScenicSpotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0ED2E51E7A983B00A8E4FC /* ScenicSpotCell.swift */; };
 		6F0ED2EC1E7A983B00A8E4FC /* ScenicSpotMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F0ED2E61E7A983B00A8E4FC /* ScenicSpotMain.storyboard */; };
 		6F0ED2ED1E7A983B00A8E4FC /* TicketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0ED2E71E7A983B00A8E4FC /* TicketCell.swift */; };
-		6F0ED2EF1E7B6F4A00A8E4FC /* html.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6F0ED2EE1E7B6F4A00A8E4FC /* html.txt */; };
+		6F2EBF1D1E85000500906852 /* html.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6F2EBF1C1E85000500906852 /* html.txt */; };
 		6FA968F41E7A76EF00B05E53 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA968F31E7A76EF00B05E53 /* Default-568h@2x.png */; };
 		6FEC4D5B1E80CDC8003117A0 /* PulickInformCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC4D5A1E80CDC8003117A0 /* PulickInformCell.swift */; };
 		6FEC4D5D1E80D1CE003117A0 /* ScenerySpotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC4D5C1E80D1CE003117A0 /* ScenerySpotCell.swift */; };
@@ -601,7 +601,7 @@
 		6F0ED2E51E7A983B00A8E4FC /* ScenicSpotCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScenicSpotCell.swift; sourceTree = "<group>"; };
 		6F0ED2E61E7A983B00A8E4FC /* ScenicSpotMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ScenicSpotMain.storyboard; sourceTree = "<group>"; };
 		6F0ED2E71E7A983B00A8E4FC /* TicketCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketCell.swift; sourceTree = "<group>"; };
-		6F0ED2EE1E7B6F4A00A8E4FC /* html.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = html.txt; sourceTree = "<group>"; };
+		6F2EBF1C1E85000500906852 /* html.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = html.txt; sourceTree = "<group>"; };
 		6FA968F31E7A76EF00B05E53 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		6FEC4D5A1E80CDC8003117A0 /* PulickInformCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulickInformCell.swift; sourceTree = "<group>"; };
 		6FEC4D5C1E80D1CE003117A0 /* ScenerySpotCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScenerySpotCell.swift; sourceTree = "<group>"; };
@@ -684,8 +684,8 @@
 				6FFD9FF61E7F929E0064D50F /* icon2.jpg */,
 				6FFD9FF71E7F929E0064D50F /* icon3.jpg */,
 				6FFD9FF81E7F929E0064D50F /* icon4.jpg */,
-				6F0ED2EE1E7B6F4A00A8E4FC /* html.txt */,
 				27609BFD1CB257E40041E8B7 /* Podfile */,
+				6F2EBF1C1E85000500906852 /* html.txt */,
 				27609BCE1CB257810041E8B7 /* ProjectFramework */,
 				27609BE31CB257810041E8B7 /* ProjectFrameworkTests */,
 				27609BEE1CB257810041E8B7 /* ProjectFrameworkUITests */,
@@ -1779,6 +1779,7 @@
 				2E26119E1E5FBAB100CC70F9 /* Diet.storyboard in Resources */,
 				2E2A3AF11E721D1900A70153 /* Restaurant.storyboard in Resources */,
 				2E2611921E5FB5B100CC70F9 /* Travel.storyboard in Resources */,
+				6F2EBF1D1E85000500906852 /* html.txt in Resources */,
 				2E12CAAA1E6F1E67009527BA /* AlipaySDK.bundle in Resources */,
 				2EFB8C831E7325AB00BC032F /* Conference.storyboard in Resources */,
 				2E596AB41DD23F720027E03C /* loading.gif in Resources */,
@@ -1787,7 +1788,6 @@
 				2E2611A61E5FBB5700CC70F9 /* TourGuide.storyboard in Resources */,
 				2E12CB021E6F1E6F009527BA /* MHSheetCell.xib in Resources */,
 				6F06CAEF1E839EFF005F2979 /* CommentSectionView.xib in Resources */,
-				6F0ED2EF1E7B6F4A00A8E4FC /* html.txt in Resources */,
 				2E26119A1E5FBA6800CC70F9 /* Scenic.storyboard in Resources */,
 				2E2611651E52BD8F00CC70F9 /* HoneMain.storyboard in Resources */,
 				2EFB8C911E737FC300BC032F /* ParkingPlace.storyboard in Resources */,

@@ -21,6 +21,7 @@ class ScenicIntroduceCell: UITableViewCell,UIWebViewDelegate {
         costomWebView.scrollView.bounces = false
         costomWebView.delegate = self
         costomWebView.backgroundColor = UIColor.white
+ 
         return costomWebView
     }()
     
@@ -28,7 +29,6 @@ class ScenicIntroduceCell: UITableViewCell,UIWebViewDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -80,4 +80,14 @@ class ScenicIntroduceCell: UITableViewCell,UIWebViewDelegate {
             myCallbackValue!(height)
         }
     }
-}
+ 
+ 
+       
+    }
+    // 页面加载失败时调用
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        print("加载失败")
+    }
+    
+      
+

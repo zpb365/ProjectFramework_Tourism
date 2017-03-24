@@ -88,14 +88,15 @@ class ScenicSpotMain: CustomTemplateViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
-    //MARK: 获取数据/Users/zhupenggouyou/Documents/ProjectFramework_Tourism/html.txt
+    //MARK: 获取数据/Users/zhupenggouyou/Documents/旅游项目平台/ProjectFramework_Tourism/html.txt
     
     func getData() -> Void {
         do {
             //发现此方法在iOS9会闪退
             let str=try NSString(contentsOfFile: "/Users/zhupenggouyou/Documents/ProjectFramework_Tourism/html.txt",encoding: String.Encoding.utf8.rawValue)
             HTMLString = str as String!
-            print("我执行这里了1")
+           // print("我执行这里了1")
+ 
         }
         catch {
             HTMLString = ""
@@ -333,7 +334,11 @@ class ScenicSpotMain: CustomTemplateViewController {
             cell.FuncCallbackValue(value: { [weak self]( height) -> Void in
                 self?.height = height
                 self?.tableView.reloadData()
+ 
+//                self?.tableView.reloadSections(NSIndexSet.init(index: 2) as IndexSet, with: .left)
+ 
             })
+           
             return cell
         }
         if (indexPath.section == 3) {
