@@ -130,7 +130,7 @@ class My: UIViewController,UITableViewDelegate,UITableViewDataSource {
     func UserInfoEdit (){
         
         if(Global_UserInfo.IsLogin==false){ //未登录
-            LoginLogicViewModel().LoginLogicViewModel(self)
+           // LoginLogicViewModel().LoginLogicViewModel(self)
         }else{  //已登录
             let vc = CommonFunction.ViewControllerWithStoryboardName("Myinfo", Identifier: "Myinfo") as! MyInfoViewController
             self.navigationController?.show(vc, sender: nil)
