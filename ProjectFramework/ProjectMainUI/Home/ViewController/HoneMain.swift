@@ -162,12 +162,9 @@ class HoneMain: UIViewController,SlidingDelegate,PYSearchViewControllerDelegate 
     ///扫描
     func leftButtonItem (){
         
-        let vc = LoginViewControllerTwo()
-        self.present(vc, animated: true, completion: nil)
-        
         ///需要真机调试
-        //let vc = QQScanViewController()
-        //self.navigationController?.pushViewController(vc, animated: true)
+        let vc = QQScanViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     ///隐藏导航栏
