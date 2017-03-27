@@ -31,7 +31,7 @@ extension UIView{
         lable.frame = CGRect.init(x: CGFloat(leftView.frame.maxX + 10), y: 0, width: 80, height: 15)
         lable.center.y = leftView.center.y
         lable.text = title
-        lable.font = UIFont.systemFont(ofSize: 14)
+        lable.font = UIFont.systemFont(ofSize: 13)
         lable.textColor = titleColor
         view.addSubview(lable)
         

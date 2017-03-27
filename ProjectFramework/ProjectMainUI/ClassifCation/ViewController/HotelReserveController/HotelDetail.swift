@@ -37,7 +37,7 @@ class HotelDetail: CustomTemplateViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewHead: UIView!
-    @IBOutlet weak var ReserveCount: UILabel!
+    @IBOutlet weak var ReserveCount: UILabel!//今天酒店的预定数
     @IBOutlet weak var buttonBar: UIView!
     
     let identiFier = "HotelRoomReserveCell"
@@ -72,10 +72,7 @@ class HotelDetail: CustomTemplateViewController {
         ReserveCount.layer.cornerRadius = 4
         ReserveCount.clipsToBounds = true
     }
-    //MARK: getData
-    func getdata() -> Void {
-        
-    }
+
     //MARK: initUI
     func initUI() -> Void {
         let model = UserCommentModel()
@@ -90,8 +87,6 @@ class HotelDetail: CustomTemplateViewController {
         self.tableView.tableHeaderView = tableViewHead
         self.header.isHidden = true
         self.tableView.register(UserCommentCell.self, forCellReuseIdentifier: identifier)
-//        self.tableView.sectionHeaderHeight = 0.01
-//        self.tableView.sectionFooterHeight = 0.01
     }
     //MARK: 设置导航栏
     func setNavBar() -> Void {

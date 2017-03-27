@@ -71,6 +71,7 @@ class UserCommentCell: UITableViewCell {
     //MARK: 构造方法
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none
         self.contentView.addSubview(self.userIcon)
         self.contentView.addSubview(self.userNickName)
         self.contentView.addSubview(self.userSexy)

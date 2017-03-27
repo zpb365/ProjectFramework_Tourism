@@ -45,6 +45,10 @@ class Restaurant: CustomTemplateViewController {
         return cell
         
     }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = CommonFunction.ViewControllerWithStoryboardName("RestaurantDetail", Identifier: "RestaurantDetail") as! RestaurantDetail
+        self.navigationController?.show(vc, sender: self  )
+    }
     // MARK: 设置导航栏
     func setNavbar(){
         

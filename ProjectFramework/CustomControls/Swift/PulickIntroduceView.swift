@@ -91,17 +91,22 @@ class PulickIntroduceView: UIView,UITableViewDelegate,UITableViewDataSource {
     }
     //组头
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
-        let header = UIView.init(frame: CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: 30))
-        header.backgroundColor = UIColor.white
-        let lable = UILabel.init(frame: CommonFunction.CGRect_fram(15, y: 7.5, w: 100, h:15 ))
-        lable.font = UIFont.systemFont(ofSize: 13)
-        lable.text = sectionTextArray[section]
-        header.addSubview(lable)
-        return header
+        if self.sectionTextArray.count > 0 {
+            let header = UIView.init(frame: CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: 30))
+            header.backgroundColor = UIColor.white
+            let lable = UILabel.init(frame: CommonFunction.CGRect_fram(15, y: 7.5, w: 100, h:15 ))
+            lable.font = UIFont.systemFont(ofSize: 13)
+            lable.text = sectionTextArray[section]
+            header.addSubview(lable)
+            return header
+        }
+        else{
+            return UIView()
+        }
     }
     //组头高
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        return self.sectionTextArray.count > 0 ? 30 : 0
     }
     
     

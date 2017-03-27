@@ -54,6 +54,10 @@ class TravelAcy: CustomTemplateViewController {
         return cell
         
     }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = CommonFunction.ViewControllerWithStoryboardName("TravelAcyDetail", Identifier: "TravelAcyDetail") as! TravelAcyDetail
+        self.navigationController?.show(vc, sender: self  )
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

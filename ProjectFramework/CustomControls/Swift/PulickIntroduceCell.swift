@@ -44,6 +44,7 @@ class PulickIntroduceCell: UITableViewCell {
     }
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none
         self.backgroundColor = UIColor.white
         self.contentView.addSubview(self.line)
         self.contentView.addSubview(self.titleLable)
