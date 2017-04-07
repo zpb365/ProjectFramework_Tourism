@@ -45,6 +45,10 @@ class Specialty: CustomTemplateViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
         return 10
     }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = CommonFunction.ViewControllerWithStoryboardName("SpecialtyDetail", Identifier: "SpecialtyDetail") as! SpecialtyDetail
+        self.navigationController?.show(vc, sender: self  )
+    }
     // MARK: 设置导航栏
     func setNavbar(){
         

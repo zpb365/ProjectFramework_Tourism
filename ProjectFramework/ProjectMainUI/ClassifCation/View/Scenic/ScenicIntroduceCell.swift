@@ -58,21 +58,7 @@ class ScenicIntroduceCell: UITableViewCell,UIWebViewDelegate {
         let str = "document.body.style.fontSize = '13px';"
         
         webView.stringByEvaluatingJavaScript(from: str)        
-//        var script: String = "var script = document.createElement('script');" +
-//        "script.type = 'text/javascript';"
-//        "script.text = \"function ResizeImages() { " +
-//            "var img;" +
-//            "var maxwidth=\(350 - 20);" +
-//            "for(i=0;i <document.images.length;i++){" +
-//            "img = document.images[i];" +
-//            "if(img.width > maxwidth){" +
-//            "img.width = maxwidth;" +
-//            "}" +
-//            "}" +
-//            "}\";" +
-//        "document.getElementsByTagName('head')[0].appendChild(script);"
-//        webView.stringByEvaluatingJavaScript(from: script)
-//        webView.stringByEvaluatingJavaScript(from: "ResizeImages();")
+
         let height = webView.scrollView.contentSize.height
         
         costomWebView.frame = CommonFunction.CGRect_fram(0, y: 0, w: self.contentView.frame.width, h: height)

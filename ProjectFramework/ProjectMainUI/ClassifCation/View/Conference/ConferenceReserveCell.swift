@@ -1,27 +1,24 @@
 //
-//  RestaurantComboCell.swift
-//  
+//  ConferenceReserveCell.swift
+//  ProjectFramework_Tourism
 //
-//  Created by 住朋购友 on 2017/3/25.
-//
+//  Created by 住朋购友 on 2017/3/28.
+//  Copyright © 2017年 HCY. All rights reserved.
 //
 
 import UIKit
 
-class RestaurantComboCell: UITableViewCell {
-    
-    //线
+class ConferenceReserveCell: UITableViewCell {
     lazy var line: UILabel = {
         let line = UILabel.init()
         line.backgroundColor = UIColor.darkGray
         return line
     }()
-    @IBOutlet weak var disCountPrice: UILabel!
-    
+    @IBOutlet weak var disPrice: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.line.frame = CommonFunction.CGRect_fram(disCountPrice.frame.origin.x - 2, y: disCountPrice.center.y, w: 30, h: 1)
+        self.line.frame = CommonFunction.CGRect_fram(disPrice.frame.origin.x - 2, y: disPrice.center.y, w: 30, h: 1)
         self.contentView.addSubview(self.line)
     }
 

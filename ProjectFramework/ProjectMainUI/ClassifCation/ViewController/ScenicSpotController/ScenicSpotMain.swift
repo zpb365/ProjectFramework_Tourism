@@ -343,7 +343,7 @@ class ScenicSpotMain: CustomTemplateViewController {
         }
         if (indexPath.section == 3) {
 //            let cell  = tableView.dequeueReusableCell(withIdentifier: identifier3) as! UserCommentCell
-            let cell = UserCommentCell.init(style: .subtitle, reuseIdentifier: identifier3)
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier3, for: indexPath)as!UserCommentCell
             cell.InitConfig(self.modelArray[0])
             return cell
         }

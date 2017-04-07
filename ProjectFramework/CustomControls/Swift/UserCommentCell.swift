@@ -58,6 +58,9 @@ class UserCommentCell: UITableViewCell {
         commentLable.numberOfLines = 0
         return commentLable
     }()
+    
+    var flag: Bool = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -68,9 +71,11 @@ class UserCommentCell: UITableViewCell {
        
         // Configure the view for the selected state
     }
+    
     //MARK: 构造方法
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         self.selectionStyle = .none
         self.contentView.addSubview(self.userIcon)
         self.contentView.addSubview(self.userNickName)
@@ -79,6 +84,7 @@ class UserCommentCell: UITableViewCell {
         self.contentView.addSubview(self.timeLable)
         self.contentView.addSubview(self.commentLable)
         self.contentView.addSubview(self.photoView)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -87,17 +93,20 @@ class UserCommentCell: UITableViewCell {
     //MARK: 创建UI
     
     override func InitConfig(_ cell: Any) {
-        
-        let model = cell as! UserCommentModel
-        let nickNameWidth = model.nickName.getContenSizeWidth(font: UIFont.systemFont(ofSize: 11))
-        let commontHeight = model.comment.ContentSize(font: UIFont.systemFont(ofSize: 11), maxSize: CGSize(width: CommonFunction.kScreenWidth - 35, height: 0)).height
-        let photoViewHeight = UITableView().getCommentPhotoViewHeight(imageArray: model.imageArray, showCount: model.imageArray.count, rowCount: 4, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10)
-        
-        userNickName.frame = CommonFunction.CGRect_fram(userNickName.frame.origin.x, y: userNickName.frame.origin.y, w: nickNameWidth, h: userNickName.frame.height)
-        userSexy.frame = CommonFunction.CGRect_fram(userNickName.frame.maxX + 5, y: 5, w: 15, h: 15)
-        commentLable.frame = CommonFunction.CGRect_fram(commentLable.frame.origin.x, y: commentLable.frame.origin.y, w: CommonFunction.kScreenWidth - 35, h: commontHeight)
-        photoView.frame = CommonFunction.CGRect_fram(commentLable.frame.origin.x, y: commentLable.frame.maxY + 5, w: CommonFunction.kScreenWidth - 35, h: photoViewHeight)
-        commentLable.text = model.comment
-        _ = photoView.initCommentPhotoView(model.imageArray, showCount: model.imageArray.count, rowCount: 4, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10)
+        if (!flag){
+            let model = cell as! UserCommentModel
+            let nickNameWidth = model.nickName.getContenSizeWidth(font: UIFont.systemFont(ofSize: 11))
+            let commontHeight = model.comment.ContentSize(font: UIFont.systemFont(ofSize: 11), maxSize: CGSize(width: CommonFunction.kScreenWidth - 35, height: 0)).height
+            let photoViewHeight = UITableView().getCommentPhotoViewHeight(imageArray: model.imageArray, showCount: model.imageArray.count, rowCount: 4, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10)
+            
+            userNickName.frame = CommonFunction.CGRect_fram(userNickName.frame.origin.x, y: userNickName.frame.origin.y, w: nickNameWidth, h: userNickName.frame.height)
+            userSexy.frame = CommonFunction.CGRect_fram(userNickName.frame.maxX + 5, y: 5, w: 15, h: 15)
+            commentLable.frame = CommonFunction.CGRect_fram(commentLable.frame.origin.x, y: commentLable.frame.origin.y, w: CommonFunction.kScreenWidth - 35, h: commontHeight)
+            photoView.frame = CommonFunction.CGRect_fram(commentLable.frame.origin.x, y: commentLable.frame.maxY + 5, w: CommonFunction.kScreenWidth - 35, h: photoViewHeight)
+            commentLable.text = model.comment
+            _ = photoView.initCommentPhotoView(model.imageArray, showCount: model.imageArray.count, rowCount: 4, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10)
+            
+            flag = true
+        }
     }
 }

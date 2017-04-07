@@ -284,7 +284,7 @@ class HotelDetail: CustomTemplateViewController {
             return cell
         }
         else if (indexPath.section == 2){
-            let cell = UserCommentCell.init(style: .subtitle, reuseIdentifier: identifier)
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)as!UserCommentCell
             cell.InitConfig(self.modelArray[0])
             return cell
         }

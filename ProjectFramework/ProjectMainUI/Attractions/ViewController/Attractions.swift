@@ -81,4 +81,14 @@ class Attractions: CustomTemplateViewController {
         _viewForHeaderInSection[1] = sectionHeaderView2
         return _viewForHeaderInSection[section]
     }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath.section == 0) {
+            let vc = CommonFunction.ViewControllerWithStoryboardName("InformDetail", Identifier: "InformDetail") as! InformDetail
+            self.navigationController?.show(vc, sender: self  )
+        }
+        if (indexPath.section == 1) {
+            let vc = CommonFunction.ViewControllerWithStoryboardName("ScenerySpotDetail", Identifier: "ScenerySpotDetail") as! ScenerySpotDetail
+            self.navigationController?.show(vc, sender: self  )
+        }
+    }
 }

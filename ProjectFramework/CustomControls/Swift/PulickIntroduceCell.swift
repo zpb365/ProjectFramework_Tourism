@@ -50,7 +50,7 @@ class PulickIntroduceCell: UITableViewCell {
         self.contentView.addSubview(self.titleLable)
         self.contentView.addSubview(self.describe)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

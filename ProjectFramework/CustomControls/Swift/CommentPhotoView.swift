@@ -16,6 +16,7 @@ class CommentPhotoView: UIView {
         let _W =  contenViewWidth - (xMargin * CGFloat(rowCount - 1))
         //视图宽度自动计算大小
         let width = _W / CGFloat (rowCount)
+
         
         for i in 0..<imageArray.count{
             //一行中的第几个
@@ -26,6 +27,8 @@ class CommentPhotoView: UIView {
             
             let X = (width + xMargin) * CGFloat(row)
             let Y = (width + yMargin) * CGFloat(low)
+            
+            
             
             //总行数
             let imageView = UIImageView.init()

@@ -1,20 +1,24 @@
 //
-//  RestaurantDetail.swift
+//  ConferenceDetail.swift
 //  ProjectFramework_Tourism
 //
-//  Created by 住朋购友 on 2017/3/24.
+//  Created by 住朋购友 on 2017/3/28.
 //  Copyright © 2017年 HCY. All rights reserved.
 //
 
 import UIKit
 
-class RestaurantDetail: CustomTemplateViewController {
-
+class ConferenceDetail: CustomTemplateViewController {
     
     lazy var sectionConment:UIView = {
         let sectionConment = Bundle.main.loadNibNamed("CommentSectionView", owner: self, options: nil)?.last
         
         return sectionConment as! UIView
+    }()
+    lazy var sectionTime:UIView = {
+        let sectionTime = Bundle.main.loadNibNamed("TimeQuantum", owner: self, options: nil)?.last
+        
+        return sectionTime as! UIView
     }()
     
     lazy var sectionIntroduce: PulickIntroduceView = {
@@ -29,16 +33,14 @@ class RestaurantDetail: CustomTemplateViewController {
         })
         return sectionIntroduce
     }()
+
     
-    lazy var sectionView: UIView = {
-        let sectionView = UIView.init().headView(width: CommonFunction.kScreenWidth, height: 40, leftViewColor: UIColor.init().TransferStringToColor("#26C6DA"), title: "套餐价格", titleColor: UIColor.black)
-        return sectionView
-    }()
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewHead: UIView!
     @IBOutlet weak var buttonBar: UIView!
+
     
-    let identiFier = "RestaurantComboCell"
+    let identiFier = "ConferenceReserveCell"
     let identifier = "UserCommentCell"
     
     var CustomNavBar:UINavigationBar!=nil
@@ -50,8 +52,13 @@ class RestaurantDetail: CustomTemplateViewController {
     var modelArray = Array<Any>()
     var height: CGFloat = 50
     var isChange: Bool = false
-    
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setNavBar()
+        self.initUI()
+        self.setHeadView()
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -59,20 +66,13 @@ class RestaurantDetail: CustomTemplateViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.setNavBar()
-        self.initUI()
-        self.setHeadView()
-    }
     
     //MARK: tableViewDelegate
     //MARK: 开始拖动时调用的方法
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         isChange = true
-        self.sectionIntroduce.setData(object: self, textArray: ["酒店政策","设施服务"])//后期网络接口传值
+        self.sectionIntroduce.setData(object: self, textArray: ["会展政策","参会须知"])//后期网络接口传值
     }
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView){
         let offset: CGFloat = scrollView.contentOffset.y
         if (offset <= 64) {
@@ -102,43 +102,25 @@ class RestaurantDetail: CustomTemplateViewController {
             tableViewHead.addSubview(buttonBar)
             
         }
-        if isChange {
-            if (offset < 10 * 80 + tableViewHead.frame.height) {
-                self.btoomLineMove(tag: 1)
-            }
-            if (offset > 10 * 80 + tableViewHead.frame.height && offset < 10 * 80 + tableViewHead.frame.height + height - 40) {
-                self.btoomLineMove(tag: 2)
-            }
-            if (offset > 10 * 80 + tableViewHead.frame.height + height) {
-                self.btoomLineMove(tag: 3)
-            }
-        }
-    }
-    func btoomLineMove(tag:Int) -> Void {
-        UIView.animate(withDuration: 0.3) {
-            let button = self.buttonBar.viewWithTag(tag) as! UIButton
-            let line = self.buttonBar.viewWithTag(666)
-            line?.center.x = button.center.x
-        }
     }
     //组数
-    override func numberOfSections(in tableView: UITableView) -> Int {        
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
     var _viewForHeaderInSection = [UIView(),UIView(),UIView()]
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
-        _viewForHeaderInSection[0] = sectionView
+        _viewForHeaderInSection[0] = sectionTime
         _viewForHeaderInSection[1] = sectionIntroduce
         _viewForHeaderInSection[2] = sectionConment
         return _viewForHeaderInSection[section]
     }
-    var _heightForHeaderInSection = [40,50,50]
+    var _heightForHeaderInSection = [35,50,50]
     //组头高
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         _heightForHeaderInSection[1] = Int(height) > 50 ? Int(height) : 50
         return CGFloat(_heightForHeaderInSection[section])
     }
-    var _numberOfRowsInSection = [10,0,10]
+    var _numberOfRowsInSection = [10,0,5]
     //组个数
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return _numberOfRowsInSection[section]
@@ -153,7 +135,7 @@ class RestaurantDetail: CustomTemplateViewController {
     //数据源
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->UITableViewCell{
         if (indexPath.section == 0) {
-            let cell = tableView.dequeueReusableCell(withIdentifier: identiFier, for: indexPath) as! RestaurantComboCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: identiFier, for: indexPath) as! ConferenceReserveCell
             return cell
         }
         if (indexPath.section == 2){
@@ -165,7 +147,7 @@ class RestaurantDetail: CustomTemplateViewController {
             return UITableViewCell()
         }
     }
-
+    
     //MARK: 悬浮按钮方法
     func headerClick(_ button: UIButton) {
         isChange = false
@@ -174,19 +156,10 @@ class RestaurantDetail: CustomTemplateViewController {
             let line = self.buttonBar.viewWithTag(666)
             line?.center.x = button.center.x
         }
-        //  1 预定餐厅   2 餐厅简介  3 用户点评
-        
-        if (button.tag == 2) {
-            self.sectionIntroduce.setData(object: self, textArray: ["酒店政策","设施服务"])//后期网络接口传值
-            self.tableView.setContentOffset(CGPoint.init(x: 0, y: 80 * 10 + tableViewHead.frame.height - 64), animated: true)
-        }
-        else {
-            self.tableView.scrollToRow(at: IndexPath(row: 0, section: button.tag - 1), at: .middle, animated: true)
-        }
     }
     //MARK: 设置头部
     func setHeadView() -> Void {
-        let titleArray: Array=["预定餐饮","餐厅简介","用户点评"]
+        let titleArray: Array=["预定会展","会展简介","用户点评"]
         for i in 0..<titleArray.count {
             let title = titleArray[i]
             let button = UIButton.init(type: .system)
@@ -224,6 +197,7 @@ class RestaurantDetail: CustomTemplateViewController {
         self.header.isHidden = true
         self.tableView.register(UserCommentCell.self, forCellReuseIdentifier: identifier)
     }
+
     //MARK: 设置导航栏
     func setNavBar() -> Void {
         CustomNavBar = UINavigationBar(frame: CGRect.init(x: 0, y: 0, width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight))

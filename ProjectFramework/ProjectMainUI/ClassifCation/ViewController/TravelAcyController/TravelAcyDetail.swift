@@ -11,7 +11,7 @@ import UIKit
 class TravelAcyDetail: CustomTemplateViewController {
     
     
-    lazy var buyButton: UIButton={
+    lazy var buyButton: UIButton = {
         let buyButton = UIButton.init(type: .system)
         buyButton.frame = CommonFunction.CGRect_fram(0, y: self.view.frame.height - 35, w: self.view.frame.width, h: 35)
         buyButton.backgroundColor = CommonFunction.SystemColor()
@@ -22,7 +22,26 @@ class TravelAcyDetail: CustomTemplateViewController {
         buyButton.addTarget(self, action: #selector(buttonClick), for: .touchUpInside)
         return buyButton
     }()
-
+    lazy var sectionJourney: PulickWebView = {
+        let sectionJourney = PulickWebView.init(frame: CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: 10))
+        sectionJourney.FuncCallbackValue {[weak self] (height) in
+            self?.sectionJourney.frame = CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: height)
+            self?.journeyHeight = height
+//            self?.tableView.reloadData()
+            print("+++++++",height)
+        }
+        return sectionJourney
+    }()
+    lazy var sectionIntroduce: PulickWebView = {
+        let sectionIntroduce = PulickWebView.init(frame: CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: 10))
+        sectionIntroduce.FuncCallbackValue {[weak self] (height) in
+        self?.sectionIntroduce.frame = CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: height)
+        self?.introduceHeight = height
+        self?.tableView.reloadData()
+            print("-------",height)
+        }
+        return sectionIntroduce
+    }()
     //费用说明
     lazy var sectionPrice: PulickIntroduceView = {
         let sectionPrice = PulickIntroduceView()
@@ -59,7 +78,10 @@ class TravelAcyDetail: CustomTemplateViewController {
     @IBOutlet weak var tableViewHead: UIView!
     @IBOutlet weak var dateBase: UIView!
     @IBOutlet weak var buttonBar: UIView!
-
+    
+    
+    let identfier0 = "PulickWebCell0"
+    let identfier1 = "PulickWebCell1"
     let identifier = "UserCommentCell"
     
     var CustomNavBar:UINavigationBar!=nil
@@ -68,11 +90,10 @@ class TravelAcyDetail: CustomTemplateViewController {
     var shareBtn:UIButton!=nil
     var alph: CGFloat = 0
     var modelArray = Array<Any>()
-    var journeyHeight: CGFloat = 0//行程富文本
-    var introduceHeight:CGFloat = 0//简介富文本
+    var journeyHeight: CGFloat = 10//行程富文本
+    var introduceHeight:CGFloat = 10//简介富文本
     var priceHeight: CGFloat = 50 //费用说明
     var reserveHeight : CGFloat = 50   //预定须知
-    
     var isChange: Bool = false
     
     //MARK: viewController
@@ -88,6 +109,7 @@ class TravelAcyDetail: CustomTemplateViewController {
         self.initUI()
         self.getData()
         // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -95,6 +117,9 @@ class TravelAcyDetail: CustomTemplateViewController {
         // Dispose of any resources that can be recreated.
     }
     //MARK: tableViewDelegate
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        isChange = true
+    }
     func scrollViewDidScroll(_ scrollView: UIScrollView){
         let offset: CGFloat = scrollView.contentOffset.y
         if (offset <= 64) {
@@ -124,12 +149,37 @@ class TravelAcyDetail: CustomTemplateViewController {
             tableViewHead.addSubview(buttonBar)
             
         }
+        
+        if isChange {
+            if (offset < tableViewHead.frame.height + journeyHeight) {
+                self.btoomLineMove(tag: 1)
+            }
+            if (offset > tableViewHead.frame.height + journeyHeight && offset < tableViewHead.frame.height + journeyHeight + introduceHeight) {
+                self.btoomLineMove(tag: 2)
+            }
+            if (offset > tableViewHead.frame.height + journeyHeight + introduceHeight && offset < tableViewHead.frame.height + journeyHeight + introduceHeight + priceHeight) {
+                self.btoomLineMove(tag: 3)
+            }
+            if (offset > tableViewHead.frame.height + journeyHeight + introduceHeight + priceHeight && offset < tableViewHead.frame.height + journeyHeight + introduceHeight + priceHeight + reserveHeight) {
+                self.btoomLineMove(tag: 4)
+            }
+            if (offset > tableViewHead.frame.height + journeyHeight + introduceHeight + priceHeight + reserveHeight) {
+                self.btoomLineMove(tag: 5)
+            }
+        }
+    }
+    func btoomLineMove(tag:Int) -> Void {
+        UIView.animate(withDuration: 0.3) {
+            let button = self.buttonBar.viewWithTag(tag) as! UIButton
+            let line = self.buttonBar.viewWithTag(666)
+            line?.center.x = button.center.x
+        }
     }
     //组数
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 5
     }
-    var _numberOfRowsInSection = [1,1,0,0,10]
+    var _numberOfRowsInSection = [0,0,0,0,10]
     //组个数
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return _numberOfRowsInSection[section]
@@ -137,24 +187,27 @@ class TravelAcyDetail: CustomTemplateViewController {
     //组头
     var _viewForHeaderInSection = [UIView(),UIView(),UIView(),UIView(),UIView()]
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
+        _viewForHeaderInSection[0] = sectionJourney
+        _viewForHeaderInSection[1] = sectionIntroduce
         _viewForHeaderInSection[2] = sectionPrice
         _viewForHeaderInSection[3] = sectionReserve
         _viewForHeaderInSection[4] = sectionConment
+        
         return _viewForHeaderInSection[section]
     }
     // 0行程 1简介 2费用说明 3预定须知 4评论
     var _heightForHeaderInSection = [0,0,0,0,50]
     //组头高
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
+        _heightForHeaderInSection[0] = Int(journeyHeight) > 0 ? Int(journeyHeight) : 10
+        _heightForHeaderInSection[1] = Int(introduceHeight) > 0 ? Int(introduceHeight) : 10
         _heightForHeaderInSection[2] = Int(priceHeight) > 0 ? Int(priceHeight) : 0
         _heightForHeaderInSection[3] = Int(reserveHeight) > 0 ? Int(reserveHeight) : 0
         return CGFloat(_heightForHeaderInSection[section])
     }
-    var _heightForRowAt = [CGFloat(50),CGFloat(50),CGFloat(0),CGFloat(0),CGFloat(0)]
+    var _heightForRowAt = [CGFloat(0),CGFloat(0),CGFloat(0),CGFloat(0),CGFloat(0)]
     //行高
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        _heightForRowAt[0] = journeyHeight > CGFloat(50) ? journeyHeight : CGFloat(50)
-        _heightForRowAt[1] = journeyHeight > CGFloat(50) ? journeyHeight : CGFloat(50)
         if self.modelArray.count > 0 {
             let model = self.modelArray[0] as! UserCommentModel //暂时为了显示数据  有接口就移除
             _heightForRowAt[4] = self.tableView.getHeightWithCell(lableWidth: CommonFunction.kScreenWidth - 35, commont: model.comment, imageArray: model.imageArray, showCount: model.imageArray.count, rowCount: 4, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10) + 48 + 10
@@ -163,9 +216,9 @@ class TravelAcyDetail: CustomTemplateViewController {
     }
     //数据源
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->UITableViewCell{
-        
+     
         if (indexPath.section == 4) {
-            let cell = UserCommentCell.init(style: .subtitle, reuseIdentifier: identifier)
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)as!UserCommentCell
             if self.modelArray.count > 0 {
                 cell.InitConfig(self.modelArray[0])
             }
@@ -219,11 +272,23 @@ class TravelAcyDetail: CustomTemplateViewController {
     }
     //悬浮条按钮方法
     func headerClick(_ button: UIButton) -> Void {
+        isChange = false
         //底部线滑动
         UIView.animate(withDuration: 0.3) {
             let line = self.buttonBar.viewWithTag(666)
             line?.center.x = button.center.x
         }
+        if (button.tag == 5) {
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: button.tag - 1), at: .middle, animated: true)
+        }
+        else{
+           let height = self.getHeight(tag: button.tag)
+            self.tableView.setContentOffset(CGPoint.init(x: 0, y:height ), animated: true)
+        }
+    }
+    func getHeight(tag:Int) -> CGFloat {
+        let heightArray = [tableViewHead.frame.height - 104,tableViewHead.frame.height - 104 + journeyHeight, tableViewHead.frame.height - 104 + journeyHeight + introduceHeight,tableViewHead.frame.height - 104 + journeyHeight + introduceHeight + priceHeight,]
+        return heightArray[tag - 1]
     }
     //MARK: 设置导航栏
     func setNavBar() -> Void {
@@ -298,6 +363,9 @@ class TravelAcyDetail: CustomTemplateViewController {
         
         self.sectionPrice.setData(object: self, textArray: ["费用包含","费用不包含"])//后期网络接口传值
         self.sectionReserve.setData(object: self, textArray: ["出行须知","特殊限制"])
+        
+        sectionJourney.loadHtmlString(html: "<p>香蕉是淀粉质丰富的有益水果。味甘性寒，可清热润肠</p><p>香蕉</p><p>香蕉</p><p>，促进肠胃蠕动，但脾虚泄泻者却不宜。根据“热者寒之”的原理，最适合燥热人士享用。痔疮出血者、因燥热而致胎动不安者，都可生吃蕉肉。</p><p>民间验方更有用香蕉炖冰糖，医治久咳；用香蕉煮酒，作为食疗。近代医学建议，用香蕉可治高血压，因它含钾量丰富，可平衡钠的不良作用，并促进细胞及组织生长。用香蕉可治疗便秘，因它能促进肠胃蠕动。</p><p>早餐午餐和晚餐分别吃一根香蕉，能够为人体提供丰富的钾，从而使得大脑血凝块几率降低约21%。</p><p>德国研究人员表示，用香蕉可治抑郁和情绪不安，因它能促进大脑分泌内啡化学物质。它能缓和紧张的情绪，提高工作效率，降低疲劳。</p>")
+        sectionIntroduce.loadHtmlString(html: "<p>品牌：xiaomi/小米</p><p>    型号：小米Max<br/></p><p>    款式：直板<br/></p><p>    颜色：金色 银色<br/></p><p>    后置摄像头：<span style=\"color: rgb(192, 0, 0);\">1600</span>万<br/></p><p>    附加功能：OTG WIFIH上网 双卡双待 高清视频<br/></p><p>    宝贝成色：全新<br/></p>")
     }
 
 }

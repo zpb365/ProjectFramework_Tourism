@@ -81,7 +81,9 @@ class Conference: CustomTemplateViewController ,UICollectionViewDelegateFlowLayo
         return cell
     }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("点击详情页");
+        print("点击进入详情页");
+        let vc = CommonFunction.ViewControllerWithStoryboardName("ConferenceDetail", Identifier: "ConferenceDetail") as! ConferenceDetail
+        self.navigationController?.show(vc, sender: self  )
     }
 
 }

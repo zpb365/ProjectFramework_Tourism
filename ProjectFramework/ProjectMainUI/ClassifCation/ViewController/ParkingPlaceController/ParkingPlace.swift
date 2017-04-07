@@ -67,6 +67,10 @@ class ParkingPlace: CustomTemplateViewController {
         return cell
         
     }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = CommonFunction.ViewControllerWithStoryboardName("ParkingPlaceDetail", Identifier: "ParkingPlaceDetail") as! ParkingPlaceDetail
+        self.navigationController?.show(vc, sender: self  )
+    }
     
 
 }

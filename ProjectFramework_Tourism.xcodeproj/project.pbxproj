@@ -191,6 +191,10 @@
 		2EFB8CB61E763F0400BC032F /* GuideBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB8CB51E763F0400BC032F /* GuideBook.swift */; };
 		2EFB8CB91E763F2B00BC032F /* Specialty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB8CB81E763F2B00BC032F /* Specialty.swift */; };
 		327B11301D58E414236AC24B /* Pods_ProjectFramework_Tourism.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6212B5E39C475CB11281041 /* Pods_ProjectFramework_Tourism.framework */; };
+		6F0638F91E965E7E00FB8E23 /* InformDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0638F81E965E7E00FB8E23 /* InformDetail.swift */; };
+		6F0638FB1E965FE600FB8E23 /* InformDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F0638FA1E965FE600FB8E23 /* InformDetail.storyboard */; };
+		6F0638FD1E96630000FB8E23 /* ScenerySpotDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0638FC1E96630000FB8E23 /* ScenerySpotDetail.swift */; };
+		6F0638FF1E96631000FB8E23 /* ScenerySpotDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F0638FE1E96631000FB8E23 /* ScenerySpotDetail.storyboard */; };
 		6F06CAEE1E839EFF005F2979 /* CommentSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F06CAEC1E839EFF005F2979 /* CommentSectionView.swift */; };
 		6F06CAEF1E839EFF005F2979 /* CommentSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F06CAED1E839EFF005F2979 /* CommentSectionView.xib */; };
 		6F06CAF51E83C3D8005F2979 /* PulickIntroduceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F06CAF21E83C3D8005F2979 /* PulickIntroduceCell.swift */; };
@@ -202,6 +206,17 @@
 		6F06CB821E889D0D005F2979 /* TravelAcyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F06CB811E889D0D005F2979 /* TravelAcyDetail.swift */; };
 		6F06CB841E889D33005F2979 /* TravelAcyDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F06CB831E889D33005F2979 /* TravelAcyDetail.storyboard */; };
 		6F06CB861E88B209005F2979 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F06CB851E88B209005F2979 /* DateView.swift */; };
+		6F08E5BE1E89FA7B00338FD7 /* PulickWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F08E5BD1E89FA7B00338FD7 /* PulickWebView.swift */; };
+		6F08E5C01E8A102100338FD7 /* ConferenceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F08E5BF1E8A102100338FD7 /* ConferenceDetail.swift */; };
+		6F08E5C21E8A104F00338FD7 /* ConferenceDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F08E5C11E8A104F00338FD7 /* ConferenceDetail.storyboard */; };
+		6F08E5C41E8A16C200338FD7 /* ConferenceReserveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F08E5C31E8A16C200338FD7 /* ConferenceReserveCell.swift */; };
+		6F08E5C61E8A6CFA00338FD7 /* TimeQuantum.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F08E5C51E8A6CFA00338FD7 /* TimeQuantum.xib */; };
+		6F08E5C81E8B413000338FD7 /* TimeQuantum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F08E5C71E8B413000338FD7 /* TimeQuantum.swift */; };
+		6F08E5CA1E8B46FD00338FD7 /* ParkingPlaceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F08E5C91E8B46FD00338FD7 /* ParkingPlaceDetail.swift */; };
+		6F08E5CC1E8B47E600338FD7 /* ParkingPlaceDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F08E5CB1E8B47E600338FD7 /* ParkingPlaceDetail.storyboard */; };
+		6F08E5CE1E8B8D8A00338FD7 /* SpecialtyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F08E5CD1E8B8D8A00338FD7 /* SpecialtyDetail.swift */; };
+		6F08E5D01E8B8DB000338FD7 /* SpecialtyDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F08E5CF1E8B8DB000338FD7 /* SpecialtyDetail.storyboard */; };
+		6F08E5D21E8BB92700338FD7 /* SpecialtyReserveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F08E5D11E8BB92700338FD7 /* SpecialtyReserveCell.swift */; };
 		6F0ED2E01E7A981300A8E4FC /* ScenicSpot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0ED2DE1E7A981300A8E4FC /* ScenicSpot.swift */; };
 		6F0ED2E11E7A981300A8E4FC /* ScenicSpotMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0ED2DF1E7A981300A8E4FC /* ScenicSpotMain.swift */; };
 		6F0ED2E81E7A983B00A8E4FC /* HotScenicSpotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0ED2E21E7A983B00A8E4FC /* HotScenicSpotCell.swift */; };
@@ -587,6 +602,10 @@
 		2EFB8CB21E763EFD00BC032F /* Conference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conference.swift; sourceTree = "<group>"; };
 		2EFB8CB51E763F0400BC032F /* GuideBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideBook.swift; sourceTree = "<group>"; };
 		2EFB8CB81E763F2B00BC032F /* Specialty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Specialty.swift; sourceTree = "<group>"; };
+		6F0638F81E965E7E00FB8E23 /* InformDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformDetail.swift; sourceTree = "<group>"; };
+		6F0638FA1E965FE600FB8E23 /* InformDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = InformDetail.storyboard; sourceTree = "<group>"; };
+		6F0638FC1E96630000FB8E23 /* ScenerySpotDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScenerySpotDetail.swift; sourceTree = "<group>"; };
+		6F0638FE1E96631000FB8E23 /* ScenerySpotDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ScenerySpotDetail.storyboard; sourceTree = "<group>"; };
 		6F06CAEC1E839EFF005F2979 /* CommentSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentSectionView.swift; sourceTree = "<group>"; };
 		6F06CAED1E839EFF005F2979 /* CommentSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentSectionView.xib; sourceTree = "<group>"; };
 		6F06CAF21E83C3D8005F2979 /* PulickIntroduceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulickIntroduceCell.swift; sourceTree = "<group>"; };
@@ -598,6 +617,17 @@
 		6F06CB811E889D0D005F2979 /* TravelAcyDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelAcyDetail.swift; sourceTree = "<group>"; };
 		6F06CB831E889D33005F2979 /* TravelAcyDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TravelAcyDetail.storyboard; sourceTree = "<group>"; };
 		6F06CB851E88B209005F2979 /* DateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
+		6F08E5BD1E89FA7B00338FD7 /* PulickWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulickWebView.swift; sourceTree = "<group>"; };
+		6F08E5BF1E8A102100338FD7 /* ConferenceDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConferenceDetail.swift; sourceTree = "<group>"; };
+		6F08E5C11E8A104F00338FD7 /* ConferenceDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ConferenceDetail.storyboard; sourceTree = "<group>"; };
+		6F08E5C31E8A16C200338FD7 /* ConferenceReserveCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConferenceReserveCell.swift; sourceTree = "<group>"; };
+		6F08E5C51E8A6CFA00338FD7 /* TimeQuantum.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeQuantum.xib; sourceTree = "<group>"; };
+		6F08E5C71E8B413000338FD7 /* TimeQuantum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeQuantum.swift; sourceTree = "<group>"; };
+		6F08E5C91E8B46FD00338FD7 /* ParkingPlaceDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkingPlaceDetail.swift; sourceTree = "<group>"; };
+		6F08E5CB1E8B47E600338FD7 /* ParkingPlaceDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ParkingPlaceDetail.storyboard; sourceTree = "<group>"; };
+		6F08E5CD1E8B8D8A00338FD7 /* SpecialtyDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialtyDetail.swift; sourceTree = "<group>"; };
+		6F08E5CF1E8B8DB000338FD7 /* SpecialtyDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SpecialtyDetail.storyboard; sourceTree = "<group>"; };
+		6F08E5D11E8BB92700338FD7 /* SpecialtyReserveCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialtyReserveCell.swift; sourceTree = "<group>"; };
 		6F0ED2DE1E7A981300A8E4FC /* ScenicSpot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScenicSpot.swift; sourceTree = "<group>"; };
 		6F0ED2DF1E7A981300A8E4FC /* ScenicSpotMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScenicSpotMain.swift; sourceTree = "<group>"; };
 		6F0ED2E21E7A983B00A8E4FC /* HotScenicSpotCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotScenicSpotCell.swift; sourceTree = "<group>"; };
@@ -1086,6 +1116,7 @@
 				6F06CAF41E83C3D8005F2979 /* UserCommentCell.swift */,
 				6F06CAF21E83C3D8005F2979 /* PulickIntroduceCell.swift */,
 				6F06CAF31E83C3D8005F2979 /* PulickIntroduceView.swift */,
+				6F08E5BD1E89FA7B00338FD7 /* PulickWebView.swift */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -1353,6 +1384,8 @@
 				2E2611951E5FB5CD00CC70F9 /* Attractions.storyboard */,
 				6FEC4D5A1E80CDC8003117A0 /* PulickInformCell.swift */,
 				6FEC4D5C1E80D1CE003117A0 /* ScenerySpotCell.swift */,
+				6F0638FA1E965FE600FB8E23 /* InformDetail.storyboard */,
+				6F0638FE1E96631000FB8E23 /* ScenerySpotDetail.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1361,6 +1394,8 @@
 			isa = PBXGroup;
 			children = (
 				2E2611971E5FB5DA00CC70F9 /* Attractions.swift */,
+				6F0638F81E965E7E00FB8E23 /* InformDetail.swift */,
+				6F0638FC1E96630000FB8E23 /* ScenerySpotDetail.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1428,6 +1463,10 @@
 			children = (
 				2EFB8C821E7325AB00BC032F /* Conference.storyboard */,
 				2EFB8C861E732CDC00BC032F /* ConferenceCell.swift */,
+				6F08E5C11E8A104F00338FD7 /* ConferenceDetail.storyboard */,
+				6F08E5C31E8A16C200338FD7 /* ConferenceReserveCell.swift */,
+				6F08E5C51E8A6CFA00338FD7 /* TimeQuantum.xib */,
+				6F08E5C71E8B413000338FD7 /* TimeQuantum.swift */,
 			);
 			path = Conference;
 			sourceTree = "<group>";
@@ -1446,6 +1485,7 @@
 			children = (
 				2EFB8C901E737FC300BC032F /* ParkingPlace.storyboard */,
 				2EFB8C941E7384C500BC032F /* ParkingPlaceCell.swift */,
+				6F08E5CB1E8B47E600338FD7 /* ParkingPlaceDetail.storyboard */,
 			);
 			path = ParkingPlace;
 			sourceTree = "<group>";
@@ -1455,6 +1495,8 @@
 			children = (
 				2EFB8C9A1E738A2D00BC032F /* Specialty.storyboard */,
 				2EFB8C9C1E738B6E00BC032F /* SpecialtyCell.swift */,
+				6F08E5CF1E8B8DB000338FD7 /* SpecialtyDetail.storyboard */,
+				6F08E5D11E8BB92700338FD7 /* SpecialtyReserveCell.swift */,
 			);
 			path = Specialty;
 			sourceTree = "<group>";
@@ -1499,6 +1541,7 @@
 			isa = PBXGroup;
 			children = (
 				2EFB8CAF1E763EC200BC032F /* ParkingPlace.swift */,
+				6F08E5C91E8B46FD00338FD7 /* ParkingPlaceDetail.swift */,
 			);
 			path = ParkingPlaceController;
 			sourceTree = "<group>";
@@ -1507,6 +1550,7 @@
 			isa = PBXGroup;
 			children = (
 				2EFB8CB21E763EFD00BC032F /* Conference.swift */,
+				6F08E5BF1E8A102100338FD7 /* ConferenceDetail.swift */,
 			);
 			path = ConferenceController;
 			sourceTree = "<group>";
@@ -1523,6 +1567,7 @@
 			isa = PBXGroup;
 			children = (
 				2EFB8CB81E763F2B00BC032F /* Specialty.swift */,
+				6F08E5CD1E8B8D8A00338FD7 /* SpecialtyDetail.swift */,
 			);
 			path = SpecialtyController;
 			sourceTree = "<group>";
@@ -1848,9 +1893,11 @@
 				2E2611C41E66312100CC70F9 /* Feedback.storyboard in Resources */,
 				2E5E84331D399B88008BAA08 /* TemplatesSettings.bundle in Resources */,
 				2E12CB061E6F1E6F009527BA /* MHSheetHead.xib in Resources */,
+				6F08E5CC1E8B47E600338FD7 /* ParkingPlaceDetail.storyboard in Resources */,
 				6FA1057F1E89169100A235F4 /* Login2Resource.bundle in Resources */,
 				27609BD71CB257810041E8B7 /* Assets.xcassets in Resources */,
 				6FEC4D631E8114B0003117A0 /* HotelDetail.storyboard in Resources */,
+				6F08E5C21E8A104F00338FD7 /* ConferenceDetail.storyboard in Resources */,
 				2E26118A1E5FB54500CC70F9 /* ClassifCation.storyboard in Resources */,
 				6F0ED2EC1E7A983B00A8E4FC /* ScenicSpotMain.storyboard in Resources */,
 				2E26118E1E5FB58400CC70F9 /* My.storyboard in Resources */,
@@ -1878,6 +1925,7 @@
 				2E2A3AFD1E723B6D00A70153 /* TravelAcy.storyboard in Resources */,
 				2E12CB041E6F1E6F009527BA /* MHSheetFoot.xib in Resources */,
 				2E2611A21E5FBB2300CC70F9 /* Meeting.storyboard in Resources */,
+				6F0638FF1E96631000FB8E23 /* ScenerySpotDetail.storyboard in Resources */,
 				2E2611A41E5FBB3E00CC70F9 /* Parking.storyboard in Resources */,
 				6FFD9FF91E7F929E0064D50F /* icon0.jpg in Resources */,
 				2E26119E1E5FBAB100CC70F9 /* Diet.storyboard in Resources */,
@@ -1899,7 +1947,10 @@
 				2E26119A1E5FBA6800CC70F9 /* Scenic.storyboard in Resources */,
 				2E2611651E52BD8F00CC70F9 /* HoneMain.storyboard in Resources */,
 				2EFB8C911E737FC300BC032F /* ParkingPlace.storyboard in Resources */,
+				6F0638FB1E965FE600FB8E23 /* InformDetail.storyboard in Resources */,
+				6F08E5D01E8B8DB000338FD7 /* SpecialtyDetail.storyboard in Resources */,
 				6FA105771E89169100A235F4 /* SB_Register.storyboard in Resources */,
+				6F08E5C61E8A6CFA00338FD7 /* TimeQuantum.xib in Resources */,
 				2E26119C1E5FBA8600CC70F9 /* Hotel.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1994,6 +2045,7 @@
 				2E12CAB31E6F1E67009527BA /* NSDataEx.m in Sources */,
 				2E12CABC1E6F1E67009527BA /* Reachability.m in Sources */,
 				2E12CB1F1E6F1E6F009527BA /* MCWebViewController.swift in Sources */,
+				6F08E5BE1E89FA7B00338FD7 /* PulickWebView.swift in Sources */,
 				2EFB8CB61E763F0400BC032F /* GuideBook.swift in Sources */,
 				2EF815BE1DB69AD100B6A378 /* GlobalParameter.swift in Sources */,
 				6F06CAF61E83C3D8005F2979 /* PulickIntroduceView.swift in Sources */,
@@ -2005,12 +2057,14 @@
 				2E2611901E5FB59900CC70F9 /* My.swift in Sources */,
 				2E12CAB51E6F1E67009527BA /* RSADataSigner.m in Sources */,
 				6FA105711E89169100A235F4 /* LoginViewController.swift in Sources */,
+				6F08E5CA1E8B46FD00338FD7 /* ParkingPlaceDetail.swift in Sources */,
 				6FA105691E89169100A235F4 /* HttpsForget+Password.swift in Sources */,
 				2EFB8C951E7384C500BC032F /* ParkingPlaceCell.swift in Sources */,
 				2E12CA2A1E6F1D88009527BA /* UIButton+Extension.swift in Sources */,
 				6F06CAF71E83C3D8005F2979 /* UserCommentCell.swift in Sources */,
 				2E273D581DAB151A00457F75 /* CreatedbBase.swift in Sources */,
 				2E12CA231E6F1D88009527BA /* CGFloat+Extension.swift in Sources */,
+				6F08E5D21E8BB92700338FD7 /* SpecialtyReserveCell.swift in Sources */,
 				2E12CA331E6F1D88009527BA /* UITextField+Extension.swift in Sources */,
 				6FEC4D651E81323D003117A0 /* HotelRoomReserveCell.swift in Sources */,
 				2E12CA221E6F1D88009527BA /* ShareView.swift in Sources */,
@@ -2064,11 +2118,13 @@
 				2E26118C1E5FB56300CC70F9 /* ClassifCation.swift in Sources */,
 				2E2611B41E5FBBC200CC70F9 /* Parking.swift in Sources */,
 				2E2611C01E65E64400CC70F9 /* MyCell.swift in Sources */,
+				6F08E5CE1E8B8D8A00338FD7 /* SpecialtyDetail.swift in Sources */,
 				6FA105821E89169100A235F4 /* registerViewCell.swift in Sources */,
 				6FA105841E89169100A235F4 /* LoginViewModel.swift in Sources */,
 				2E12CB221E6F1E6F009527BA /* ScrollViewPageViewController.swift in Sources */,
 				2E2302481E6F7B9F00B05279 /* ClassifCationCell.swift in Sources */,
 				2E2A3AFF1E723DD100A70153 /* TravelAcyCell.swift in Sources */,
+				6F0638FD1E96630000FB8E23 /* ScenerySpotDetail.swift in Sources */,
 				2E2611B21E5FBBB700CC70F9 /* Meeting.swift in Sources */,
 				2E2611AA1E5FBB8A00CC70F9 /* Scenic.swift in Sources */,
 				2E12CAB11E6F1E67009527BA /* DataVerifier.m in Sources */,
@@ -2084,7 +2140,9 @@
 				6F06CB7E1E860000005F2979 /* RestaurantComboCell.swift in Sources */,
 				2E12CA2B1E6F1D88009527BA /* UICollectionViewCell+Extension.swift in Sources */,
 				2E12CB1E1E6F1E6F009527BA /* ImagePreviewViewController.swift in Sources */,
+				6F08E5C41E8A16C200338FD7 /* ConferenceReserveCell.swift in Sources */,
 				2E2611831E5E7A0E00CC70F9 /* HoneMain.swift in Sources */,
+				6F0638F91E965E7E00FB8E23 /* InformDetail.swift in Sources */,
 				6FA105781E89169100A235F4 /* LoginLogicViewModel.swift in Sources */,
 				2EFB8C8E1E736FB300BC032F /* GuideBookCell.swift in Sources */,
 				2E12CA261E6F1D88009527BA /* Double+Extension.swift in Sources */,
@@ -2109,6 +2167,7 @@
 				2EFB8CAD1E763E8300BC032F /* TravelAcy.swift in Sources */,
 				2E12CAB91E6F1E67009527BA /* MBProgressHUD+NJ.m in Sources */,
 				2EFB8CA71E763DBD00BC032F /* HotelReserve.swift in Sources */,
+				6F08E5C81E8B413000338FD7 /* TimeQuantum.swift in Sources */,
 				2E2611CA1E66313300CC70F9 /* MyInfoViewController.swift in Sources */,
 				27609BD01CB257810041E8B7 /* AppDelegate.swift in Sources */,
 				2E12CB161E6F1E6F009527BA /* TZPhotoPreviewCell.m in Sources */,
@@ -2128,6 +2187,7 @@
 				2E2302681E71D6DE00B05279 /* HotelReserveCell.swift in Sources */,
 				2E12CB011E6F1E6F009527BA /* MHSheetCell.m in Sources */,
 				2E025BD81DC10A31002687EF /* AppResultModel.swift in Sources */,
+				6F08E5C01E8A102100338FD7 /* ConferenceDetail.swift in Sources */,
 				2E2302711E71EA2000B05279 /* ScenicSpotModel.swift in Sources */,
 				2E12CB0C1E6F1E6F009527BA /* PYSearchViewController.m in Sources */,
 				2E12CB171E6F1E6F009527BA /* TZPhotoPreviewController.m in Sources */,
