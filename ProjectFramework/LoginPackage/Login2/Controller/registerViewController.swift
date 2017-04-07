@@ -37,11 +37,11 @@ class registerViewController: UIViewController,UITableViewDelegate,UITableViewDa
     ///注册 按钮
     lazy var registerbtn:UIButton =
         {
-            let btn = UIButton(frame: CGRect(x: 20, y: 5, width: self.view.bounds.width-40, height: 40))
+            let btn = UIButton(frame: CGRect(x: 20, y: 5, width: self.view.bounds.width-40, height: 35))
             btn.backgroundColor=UIColor.red
             btn.setTitleColor(UIColor.white, for: .normal)
             btn.setTitle(  "注  册",   for: .normal)
-            btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+            btn.titleLabel?.font = UIFont.systemFont(ofSize: 13)
             btn.layer.cornerRadius=4
             btn.layer.masksToBounds=true
             btn.rx.tap
@@ -90,26 +90,18 @@ class registerViewController: UIViewController,UITableViewDelegate,UITableViewDa
         self.view.backgroundColor=UIColor.white
         self.view.addSubview(HeaderView)    //添加头部view
         self.view.addSubview(tableView) //添加tableview
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(Hidekeyboard))
-        self.view.addGestureRecognizer(tapGesture)  //添加点击tableview 因此键盘
+    
+        //点击背景收起键盘
+        let tapBackground = UITapGestureRecognizer()
+        tapBackground.rx.event
+            .subscribe(onNext: { [weak self] _ in
+                self?.view.endEditing(true)
+            })
+            .addDisposableTo( disposeBag)
+       self.view.addGestureRecognizer(tapBackground)
         RegisterResult()
     }
-    
-    //隐藏键盘
-    func Hidekeyboard(){
-        //用户
-        let username = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! registerViewCell
-        //密码
-        let password = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! registerViewCell
-        //验证码
-        let VerificationCode = tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! registerViewCell
-        
-        
-        username.inpuText.resignFirstResponder()
-        password.inpuText.resignFirstResponder()
-        VerificationCode.inpuText.resignFirstResponder()
-    }
- 
+      
     
     override func didReceiveMemoryWarning()
     {
@@ -163,11 +155,17 @@ class registerViewController: UIViewController,UITableViewDelegate,UITableViewDa
             cell.inpuText.rx.text.orEmpty
                 .bindTo(_regiestViewModel.VerificationCode) //绑定验证码
                 .addDisposableTo(disposeBag)
-            cell.VerificationCodeBtn.rx.tap.subscribe(      //验证码事件
-                onNext:{  
-                   cell.StartTime() //启动计时器
-            }
-            ).addDisposableTo(disposeBag)
+//            cell.VerificationCodeBtn.rx.tap.subscribe(      //验证码事件
+//                onNext:{
+//                   cell.StartTime() //启动计时器
+//            }
+//            ).addDisposableTo(disposeBag) 
+        
+            _ =  _regiestViewModel.VerificationCodeEvent1=cell
+            cell.VerificationCodeBtn.rx.tap
+                .bindTo(_regiestViewModel.VerificationCodeEvent)
+                .addDisposableTo(self.disposeBag)
+            
             
             break
             

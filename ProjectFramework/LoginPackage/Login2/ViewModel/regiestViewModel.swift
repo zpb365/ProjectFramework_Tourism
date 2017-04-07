@@ -21,10 +21,10 @@ class regiestViewModel {
     // 注册按钮点击 绑定的 事件
     let registerEvent = PublishSubject<Void>()
     // 验证码按钮点击 绑定的 事件
-    let VerificationCodeEvent = PublishSubject<Void>()
-    
+    let VerificationCodeEvent = PublishSubject< Void >()
+    var VerificationCodeEvent1:registerViewCell?=nil
     // 注册返回数据
-   var registeResult: Observable<ValidationResult>? = nil
+    var registeResult: Observable<ValidationResult>? = nil
    
     init( ) {
         register()
@@ -34,6 +34,7 @@ class regiestViewModel {
     //注册
     func register(){
        
+        
         
        let parameter = Observable.combineLatest(username.asObservable(),password.asObservable(),VerificationCode.asObservable()){($0,$1,$2)}
         registeResult = registerEvent.asObserver()
@@ -84,23 +85,30 @@ class regiestViewModel {
     //获取验证码
     func GetVerificationCode(){
         
-       
-       _ = VerificationCodeEvent.asObserver().flatMapLatest { () ->  Observable<ValidationResult> in
+        _ =  VerificationCodeEvent.subscribe( onNext:{
+    
+            self.VerificationCodeEvent1?.StartTime()   //开启计时器
             
-            //------------用户名处理
-            if(self.username.value==""){
-                //空值处理
-                print("空处理")
-                return  Observable.just(ValidationResult.empty)
-            }
-            if(self.username.value.characters.count != 11){
-                //校验手机号码
-                return  Observable.just(ValidationResult.error)
-            }
-            
-            return Observable.just(ValidationResult.ok)
-            
-        }.shareReplay(1)
+           // ------ 发送网络请求
+        }
+        )
+//       
+//       _ = VerificationCodeEvent.asObserver().flatMapLatest { () ->  Observable<ValidationResult> in
+//            
+//            //------------用户名处理
+//            if(self.username.value==""){
+//                //空值处理
+//                print("空处理")
+//                return  Observable.just(ValidationResult.empty)
+//            }
+//            if(self.username.value.characters.count != 11){
+//                //校验手机号码
+//                return  Observable.just(ValidationResult.error)
+//            }
+//            
+//            return Observable.just(ValidationResult.ok)
+//            
+//        }.shareReplay(1)
        
         
         
@@ -108,10 +116,7 @@ class regiestViewModel {
     }
     
     
-    
-    
-    
-    
+  
     
     
     
