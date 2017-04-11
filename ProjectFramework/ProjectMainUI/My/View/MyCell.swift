@@ -11,6 +11,12 @@ import UIKit
 class MyCell: UITableViewCell {
     
     
+    typealias CallbackValue=(_ value:UIButton)->Void //类似于OC中的typedef
+    var myCallbackValue:CallbackValue?  //声明一个闭包 类似OC的Block属性
+    func  FuncCallbackValue(value:CallbackValue?){
+        myCallbackValue = value //返回值
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -33,31 +39,43 @@ class MyCell: UITableViewCell {
         lineView.backgroundColor=CommonFunction.LineColor()
         self.contentView.addSubview(lineView)
         
-        let  _width = (self.contentView.frame.width*(1+1)-self.contentView.frame.width) / CGFloat(4) //整个view宽度的100% / 4
+
+        
+        let  _width = (CommonFunction.kScreenWidth - 1) / 4
         let _heigth:CGFloat=80
-        var ForIndex=0
-        for index in  0...TitleList.count/4 {
-            for  i:Int in 0  ..< 4 {
-                if(ForIndex>=TitleList.count){
-                    return
-                }
-                let btn  = UIButton(frame: CGRect(x: CGFloat(i)*_width, y: (CGFloat(index)*_heigth)+lineView.frame.maxY+5, width: _width, height: _heigth ))
-                btn.setTitleColor(UIColor.black, for: UIControlState())
-                btn.layer.borderColor=CommonFunction.LineColor().cgColor
-                btn.layer.borderWidth=0.3
-                btn.titleLabel?.font=UIFont.systemFont(ofSize: 10)
-                btn.setImageTitle(image: UIImage(named: ImageList[ForIndex]), title: TitleList[ForIndex], titlePosition: .bottom,
-                                  additionalSpacing: 0, state: .normal)
-                self.contentView.addSubview(btn)
-                ForIndex += 1
-            }
+        
+        for i in  0..<TitleList.count{
+            //一行中的第几个
+            let row  = i % 4
+            //
+            let low = i / 4
+            
+            let X = (_width + 0.33) * CGFloat(row)
+            let Y = (_heigth + 0.33) * CGFloat(low) + lineView.frame.maxY+5
+            let btn  = UIButton(frame: CGRect(x: X, y: Y, width: _width, height: _heigth ))
+            btn.setTitleColor(UIColor.black, for: UIControlState())
+            btn.layer.borderColor=CommonFunction.LineColor().cgColor
+            btn.layer.borderWidth=0.3
+            btn.tag = 100 + i
+            btn.titleLabel?.font=UIFont.systemFont(ofSize: 10)
+            btn.setImageTitle(image: UIImage(named: ImageList[i]), title: TitleList[i], titlePosition: .bottom,
+                              additionalSpacing: 0, state: .normal)
+          
+            btn.addTarget(self, action:#selector(buttonClick(button:)), for: .touchUpInside)
+            self.contentView.addSubview(btn)
+        }
+    }
+    
+    //MARK: buttonClik
+    func buttonClick(button:UIButton) -> Void {
+        if (myCallbackValue != nil) {
+            myCallbackValue!(button)
         }
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
     
     
     

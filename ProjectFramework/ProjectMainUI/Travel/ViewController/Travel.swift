@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class Travel: CustomTemplateViewController {
 
@@ -23,8 +24,8 @@ class Travel: CustomTemplateViewController {
         self.tableView.frame = CGRect.init(x: 0, y: CommonFunction.NavigationControllerHeight, width: self.view.frame.width, height: self.view.frame.height-CommonFunction.NavigationControllerHeight)
         self.numberOfRowsInSection=10//显示的个数
         self.numberOfSections=1//显示行数
-        self.tableViewheightForRowAt=170//行高
-        
+        self.tableViewheightForRowAt=150//行高
+
         // Do any additional setup after loading the view.
     }
 
@@ -39,5 +40,9 @@ class Travel: CustomTemplateViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: identiFier, for: indexPath) as! TravelCell
         return cell
         
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = CommonFunction.ViewControllerWithStoryboardName("TravelDetail", Identifier: "TravelDetail") as! TravelDetail
+        self.navigationController?.show(vc, sender: self  )
     }
 }

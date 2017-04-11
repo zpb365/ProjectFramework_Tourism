@@ -21,17 +21,24 @@ class MyInfoViewController: UITableViewController {
         super.viewDidLoad()
         self.title="个人信息"
         self.tableView.tableFooterView=UIView() //去除多余底部线条
+        self.pic.layer.cornerRadius = self.pic.frame.width / 2
+        self.pic.clipsToBounds = true
         //添加保存按钮
         let item = UIBarButtonItem(title: "保存 ", style: .plain, target: self, action: #selector(MyInfoViewController.Save))
         self.navigationItem.rightBarButtonItem=item
-        
-        
+        let image = UIImage.init(named: "userIcon_defualt")
+        self.pic.image = image
         if(Global_UserInfo.IsLogin==true){
             
             self.pic.sd_setImage(with:URL(string:HttpsUrlImage+Global_UserInfo.HeadImgPath), placeholderImage:  UIImage(named: placeholderImage) ,options:  SDWebImageOptions.retryFailed) { (UIImage, NSError, SDImageCacheType, NSURL) -> Void in
                 if(UIImage != nil){
                     self.pic.image=UIImage
                 }
+                else{
+                    
+                    
+                }
+                
             }
             name.text=Global_UserInfo.RealName
             sex.text=Global_UserInfo.Sex
@@ -47,6 +54,7 @@ class MyInfoViewController: UITableViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        
         // Dispose of any resources that can be recreated.
     }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

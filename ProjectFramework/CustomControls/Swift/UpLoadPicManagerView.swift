@@ -342,6 +342,7 @@ class UpLoadPicManagerView: UIView, UICollectionViewDelegate, UICollectionViewDa
         //即将出现
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
+            //设置刚进来的时候默认的透明Bar
             
         }
         

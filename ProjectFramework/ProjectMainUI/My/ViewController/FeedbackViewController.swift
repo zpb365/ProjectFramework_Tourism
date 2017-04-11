@@ -8,70 +8,77 @@
 
 import UIKit
 
-class FeedbackViewController: UIViewController,UITextFieldDelegate  {
+class FeedbackViewController: UIViewController,UITextFieldDelegate ,UITextViewDelegate {
 
-    @IBOutlet weak var feedbackInfo: UIView!            //反馈信息view
-    @IBOutlet weak var contact: UITextField!            //联系方式
-    var customTextView:CustomTextView?                  //反馈信息textview
- 
-    @IBOutlet weak var contactview: UIView!
     
+    @IBOutlet weak var commentTextView: UITextView!
+    @IBOutlet weak var promptLable: UILabel!//textview文本提示文本
+    @IBOutlet weak var contactLable: UITextField!//联系文本
+    @IBOutlet weak var showCount: UILabel!
+    
+    @IBAction func submitClick(_ sender: Any) {
+        
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title="意见反馈"
-        if(self.responds(to: #selector(getter: automaticallyAdjustsScrollViewInsets))){
-            self.automaticallyAdjustsScrollViewInsets=true
-        }
-        //反馈信息
-          customTextView = CustomTextView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width-30, height: 150))
-        customTextView!.SetPlaceholder("请简单的描述下您遇到的问题和意见")
-        customTextView!.SetMaxLength(500)
-        self.feedbackInfo.addSubview(customTextView!)
         
-        contact.delegate=self       //实现代理
-        contact.returnKeyType = .done   //设置键盘类型为完成
+        self.initUI()
         
-        let tapGRs = UITapGestureRecognizer(target: self, action:#selector(FeedbackViewController.tapHandlermoreKey))    //点击手势
-        tapGRs.numberOfTapsRequired = 1  //点击一次触发
-        self.view.addGestureRecognizer(tapGRs)  //添加手势点击操作
- 
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    //提交
-    @IBAction func Submit(_ sender: AnyObject) {
-        //提交操作
+    func initUI() -> Void {
+        self.title="意见反馈"
         
-        CommonFunction.HUD("信息已提交", type: .success)
+        self.automaticallyAdjustsScrollViewInsets=false // //取消掉被
+        self.view.backgroundColor = UIColor.white
+        commentTextView.layer.cornerRadius = 5
+        commentTextView.layer.borderWidth = 0.5
+        commentTextView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.6).cgColor
+        contactLable.layer.cornerRadius = 4
+        contactLable.layer.borderWidth = 0.5
+        contactLable.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.6).cgColor
+        commentTextView.delegate = self
+        contactLable.delegate = self
+        
     }
-    
- 
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        //按完成的时候键盘移除
-        if(string=="\n"){
-            contact.resignFirstResponder()
+    //MARK: UITextViewDelegate
+    //检测到textView为空时，隐藏键盘
+    func textViewDidChange(_ textView: UITextView) {
+        if (commentTextView.text == "") {
+            commentTextView.resignFirstResponder()
+            promptLable.isHidden = false
+        }
+        else{
+//            commentTextView.text.characters.count
+            let num = 500 - commentTextView.text.characters.count
+            showCount.text = "\(num)/500"
+        }
+    }
+    //开始编辑，隐藏lable
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        promptLable.isHidden = true
+        return true
+    }
+    //取消键盘
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+        if (commentTextView.text.characters.count == 0) {
+            promptLable.isHidden = false
+        }
+    }
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if range.location >= 500 {
             return false
         }
-    
-        return true
-
+        else {
+            return true
+        }
     }
-    
-    //点击当前view隐藏键盘
-    func tapHandlermoreKey( ) {
-        hidekeyboard()
-    }
-    
-    //隐藏当前弹出的键盘
-    func hidekeyboard(){
-        contact.resignFirstResponder() //隐藏当前键盘 
-        customTextView?.CustomTextResignFirstResponder()
-    }
-    
     
   
 

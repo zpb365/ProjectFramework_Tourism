@@ -11,7 +11,7 @@ import UIKit
 class PulickWebView: UIView,UIWebViewDelegate{
 
     typealias CallbackValue=(_ value:CGFloat)->Void //类似于OC中的typedef
-    var myCallbackValue:CallbackValue?  //声明一个闭包 类似OC的属性
+    var myCallbackValue:CallbackValue?  //声明一个闭包 类似OC的Block属性
     func  FuncCallbackValue(value:CallbackValue?){
         myCallbackValue = value //返回值
     }

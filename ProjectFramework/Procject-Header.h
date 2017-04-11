@@ -64,5 +64,5 @@
 #import "MHActionSheet.h"
 #import "TZImagePickerController.h" //图片选择
 #import "PYSearchViewController.h" //搜索UI 
-
+#import "XHStarRateView.h"
 

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,118 +21,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhN-gO-mDs">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <color key="backgroundColor" red="0.26760332808004461" green="0.71349606429026735" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="b5R-JZ-64K"/>
-                                </constraints>
-                                <state key="normal" title="提交">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="b5R-JZ-64K"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="b5R-JZ-64K"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="Submit:" destination="8jg-Bb-P2c" eventType="touchUpInside" id="TkO-H3-WhO"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请留下您的电话\QQ\微信,方便我们与您联系" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fcV-By-qmK">
-                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9mt-Ga-sVT">
+                                <rect key="frame" x="15" y="74" width="345" height="150"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="请简单描述下您遇到的问题和意见。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zCh-nH-q7E">
+                                <rect key="frame" x="19" y="74" width="227" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请留下您的联系方式，方面我们与您联系。" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="751-RT-Rn5">
+                                <rect key="frame" x="13" y="236" width="345" height="30"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5G-uT-16a">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="214" id="CYq-2w-m9I">
-                                        <variation key="widthClass=compact" constant="128"/>
-                                    </constraint>
-                                    <constraint firstAttribute="width" constant="240" id="N4W-j7-PbK"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="CYq-2w-m9I"/>
-                                        <exclude reference="N4W-j7-PbK"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="CYq-2w-m9I"/>
-                                        <include reference="N4W-j7-PbK"/>
-                                    </mask>
-                                </variation>
-                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWT-MI-rMa">
+                                <rect key="frame" x="13" y="289" width="345" height="30"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.4392156862745098" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="提交">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="submitClick:" destination="8jg-Bb-P2c" eventType="touchUpInside" id="XOz-qJ-PYo"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0/500" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1a2-VH-nNU">
+                                <rect key="frame" x="304" y="202" width="56" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="leadingMargin" secondItem="qhN-gO-mDs" secondAttribute="leading" constant="39" id="2TI-Oe-a2J"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="fcV-By-qmK" secondAttribute="leading" constant="41" id="Kkw-aZ-FZS"/>
-                            <constraint firstItem="qhN-gO-mDs" firstAttribute="top" secondItem="fcV-By-qmK" secondAttribute="bottom" constant="-15" id="TLk-og-5S2"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="qhN-gO-mDs" secondAttribute="trailing" constant="336" id="WLl-Vi-vF2"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="a5G-uT-16a" secondAttribute="leading" constant="16" id="aw4-Ut-uH8"/>
-                            <constraint firstItem="fcV-By-qmK" firstAttribute="top" secondItem="a5G-uT-16a" secondAttribute="bottom" constant="35" id="eIb-aX-ngu">
-                                <variation key="widthClass=compact" constant="-158"/>
-                            </constraint>
-                            <constraint firstItem="a5G-uT-16a" firstAttribute="top" secondItem="qOd-WZ-8DQ" secondAttribute="bottom" constant="41" id="jd1-s2-RV6">
-                                <variation key="widthClass=compact" constant="-20"/>
-                            </constraint>
-                            <constraint firstAttribute="trailingMargin" secondItem="fcV-By-qmK" secondAttribute="trailing" constant="287" id="sks-bq-sef"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="a5G-uT-16a" secondAttribute="trailing" constant="119" id="vLc-sO-jDr"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="qhN-gO-mDs"/>
-                                <exclude reference="fcV-By-qmK"/>
-                                <exclude reference="a5G-uT-16a"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="Kkw-aZ-FZS"/>
-                                <exclude reference="eIb-aX-ngu"/>
-                                <exclude reference="sks-bq-sef"/>
-                                <exclude reference="2TI-Oe-a2J"/>
-                                <exclude reference="TLk-og-5S2"/>
-                                <exclude reference="WLl-Vi-vF2"/>
-                                <exclude reference="aw4-Ut-uH8"/>
-                                <exclude reference="jd1-s2-RV6"/>
-                                <exclude reference="vLc-sO-jDr"/>
-                            </mask>
-                        </variation>
-                        <variation key="widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="qhN-gO-mDs"/>
-                                <include reference="fcV-By-qmK"/>
-                                <include reference="a5G-uT-16a"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="Kkw-aZ-FZS"/>
-                                <include reference="eIb-aX-ngu"/>
-                                <include reference="sks-bq-sef"/>
-                                <include reference="2TI-Oe-a2J"/>
-                                <include reference="TLk-og-5S2"/>
-                                <include reference="WLl-Vi-vF2"/>
-                                <include reference="aw4-Ut-uH8"/>
-                                <include reference="jd1-s2-RV6"/>
-                                <include reference="vLc-sO-jDr"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
-                        <outlet property="contact" destination="fcV-By-qmK" id="cZf-Lv-U68"/>
-                        <outlet property="feedbackInfo" destination="a5G-uT-16a" id="y2t-BO-KVe"/>
+                        <outlet property="commentTextView" destination="9mt-Ga-sVT" id="QNm-Gh-rKJ"/>
+                        <outlet property="contactLable" destination="751-RT-Rn5" id="b7a-Nc-47a"/>
+                        <outlet property="promptLable" destination="zCh-nH-q7E" id="vkA-MI-qhU"/>
+                        <outlet property="showCount" destination="1a2-VH-nNU" id="yeO-MY-3c2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gG9-8G-KRx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="574.5" y="229"/>
+            <point key="canvasLocation" x="573.60000000000002" y="228.93553223388307"/>
         </scene>
     </scenes>
 </document>

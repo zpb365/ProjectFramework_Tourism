@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Travel Detail-->
+        <scene sceneID="STI-PF-jN8">
+            <objects>
+                <viewController storyboardIdentifier="TravelDetail" id="FLF-MQ-UhN" customClass="TravelDetail" customModule="智慧旅游平台" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3qV-U9-uVe"/>
+                        <viewControllerLayoutGuide type="bottom" id="61A-XE-S4q"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9UB-3c-a9t">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qat-PK-510">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="pca-ES-dX7">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Orderquery.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="zWd-Fe-D2n">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="130" id="XB7-hx-2OD"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tkB-K9-yzv">
+                                            <rect key="frame" x="15" y="135" width="345" height="72"/>
+                                            <string key="text">泰国的常年气温在 19~38 之间，平均气温约 28 ℃；湿度变化为 66%~82.8% 。一年分三季：凉季（十一月至二月）、夏季（三月至五月）、雨季（六月至十月）。曼谷最凉爽的气温平均为 17 度；最热为 4 月份，约 38 度。高原上的清迈和北部的山区气候较凉爽，最宜旅行。</string>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="zWd-Fe-D2n" firstAttribute="leading" secondItem="pca-ES-dX7" secondAttribute="leading" id="063-sV-Wz8"/>
+                                        <constraint firstAttribute="trailing" secondItem="zWd-Fe-D2n" secondAttribute="trailing" id="MSM-qq-A1W"/>
+                                        <constraint firstAttribute="trailing" secondItem="tkB-K9-yzv" secondAttribute="trailing" constant="15" id="XDM-50-GB8"/>
+                                        <constraint firstItem="tkB-K9-yzv" firstAttribute="top" secondItem="zWd-Fe-D2n" secondAttribute="bottom" constant="5" id="bF7-Pm-QaP"/>
+                                        <constraint firstItem="tkB-K9-yzv" firstAttribute="leading" secondItem="pca-ES-dX7" secondAttribute="leading" constant="15" id="eUZ-eM-OuZ"/>
+                                        <constraint firstItem="zWd-Fe-D2n" firstAttribute="top" secondItem="pca-ES-dX7" secondAttribute="top" id="pKM-xK-tPE"/>
+                                    </constraints>
+                                </view>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="BaseView" destination="pca-ES-dX7" id="0aY-XC-nTy"/>
+                        <outlet property="contentLabel" destination="tkB-K9-yzv" id="bA8-uc-tlt"/>
+                        <outlet property="imageView" destination="pca-ES-dX7" id="Yoy-TG-vcd"/>
+                        <outlet property="tableView" destination="qat-PK-510" id="icI-y6-Ei9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="or9-8O-T3F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2.3999999999999999" y="36.431784107946029"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Orderquery.jpg" width="804" height="1024"/>
+    </resources>
+</document>

@@ -13,6 +13,7 @@ class ClassifCation: CustomTemplateViewController ,UICollectionViewDelegateFlowL
     let reuseIdentifier = "ClassifCation"
     @IBOutlet weak var CollectView: UICollectionView!
     let layout = UICollectionViewFlowLayout()
+    let iamgeArray = [""]
     // collectioniew属性
   
     override func viewDidLoad() {
@@ -31,7 +32,7 @@ class ClassifCation: CustomTemplateViewController ,UICollectionViewDelegateFlowL
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     // MARK: UILayoutDelegate,iOS 10之后需要在代理方法里实现
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 5)

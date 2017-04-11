@@ -213,14 +213,20 @@ final class   CommonFunction {
     /// 拨打电话 ,里面会判断是否需要拨打号码 外部不需要调用判断 需要真机调试
     static func CallPhone(_ vc:UIViewController,number:String){
         
-        AlertController(vc, title: "拨打号码", message: "确认是否拨通此号码", ok_name: "确定", cancel_name: "取消", style: .alert, OK_Callback: {
-            //确定
+        if #available(iOS 10.0, *) {
             let telUrl="tel:"+number
             let url  = URL(string: telUrl)
             UIApplication.shared.openURL(url!)
-            
-        }) {
-            //取消
+        }else {
+            AlertController(vc, title: "拨打号码", message: "确认是否拨通此号码", ok_name: "确定", cancel_name: "取消", style: .alert, OK_Callback: {
+                //确定
+                let telUrl="tel:"+number
+                let url  = URL(string: telUrl)
+                UIApplication.shared.openURL(url!)
+                
+            }) {
+                //取消
+            }
         }
         
     }
