@@ -71,10 +71,10 @@
  @param UrlPath 图片路径
  @return
  */
--(id)initWithUrlPath: (NSString *)UrlPath
+-(id)initWithUrlPath: (UIImage *)image
 {
     if (self=[super init]) {
-       self.Urlpath=UrlPath;
+       self.image=image;
     }
     return self;
     
@@ -181,10 +181,10 @@
     /// 由于OpenGL的默认坐标系设置在左下角, 而GLKit在左上角, 因此需要转换
     NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], GLKTextureLoaderOriginBottomLeft, nil];
     /// 将图片转换成为纹理信息
-    //NSString *testPath = [[NSBundle mainBundle] pathForResource:@"test3" ofType:@"jpg"];
-    NSLog(@"%@", _Urlpath);
-    NSURL *url = [NSURL URLWithString:_Urlpath];
-    self.textureInfo = [GLKTextureLoader textureWithContentsOfURL:url options:options error:nil];
+ 
+    NSData *imageData = UIImageJPEGRepresentation(self.image, 1);   //全景图转换成 nsdata  
+  
+    self.textureInfo = [GLKTextureLoader textureWithContentsOfData:imageData options:options error:nil];
     
     /// 设置着色器的纹理
     self.effect = [[GLKBaseEffect alloc] init];

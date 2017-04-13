@@ -12,9 +12,9 @@
 @interface PanoramaViewController : GLKViewController
 
 /// 全景图路径
-@property (strong, nonatomic)NSString* Urlpath;
+@property (strong, nonatomic)UIImage* image;
 
--(id)initWithUrlPath: (NSString *)UrlPath;
+-(id)initWithUrlPath: (UIImage *)image;
 
 @end
 

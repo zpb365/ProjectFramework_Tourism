@@ -57,7 +57,7 @@ class RecommendedViewCell: UITableViewCell {
     func AddScrollViewContrler(index:Int){
              let imageX:CGFloat = CGFloat(index) * imageW;
         let imageView = UIImageView(frame: CGRect(x: imageX+5, y: imageY, width: imageW-5, height: imageH)) //设置图片的大小，注意Image和ScrollView的关系，其实几张图片是按顺序从左向右依次放置在ScrollView中的，但是ScrollView在界面中显示的只是一张图片的大小，效果类似与画廊
-         imageView.ImageLoad(PostUrl: "")
+         imageView.ImageLoad(PostUrl: "http://seopic.699pic.com/photo/00021/6438.jpg_wh1200.jpg")
         imageView.backgroundColor=UIColor.red
         imageView.contentMode=UIViewContentMode.scaleToFill
         

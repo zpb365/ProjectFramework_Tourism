@@ -8,6 +8,7 @@
 
 import Foundation
 import CWStatusBarNotification
+import SDWebImage
 import FMDB
 
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
@@ -764,5 +765,31 @@ final class   CommonFunction {
         }
     }
     
+    
+    
+    // MARK: >> 全景图
+    
+    /// 全景图
+    ///
+    /// - Parameters:
+    ///   - vc: 控制器
+    ///   - url: url
+    static func Panorama360Show(vc:UIViewController,url:String){
+        HUD("数据加载中....", type: .load )
+        let img = UIImageView()
+        
+        img.sd_setImage(with:URL(string: url), placeholderImage:  UIImage(named: placeholderImage) ,options:  SDWebImageOptions.retryFailed) { (UIImage, NSError, SDImageCacheType, NSURL) -> Void in
+            HUDHide()
+            if(UIImage != nil){
+                img.image=UIImage
+                let vcPanorama = PanoramaViewController(urlPath:  img.image)
+                vc.present(vcPanorama!, animated: true, completion: nil)
+            }
+            if(NSError != nil){
+                HUD("加载全景图出错", type: .error)
+            }
+        }
+    
+    }
    
 }
