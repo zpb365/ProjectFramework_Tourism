@@ -11,15 +11,17 @@ import UIKit
 
 class ClassifCationCell: UICollectionViewCell {
     
+    @IBOutlet weak var mainImageView: UIImageView!
+    @IBOutlet weak var textLable: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-//        self.contentView.layer.borderColor = UIColor().TransferStringToColor("#BBBBBB").cgColor
-//        self.contentView.layer.borderWidth = 1.0
-        // Initialization code
+        
     }
     
-    override func InitConfig(_ cell: Any) {
-        
+    func setCell(iamge: String , text: String) -> Void {
+        mainImageView.image = UIImage.init(named: iamge)
+        textLable.text = text
     }
     
    
