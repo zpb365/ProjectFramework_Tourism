@@ -11,7 +11,7 @@
 #import <StoreKit/StoreKit.h>       //打开第三方应用
 #import <AssetsLibrary/AssetsLibrary.h> //系统图片
 #import <MobileCoreServices/MobileCoreServices.h>//系统图片
-
+#import <CoreMotion/CoreMotion.h>    
 //友盟  ↓ 
 #import "UMSocialData.h"                       //分享内容类
 #import "UMSocialDataService.h"                //分享数据级接口类
@@ -64,5 +64,6 @@
 #import "MHActionSheet.h"
 #import "TZImagePickerController.h" //图片选择
 #import "PYSearchViewController.h" //搜索UI 
-#import "XHStarRateView.h"
+#import "XHStarRateView.h"         //评分星星
+#import "PanoramaViewController.h"      // 全景图
 

@@ -155,9 +155,8 @@ class My: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     ///消息
     func righButtonItem (){
-        let controller9 = CommonFunction.ViewControllerWithStoryboardName("Shopping", Identifier: "Shopping") as! Shopping
-        
-        self.navigationController?.show(controller9, sender: self)
+        let vc = CommonFunction.ViewControllerWithStoryboardName("Message", Identifier: "Message") as! MessageViewController
+        self.navigationController?.show(vc, sender: self)
         
     }
     
