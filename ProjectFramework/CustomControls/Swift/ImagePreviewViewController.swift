@@ -25,6 +25,8 @@ class ImagePreviewViewController: UIViewController,UIScrollViewDelegate {
     fileprivate  var imageW:CGFloat!
     fileprivate var imageH:CGFloat!
     fileprivate var imageY:CGFloat!
+    fileprivate var CustomNavBar:UINavigationBar!=nil
+    fileprivate var backBtn:UIButton!=nil
     /**
      图片浏览
      
@@ -78,6 +80,7 @@ class ImagePreviewViewController: UIViewController,UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setNavgationBar()
         initLoad()
     }
     
@@ -85,12 +88,34 @@ class ImagePreviewViewController: UIViewController,UIScrollViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    func setNavgationBar() -> Void {
+        CustomNavBar = UINavigationBar(frame: CGRect.init(x: 0, y: 0, width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight))
+        //把导航栏渐变效果移除
+        CustomNavBar.setBackgroundImage(UIImage().ImageWithColor(color: UIColor.clear, size: CGSize(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)), for: .default)
+        CustomNavBar.clipsToBounds=true
+        self.view.addSubview(CustomNavBar)
+        
+        let CustomNavItem = UINavigationItem()
+        //返回按钮
+        backBtn = UIButton(type: .custom)
+        backBtn.frame = CommonFunction.CGRect_fram(0, y: 0, w: 30, h: 30)
+        backBtn.tag = 100
+        backBtn.backgroundColor = UIColor.clear
+        backBtn.setImage(UIImage(named: "back"), for: .normal)
+        backBtn.addTarget(self, action:#selector(buttonClick) , for: .touchUpInside)
+
+         CustomNavItem.leftBarButtonItem=UIBarButtonItem.init(customView: backBtn)
+        CustomNavBar.pushItem(CustomNavItem, animated: true)
+    }
+    //导航栏按钮方法
+    func buttonClick(_ button: UIButton){
+        _ = self.navigationController?.popViewController(animated: true)
+    }
     func initLoad(){
         
-        scrollView=UIScrollView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+        scrollView=UIScrollView(frame: CGRect(x: 0, y: CommonFunction.NavigationControllerHeight, width: self.view.frame.width, height: CommonFunction.kScreenHeight - CommonFunction.NavigationControllerHeight))
         imageW = self.view.frame.size.width;//获取ScrollView的宽作为图片的宽；
-        imageH = self.view.frame.size.height;//获取ScrollView的高作为图片的高；
+        imageH = CommonFunction.kScreenHeight - CommonFunction.NavigationControllerHeight;//获取ScrollView的高作为图片的高；
         
         if(IsDescribe==true){
             //添加一个描述UITextView
@@ -226,33 +251,23 @@ class ImagePreviewViewController: UIViewController,UIScrollViewDelegate {
     
     //点击屏幕时会调用此方法,放大和缩小图片
     func handleTapGesture(_ sender: UITapGestureRecognizer){
-      
-        if(self.navigationController?.isNavigationBarHidden==true){
-            //带有滑动的隐藏方式
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
+        if CustomNavBar.isHidden == true {
+            CustomNavBar.isHidden = false
             DescribeLab?.isHidden=false
         }
         else{
-            //带有滑动的显示方式
-            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            CustomNavBar.isHidden = true
             DescribeLab?.isHidden=true
         }
     }
     
-    //即将出现
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.automaticallyAdjustsScrollViewInsets=false
-        //设置刚进来的时候默认的透明Bar
-        self.navigationController?.navigationBar.isTranslucent=true
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(),for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        
+        super.viewWillAppear(true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        //返回视图的时候设置导航为不透明
-        self.navigationController?.navigationBar.isTranslucent=false
+       
     }
     
     

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ScenicSpotCollectionCell" customModule="智慧旅游平台" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="168" height="188"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="168" height="188"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Orderquery.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="I5A-eL-dzd">
+                        <rect key="frame" x="0.0" y="0.0" width="168" height="188"/>
+                    </imageView>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="360Panorama" translatesAutoresizingMaskIntoConstraints="NO" id="e8M-gX-x87">
+                        <rect key="frame" x="71" y="72.5" width="27" height="23"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="23" id="AEh-te-a3O"/>
+                            <constraint firstAttribute="width" constant="27" id="UL9-Po-1ci"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="454-iU-rOv">
+                        <rect key="frame" x="0.0" y="163" width="168" height="25"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="GOY-X8-Evd"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="标题" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WHi-FV-dCW">
+                        <rect key="frame" x="7" y="165" width="154" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="I3L-eh-CeM"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 360°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JB8-ja-MFy">
+                        <rect key="frame" x="39" y="100.5" width="90" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="vdu-y9-6Et"/>
+                            <constraint firstAttribute="width" constant="90" id="yW2-L6-Lfh"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="JB8-ja-MFy" firstAttribute="centerX" secondItem="e8M-gX-x87" secondAttribute="centerX" id="32l-nD-o6n"/>
+                <constraint firstAttribute="trailing" secondItem="I5A-eL-dzd" secondAttribute="trailing" id="9Fr-t7-Idd"/>
+                <constraint firstItem="I5A-eL-dzd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="9tC-U7-WWw"/>
+                <constraint firstItem="454-iU-rOv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="HsC-xr-vZQ"/>
+                <constraint firstItem="JB8-ja-MFy" firstAttribute="top" secondItem="e8M-gX-x87" secondAttribute="bottom" constant="5" id="MBw-0t-i4e"/>
+                <constraint firstItem="WHi-FV-dCW" firstAttribute="centerY" secondItem="454-iU-rOv" secondAttribute="centerY" id="NKt-q6-xiD"/>
+                <constraint firstItem="e8M-gX-x87" firstAttribute="centerY" secondItem="I5A-eL-dzd" secondAttribute="centerY" constant="-10" id="PYF-l3-oGm"/>
+                <constraint firstItem="e8M-gX-x87" firstAttribute="centerX" secondItem="I5A-eL-dzd" secondAttribute="centerX" id="gE2-4w-vSS"/>
+                <constraint firstAttribute="trailing" secondItem="WHi-FV-dCW" secondAttribute="trailing" constant="7" id="iWq-Ba-cgo"/>
+                <constraint firstAttribute="bottom" secondItem="454-iU-rOv" secondAttribute="bottom" id="ktQ-4w-fVT"/>
+                <constraint firstItem="I5A-eL-dzd" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="oYd-1y-KOO"/>
+                <constraint firstAttribute="bottom" secondItem="I5A-eL-dzd" secondAttribute="bottom" id="ooo-Su-HN5"/>
+                <constraint firstAttribute="trailing" secondItem="454-iU-rOv" secondAttribute="trailing" id="pcc-7W-RP3"/>
+                <constraint firstItem="WHi-FV-dCW" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="7" id="rbj-VY-Ozg"/>
+            </constraints>
+            <size key="customSize" width="168" height="188"/>
+            <connections>
+                <outlet property="icon" destination="e8M-gX-x87" id="CmF-yI-Eav"/>
+                <outlet property="lable" destination="JB8-ja-MFy" id="Slp-co-riP"/>
+            </connections>
+            <point key="canvasLocation" x="84" y="121"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="360Panorama" width="32" height="32"/>
+        <image name="Orderquery.jpg" width="804" height="1024"/>
+    </resources>
+</document>

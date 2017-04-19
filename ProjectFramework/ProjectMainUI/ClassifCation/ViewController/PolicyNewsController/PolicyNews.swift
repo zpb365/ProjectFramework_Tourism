@@ -11,21 +11,7 @@ import UIKit
 class PolicyNews: CustomTemplateViewController {
     @IBOutlet weak var tableView: UITableView!
 
-//    lazy var sectionView: UIView = {
-//        let sectionView = UIView.init(frame: CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: 50))
-//        sectionView.backgroundColor = UIColor.white
-//        return sectionView
-//    }()
-//    lazy var lable: UILabel = {
-//        let lable = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: 150, height: 30))
-//        lable.backgroundColor = UIColor().TransferStringToColor("#738FFE")
-//        lable.textAlignment = .center
-//        lable.font = UIFont.systemFont(ofSize: 12)
-//        lable.textColor = UIColor.white
-//        lable.layer.cornerRadius = 5
-//        lable.clipsToBounds = true
-//        return lable
-//    }()
+
     
     let identiFier = "PolicyNewsCell"
     

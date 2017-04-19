@@ -13,5 +13,5 @@ class CommentSectionView: UIView {
     @IBOutlet weak var Satisfaction: UILabel!
     @IBOutlet weak var conmontCount: UILabel!
     
-
+    
 }

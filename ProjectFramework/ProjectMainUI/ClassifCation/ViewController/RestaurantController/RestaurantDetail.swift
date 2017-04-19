@@ -57,8 +57,13 @@ class RestaurantDetail: CustomTemplateViewController {
         // Dispose of any resources that can be recreated.
     }
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage().ImageWithColor(color: UIColor().TransferStringToColor("#00BDD1"), size: CGSize.init(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)),for: UIBarMetrics.default)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage().ImageWithColor(color: UIColor().TransferStringToColor("#00BDD1"), size: CGSize.init(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)),for: UIBarMetrics.default)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNavBar()
@@ -76,14 +81,14 @@ class RestaurantDetail: CustomTemplateViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView){
         let offset: CGFloat = scrollView.contentOffset.y
         if (offset <= 64) {
-            CustomNavBar.setBackgroundImage(UIImage().ImageWithColor(color: CommonFunction.SystemColor().withAlphaComponent(0), size: CGSize(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)), for: .default)
+            CustomNavBar.setBackgroundImage(UIImage().ImageWithColor(color: UIColor().TransferStringToColor("#00BDD1").withAlphaComponent(0), size: CGSize(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)), for: .default)
             backBtn.backgroundColor = UIColor.gray
             cellectionBtn.backgroundColor = UIColor.gray
             shareBtn.backgroundColor = UIColor.gray
         }
         else{
             alph = 1-((200 - offset)/200)
-            CustomNavBar.setBackgroundImage(UIImage().ImageWithColor(color: CommonFunction.SystemColor().withAlphaComponent(alph), size: CGSize(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)), for: .default)
+            CustomNavBar.setBackgroundImage(UIImage().ImageWithColor(color: UIColor().TransferStringToColor("#00BDD1").withAlphaComponent(alph), size: CGSize(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)), for: .default)
             backBtn.backgroundColor = UIColor.gray.withAlphaComponent(1-alph)
             cellectionBtn.backgroundColor = UIColor.gray.withAlphaComponent(1-alph)
             shareBtn.backgroundColor = UIColor.gray.withAlphaComponent(1-alph)
@@ -228,7 +233,7 @@ class RestaurantDetail: CustomTemplateViewController {
     func setNavBar() -> Void {
         CustomNavBar = UINavigationBar(frame: CGRect.init(x: 0, y: 0, width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight))
         //把导航栏渐变效果移除
-        CustomNavBar.setBackgroundImage(UIImage().ImageWithColor(color: CommonFunction.SystemColor().withAlphaComponent(alph), size: CGSize(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)), for: .default)
+        CustomNavBar.setBackgroundImage(UIImage().ImageWithColor(color: UIColor().TransferStringToColor("#00BDD1").withAlphaComponent(alph), size: CGSize(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)), for: .default)
         CustomNavBar.clipsToBounds=true
         self.view.addSubview(CustomNavBar)
         
@@ -248,7 +253,7 @@ class RestaurantDetail: CustomTemplateViewController {
         cellectionBtn.tag = 101
         cellectionBtn.backgroundColor = UIColor.gray
         cellectionBtn.layer.cornerRadius = 15
-        cellectionBtn.setImage(UIImage(named: "scanning"), for: .normal)
+        cellectionBtn.setImage(UIImage(named: "collection_normal"), for: .normal)
         cellectionBtn.addTarget(self, action:#selector(buttonClick) , for: .touchUpInside)
         //分享
         shareBtn = UIButton(type: .custom)
@@ -257,7 +262,7 @@ class RestaurantDetail: CustomTemplateViewController {
         shareBtn.adjustsImageWhenHighlighted = false
         shareBtn.backgroundColor = UIColor.gray
         shareBtn.layer.cornerRadius = 15
-        shareBtn.setImage(UIImage(named: "scanning"), for: .normal)
+        shareBtn.setImage(UIImage(named: "share"), for: .normal)
         shareBtn.addTarget(self, action:#selector(buttonClick) , for: .touchUpInside)
         
         CustomNavItem.leftBarButtonItem=UIBarButtonItem.init(customView: backBtn)

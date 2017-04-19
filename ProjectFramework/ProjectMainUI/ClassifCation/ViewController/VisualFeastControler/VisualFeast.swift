@@ -63,6 +63,7 @@ class VisualFeast: UIViewController{
         ]
         
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0, y: 0, width:CommonFunction.kScreenWidth, height: self.view.frame.height), pageMenuOptions: parameters)
+        
         self.addChildViewController(pageMenu!)
         self.view.addSubview(pageMenu!.view)
         pageMenu!.didMove(toParentViewController: self)
@@ -71,7 +72,7 @@ class VisualFeast: UIViewController{
     func setNavbar(){        
         let CustomNavItem = self.navigationItem
         
-        CustomNavItem.titleView = UIButton().SearchBtn(target: self,actionEvent: #selector(SearchEvent), placeholder: "搜索景点")
+        CustomNavItem.titleView = UIButton().SearchBtn(target: self,actionEvent: #selector(SearchEvent), placeholder: "搜索美图、视频")
     }
     // MARK: 搜索 && 当前地址
     func SearchEvent(){

@@ -26,11 +26,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PolicyNewsCell" rowHeight="35" id="koX-wt-65S" customClass="PolicyNewsCell" customModule="智慧旅游平台" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PolicyNewsCell" rowHeight="35" id="koX-wt-65S" customClass="PolicyNewsCell" customModule="智慧旅游平台" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="35"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="koX-wt-65S" id="4C8-jC-D2U">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="34.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="34.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="point" translatesAutoresizingMaskIntoConstraints="NO" id="0bH-XN-vAN">
@@ -38,16 +38,12 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="青秀山青秀山青秀山青秀山青秀山青秀山" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAT-Cn-fak">
-                                                    <rect key="frame" x="25" y="8" width="311" height="21"/>
+                                                    <rect key="frame" x="25" y="8" width="278" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ionicons" translatesAutoresizingMaskIntoConstraints="NO" id="l9D-Jm-09B">
-                                                    <rect key="frame" x="337" y="5" width="30" height="26"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -66,7 +62,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ionicons" width="138" height="138"/>
         <image name="point" width="16" height="16"/>
     </resources>
 </document>

@@ -12,6 +12,7 @@ class WaterCollectionViewLayout: UICollectionViewLayout {
     //来控制cell的大小
     var setSize:()->(Array<UIImage>) = {_ in return []}
     var queueNum: Int = 2 //列数，默认为两列
+    let margin: CGFloat = 3//左右距离
     var hs: Array<CGFloat>!
     private var totalNum: Int!
     private var layoutAttributes: Array<UICollectionViewLayoutAttributes>!
@@ -33,10 +34,18 @@ class WaterCollectionViewLayout: UICollectionViewLayout {
         }
     }
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        width = (collectionView!.bounds.size.width-gap*(CGFloat(queueNum)-1))/CGFloat(queueNum)
+        width = (collectionView!.bounds.size.width-gap*(CGFloat(queueNum)-1)-margin*2)/CGFloat(queueNum)
         let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
         let sizes = setSize()
-        attributes.size = CGSize(width: width, height: sizes[indexPath.row].size.height*width/sizes[indexPath.row].size.width)
+        //随机给个高度
+        let num1 = CGFloat(arc4random() % 100)
+        let num2 = CGFloat(arc4random() % 100)
+        if num1 >= num2{
+            attributes.size = CGSize(width: width , height: sizes[indexPath.row].size.height*width/sizes[indexPath.row].size.width + CGFloat(arc4random() % 30))
+        }
+        else{
+            attributes.size = CGSize(width: width , height: sizes[indexPath.row].size.height*width/sizes[indexPath.row].size.width - CGFloat(arc4random() % 50))
+        }
         var nub:CGFloat = 0
         var h:CGFloat = 0
         (nub,h) = minH(hhs: hs)
@@ -73,6 +82,7 @@ class WaterCollectionViewLayout: UICollectionViewLayout {
                 max = hhs[i]
             }
         }
+        
         return max
     } 
 }

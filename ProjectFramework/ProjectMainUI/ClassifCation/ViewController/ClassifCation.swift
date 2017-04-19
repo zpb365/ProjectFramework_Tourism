@@ -31,6 +31,9 @@ class ClassifCation: CustomTemplateViewController ,UICollectionViewDelegateFlowL
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage().ImageWithColor(color: CommonFunction.SystemColor(), size: CGSize.init(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)),for: UIBarMetrics.default)
+    }
     //MARK: getDta
     func getData() -> Void {
         for i in 0..<9 {
@@ -78,7 +81,7 @@ class ClassifCation: CustomTemplateViewController ,UICollectionViewDelegateFlowL
         
         switch textArray[num] {
             //景区
-        case "1":
+        case "景区":
             let vc = CommonFunction.ViewControllerWithStoryboardName("ScenicSpot", Identifier: "ScenicSpot") as! ScenicSpot
             self.navigationController?.show(vc, sender: self  )
             break

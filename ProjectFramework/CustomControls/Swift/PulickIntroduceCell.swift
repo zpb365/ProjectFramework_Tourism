@@ -11,7 +11,7 @@ import UIKit
 class PulickIntroduceCell: UITableViewCell {
     
     lazy var titleLable: UILabel = {
-        let titleLable = UILabel.init(frame: CommonFunction.CGRect_fram(self.line.frame.maxX + 8, y: 5, w: 100, h:15 ))
+        let titleLable = UILabel.init(frame: CommonFunction.CGRect_fram(self.line.frame.maxX + 5, y: 5, w: 100, h:15 ))
         titleLable.text = "我是标题"
         titleLable.textColor = UIColor.darkGray
         titleLable.font = UIFont.systemFont(ofSize: 11)
