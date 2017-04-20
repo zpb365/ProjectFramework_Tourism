@@ -34,7 +34,7 @@ class MenuView: UIView,DOPDropDownMenuDataSource,DOPDropDownMenuDelegate {
         _MenuValue.append(model)
     }
     
-    fileprivate var delegate:UIViewController?=nil
+    fileprivate weak var delegate:UIViewController?=nil
     
     init(delegate:UIViewController ,frame: CGRect) {
         let _frame = CGRect(x: 0, y: frame.origin.y, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)

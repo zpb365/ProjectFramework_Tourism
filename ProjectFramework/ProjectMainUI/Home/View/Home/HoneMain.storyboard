@@ -56,6 +56,10 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="CreateTime" destination="iLE-kE-VbP" id="4Au-en-jdu"/>
+                                            <outlet property="Title" destination="WlT-Hd-XVR" id="396-bX-P7I"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="recommended" rowHeight="105" id="fAd-bb-bVn" customClass="RecommendedViewCell" customModule="智慧旅游平台" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="233" width="375" height="105"/>
@@ -108,6 +112,11 @@
                                                 <constraint firstItem="LDB-kx-kc6" firstAttribute="width" secondItem="68E-OF-Jbi" secondAttribute="width" id="nJa-lN-7Ao"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="Img1" destination="68E-OF-Jbi" id="wYb-RM-fF5"/>
+                                            <outlet property="Img2" destination="LDB-kx-kc6" id="yGT-Jb-YKx"/>
+                                            <outlet property="Img3" destination="qIM-b8-g5V" id="fhu-zy-LKC"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="scenic" rowHeight="110" id="DBf-iM-p2r" customClass="ScenicViewCell" customModule="智慧旅游平台" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="438" width="375" height="110"/>
@@ -187,6 +196,14 @@
                                                 <constraint firstItem="Q9z-Pa-hGN" firstAttribute="height" secondItem="x1f-eT-lDe" secondAttribute="height" id="yOi-WF-cyU"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="Img1" destination="x1f-eT-lDe" id="1cf-bo-jsG"/>
+                                            <outlet property="Img2" destination="eGq-rx-tYD" id="NIe-pC-M9w"/>
+                                            <outlet property="Img3" destination="Q9z-Pa-hGN" id="1b4-TD-Ip5"/>
+                                            <outlet property="text1" destination="ZFI-SV-hIc" id="eZr-ML-c58"/>
+                                            <outlet property="text2" destination="ffh-yJ-xfp" id="oc5-TH-Mmh"/>
+                                            <outlet property="text3" destination="F5m-cJ-YXQ" id="3Wu-z2-R9H"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="hotel" rowHeight="170" id="KbC-Jr-B5V" customClass="HotelViewCell" customModule="智慧旅游平台" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="548" width="375" height="170"/>
@@ -294,6 +311,16 @@
                                                 <constraint firstItem="xjq-Px-BHp" firstAttribute="leading" secondItem="mTG-Gf-GTd" secondAttribute="trailing" constant="8" id="tfZ-gY-iA7"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="Img1" destination="mTG-Gf-GTd" id="yjf-3m-gEP"/>
+                                            <outlet property="Img2" destination="AhN-7t-s6o" id="pBg-Fd-edB"/>
+                                            <outlet property="Money1" destination="sp7-Qb-xZg" id="Mna-in-0pG"/>
+                                            <outlet property="Money2" destination="eaS-EL-PRF" id="ETI-fL-mpw"/>
+                                            <outlet property="Score1" destination="7O8-0q-AEO" id="8la-kG-YqU"/>
+                                            <outlet property="Score2" destination="xjq-Px-BHp" id="ZQA-e6-yKj"/>
+                                            <outlet property="Title1" destination="kMi-Pv-T7L" id="nfm-g1-gkb"/>
+                                            <outlet property="Title2" destination="jXb-Id-riS" id="ghS-Tc-4yQ"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="restaurant" rowHeight="125" id="uBK-7h-XTG" customClass="RestaurantViewCell" customModule="智慧旅游平台" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="718" width="375" height="125"/>
@@ -450,6 +477,20 @@
                                                 <constraint firstItem="aKX-78-2yH" firstAttribute="top" secondItem="ctZ-Nv-3xv" secondAttribute="bottom" constant="1" id="ttG-VC-1XU"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="Img1" destination="ctZ-Nv-3xv" id="xCo-aj-jMD"/>
+                                            <outlet property="Img2" destination="4qx-dF-nBd" id="ySm-oA-tWL"/>
+                                            <outlet property="Img3" destination="Yhc-HK-tV8" id="XtS-gV-gc2"/>
+                                            <outlet property="Money1" destination="XHB-MD-Hzd" id="mMX-tI-HJK"/>
+                                            <outlet property="Money2" destination="SWO-3D-Rer" id="txz-IC-eBP"/>
+                                            <outlet property="Money3" destination="A7B-O6-Fam" id="uVa-e8-Euh"/>
+                                            <outlet property="Score1" destination="mUK-gP-dyh" id="e2E-0H-Tr2"/>
+                                            <outlet property="Score2" destination="MtK-h3-L1d" id="QRK-2N-iHV"/>
+                                            <outlet property="Score3" destination="f8g-SS-clp" id="wML-wo-7Fi"/>
+                                            <outlet property="Title1" destination="aKX-78-2yH" id="tos-ZL-O5S"/>
+                                            <outlet property="Title2" destination="z2y-82-GKT" id="Gwj-RM-Nyk"/>
+                                            <outlet property="Title3" destination="bVC-8v-Nzp" id="eUh-pJ-PYO"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="travelAcy" rowHeight="170" id="cDZ-tD-UPY" customClass="TravelAcyViewCell" customModule="智慧旅游平台" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="843" width="375" height="170"/>
@@ -557,6 +598,16 @@
                                                 <constraint firstItem="hwx-OZ-vga" firstAttribute="leading" secondItem="16u-uv-Zad" secondAttribute="trailing" constant="8" id="yxD-qa-RdL"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="Img1" destination="7uA-0O-XCo" id="hCt-Iz-lee"/>
+                                            <outlet property="Img2" destination="fa8-9y-eTD" id="Rn8-EV-gbQ"/>
+                                            <outlet property="Money1" destination="4bE-vo-u7c" id="10T-gc-N6c"/>
+                                            <outlet property="Money2" destination="oHj-5X-nPD" id="M3g-Ib-dgW"/>
+                                            <outlet property="Score1" destination="38x-89-KUV" id="8Z3-WL-IXZ"/>
+                                            <outlet property="Score2" destination="PyW-8d-NmV" id="mqj-FH-UJQ"/>
+                                            <outlet property="Title1" destination="16u-uv-Zad" id="34C-Zx-V3V"/>
+                                            <outlet property="Title2" destination="hwx-OZ-vga" id="OSP-Eh-sNE"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="meeting" rowHeight="125" id="UtN-2n-K2m" customClass="MeetingViewCell" customModule="智慧旅游平台" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1013" width="375" height="125"/>
@@ -713,6 +764,20 @@
                                                 <constraint firstItem="WYR-ER-2Ty" firstAttribute="width" secondItem="y7R-nO-6WL" secondAttribute="width" id="xUX-7t-E3s"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="Img1" destination="y7R-nO-6WL" id="JYQ-Ye-CVu"/>
+                                            <outlet property="Img2" destination="WYR-ER-2Ty" id="WiT-Ni-HGx"/>
+                                            <outlet property="Img3" destination="aqq-Uq-4FV" id="bed-Lx-GR3"/>
+                                            <outlet property="Money1" destination="8Ae-Kh-GlB" id="q21-oa-kM0"/>
+                                            <outlet property="Money2" destination="lKX-Ns-CLT" id="mRM-K1-sAD"/>
+                                            <outlet property="Money3" destination="StW-aR-3U9" id="bk1-bH-9Qv"/>
+                                            <outlet property="Score1" destination="KzP-5J-f16" id="Bdv-cj-YVG"/>
+                                            <outlet property="Score2" destination="dai-QR-g0z" id="Uah-bx-PYA"/>
+                                            <outlet property="Score3" destination="FDk-Vn-bK5" id="X5M-D5-NpP"/>
+                                            <outlet property="Title1" destination="oX2-Gh-t0Z" id="FQV-Oe-3j0"/>
+                                            <outlet property="Title2" destination="RWj-aP-Muj" id="oLU-i1-gTN"/>
+                                            <outlet property="Title3" destination="nbk-E3-AGe" id="XDH-EY-WK5"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="specialty" rowHeight="170" id="fhI-Zj-3il" customClass="SpecialtyViewCell" customModule="智慧旅游平台" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1138" width="375" height="170"/>
@@ -820,6 +885,16 @@
                                                 <constraint firstItem="pCg-bC-LO6" firstAttribute="leading" secondItem="ZfM-xs-OgB" secondAttribute="trailing" constant="8" id="zNp-uH-naM"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="Img1" destination="iW8-iu-qmd" id="p3n-Ob-vLp"/>
+                                            <outlet property="Img2" destination="CYy-qN-seP" id="0G3-sy-Pcf"/>
+                                            <outlet property="Money1" destination="ZfM-xs-OgB" id="hVw-By-U2u"/>
+                                            <outlet property="Money2" destination="pCg-bC-LO6" id="hjI-zO-yGf"/>
+                                            <outlet property="Score1" destination="Eiy-hO-iHD" id="AkD-A2-aU5"/>
+                                            <outlet property="Score2" destination="sSh-RR-aV2" id="pXO-bx-Pnn"/>
+                                            <outlet property="Title1" destination="xfL-zh-FvO" id="9Cy-iE-z4Q"/>
+                                            <outlet property="Title2" destination="79I-pI-N1A" id="KgA-va-krL"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="travelGuide" rowHeight="80" id="ern-YF-YoQ" customClass="TravelGuideViewCell" customModule="智慧旅游平台" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1308" width="375" height="80"/>

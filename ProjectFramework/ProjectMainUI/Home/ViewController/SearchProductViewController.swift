@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchProductViewController: UIViewController {
+class SearchProductViewController: CustomTemplateViewController {
 
     var SearchText = "" //搜索的标题
     override func viewDidLoad() {

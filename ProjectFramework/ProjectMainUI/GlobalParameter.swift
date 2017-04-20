@@ -14,7 +14,7 @@ class MyInfoModel:NSObject  {
     ///是否已登录
     var IsLogin=false
     ///用户ID
-    var MemberID=""
+    var userid=0
     ///图片
     var HeadImgPath=""
     ///名称(姓名
@@ -40,8 +40,8 @@ let BaiduMapKey="bkKIE4v1nTBGCRYZ4Zpg34LrynTExfXk" //百度地图key
 let JpushKey="f94230388fe4e446d9b86d5b"            //激光推送Key
 
 #if DEBUG
-let HttpsUrl="http://192.168.1.20:5420/";
-let HttpsUrlImage="http://192.168.1.20:5421/";
+let HttpsUrl="http://192.168.1.20:5499/";
+let HttpsUrlImage="http://192.168.1.20:5488/";
 #else
 let HttpsUrl="http://api.gxzhnm.com/";
 let HttpsUrlImage="http://image.gxzhnm.com/";

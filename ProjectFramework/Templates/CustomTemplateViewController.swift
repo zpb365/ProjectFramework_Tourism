@@ -114,15 +114,18 @@ class CustomTemplateViewController: UIViewController ,UITableViewDelegate,UITabl
     }
     // MARK: - 刷新、网络请求失败等函数
     ///刷新请求  参数1：isLoading 是否加载中 参数1：isLoadError 是否加载失败
-    func RefreshRequest(isLoading:Bool,isLoadError:Bool=false){
+    func RefreshRequest(isLoading:Bool,isHiddenFooter:Bool=false,isLoadError:Bool=false){
         self.isLoading=isLoading
         self.isLoadError=isLoadError
-        if(tableView != nil ){ 
+        if(tableView != nil ){
             self.tableView?.reloadEmptyDataSet()
-            
+            self.tableView?.reloadData() 
+            self.footer.isHidden=isHiddenFooter
         }
         if(collection != nil ){
             self.collection?.reloadEmptyDataSet()
+            self.collection?.reloadData()
+            self.footer.isHidden=isHiddenFooter
         }
         if(isLoading==false && isLoadError==false){
             self.tableView?.mj_footer.isHidden=true

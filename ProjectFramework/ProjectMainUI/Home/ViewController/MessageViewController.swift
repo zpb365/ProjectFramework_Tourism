@@ -6,25 +6,39 @@
 //  Copyright © 2017年 HCY. All rights reserved.
 //
 
-import UIKit
+import UIKit 
 
 class MessageViewController: CustomTemplateViewController {
 
     @IBOutlet weak var tableView: UITableView!
     let identifier = "messageCell"
     
+    fileprivate let viewModel = MessageViewModel()
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.title="您的消息"
         tableView.frame=CGRect(x: 0, y: CommonFunction.NavigationControllerHeight, width: CommonFunction.kScreenWidth, height: self.view.frame.height - CommonFunction.NavigationControllerHeight)
         self.tableViewheightForRowAt=55
         self.numberOfSections=1
-        self.numberOfRowsInSection=10
-        self.InitCongif(tableView) 
+        self.InitCongif(tableView)
+        self.header.isHidden=true
+        
+        viewModel.GetPushMessageInfo { (result) in
+            if(result==true){
+               self.numberOfRowsInSection=self.viewModel.ListData.count
+                self.RefreshRequest(isLoading: false,isHiddenFooter: true) 
+            }else{
+                self.RefreshRequest(isLoading: false,isLoadError: true) 
+                
+            }
+        }
+          
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: identifier , for: indexPath) as! MessageViewCell
+        cell.InitConfig(viewModel.ListData[indexPath.row])
         return cell
     }
     

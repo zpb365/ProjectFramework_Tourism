@@ -10,9 +10,19 @@ import UIKit
 
 class HeadlinesViewCell: UITableViewCell {
 
+    @IBOutlet weak var Title: UILabel!
+    
+    @IBOutlet weak var CreateTime: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    
+    override func InitConfig(_ cell: Any) {
+        let model = cell as! ClassNewsList_Item
+        Title.text=model.Title
+        CreateTime.text=model.CreateTime
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

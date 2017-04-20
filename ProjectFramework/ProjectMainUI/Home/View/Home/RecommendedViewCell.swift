@@ -15,7 +15,7 @@ class RecommendedViewCell: UITableViewCell {
     fileprivate  var imageW:CGFloat!
     fileprivate var imageH:CGFloat!
     fileprivate var imageY:CGFloat!
-    let UIImageList = ["","","" ,"" ,"" ,""  ]
+    var UIImageList = [ClassHotList]()
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,6 +24,9 @@ class RecommendedViewCell: UITableViewCell {
     override func InitConfig(_ cell: Any) {
         
         if(ScrollView.subviews.count==1){
+            
+            UIImageList = cell as! [ClassHotList]
+            
             imageW = self.contentView.frame.size.width/3+10;//获取ScrollView的宽作为图片的宽；
             imageH = self.contentView.frame.size.height-20;//获取ScrollView的高作为图片的高；
             
@@ -36,7 +39,7 @@ class RecommendedViewCell: UITableViewCell {
             if(self.UIImageList.count>0){
                 
                 for _ in self.UIImageList {
-                    AddScrollViewContrler(index: index)
+                    AddScrollViewContrler(index: index,ClassHotList: UIImageList[index])
                     index += 1
                 }
             }
@@ -54,30 +57,30 @@ class RecommendedViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func AddScrollViewContrler(index:Int){
+    func AddScrollViewContrler(index:Int,ClassHotList:ClassHotList){
              let imageX:CGFloat = CGFloat(index) * imageW;
         let imageView = UIImageView(frame: CGRect(x: imageX+5, y: imageY, width: imageW-5, height: imageH)) //设置图片的大小，注意Image和ScrollView的关系，其实几张图片是按顺序从左向右依次放置在ScrollView中的，但是ScrollView在界面中显示的只是一张图片的大小，效果类似与画廊
-         imageView.ImageLoad(PostUrl: "http://seopic.699pic.com/photo/00021/6438.jpg_wh1200.jpg")
+         imageView.ImageLoad(PostUrl: HttpsUrlImage+ClassHotList.Img)
         imageView.backgroundColor=UIColor.red
         imageView.contentMode=UIViewContentMode.scaleToFill
-        
-        let tab = UILabel(frame: CGRect(x: 0, y: 0, width: 30, height: 20)) //标签
-        tab.font=UIFont.systemFont(ofSize: 11)
-        tab.text="景区"
-        tab.textColor=UIColor.white
-        tab.backgroundColor=UIColor.green
-        tab.textAlignment = .center
-        imageView.addSubview(tab)
+       
+        let TapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(sender:)))
+        TapGestureRecognizer.ExpTagString=ClassHotList.LinkUrl
+        imageView.isUserInteractionEnabled=true
+        imageView.addGestureRecognizer(TapGestureRecognizer)
         
         let title = UILabel(frame: CGRect(x: imageX+5, y: imageView.frame.maxY, width: imageW, height: 20)) //标题
         title.font=UIFont.systemFont(ofSize: 12)
-        title.text="青秀山桃花节"
+        title.text=ClassHotList.Title
         title.textColor=UIColor.gray
         
         ScrollView.addSubview(imageView)
         ScrollView.addSubview(title)
-        
 
+    }
+    
+    func handleTapGesture(sender: UITapGestureRecognizer){
+        print("点击了"+sender.ExpTagString)
     }
 
 }

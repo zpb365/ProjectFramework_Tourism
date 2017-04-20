@@ -20,6 +20,8 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
     
     var CustomNavBar:UINavigationBar?=nil //自定义导航列表
     
+    fileprivate let viewModel = HomeViewModel()
+    
     fileprivate let disposeBag   = DisposeBag() //创建一个处理包（通道）
     
     ///圆角（消息NavItem）属性
@@ -39,17 +41,20 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
         return numberlab
     }()
     
+    var titleArray=[String]()
+    var HeadShowCountArray=[Int]()
     var currentHeadlinesBtn = UIButton() //智慧头条
     lazy var SectionHeadlinesButtonBar: UIView = {
         let topButtonBar = UIView.init(frame: CommonFunction.CGRect_fram(0, y: 25, w: CommonFunction.kScreenWidth, h: 40))
         topButtonBar.backgroundColor = UIColor.white
-        let titleArray: Array=["政策法规","行业信息","景区公告","通知公告"]
-        for i in 0..<titleArray.count {
-            let title = titleArray[i]
+   
+        for i in 0..<self.titleArray.count {
+            let title = self.titleArray[i]
             let button = UIButton.init(type: .system)
-            let frame_x = CGFloat((CommonFunction.kScreenWidth/CGFloat(titleArray.count))*CGFloat(i))
-            button.frame = CommonFunction.CGRect_fram(frame_x, y:0, w:CommonFunction.kScreenWidth / CGFloat(titleArray.count) , h: 35)
-            button.tag = 1 + i
+            let frame_x = CGFloat((CommonFunction.kScreenWidth/CGFloat(self.titleArray.count))*CGFloat(i))
+            button.frame = CommonFunction.CGRect_fram(frame_x, y:0, w:CommonFunction.kScreenWidth / CGFloat(self.titleArray.count) , h: 35)
+            button.tag =  i
+            button.ExpTagString=title
             button.setTitle(title, for: .normal)
             button.titleLabel?.font = UIFont.systemFont(ofSize: 13)
             button.setTitleColor(UIColor.gray, for: .normal)
@@ -61,6 +66,7 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
                         button.setTitleColor(CommonFunction.SystemColor(), for: .normal)
                         self?.currentHeadlinesBtn.setTitleColor(UIColor.gray, for: .normal)
                         self?.currentHeadlinesBtn = button
+                        self?.tableView.reloadData()
                     }
                     
             }).addDisposableTo(self.disposeBag)
@@ -80,8 +86,10 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
         return topButtonBar
     }()
     
-    
+  
+ 
     var currentVisualBtn = UIButton() //视觉盛宴
+    var VisualShowCountArray=[Int]()
     lazy var SectionVisualButtonBar: UIView = {
         let topButtonBar = UIView.init(frame: CommonFunction.CGRect_fram(0, y: 25, w: CommonFunction.kScreenWidth, h: 40))
         topButtonBar.backgroundColor = UIColor.white
@@ -91,10 +99,11 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
             let button = UIButton.init(type: .system)
             let frame_x = CGFloat((CommonFunction.kScreenWidth/CGFloat(titleArray.count))*CGFloat(i))
             button.frame = CommonFunction.CGRect_fram(frame_x, y:0, w:CommonFunction.kScreenWidth / CGFloat(titleArray.count) , h: 35)
-            button.tag = 1 + i
+            button.tag =  i
             button.setTitle(title, for: .normal)
             button.titleLabel?.font = UIFont.systemFont(ofSize: 13)
             button.setTitleColor(UIColor.gray, for: .normal)
+            button.ExpTagString=title
             button.rx.tap.subscribe(
                 onNext:{ [weak self] value in
                     UIView.animate(withDuration: 0.3) { //点击滑动绑定事件
@@ -103,6 +112,7 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
                         button.setTitleColor(CommonFunction.SystemColor(), for: .normal)
                         self?.currentVisualBtn.setTitleColor(UIColor.gray, for: .normal)
                         self?.currentVisualBtn = button
+                        self?.tableView.reloadData()
                     }
                     
             }).addDisposableTo(self.disposeBag)
@@ -153,33 +163,66 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.header.isHidden=true
         tableView.frame=CGRect.init(x: 0, y: CommonFunction.NavigationControllerHeight, width: self.view.frame.width, height: self.view.frame.height-(CommonFunction.NavigationControllerHeight+49))
         self.InitCongif(tableView)
         SetupNavBar()
-        InitAdv()
+        GetHtpsData()
     }
+    
+    func GetHtpsData(){
+         self.RefreshRequest(isLoading: true,isHiddenFooter: true)
+        //获取网络数据
+        viewModel.GetHomeInfo { (relust) in
+            if(relust==true){   //数据请求成功
+                self.numberOfSections=10
+                for i in 0..<self.viewModel.ListData.NewsList!.count {  //设置智慧头条的选项名称
+                    self.titleArray.append(self.viewModel.ListData.NewsList![i].NewsTypeName)  //添加到当前数据列
+                    self.HeadShowCountArray.append(self.viewModel.ListData.NewsList![i].List!.count)    // 添加当前索引的总数（用用滑动刷新展示不同数据列)
+                }
+                //设置视觉盛宴的总数 -->美图
+                self.VisualShowCountArray.append(self.viewModel.ListData.VisualFeast!.BeautifulPictureList!.count)    // 添加当前索引的总数（用用滑动刷新展示不同数据列)
+                //设置视觉盛宴的总数  --> 全景
+                self.VisualShowCountArray.append(self.viewModel.ListData.VisualFeast!.Panorama360List!.count)    // 添加当前索引的总数（用用滑动刷新展示不同数据列)
+                //设置视觉盛宴的总数  --> VR视频
+                self.VisualShowCountArray.append(self.viewModel.ListData.VisualFeast!.VRVideoClassList!.count)    // 添加当前索引的总数（用用滑动刷新展示不同数据列)
+                self.RefreshRequest(isLoading: false, isHiddenFooter: true)
+                
+                self.InitAdv(ClassAdvList: self.viewModel.ListData.advList!)
+                
+            }else{
+                self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: true)
+            }
+        }
+    }
+    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true) 
     }
     
-   override func numberOfSections(in tableView: UITableView) -> Int {
-        return 10
-    }
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         switch section {
-        case 1:
-            return 1    //热门推荐
+        case 0: return HeadShowCountArray[currentHeadlinesBtn.tag] //智慧头条
+        case 1: return 1    //热门推荐
+        case 2: return Int((CGFloat(VisualShowCountArray[currentVisualBtn.tag]) / 3.0).description.components(separatedBy: ".")[1])! > 0 ? (VisualShowCountArray[currentVisualBtn.tag]/3)+1:VisualShowCountArray[currentVisualBtn.tag]/3   //视觉盛宴
+        case 3: return Int((CGFloat(self.viewModel.ListData.Scenic!.count) / 3.0).description.components(separatedBy: ".")[1])! > 0 ? (self.viewModel.ListData.Scenic!.count/3)+1:self.viewModel.ListData.Scenic!.count/3   //景区
+        case 4: return Int((CGFloat(self.viewModel.ListData.Hotel!.count) / 2.0).description.components(separatedBy: ".")[1])! > 0 ? (self.viewModel.ListData.Hotel!.count/2)+1:self.viewModel.ListData.Hotel!.count/2   //酒店
+        case 5: return Int((CGFloat(self.viewModel.ListData.Restaurant!.count) / 3.0).description.components(separatedBy: ".")[1])! > 0 ? (self.viewModel.ListData.Restaurant!.count/3)+1:self.viewModel.ListData.Restaurant!.count/3     //餐厅
+        case 6: return Int((CGFloat(self.viewModel.ListData.TravelAgency!.count) / 2.0).description.components(separatedBy: ".")[1])! > 0 ? (self.viewModel.ListData.TravelAgency!.count/2)+1:self.viewModel.ListData.TravelAgency!.count/2  //旅行社
+        case 7: return Int((CGFloat(self.viewModel.ListData.Meeting!.count) / 3.0).description.components(separatedBy: ".")[1])! > 0 ? (self.viewModel.ListData.Meeting!.count/3)+1:self.viewModel.ListData.Meeting!.count/3   //会展
+        case 8: return Int((CGFloat(self.viewModel.ListData.Specialities!.count) / 2.0).description.components(separatedBy: ".")[1])! > 0 ? (self.viewModel.ListData.Specialities!.count/2)+1:self.viewModel.ListData.Specialities!.count/2  //特产
+        case 9: return 2    //游记攻略
         default:
             break
         }
-         return 2
+         return 0
     }
     
     let _heightForHeaderInSection=[60,40,60,40,40,40,40,40,40,40]   //行头部高度
@@ -189,7 +232,7 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
         return CGFloat(_heightForHeaderInSection[section])
     }
     
-    let _heightForRowAt=[55,105,100,100,155,115,155,115,160,80]  //行高
+    let _heightForRowAt=[55,105,100,100,150,115,150,115,150,80]  //行高
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
            return CGFloat(_heightForRowAt[indexPath.section])
     }
@@ -202,45 +245,163 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
         return _viewForHeaderInSection[section]
     }
     
+   
     let identifier = ["headlines","recommended","visual","scenic","hotel","restaurant","travelAcy","meeting","specialty","travelGuide"]
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifier[indexPath.section], for: indexPath) as! HeadlinesViewCell
-            return  cell    //头条
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier[indexPath.section], for: indexPath) as! HeadlinesViewCell   //头条
+            cell.InitConfig(viewModel.ListData.NewsList?[currentHeadlinesBtn.tag].List?[indexPath.row] as Any)
+            return  cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifier[indexPath.section], for: indexPath) as! RecommendedViewCell
-            cell.InitConfig("")
-            return  cell    //推荐
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier[indexPath.section], for: indexPath) as! RecommendedViewCell //推荐
+            cell.InitConfig(viewModel.ListData.HotList as Any)
+            return  cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier[indexPath.section], for: indexPath) as! VisualViewCell
+            cell.BeautifulPictureList.removeAll()
+            cell.Panorama360List.removeAll()
+            cell.VRVideoClassList.removeAll()
+            cell.delegate=self
+            if(currentVisualBtn.tag==0){    //点击美图
+                if( viewModel.ListData.VisualFeast!.BeautifulPictureList!.count > (indexPath.row*3+0)  ){  //判断元素 否则就越界了 出错
+                cell.BeautifulPictureList.append(viewModel.ListData.VisualFeast!.BeautifulPictureList![indexPath.row*3+0])
+                }
+                if( viewModel.ListData.VisualFeast!.BeautifulPictureList!.count > (indexPath.row*3+0)  ){  //判断元素 否则就越界了 出错
+                cell.BeautifulPictureList.append(viewModel.ListData.VisualFeast!.BeautifulPictureList![indexPath.row*3+1])
+                }
+                if( viewModel.ListData.VisualFeast!.BeautifulPictureList!.count > (indexPath.row*3+0)  ){  //判断元素 否则就越界了 出错
+                cell.BeautifulPictureList.append(viewModel.ListData.VisualFeast!.BeautifulPictureList![indexPath.row*3+2])
+                }
+            }
+            if(currentVisualBtn.tag==1){    //点击全景
+                if( viewModel.ListData.VisualFeast!.Panorama360List!.count > (indexPath.row*3+0)  ){  //判断元素 否则就越界了 出错
+                cell.Panorama360List.append(viewModel.ListData.VisualFeast!.Panorama360List![indexPath.row*3+0])
+                }
+                if( viewModel.ListData.VisualFeast!.Panorama360List!.count > (indexPath.row*3+0)  ){  //判断元素 否则就越界了 出错
+                cell.Panorama360List.append(viewModel.ListData.VisualFeast!.Panorama360List![indexPath.row*3+1])
+                }
+                if( viewModel.ListData.VisualFeast!.Panorama360List!.count > (indexPath.row*3+0)  ){  //判断元素 否则就越界了 出错
+                cell.Panorama360List.append(viewModel.ListData.VisualFeast!.Panorama360List![indexPath.row*3+2])
+                }
+            }
+            if(currentVisualBtn.tag==2){    //点击视频
+                if( viewModel.ListData.VisualFeast!.VRVideoClassList!.count > (indexPath.row*3+0)  ){  //判断元素 否则就越界了 出错
+                    cell.VRVideoClassList.append( viewModel.ListData.VisualFeast!.VRVideoClassList![indexPath.row*3+0])
+                }
+                if( viewModel.ListData.VisualFeast!.VRVideoClassList!.count > (indexPath.row*3+1)  ){    //判断元素 否则就越界了 出错
+                    cell.VRVideoClassList.append( viewModel.ListData.VisualFeast!.VRVideoClassList![indexPath.row*3+1])
+                }
+                if( viewModel.ListData.VisualFeast!.VRVideoClassList!.count  > (indexPath.row*3+2)  ){   //判断元素 否则就越界了 出错
+                     cell.VRVideoClassList.append( viewModel.ListData.VisualFeast!.VRVideoClassList![indexPath.row*3+2])
+                } 
+            }
+            cell.InitConfig("") 
             return  cell    //视觉盛宴
         case 3:
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifier[indexPath.section], for: indexPath) as! ScenicViewCell
-            return  cell    //景区
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier[indexPath.section], for: indexPath) as! ScenicViewCell    //景区
+            cell.Scenic.removeAll()
+            cell.delegate=self
+            if( viewModel.ListData.Scenic!.count > (indexPath.row*3+0)  ){  //判断元素 否则就越界了 出错
+                cell.Scenic.append( viewModel.ListData.Scenic![indexPath.row*3+0])
+            }
+            if( viewModel.ListData.Scenic!.count > (indexPath.row*3+1)  ){    //判断元素 否则就越界了 出错
+                cell.Scenic.append( viewModel.ListData.Scenic![indexPath.row*3+1])
+            }
+            if( viewModel.ListData.Scenic!.count  > (indexPath.row*3+2)  ){   //判断元素 否则就越界了 出错
+                cell.Scenic.append( viewModel.ListData.Scenic![indexPath.row*3+2])
+            }
+            cell.InitConfig("")
+            return  cell
         case 4:
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifier[indexPath.section], for: indexPath) as! HotelViewCell
-            return  cell    //酒店
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier[indexPath.section], for: indexPath) as! HotelViewCell //酒店
+            cell.Hotel.removeAll()
+            cell.delegate=self
+            if( viewModel.ListData.Hotel!.count > (indexPath.row*2+0)  ){  //判断元素 否则就越界了 出错
+                cell.Hotel.append( viewModel.ListData.Hotel![indexPath.row*2+0])
+            }
+            if( viewModel.ListData.Hotel!.count > (indexPath.row*2+1)  ){    //判断元素 否则就越界了 出错
+                cell.Hotel.append( viewModel.ListData.Hotel![indexPath.row*2+1])
+            }
+            cell.InitConfig("")
+            
+            return  cell
         case 5:
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifier[indexPath.section], for: indexPath) as! RestaurantViewCell
-            return  cell    //餐厅
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier[indexPath.section], for: indexPath) as! RestaurantViewCell  //餐厅
+            cell.Restaurant.removeAll()
+            cell.delegate=self
+            if( viewModel.ListData.Restaurant!.count > (indexPath.row*3+0)  ){  //判断元素 否则就越界了 出错
+                cell.Restaurant.append( viewModel.ListData.Restaurant![indexPath.row*3+0])
+            }
+            if( viewModel.ListData.Restaurant!.count > (indexPath.row*3+1)  ){    //判断元素 否则就越界了 出错
+                cell.Restaurant.append( viewModel.ListData.Restaurant![indexPath.row*3+1])
+            }
+            if( viewModel.ListData.Restaurant!.count > (indexPath.row*3+2)  ){    //判断元素 否则就越界了 出错
+                cell.Restaurant.append( viewModel.ListData.Restaurant![indexPath.row*3+2])
+            }
+            cell.InitConfig("")
+            return  cell
         case 6:
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifier[indexPath.section], for: indexPath) as! TravelAcyViewCell
-            return  cell    //旅行社
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier[indexPath.section], for: indexPath) as! TravelAcyViewCell //旅行社
+            cell.TravelAgency.removeAll()
+            cell.delegate=self
+            if( viewModel.ListData.TravelAgency!.count > (indexPath.row*2+0)  ){  //判断元素 否则就越界了 出错
+                cell.TravelAgency.append( viewModel.ListData.TravelAgency![indexPath.row*2+0])
+            }
+            if( viewModel.ListData.TravelAgency!.count > (indexPath.row*2+1)  ){    //判断元素 否则就越界了 出错
+                cell.TravelAgency.append( viewModel.ListData.TravelAgency![indexPath.row*2+1])
+            }
+            cell.InitConfig("")
+            return  cell
         case 7:
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifier[indexPath.section], for: indexPath) as! MeetingViewCell
-            return  cell    //会展
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier[indexPath.section], for: indexPath) as! MeetingViewCell  //会展
+            cell.Meeting.removeAll()
+            cell.delegate=self
+            if( viewModel.ListData.Meeting!.count > (indexPath.row*3+0)  ){  //判断元素 否则就越界了 出错
+                cell.Meeting.append( viewModel.ListData.Meeting![indexPath.row*3+0])
+            }
+            if( viewModel.ListData.Meeting!.count > (indexPath.row*3+1)  ){    //判断元素 否则就越界了 出错
+                cell.Meeting.append( viewModel.ListData.Meeting![indexPath.row*3+1])
+            }
+            if( viewModel.ListData.Meeting!.count > (indexPath.row*3+2)  ){    //判断元素 否则就越界了 出错
+                cell.Meeting.append( viewModel.ListData.Meeting![indexPath.row*3+2])
+            }
+            cell.InitConfig("")
+            return  cell
         case 8:
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifier[indexPath.section], for: indexPath) as! SpecialtyViewCell
-            return  cell    //特产
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier[indexPath.section], for: indexPath) as! SpecialtyViewCell   //特产
+            cell.Specialities.removeAll()
+            cell.delegate=self
+            if( viewModel.ListData.Specialities!.count > (indexPath.row*2+0)  ){  //判断元素 否则就越界了 出错
+                cell.Specialities.append( viewModel.ListData.Specialities![indexPath.row*2+0])
+            }
+            if( viewModel.ListData.Specialities!.count > (indexPath.row*2+1)  ){    //判断元素 否则就越界了 出错
+                cell.Specialities.append( viewModel.ListData.Specialities![indexPath.row*2+1])
+            }
+            cell.InitConfig("")
+            return  cell
         case 9:
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifier[indexPath.section], for: indexPath) as! TravelGuideViewCell
-            return  cell    //游记
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier[indexPath.section], for: indexPath) as! TravelGuideViewCell   //游记
+            cell.delegate=self
+            return  cell
         default:
             break
         }
         return UITableViewCell()
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case  0:
+            let vc = InformationViewController()    //点击智慧头条的cell
+            vc.title=viewModel.ListData.NewsList![currentHeadlinesBtn.tag].List![indexPath.row].Title
+            vc.Content = viewModel.ListData.NewsList![currentHeadlinesBtn.tag].List![indexPath.row].NewsContent
+            self.navigationController?.show(vc, sender: self)
+            break
+        default:
+            break
+        }
     }
      
     ///自定义UINavigationBar
@@ -269,9 +430,12 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
     }
     
     ///初始化轮播广告图
-    private func InitAdv(){
+    private func InitAdv(ClassAdvList:[ClassAdvList]){
         
-        let Imagelist  = ["index1","index2","index3","index4"]
+        var Imagelist  =  [String]()
+        for var item in ClassAdvList{
+            Imagelist.append(item.Img)
+        }
         let vc = ScrollViewPageViewController(Enabletimer: true,   //是否启动滚动
             timerInterval: 4,     //如果启用滚动，滚动秒数
             ImageList:Imagelist  ,//图片
@@ -282,6 +446,11 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
         
         Adv_View.addSubview(vc.view)
         
+    }
+    
+    ///数据请求出错了处理事件
+    override func Error_Click() {
+        GetHtpsData()
     }
 
     ///搜索事件

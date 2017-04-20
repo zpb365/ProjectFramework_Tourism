@@ -9,7 +9,9 @@
 import UIKit
 
 class TravelGuideViewCell: UITableViewCell {
-
+    
+    weak var delegate:UIViewController?=nil
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

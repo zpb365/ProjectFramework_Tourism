@@ -52,7 +52,7 @@ class CreatedbBase {
  
         var DBItem=[String]()
         //用户信息
-        let createSql1:String = "CREATE TABLE IF NOT EXISTS MemberInfo (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, MemberID text , PhoneNo text , RealName text ,  Sex text , HeadImgPath text , Token text  , IsLogin bit  )"
+        let createSql1:String = "CREATE TABLE IF NOT EXISTS MemberInfo (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, userid integer , PhoneNo text , RealName text ,  Sex text , HeadImgPath text , Token text  , IsLogin bit  )"
         
         DBItem.append(createSql1) // 用户信息
         
@@ -84,7 +84,7 @@ class CreatedbBase {
                 CommonFunction.ExecuteQuery("select * from MemberInfo", nil, callback: { (Result) in
                     while Result.next() {
                         print(Result.resultDictionary())
-                        let MemberID = Result.string(forColumn: "MemberID") as String
+                        let userid = Result.int(forColumn: "userid") as Int32
                         let PhoneNo = Result.string(forColumn: "PhoneNo") as String
                         let RealName = Result.string(forColumn: "RealName") as String
                         let Sex = Result.string(forColumn: "Sex") as String
@@ -93,7 +93,7 @@ class CreatedbBase {
                         let IsLogin = Result.bool(forColumn: "IsLogin") as Bool
                          
                         Global_UserInfo.IsLogin=IsLogin
-                        Global_UserInfo.MemberID=MemberID
+                        Global_UserInfo.userid=Int(userid)
                         Global_UserInfo.PhoneNo=PhoneNo
                         Global_UserInfo.RealName=RealName
                         Global_UserInfo.Sex=Sex
