@@ -106,6 +106,7 @@ class HotelReserve: CustomTemplateViewController,PYSearchViewControllerDelegate 
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = CommonFunction.ViewControllerWithStoryboardName("HotelDetail", Identifier: "HotelDetail") as! HotelDetail
+        vc.HotelID = viewModel.ListData[indexPath.row].HotelID
         self.navigationController?.show(vc, sender: self  )
     }
     

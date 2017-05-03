@@ -54,4 +54,15 @@ class DateClass: NSObject {
         let countOfMonth = getCountOfDaysInMonth(year: y, month: m)
         return (y,m,countOfMonth.count,countOfMonth.week)
     }
+    static func getTomorrowDay(_ aDate: Date) -> (year:Int,month:Int,day:Int) {
+        let gregorian = Calendar(identifier: .gregorian)
+        var components: DateComponents? = gregorian.dateComponents([.weekday, .year, .month, .day], from: aDate)
+        components?.day = ((components?.day)! + 1)
+        let beginningOfWeek: Date? = gregorian.date(from: components!)
+        let dateday = DateFormatter()
+        dateday.dateFormat = "yyyy-MM-dd"
+        let string = dateday.string(from: beginningOfWeek!)
+        let array = string.components(separatedBy: "-")
+        return (Int(array[0])!,Int(array[1])!,Int(array[2])!)
+    }
 }

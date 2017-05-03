@@ -24,5 +24,11 @@ class HotelRoomReserveCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
     }
-    
+    override func InitConfig(_ cell: Any) {
+        let model = cell as! HotelProduct_List
+        imageIcon.ImageLoad(PostUrl: HttpsUrlImage+model.CoverPhoto)
+        titleLable.text = model.Title
+        describeLable.text = "\(model.BedType)|\(model.Network)|\(model.Acreage)|\(model.Policy)"
+        priceLable.text = "¥\(model.Price)"
+    }
 }

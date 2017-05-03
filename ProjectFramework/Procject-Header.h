@@ -66,3 +66,4 @@
 #import "PYSearchViewController.h" //搜索UI 
 #import "XHStarRateView.h"         //评分星星
 #import "PanoramaViewController.h"      // 全景图
+

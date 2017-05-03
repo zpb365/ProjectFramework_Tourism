@@ -11,15 +11,28 @@ import UIKit
 class HotelDetail: CustomTemplateViewController {
     
     
-    lazy var sectionDate:UIView = {
+    lazy var sectionDate:DateSectionView = {
         let sectionDate = Bundle.main.loadNibNamed("DateSectionView", owner: self, options: nil)?.last
-        return sectionDate as! UIView
+        return sectionDate as! DateSectionView
         
     }()
-    lazy var sectionConment:UIView = {
+    lazy var sectionConment:CommentSectionView = {
         let sectionConment = Bundle.main.loadNibNamed("CommentSectionView", owner: self, options: nil)?.last
         
-        return sectionConment as! UIView
+        return sectionConment as! CommentSectionView
+    }()
+    //酒店设施那些
+    lazy var footderIntroduce: PulickIntroduceView = {
+        let footderIntroduce = PulickIntroduceView()
+        footderIntroduce.createTableView(frame: CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: 50))
+        footderIntroduce.FuncCallbackValue(value: { [weak self](height) in
+            self?.footderIntroduceHeght = height
+            self?.footderIntroduce.frame = CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: height)
+            self?.footderIntroduce.customTableView.frame = (self?.footderIntroduce.bounds)!
+            self?.tableView.reloadData()
+            //            print("介绍的tableview高度====",height)
+        })
+        return footderIntroduce
     }()
     
     @IBOutlet weak var tableView: UITableView!
@@ -30,6 +43,9 @@ class HotelDetail: CustomTemplateViewController {
     @IBOutlet weak var address: UIView!//头部地址
     @IBOutlet weak var phone: UIImageView!//头部电话
     @IBOutlet weak var VRVedio: UIView!//头部VR视频
+    @IBOutlet weak var hotelTilte: UILabel!//标题
+    @IBOutlet weak var hotelAdress: UILabel!//地址
+    @IBOutlet weak var hotelTab: UILabel!//标签
     
     let identiFier = "HotelRoomReserveCell"
     let identifier = "UserCommentCell"
@@ -45,18 +61,39 @@ class HotelDetail: CustomTemplateViewController {
     var modelArray = Array<Any>()
     var hotelIntroduceHeight: CGFloat = 50//酒店介绍的高度
     var BookingHeight: CGFloat = 50//预定须知的高度
+    var footderIntroduceHeght: CGFloat = 50//酒店设施那些
     var isChange: Bool = false//防止tableView重复滑动的标记
+    var viewModel = HotelDetailViewModel()
+    var PageIndex: Int      = 1
+    var PageSize:  Int      = 10
+    var HotelID = 0
+    var DateTimeBegin = ""
+    var DateTimeEnd = ""
+    var startYear=0
+    var startMoon=0
+    var startDay=0
+    var endYear=0
+    var endMoon=0
+    var endDay=0
+    var Imagelist = Array<String>()
+    var ImageTab = Array<String>()
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.navigationController?.navigationBar.setBackgroundImage(UIImage().ImageWithColor(color: UIColor().TransferStringToColor("#5E7D8A"), size: CGSize.init(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)),for: UIBarMetrics.default)
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //
+        self.getDate()
         self.setNavBar()
         self.setHeadView()
         self.initUI()
+        self.GetHtpsData()
         
     }
     
@@ -81,8 +118,43 @@ class HotelDetail: CustomTemplateViewController {
         phone.addGestureRecognizer(tap3)
         VRVedio.addGestureRecognizer(tap4)
     }
+    //MARK: getDate
+    func getDate() -> Void {
+        //获取今天日期
+        let nowDate = DateClass.getNowDate()
+        let tomorrowDate = DateClass.getTomorrowDay(NSDate.init() as Date)
+        DateTimeBegin = "\(nowDate.year)-\(nowDate.month)-\(nowDate.day)"
+        DateTimeEnd   = "\(tomorrowDate.year)-\(tomorrowDate.month)-\(tomorrowDate.day)"
+        startYear = nowDate.year
+        startMoon = nowDate.month
+        startDay  = nowDate.day
+        endDay    = tomorrowDate.day
+        endMoon   = tomorrowDate.month
+        endYear   = tomorrowDate.year
+    }
+    //MARK: 校验重新选择的日期
+    func checkTime() -> Void {
+        
+    }
     //MARK: 请求数据
-    
+    func GetHtpsData() -> Void {
+        
+        viewModel.GetChannelsHotelDetails(HotelID: HotelID, PageIndex: PageIndex, PageSize: PageSize, DateTimeBegin: DateTimeBegin, DateTimeEnd: DateTimeEnd) { (result) in
+            if result == true{
+                print(self.viewModel.ListData.HotelName)
+                self.setData()
+            }
+        }
+    }
+    func setData() -> Void {
+        hotelTilte.text = " 1/\(viewModel.ListData.ImageList!.count) \(viewModel.ListData.HotelName)"
+        headimage.ImageLoad(PostUrl: HttpsUrlImage+viewModel.ListData.CoverPhoto)
+        hotelAdress.text = viewModel.ListData.Address
+        hotelTab.text   = viewModel.ListData.tab
+        ReserveCount.text = viewModel.ListData.ToDayOrderNumber
+        
+        self.RefreshRequest(isLoading: false, isHiddenFooter: false)
+    }
     //MARK: initUI
     func initUI() -> Void {
         let model = UserCommentModel()
@@ -104,18 +176,23 @@ class HotelDetail: CustomTemplateViewController {
     func tapClick(tap:UITapGestureRecognizer) -> Void {
         switch tap.view!.tag {
         case 1000:
-            let urllist=["http://pic9.nipic.com/20100902/2029588_234330095230_2.jpg"
-                ,"http://pic1a.nipic.com/2008-08-26/200882614319401_2.jpg"
-                ,"http://www.ahhnh.com/data/upload/2015-10/2015101940975833.jpg"
-                ,"http://pic10.nipic.com/20100929/4879567_114926982000_2.jpg"
-                ,"http://img2.imgtn.bdimg.com/it/u=2081796248,4191591232&fm=21&gp=0.jpg"]
-            let describeList=["张三","李四","李四","李四","李四"]
-            let vc = ImagePreviewViewController( ImageUrlList: urllist ,IsDescribe: true,DescribeList: describeList )
-            self.navigationController?.pushViewController(vc, animated: true )
+            if (viewModel.ListData.ImageList?.count)! > 0 {
+                for i in 0..<(viewModel.ListData.ImageList?.count)!{
+                    let model = viewModel.ListData.ImageList?[i]
+                    Imagelist.append(model!.PhotoUrl)
+                    ImageTab.append(model!.Tab)
+                }
+                
+                let vc = ImagePreviewViewController( ImageUrlList: Imagelist ,IsDescribe: true,DescribeList: ImageTab )
+                self.navigationController?.pushViewController(vc, animated: true )
+            }
+
         case 1001:
             print("跳转到百度地图")
         case 1002:
-            CommonFunction.CallPhone(self, number: "15907740425")
+            if viewModel.ListData.Phone != "" {
+                CommonFunction.CallPhone(self, number: viewModel.ListData.Phone)
+            }
         case 1003:
             print("跳转到全景动画")
         default:
@@ -254,16 +331,16 @@ class HotelDetail: CustomTemplateViewController {
         }
         //顶部按钮线移动
         if isChange {
-            if (offset < 10 * 80 + tableViewHead.frame.height) {
+            if (offset < CGFloat(viewModel.ListData.HotelProduct!.count * 80) + tableViewHead.frame.height) {
                 self.btoomLineMove(tag: 1)
             }
-            if (offset > 10 * 80 + tableViewHead.frame.height && offset < 10 * 80 + tableViewHead.frame.height + hotelIntroduceHeight + 40) {
+            if (offset > CGFloat(viewModel.ListData.HotelProduct!.count * 80) + tableViewHead.frame.height && offset < 10 * 80 + tableViewHead.frame.height + hotelIntroduceHeight + 40) {
                 self.btoomLineMove(tag: 2)
             }
-            if (offset > 10 * 80 + tableViewHead.frame.height + hotelIntroduceHeight + 40 && offset < 10 * 80 + tableViewHead.frame.height + hotelIntroduceHeight + BookingHeight + 80) {
+            if (offset > CGFloat(viewModel.ListData.HotelProduct!.count * 80) + tableViewHead.frame.height + hotelIntroduceHeight + 40 && offset < 10 * 80 + tableViewHead.frame.height + hotelIntroduceHeight + BookingHeight + 80) {
                 self.btoomLineMove(tag: 3)
             }
-            if (offset > 10 * 80 + tableViewHead.frame.height + hotelIntroduceHeight + BookingHeight + 80){
+            if (offset > CGFloat(viewModel.ListData.HotelProduct!.count * 80) + tableViewHead.frame.height + hotelIntroduceHeight + BookingHeight + 80){
                 self.btoomLineMove(tag: 4)
             }
         }
@@ -284,6 +361,7 @@ class HotelDetail: CustomTemplateViewController {
     //组头
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
         _viewForHeaderInSection[0] = sectionDate
+        sectionDate.setDate(startYear: startYear, startMoon: startMoon, startDay: startDay, endYear: endYear, endMoon: endMoon, endDay: endDay)
         _viewForHeaderInSection[1] = UIView().setIntroduceView(height: 40, title: "酒店介绍")
         _viewForHeaderInSection[2] = UIView().setIntroduceView(height: 40, title: "预定须知")
         _viewForHeaderInSection[3] = sectionConment
@@ -294,11 +372,40 @@ class HotelDetail: CustomTemplateViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat(_heightForHeaderInSection[section])
     }
-  
-    var _numberOfRowsInSection = [10,1,1,5]
+    //组尾
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section == 1 {
+            if viewModel.ListData.DescribeName != nil {
+                self.footderIntroduce.setData(object: viewModel.ListData.DescribeName as Any)
+                return self.footderIntroduce
+            }else{
+                return UIView()
+            }
+        }else{
+            return UIView()
+
+        }
+    }
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 1 {
+            if viewModel.ListData.DescribeName != nil {
+                return self.footderIntroduceHeght
+            }else{
+                return 0
+            }
+        }else{
+            return 0
+        }
+    }
+    var _numberOfRowsInSection = [0,1,1,5]
     //组个数
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        //防崩溃
+        if viewModel.ListData.HotelProduct != nil{
+            _numberOfRowsInSection[0] = viewModel.ListData.HotelProduct!.count
+        }
         return _numberOfRowsInSection[section]
+
     }
     var _heightForRowAt = [CGFloat(80),CGFloat(0),CGFloat(0),CGFloat(0)]
     //行高
@@ -315,15 +422,19 @@ class HotelDetail: CustomTemplateViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->UITableViewCell{
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier: identiFier, for: indexPath) as! HotelRoomReserveCell
+            cell.InitConfig(viewModel.ListData.HotelProduct?[indexPath.row] as Any)
             return cell
         }
         if (indexPath.section == 1) {
-            let cell = tableView.dequeueReusableCell(withIdentifier: indetifer1, for: indexPath)as!PulickWebCell
-            cell.FuncCallbackValue(value: {[weak self] (height) in
-                self?.hotelIntroduceHeight = height
-            })
-            cell.loadHtmlString(html: "<p>“99旅馆连锁”北京丰益桥店地处北京市西三环主路边上，是西三环线的交通枢纽、商务中心，近地铁10号线泥洼站。门店西临北京四大汽车交易市场之一的西三环汽配城、美克美家家居装饰城、东方家园以及中国军区总院的309医院。酒店靠近丽泽长途汽车站、六里桥长途汽车站，周边还有大糖梨烤鸭店、老诚一锅、老...</p>", isFirst: isfirst1)
-            isfirst1 = true
+            let cell = tableView.dequeueReusableCell(withIdentifier: indetifer1, for: indexPath)as!PulickWebCell            
+            if viewModel.ListData.Introduce != "" {
+                cell.loadHtmlString(html: viewModel.ListData.Introduce, isFirst: isfirst1)
+                isfirst1 = true
+                cell.FuncCallbackValue(value: {[weak self] (height) in
+                    self?.hotelIntroduceHeight = height
+                    self?.tableView.reloadData()
+                })
+            }
             return cell
         }
         
@@ -333,8 +444,14 @@ class HotelDetail: CustomTemplateViewController {
                 self?.BookingHeight = height
                 self?.tableView.reloadData()
             })
-            cell.loadHtmlString(html: "<p>品牌：xiaomi/小米</p><p>    型号：小米Max<br/></p><p>    款式：直板<br/></p><p>    颜色：金色 银色<br/></p><p>    后置摄像头：<span style=\"color: rgb(192, 0, 0);\">1600</span>万<br/></p><p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          附加功能：OTG WIFIH上网 双卡双待 高清视频<br/></p><p>    宝贝成色：全新<br/></p>", isFirst: isfirst2)
-            isfirst2 = true
+            if viewModel.ListData.BookInformation != "" {
+                cell.loadHtmlString(html: viewModel.ListData.BookInformation, isFirst: isfirst2)
+                isfirst2 = true
+                cell.FuncCallbackValue(value: {[weak self] (height) in
+                    self?.hotelIntroduceHeight = height
+                    self?.tableView.reloadData()
+                })
+            }
             return cell
         }
         else if (indexPath.section == 3){

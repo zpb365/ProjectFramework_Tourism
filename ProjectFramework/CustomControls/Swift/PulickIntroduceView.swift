@@ -36,8 +36,7 @@ class PulickIntroduceView: UIView,UITableViewDelegate,UITableViewDataSource {
         return detailLable
     }()
     var customTableView: UITableView!
-    var sectionArray = Array<Any>()
-    var sectionTextArray = Array<String>()//组标题
+    var sectionArray = [DescribeName_List]()
     let identiFier = "PulickIntroduceCell"//政策和设施服务那些
 
     
@@ -63,7 +62,7 @@ class PulickIntroduceView: UIView,UITableViewDelegate,UITableViewDataSource {
     
     
     //MARK: 传值回调
-    func setData( object:Any,textArray:Array<String> ) -> Void {
+    func setData( object:Any ) -> Void {
 //        let text = "酒店介绍"
 //        
 //        let str = "南宁迪拜七星酒店 是昌龙集团旗下的五星级酒店，迪拜七星酒店位于南宁市民族大道竹溪立交东北侧；金融、政治、文化、中心的航洋商圈；东盟国际会展中心正对面，民族大道127号铂宫国际商业大楼内，占地面积约2万平方米。它是结合京城四大会所成功经营管理模式，与国际俱乐部组织接轨共同打造具有广西特色超级豪华型的会员式精品酒店"
@@ -74,7 +73,8 @@ class PulickIntroduceView: UIView,UITableViewDelegate,UITableViewDataSource {
 //        self.titleLable.text = text
 //        self.detailLable.text = str
         
-        self.sectionTextArray = textArray
+        self.sectionArray = object as! [DescribeName_List]
+        
         if (myCallbackValue != nil) {
             customTableView.reloadData()
             myCallbackValue!(customTableView.contentSize.height)
@@ -83,20 +83,23 @@ class PulickIntroduceView: UIView,UITableViewDelegate,UITableViewDataSource {
 
     //MARK: tableViewDelegate && tableViewDataSource
     func numberOfSections(in tableView: UITableView) -> Int{
-        return self.sectionTextArray.count
+        if (self.sectionArray.count) > 0 {
+            print((self.sectionArray.count))
+        }
+        return (self.sectionArray.count)
     }
-    var _numberOfRowsInSection = [3,5]
+//    var _numberOfRowsInSection = [3,5]
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return _numberOfRowsInSection[section]
+        return (self.sectionArray[section].List?.count)!
     }
     //组头
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
-        if self.sectionTextArray.count > 0 {
+        if (self.sectionArray.count) > 0 {
             let header = UIView.init(frame: CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: 30))
             header.backgroundColor = UIColor.white
             let lable = UILabel.init(frame: CommonFunction.CGRect_fram(15, y: 7.5, w: 100, h:15 ))
             lable.font = UIFont.systemFont(ofSize: 13)
-            lable.text = sectionTextArray[section]
+            lable.text = self.sectionArray[section].Name
             header.addSubview(lable)
             return header
         }
@@ -106,7 +109,7 @@ class PulickIntroduceView: UIView,UITableViewDelegate,UITableViewDataSource {
     }
     //组头高
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return self.sectionTextArray.count > 0 ? 30 : 0
+        return (self.sectionArray.count) > 0 ? 30 : 0
     }
     
     

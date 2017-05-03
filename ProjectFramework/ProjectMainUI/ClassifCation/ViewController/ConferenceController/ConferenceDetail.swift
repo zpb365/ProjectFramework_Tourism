@@ -71,7 +71,7 @@ class ConferenceDetail: CustomTemplateViewController {
     //MARK: 开始拖动时调用的方法
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         isChange = true
-        self.sectionIntroduce.setData(object: self, textArray: ["会展政策","参会须知"])//后期网络接口传值
+//        self.sectionIntroduce.setData(object: self, textArray: ["会展政策","参会须知"])//后期网络接口传值
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView){
         let offset: CGFloat = scrollView.contentOffset.y

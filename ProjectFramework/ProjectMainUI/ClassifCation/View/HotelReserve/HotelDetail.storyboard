@@ -221,6 +221,9 @@
                         <outlet property="address" destination="xhO-rA-Ste" id="AIQ-v5-Jb8"/>
                         <outlet property="buttonBar" destination="dAo-iT-3Eg" id="810-LR-nhN"/>
                         <outlet property="headimage" destination="xzu-jB-6ay" id="whE-zj-lvY"/>
+                        <outlet property="hotelAdress" destination="dlm-2V-kz1" id="MvW-3j-4oS"/>
+                        <outlet property="hotelTab" destination="XRY-7Z-aGX" id="qa3-t3-OM7"/>
+                        <outlet property="hotelTilte" destination="5AT-hQ-xNY" id="s0x-Rf-N4C"/>
                         <outlet property="phone" destination="jyg-sL-G4T" id="rbK-5r-Qs3"/>
                         <outlet property="tableView" destination="4ZF-s3-TrF" id="Zi3-vc-SGN"/>
                         <outlet property="tableViewHead" destination="MGw-qs-arE" id="tCH-UK-2Nm"/>

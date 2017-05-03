@@ -75,7 +75,7 @@ class RestaurantDetail: CustomTemplateViewController {
     //MARK: 开始拖动时调用的方法
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         isChange = true
-        self.sectionIntroduce.setData(object: self, textArray: ["酒店政策","设施服务"])//后期网络接口传值
+//        self.sectionIntroduce.setData(object: self, textArray: ["酒店政策","设施服务"])//后期网络接口传值
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView){
@@ -182,7 +182,7 @@ class RestaurantDetail: CustomTemplateViewController {
         //  1 预定餐厅   2 餐厅简介  3 用户点评
         
         if (button.tag == 2) {
-            self.sectionIntroduce.setData(object: self, textArray: ["酒店政策","设施服务"])//后期网络接口传值
+//            self.sectionIntroduce.setData(object: self, textArray: ["酒店政策","设施服务"])//后期网络接口传值
             self.tableView.setContentOffset(CGPoint.init(x: 0, y: 80 * 10 + tableViewHead.frame.height - 64), animated: true)
         }
         else {

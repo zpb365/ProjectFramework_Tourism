@@ -361,8 +361,8 @@ class TravelAcyDetail: CustomTemplateViewController {
         
         self.tableView.reloadData()
         
-        self.sectionPrice.setData(object: self, textArray: ["费用包含","费用不包含"])//后期网络接口传值
-        self.sectionReserve.setData(object: self, textArray: ["出行须知","特殊限制"])
+//        self.sectionPrice.setData(object: self, textArray: ["费用包含","费用不包含"])//后期网络接口传值
+//        self.sectionReserve.setData(object: self, textArray: ["出行须知","特殊限制"])
         
         sectionJourney.loadHtmlString(html: "<p>香蕉是淀粉质丰富的有益水果。味甘性寒，可清热润肠</p><p>香蕉</p><p>香蕉</p><p>，促进肠胃蠕动，但脾虚泄泻者却不宜。根据“热者寒之”的原理，最适合燥热人士享用。痔疮出血者、因燥热而致胎动不安者，都可生吃蕉肉。</p><p>民间验方更有用香蕉炖冰糖，医治久咳；用香蕉煮酒，作为食疗。近代医学建议，用香蕉可治高血压，因它含钾量丰富，可平衡钠的不良作用，并促进细胞及组织生长。用香蕉可治疗便秘，因它能促进肠胃蠕动。</p><p>早餐午餐和晚餐分别吃一根香蕉，能够为人体提供丰富的钾，从而使得大脑血凝块几率降低约21%。</p><p>德国研究人员表示，用香蕉可治抑郁和情绪不安，因它能促进大脑分泌内啡化学物质。它能缓和紧张的情绪，提高工作效率，降低疲劳。</p>")
         sectionIntroduce.loadHtmlString(html: "<p>品牌：xiaomi/小米</p><p>    型号：小米Max<br/></p><p>    款式：直板<br/></p><p>    颜色：金色 银色<br/></p><p>    后置摄像头：<span style=\"color: rgb(192, 0, 0);\">1600</span>万<br/></p><p>    附加功能：OTG WIFIH上网 双卡双待 高清视频<br/></p><p>    宝贝成色：全新<br/></p>")
