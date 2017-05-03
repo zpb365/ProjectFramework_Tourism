@@ -16,6 +16,8 @@ class OneMenuModel {     //一级菜单属性
     var  value:String?
     ///图片
     var  image:String?
+    ///类型
+    var  type:Int?
     var  TowMenu = [TowMenuModel]()
     
 }
@@ -26,6 +28,8 @@ class TowMenuModel {    //二级菜单属性
     var  value:String?
     ///图片
     var  image:String?
+    ///类型
+    var  type:Int?
 }
 
 

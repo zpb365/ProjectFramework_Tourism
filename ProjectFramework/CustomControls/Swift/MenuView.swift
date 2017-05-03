@@ -13,7 +13,7 @@ import DOPDropDownMenu_Enhanced
 
 class MenuView: UIView,DOPDropDownMenuDataSource,DOPDropDownMenuDelegate {
     
-    typealias CallbackSelectedValue=(_ name:String,_ value:String)->Void
+    typealias CallbackSelectedValue=(_ name:String,_ value:String, _ type:Int)->Void
     
     //声明一个闭包
     fileprivate  var myCallbackValue:CallbackSelectedValue?
@@ -147,13 +147,14 @@ class MenuView: UIView,DOPDropDownMenuDataSource,DOPDropDownMenuDelegate {
     
     //一级菜单 右边带有数字
     func menu(_ menu: DOPDropDownMenu!, detailTextForRowAt indexPath: DOPIndexPath!) -> String! {
-        let value  = _MenuValue[indexPath.column]
-        return  value.OneMenu[indexPath.row].TowMenu.count.description  //获取二级列表的总数
+       // let value  = _MenuValue[indexPath.column]
+//        return  value.OneMenu[indexPath.row].TowMenu.count.description  //获取二级列表的总数
+        return ""
     }
     //二级菜单 右边带有数字
     func menu(_ menu: DOPDropDownMenu!, detailTextForItemsInRowAt indexPath: DOPIndexPath!) -> String! {
         
-        return "0"
+        return ""
     }
     //选择
     func menu(_ menu: DOPDropDownMenu!, didSelectRowAt indexPath: DOPIndexPath!) {
@@ -163,12 +164,12 @@ class MenuView: UIView,DOPDropDownMenuDataSource,DOPDropDownMenuDelegate {
             //一级菜单
             //            print(title.OneMenu[indexPath.row].name)
             if(myCallbackValue != nil){
-                myCallbackValue!(title.OneMenu[indexPath.row].name!,title.OneMenu[indexPath.row].value!)
+                myCallbackValue!(title.OneMenu[indexPath.row].name!,title.OneMenu[indexPath.row].value!,title.OneMenu[indexPath.row].type!)
             }
         }
         else{//选中二级
-            if(indexPath.item>0){
-                myCallbackValue!(title.OneMenu[indexPath.row].TowMenu[indexPath.item].name!,title.OneMenu[indexPath.row].TowMenu[indexPath.item].value!)
+            if(indexPath.item>=0){
+                myCallbackValue!(title.OneMenu[indexPath.row].TowMenu[indexPath.item].name!,title.OneMenu[indexPath.row].TowMenu[indexPath.item].value!,title.OneMenu[indexPath.row].TowMenu[indexPath.item].type!)
             }
         }
     }

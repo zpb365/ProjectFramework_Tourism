@@ -10,6 +10,7 @@ import UIKit
 
 class PolicyNewsCell: UITableViewCell {
 
+    @IBOutlet weak var titleLable: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,5 +21,8 @@ class PolicyNewsCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    override func InitConfig(_ cell: Any) {
+        let model = cell as! PolicyNewsItemModel
+        titleLable.text = model.Title
+    }
 }

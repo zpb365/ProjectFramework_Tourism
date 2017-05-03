@@ -18,11 +18,12 @@ class ClassifCationCell: UICollectionViewCell {
         super.awakeFromNib()
         
     }
-    
-    func setCell(iamge: String , text: String) -> Void {
-        mainImageView.image = UIImage.init(named: iamge)
-        textLable.text = text
+    override func InitConfig(_ cell: Any) {
+        let model = cell as! ClassifCationModel
+        mainImageView.ImageLoad(PostUrl: HttpsUrlImage+model._coverphoto)
+        textLable.text = model._channelname
     }
     
+  
    
 }

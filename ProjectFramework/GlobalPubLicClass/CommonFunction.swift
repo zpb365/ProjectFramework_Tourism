@@ -499,10 +499,11 @@ final class   CommonFunction {
     ///   - ItemsTextColor: text颜色
     ///   - ReturnSelectedIndex: 返回值  返回选择的索引和字符串
     static func ActionSheet(ShowTitle:[String],
+                            sheetWithTitle:String,
                             ItemsTextColor:UIColor?,
                             ReturnSelectedIndex:(( _ SelectedIndex:Int, _ SelectedValue:String) -> Void)?){
         
-        let vc = MHActionSheet(sheetWithTitle: "Please select a", style: .weiChat, itemTitles: ShowTitle)
+        let vc = MHActionSheet(sheetWithTitle: sheetWithTitle, style: .weiChat, itemTitles: ShowTitle)
         vc?.titleTextFont=UIFont.systemFont(ofSize: 14)
         vc?.cancleTextFont=UIFont.systemFont(ofSize: 14)
         vc?.itemTextFont=UIFont.systemFont(ofSize: 14)

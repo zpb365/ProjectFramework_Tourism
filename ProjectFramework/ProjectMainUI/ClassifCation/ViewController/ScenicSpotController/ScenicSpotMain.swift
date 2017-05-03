@@ -8,7 +8,13 @@
 
 import UIKit 
 
-class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource,PayForTicketDelegate {
+//子控制器的滑动协议
+protocol ScrollEnabledDelegate {
+    func ScrollEnabledCan()
+    func ScrollEnabledNo()
+}
+
+class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     lazy var pageMenu: CAPSPageMenu = {
         var controllerArray : [UIViewController] = []
@@ -31,7 +37,17 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
         controller7.title = "景区介绍"
         controller8.title = "停车场"
         controller9.title = "门票预订"
-        controller9.PayForTicketDelegate = self
+        //请求回来的数据在这里正向传值
+        controller1.ScenicHomeModel = self.ViewModel.ListData.ScenicHome!
+        controller2.ScenicNewsModel = self.ViewModel.ListData.ScenicNews!
+        controller3.dataArray       = self.ViewModel.ListData.Panorama360!
+        controller4.dataArray       = self.ViewModel.ListData.VRVideoClass!
+        controller5.dataArray       = self.ViewModel.ListData.BeautifulPicture!
+        controller6.dataArray       = self.ViewModel.ListData.ScenicAttractions!
+//        controller7.dataArray       = self.ViewModel.ListData.BeautifulPicture!
+        controller9.dataArray       = self.ViewModel.ListData.ScenicTicket!
+        controller9.ScenicID        = self.ScenicID
+        
         controllerArray.append(controller1)
         controllerArray.append(controller2)
         controllerArray.append(controller3)
@@ -41,6 +57,18 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
         controllerArray.append(controller7)
         controllerArray.append(controller8)
         controllerArray.append(controller9)
+        
+        /********************  为了防止循环引用写的多个代理属性  ********************/
+        self.ScrollEnabledDelegate1 = controller1
+        self.ScrollEnabledDelegate2 = controller2
+        self.ScrollEnabledDelegate3 = controller3
+        self.ScrollEnabledDelegate4 = controller4
+        self.ScrollEnabledDelegate5 = controller5
+        self.ScrollEnabledDelegate6 = controller6
+        self.ScrollEnabledDelegate7 = controller7
+        self.ScrollEnabledDelegate8 = controller8
+        self.ScrollEnabledDelegate9 = controller9
+        
         let parameters: [CAPSPageMenuOption] = [
             .scrollMenuBackgroundColor(UIColor.white),
             .viewBackgroundColor(UIColor.white),
@@ -83,9 +111,18 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
     @IBOutlet weak var headView: UIView!//头部视图
     @IBOutlet weak var shufflingBaseView: UIView!//轮播图
     @IBOutlet weak var describeLable: UILabel!//描述
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var mainImageView: UIImageView!
     
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var mainImageView: UIImageView!//
+    @IBOutlet weak var address: UILabel!
+    @IBOutlet weak var phoneNumber: UILabel!
+    
+    //拨打电话
+    @IBAction func callphone(_ sender: Any) {
+        if ViewModel.ListData.Tel != "" {
+            CommonFunction.CallPhone(self, number: ViewModel.ListData.Tel)
+        }
+    }
     
     var CustomNavBar:UINavigationBar!=nil
     var backBtn:UIButton!=nil
@@ -93,46 +130,69 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
     var shareBtn:UIButton!=nil
     var alph: CGFloat = 0
     var isChange: Bool = true
-
+    var ScenicID = 0
+    var ViewModel = ScenicDetailViewModel()
+    
+    //协议属性
+    var ScrollEnabledDelegate1:ScrollEnabledDelegate?
+    var ScrollEnabledDelegate2:ScrollEnabledDelegate?
+    var ScrollEnabledDelegate3:ScrollEnabledDelegate?
+    var ScrollEnabledDelegate4:ScrollEnabledDelegate?
+    var ScrollEnabledDelegate5:ScrollEnabledDelegate?
+    var ScrollEnabledDelegate6:ScrollEnabledDelegate?
+    var ScrollEnabledDelegate7:ScrollEnabledDelegate?
+    var ScrollEnabledDelegate8:ScrollEnabledDelegate?
+    var ScrollEnabledDelegate9:ScrollEnabledDelegate?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNavBar()
         self.initUI()
+        self.GetHtpsData()
+        
+    }
+    //MARK: 获取数据
+    func GetHtpsData() -> Void {
+        ViewModel.GetChannelsScenicDetails(ScenicID: ScenicID) { (result) in
+            if result == true{
+                
+                //print(self.ViewModel.ListData.ScenicNews?.News?[0].ScenicNews?[0].Title)
+                self.setData()
+            }
+        }
+    }
+    //数据赋值
+    func setData() -> Void {
+        address.text = self.ViewModel.ListData.Address
+        describeLable.text = self.ViewModel.ListData.ScenicName + "---" + self.ViewModel.ListData.ScenicContent
+        phoneNumber.text = self.ViewModel.ListData.Tel
+        mainImageView.ImageLoad(PostUrl: HttpsUrlImage + self.ViewModel.ListData.Logo)
         self.InitAdv()
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage().ImageWithColor(color: UIColor().TransferStringToColor("#00ABEE"), size: CGSize.init(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)),for: UIBarMetrics.default)
-    }
-    //MARK: 实现协议方法
-    internal func push() {
-        let vc = ScenicSpotDateChoose()
-        self.navigationController?.show(vc, sender: self  )
     }
     //MARK: 轮播图
     ///初始化轮播广告图
     private func InitAdv(){
-        
-        let Imagelist  = ["index1","index2","index3","index4"]
+        let num = Int((self.ViewModel.ListData.ScenicDetailsAdv?.count)!)
+        var Imagelist  = Array<String>()
+        for i in 0..<num{
+            let model = self.ViewModel.ListData.ScenicDetailsAdv![i]
+            Imagelist.append(model.Img)
+        }
         let vc = ScrollViewPageViewController(Enabletimer: true,   //是否启动滚动
             timerInterval: 4,     //如果启用滚动，滚动秒数
             ImageList:Imagelist  ,//图片
             frame: shufflingBaseView.bounds,
             Callback_SelectedValue: nil ,
+            
             isJumpBtn: nil,
             Callback_JumpValue: nil)
         shufflingBaseView.addSubview(vc.view)
-        
+        //刷新
+        self.tableView.reloadData()
     }
     //MARK: initUI
     func initUI() -> Void {
@@ -171,17 +231,48 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
         if offset >= headView.frame.height - 64 - 20 {
             if isChange  {
                 self.tableView.setContentOffset(CGPoint.init(x: 0, y: headView.frame.height - 64 - 20), animated: true)
-                isChange = false
+                //让主界面不可滑
                 self.tableView.isScrollEnabled = false
                 self.topButton.isHidden = false
+                
+                self.setDelegateDone(delegate: ScrollEnabledDelegate1!)
+                self.setDelegateDone(delegate: ScrollEnabledDelegate2!)
+                self.setDelegateDone(delegate: ScrollEnabledDelegate3!)
+                self.setDelegateDone(delegate: ScrollEnabledDelegate4!)
+                self.setDelegateDone(delegate: ScrollEnabledDelegate5!)
+                self.setDelegateDone(delegate: ScrollEnabledDelegate6!)
+                self.setDelegateDone(delegate: ScrollEnabledDelegate7!)
+                self.setDelegateDone(delegate: ScrollEnabledDelegate8!)
+                self.setDelegateDone(delegate: ScrollEnabledDelegate9!)
+                
+                isChange = false
             }
             
         }else{
-            isChange = true
+            //让主界面可滑
             self.tableView.isScrollEnabled = true
             self.topButton.isHidden = true
         }
         
+    }
+    func setDelegateDone(delegate:ScrollEnabledDelegate) -> Void {
+        DispatchQueue.global(qos: .default).async(execute: {() -> Void in
+            delegate.ScrollEnabledCan()
+            //异步线程加载结束回到主线程渲染UI
+            DispatchQueue.main.async(execute: {() -> Void in
+            
+            })
+        })
+
+    }
+    func setDelegateDoneCancle(delegate:ScrollEnabledDelegate) -> Void {
+        DispatchQueue.global(qos: .default).async(execute: {() -> Void in
+            delegate.ScrollEnabledNo()
+            //异步线程加载结束回到主线程渲染UI
+            DispatchQueue.main.async(execute: {() -> Void in
+                
+            })
+        })
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -196,7 +287,12 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
         return UITableViewCell()
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return self.pageMenu.view
+        //判断是否是请求数据回来了，是就返回自定义控件
+        if self.ViewModel.ListData.ScenicName != "" {
+            return self.pageMenu.view
+        }else{
+            return UIView()
+        }
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CommonFunction.kScreenHeight - 64
@@ -255,7 +351,18 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
             print("分享")
             break
         case 103:
+            isChange = true
             self.tableView.setContentOffset(CGPoint.init(x: 0, y:(-20)), animated: true)
+
+            self.setDelegateDoneCancle(delegate: ScrollEnabledDelegate1!)
+            self.setDelegateDoneCancle(delegate: ScrollEnabledDelegate2!)
+            self.setDelegateDoneCancle(delegate: ScrollEnabledDelegate3!)
+            self.setDelegateDoneCancle(delegate: ScrollEnabledDelegate4!)
+            self.setDelegateDoneCancle(delegate: ScrollEnabledDelegate5!)
+            self.setDelegateDoneCancle(delegate: ScrollEnabledDelegate6!)
+            self.setDelegateDoneCancle(delegate: ScrollEnabledDelegate7!)
+            self.setDelegateDoneCancle(delegate: ScrollEnabledDelegate8!)
+            self.setDelegateDoneCancle(delegate: ScrollEnabledDelegate9!)
             break
         default:
             break

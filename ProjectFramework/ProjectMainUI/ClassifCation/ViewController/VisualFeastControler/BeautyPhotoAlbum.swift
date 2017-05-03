@@ -13,6 +13,7 @@ class BeautyPhotoAlbum: CustomTemplateViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let identiFier = "BeautyPhotoCell"
+    var dataArray = [ClassBeautifulPictureList_Item]()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "美图相册"
@@ -35,22 +36,20 @@ class BeautyPhotoAlbum: CustomTemplateViewController {
         self.tableView.frame = CommonFunction.CGRect_fram(0, y:CommonFunction.NavigationControllerHeight, w: self.view.frame.width, h: self.view.frame.height - CommonFunction.NavigationControllerHeight)
         self.tableView.backgroundColor = UIColor().TransferStringToColor("E1E3ED")
         self.numberOfSections = 1
-        self.numberOfRowsInSection = 10
+        self.numberOfRowsInSection = self.dataArray.count
         self.tableViewheightForRowAt = 200
-        
+        self.header.isHidden = true
+        self.footer.isHidden = true
+        self.RefreshRequest(isLoading: false, isHiddenFooter: true)
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: identiFier, for: indexPath) as! BeautyPhotoCell
+        cell.InitConfig(self.dataArray[indexPath.row])
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let urllist=["http://pic9.nipic.com/20100902/2029588_234330095230_2.jpg"
-            ,"http://pic1a.nipic.com/2008-08-26/200882614319401_2.jpg"
-            ,"http://www.ahhnh.com/data/upload/2015-10/2015101940975833.jpg"
-            ,"http://pic10.nipic.com/20100929/4879567_114926982000_2.jpg"
-            ,"http://img2.imgtn.bdimg.com/it/u=2081796248,4191591232&fm=21&gp=0.jpg"]
-        let describeList=["张三","李四","李四","李四","李四"]
-        let vc = ImagePreviewViewController( ImageUrlList: urllist ,IsDescribe: true,DescribeList: describeList )
+        let image_url = "\(HttpsUrlImage)\(self.dataArray[indexPath.row].PhotoUrl)"
+        let vc = ImagePreviewViewController( ImageUrlList: [image_url] ,IsDescribe: true,DescribeList: [self.dataArray[indexPath.row].PhotoDescribe] )
         self.navigationController?.pushViewController(vc, animated: true )
     }
     

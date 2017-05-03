@@ -108,10 +108,10 @@ class CustomTemplateViewController: UIViewController ,UITableViewDelegate,UITabl
         debugPrint("CustomTemplateViewController 页面已经销毁")
     }
     
-    //视图即将消失
-    override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage().ImageWithColor(color: CommonFunction.SystemColor(), size: CGSize.init(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)),for: UIBarMetrics.default)
-    }
+//    //视图即将消失
+//    override func viewWillDisappear(_ animated: Bool) {
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage().ImageWithColor(color: CommonFunction.SystemColor(), size: CGSize.init(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)),for: UIBarMetrics.default)
+//    }
     // MARK: - 刷新、网络请求失败等函数
     ///刷新请求  参数1：isLoading 是否加载中 参数1：isLoadError 是否加载失败
     func RefreshRequest(isLoading:Bool,isHiddenFooter:Bool=false,isLoadError:Bool=false){
@@ -127,13 +127,13 @@ class CustomTemplateViewController: UIViewController ,UITableViewDelegate,UITabl
             self.collection?.reloadData()
             self.footer.isHidden=isHiddenFooter
         }
-        if(isLoading==false && isLoadError==false){
-            self.tableView?.mj_footer.isHidden=true
-            self.collection?.mj_footer.isHidden=true
-        }else if(isLoading==true && isLoading==false){
-            self.tableView?.mj_footer.isHidden=false
-            self.collection?.mj_footer.isHidden=false
-        } 
+//        if(isLoading==false && isLoadError==false){
+//            self.tableView?.mj_footer.isHidden=true
+//            self.collection?.mj_footer.isHidden=true
+//        }else if(isLoading==true && isLoading==false){
+//            self.tableView?.mj_footer.isHidden=false
+//            self.collection?.mj_footer.isHidden=false
+//        } 
     }
     
     ///出错了点击事件

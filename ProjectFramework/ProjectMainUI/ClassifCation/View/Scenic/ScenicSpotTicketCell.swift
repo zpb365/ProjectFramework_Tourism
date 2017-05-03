@@ -21,6 +21,11 @@ class ScenicSpotTicketCell: UITableViewCell {
         }
     }
     
+    @IBOutlet weak var titleLable: UILabel!
+    @IBOutlet weak var typeLable: UILabel!
+    @IBOutlet weak var priceLable: UILabel!
+    
+//    var item:ScenicTicketList?=nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,5 +37,12 @@ class ScenicSpotTicketCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-   
+    override func InitConfig(_ cell: Any) {
+        let model = cell as! ScenicTicketList
+        titleLable.text = model.Title
+        if model.TicketsTypes == 0 {
+            typeLable.text = "门票类型：电子票"
+        }
+        priceLable.text = "¥\(model.DefaultPrice)"
+    }
 }

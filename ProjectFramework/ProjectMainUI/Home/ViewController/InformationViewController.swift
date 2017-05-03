@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class InformationViewController: CustomTemplateViewController {
+class InformationViewController: CustomTemplateViewController ,WKNavigationDelegate{
     
     var  Content=""
     override func viewDidLoad() {
@@ -20,6 +20,7 @@ class InformationViewController: CustomTemplateViewController {
         
         //创建wkwebview
         let webview = WKWebView(frame: CGRect(x: 0, y: CommonFunction.NavigationControllerHeight, width: CommonFunction.kScreenWidth, height: self.view.frame.height-CommonFunction.NavigationControllerHeight))
+        webview.navigationDelegate = self
         //加载请求
         webview.loadHTMLString(Content, baseURL: nil    )
         //添加wkwebview
@@ -31,8 +32,16 @@ class InformationViewController: CustomTemplateViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
+        
+//        let str = "document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '400%'"
+//        webView.evaluateJavaScript(str) { (data , error) in
+//           
+//        }
+    }
 
+    
+    
  
 
 }

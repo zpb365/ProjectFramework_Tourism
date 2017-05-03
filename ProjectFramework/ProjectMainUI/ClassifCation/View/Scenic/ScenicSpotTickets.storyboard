@@ -80,6 +80,11 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="priceLable" destination="7ea-y1-Vj2" id="lSt-tm-dce"/>
+                                            <outlet property="titleLable" destination="tNd-jS-cCZ" id="KOb-an-zqt"/>
+                                            <outlet property="typeLable" destination="9cr-J4-b4D" id="cTv-7e-Abf"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

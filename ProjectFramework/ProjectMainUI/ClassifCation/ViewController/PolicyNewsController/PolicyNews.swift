@@ -16,17 +16,31 @@ class PolicyNews: CustomTemplateViewController {
     let identiFier = "PolicyNewsCell"
     
     let sectionArray = ["政策法规","行业信息","景区公告","通知公告"]
+    var viewModel = PolicyNewsViewMdeel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setNavbar()
+        //self.setNavbar()
         self.initUI()
+        GetHtpsData()
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    func GetHtpsData() -> Void {
+        viewModel.GetChannelsNews(result: { (result) in
+            if  result == true {
+                self.numberOfSections = self.viewModel.ListData.count
+                self.RefreshRequest(isLoading: false, isHiddenFooter: true)
+                
+            }else{
+                
+                self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: true)
+            }
+        })
     }
     // MARK: 设置导航栏
     func setNavbar(){
@@ -48,14 +62,10 @@ class PolicyNews: CustomTemplateViewController {
         
     }
     //MARK: tableViewDelegate
-    //组数
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
-    }
-    var _numberOfRowsInSection = [4,5,5,8]
+
     //组个数
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return _numberOfRowsInSection[section]
+        return viewModel.ListData[section].News!.count
     }
     //组头高
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -71,13 +81,25 @@ class PolicyNews: CustomTemplateViewController {
         lable.textColor = UIColor.white
         lable.layer.cornerRadius = 5
         lable.clipsToBounds = true
-        lable.text = sectionArray[section]
+        lable.text = viewModel.ListData[section].NewsTypeName
         lable.center = sectionView.center
         sectionView.addSubview(lable)
         return sectionView
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: identiFier, for: indexPath) as! PolicyNewsCell
+        cell.InitConfig(viewModel.ListData[indexPath.section].News?[indexPath.row] as Any)
         return cell
     }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = InformationViewController()    //点击智慧头条的cell
+        vc.title = viewModel.ListData[indexPath.section].News![indexPath.row].Title
+        vc.Content = viewModel.ListData[indexPath.section].News![indexPath.row].NewsContent
+        self.navigationController?.show(vc, sender: self)
+    }
+    ///数据请求出错了处理事件
+    override func Error_Click() {
+        GetHtpsData()
+    }
+
 }

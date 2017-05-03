@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ScenicSpotPark: UIViewController {
+class ScenicSpotPark: UIViewController,ScrollEnabledDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,16 +20,17 @@ class ScenicSpotPark: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    //MARK: SlidingDelegate
+    func ScrollEnabledCan() {
+//        print("实现代理")
+        //        self.WebView. = true
     }
-    */
-
+    func ScrollEnabledNo() {
+//        print("实现代理")
+        //        self.WebView.isScrollEnabled = false
+    }
+    deinit {    //销毁页面
+        debugPrint("停车场 页面已经销毁")
+    }
+    
 }

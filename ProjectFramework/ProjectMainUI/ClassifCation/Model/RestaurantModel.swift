@@ -10,7 +10,7 @@ import Foundation
 
 //餐厅实体
 class RestaurantModel: NSObject {
-    var  RestaurantID=0
+    var RestaurantID=0
     var RestaurantName=""
     var CoverPhoto=""
     var Lng=""
@@ -18,4 +18,5 @@ class RestaurantModel: NSObject {
     var lowestPrice=0.0
     var CommentsCount=0
     var Score=0.0
+    var tab=""
 }

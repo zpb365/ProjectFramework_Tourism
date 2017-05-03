@@ -8,18 +8,24 @@
 
 import UIKit
 
+
+
 class ScenicSpotHomeNewsCell: UITableViewCell {
 
+    @IBOutlet weak var textLable: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        self.selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    override func InitConfig(_ cell: Any) {
+        let modle = cell as! ScenicNewsList_Item
+        textLable.text = modle.Title
     }
     
 }

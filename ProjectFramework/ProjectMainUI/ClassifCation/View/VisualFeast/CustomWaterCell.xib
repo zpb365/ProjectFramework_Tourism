@@ -17,20 +17,8 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="179" height="204"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tGA-Mz-hH6">
-                        <rect key="frame" x="13" y="15" width="152" height="169"/>
-                        <color key="backgroundColor" red="1" green="0.38823529410000002" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
-                    </imageView>
-                </subviews>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="tGA-Mz-hH6" secondAttribute="trailing" constant="14" id="0rZ-91-4fT"/>
-                <constraint firstItem="tGA-Mz-hH6" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="58f-mn-EXa"/>
-                <constraint firstAttribute="bottom" secondItem="tGA-Mz-hH6" secondAttribute="bottom" constant="20" id="R7j-hz-xEz"/>
-                <constraint firstItem="tGA-Mz-hH6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="13" id="iQV-I4-c36"/>
-            </constraints>
             <size key="customSize" width="179" height="204"/>
             <point key="canvasLocation" x="89.5" y="129"/>
         </collectionViewCell>

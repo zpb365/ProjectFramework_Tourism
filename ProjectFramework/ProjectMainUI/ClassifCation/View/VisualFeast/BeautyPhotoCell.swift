@@ -28,4 +28,10 @@ class BeautyPhotoCell: UITableViewCell {
         mainImageView.clipsToBounds = true
         mainImageView.layer.cornerRadius = 5
     }
+    override func InitConfig(_ cell: Any) {
+        let model = cell as! ClassBeautifulPictureList_Item
+        mainImageView.ImageLoad(PostUrl: HttpsUrlImage+model.PhotoUrl)
+        titleLable.text = model.PhotoDescribe
+        dateLable.text = model.CreateTime
+    }
 }

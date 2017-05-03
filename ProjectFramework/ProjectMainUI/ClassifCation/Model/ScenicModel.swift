@@ -8,7 +8,7 @@
 
 import Foundation
 
-///景区实体
+///景区列表实体
 class ScenicModel: NSObject {
     
     var ScenicID=0

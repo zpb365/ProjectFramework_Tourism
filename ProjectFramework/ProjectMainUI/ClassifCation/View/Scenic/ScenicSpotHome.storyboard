@@ -27,7 +27,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ScenicSpotMainCell" rowHeight="140" id="2dw-9k-2uO" customClass="ScenicSpotMainCell" customModule="智慧旅游平台" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ScenicSpotMainCell" rowHeight="140" id="2dw-9k-2uO" customClass="ScenicSpotMainCell" customModule="智慧旅游平台" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2dw-9k-2uO" id="oN9-kG-DWN">
@@ -149,12 +149,15 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="bottomView" destination="SR2-u5-xd1" id="JpF-GG-Z3G"/>
                                             <outlet property="icon1" destination="0hn-d5-lyn" id="DmV-zM-v3A"/>
                                             <outlet property="icon2" destination="05h-KC-lZz" id="1wI-PY-A4t"/>
                                             <outlet property="lable1" destination="7H5-HF-bds" id="isD-6S-Fst"/>
                                             <outlet property="lable2" destination="5zw-vD-Ffg" id="N26-uW-PgG"/>
                                             <outlet property="mainImageView1" destination="Lcv-dr-kP0" id="Q7o-j0-uDo"/>
                                             <outlet property="mainImageView2" destination="rHN-la-4pU" id="mWY-8B-wgd"/>
+                                            <outlet property="titleLable1" destination="Cxa-I8-WIl" id="z8j-ND-Kvm"/>
+                                            <outlet property="titleLable2" destination="2hk-B6-YMI" id="NwN-sw-Jz9"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

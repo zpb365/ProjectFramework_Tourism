@@ -104,9 +104,10 @@ class UserCommentCell: UITableViewCell {
             commentLable.frame = CommonFunction.CGRect_fram(commentLable.frame.origin.x, y: commentLable.frame.origin.y, w: CommonFunction.kScreenWidth - 35, h: commontHeight)
             photoView.frame = CommonFunction.CGRect_fram(commentLable.frame.origin.x, y: commentLable.frame.maxY + 5, w: CommonFunction.kScreenWidth - 35, h: photoViewHeight)
             commentLable.text = model.comment
-            _ = photoView.initCommentPhotoView(model.imageArray, showCount: model.imageArray.count, rowCount: 4, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10)
-            
-            flag = true
+            if model.imageArray.count > 0 {
+                _ = photoView.initCommentPhotoView(model.imageArray, showCount: model.imageArray.count, rowCount: 4, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10)                
+                flag = true
+            }
         }
     }
 }

@@ -6,25 +6,26 @@
 //  Copyright © 2017年 HCY. All rights reserved.
 //
 
-import UIKit 
-                 // CustomTemplateViewController  自定义模板控制器
+import UIKit
+
+
+
 class ClassifCation: CustomTemplateViewController ,UICollectionViewDelegateFlowLayout{
 
     let reuseIdentifier = "ClassifCation"
     @IBOutlet weak var CollectView: UICollectionView!
     let layout = UICollectionViewFlowLayout()
-    var imageArray = Array<Any>()
-    let textArray = ["政务资讯","视觉盛宴","景区","酒店预订","餐厅餐饮","旅行社","会议","特产购物","导游预订"]
-    // collectioniew属性
-  
+    var viewModel = ClassifCationViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //基控制器
         self.InitCongifCollection(CollectView, nil)
-        self.numberOfSections=1//显示行数
-        // Do any additional setup after loading the view.
-        self.getData()
+        self.header.isHidden = true
+        self.footer.isHidden = true
+        CollectView.reloadData()
+        self.GetHtpsData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,13 +36,21 @@ class ClassifCation: CustomTemplateViewController ,UICollectionViewDelegateFlowL
         self.navigationController?.navigationBar.setBackgroundImage(UIImage().ImageWithColor(color: CommonFunction.SystemColor(), size: CGSize.init(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)),for: UIBarMetrics.default)
     }
     //MARK: getDta
-    func getData() -> Void {
-        for i in 0..<9 {
-            let imageString = "Classif\(i).jpg"
-            imageArray.append(imageString)
+    
+    func GetHtpsData() {
+        viewModel.GetChannelDta { (result) in
+            if  result == true {
+                self.numberOfSections = 1
+                self.numberOfRowsInSection = self.viewModel.ListData.count
+                self.RefreshRequest(isLoading: false, isHiddenFooter: true)
+                
+            }else{
+                
+                self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: true)
+            }
         }
-        self.CollectView.reloadData()
     }
+    
     // MARK: UILayoutDelegate,iOS 10之后需要在代理方法里实现
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 5)
@@ -63,65 +72,69 @@ class ClassifCation: CustomTemplateViewController ,UICollectionViewDelegateFlowL
         return CGSize(width: (self.view.bounds.size.width - 20.0)/showrowsitem, height: ((self.view.bounds.size.width - 20.0)/showrowsitem) * 1.318)
     }
 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return textArray.count
-    }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ClassifCationCell
-        cell.setCell(iamge: imageArray[indexPath.row] as! String, text: textArray[indexPath.row])
+        cell.InitConfig(viewModel.ListData[indexPath.row])
         return cell
     }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("点击");
-        //后接口替换成实体类
         self.push(num: indexPath.row )
     }
     // MARK: 跳转
     func push(num: Int){
+        let chanleID = self.viewModel.ListData[num]._channelid
         
-        switch textArray[num] {
+        switch chanleID {
             //景区
-        case "景区":
+        case 1:
             let vc = CommonFunction.ViewControllerWithStoryboardName("ScenicSpot", Identifier: "ScenicSpot") as! ScenicSpot
+            vc.ChannelID = 1
             self.navigationController?.show(vc, sender: self  )
             break
             //
-        case "酒店预订":
+        case 2:
             let vc = CommonFunction.ViewControllerWithStoryboardName("HotelReserve", Identifier: "HotelReserve") as! HotelReserve
+            vc.ChannelID = 2
             self.navigationController?.show(vc, sender: self  )
             break
-        case "餐厅餐饮":
+        case 3:
             let vc = CommonFunction.ViewControllerWithStoryboardName("Restaurant", Identifier: "Restaurant") as! Restaurant
+            vc.ChannelID = 3
             self.navigationController?.show(vc, sender: self  )
             break
-        case "旅行社":
+        case 4:
             let vc = CommonFunction.ViewControllerWithStoryboardName("TravelAcy", Identifier: "TravelAcy") as! TravelAcy
+            vc.ChannelID = 4
             self.navigationController?.show(vc, sender: self  )
             break
             
-        case "会议":
+        case 5:
             let vc = CommonFunction.ViewControllerWithStoryboardName("Conference", Identifier: "Conference") as! Conference
+            vc.ChannelID = 5
             self.navigationController?.show(vc, sender: self  )
             break
             
-        case "导游预订":
+        case 11:
             let vc = CommonFunction.ViewControllerWithStoryboardName("GuideBook", Identifier: "GuideBook") as! GuideBook
+            vc.ChannelID = 11
             self.navigationController?.show(vc, sender: self  )
             break
             
-        case "政务资讯":
+        case 9:
             let vc = CommonFunction.ViewControllerWithStoryboardName("PolicyNews", Identifier: "PolicyNews") as! PolicyNews
+            vc.title = self.viewModel.ListData[num]._channelname
             self.navigationController?.show(vc, sender: self  )
             break
             
-        case "特产购物":
+        case 6:
             let vc = CommonFunction.ViewControllerWithStoryboardName("Specialty", Identifier: "Specialty") as! Specialty
+            vc.ChannelID = 6
             self.navigationController?.show(vc, sender: self  )
             break
-        case "视觉盛宴":
+        case 10:
             let vc = CommonFunction.ViewControllerWithStoryboardName("VisualFeast", Identifier: "VisualFeast") as! VisualFeast
+            vc.title = self.viewModel.ListData[num]._channelname
             self.navigationController?.show(vc, sender: self  )
-//              self.navigationController?.show(aaqaaViewController(),sender: self)
             break
         default:
             print(num)
@@ -131,8 +144,11 @@ class ClassifCation: CustomTemplateViewController ,UICollectionViewDelegateFlowL
     
     //刷新
     override func headerRefresh() {
-        print("aaaa")
         header.endRefreshing()
+    }
+    //数据请求出错了处理事件
+    override func Error_Click() {
+        GetHtpsData()
     }
 
 }

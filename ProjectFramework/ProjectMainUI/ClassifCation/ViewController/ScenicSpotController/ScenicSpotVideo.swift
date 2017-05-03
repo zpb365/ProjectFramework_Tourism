@@ -8,26 +8,27 @@
 
 import UIKit
 
-class ScenicSpotVideo: CustomTemplateViewController ,UICollectionViewDelegateFlowLayout{
+class ScenicSpotVideo: CustomTemplateViewController ,UICollectionViewDelegateFlowLayout,ScrollEnabledDelegate{
 
     @IBOutlet weak var collectionView: UICollectionView!
+    
     let reuseIdentifier = "ScenicSpotCollectionCell"
+    var dataArray:[ClassVRVideoClassList]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.blue
         self.initUI()
+        self.RefreshRequest(isLoading: false, isHiddenFooter: true)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     func initUI() -> Void {
         //基控制器
         self.InitCongifCollection(collectionView, nil)
-        self.collectionView.frame = self.view.bounds
-        self.numberOfSections=1//显示行数
+        self.collectionView.frame = CGRect.init(x: 0, y: 0, width: CommonFunction.kScreenWidth, height: CommonFunction.kScreenHeight - 64 - 30)
+        self.collectionView.isScrollEnabled = false
+        self.header.isHidden = true
+        self.numberOfSections=1
+        self.numberOfRowsInSection=(self.dataArray?.count)!//显示行数
         self.collectionView.register(UINib(nibName: "ScenicSpotCollectionCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.register(ScenicSpotHeaderReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
     }
@@ -47,9 +48,7 @@ class ScenicSpotVideo: CustomTemplateViewController ,UICollectionViewDelegateFlo
         
         return CGSize(width: (self.view.bounds.size.width - 15.0)/showrowsitem, height: ((self.view.bounds.size.width - 15.0)/showrowsitem) * 0.8)
     }
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
-    }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return  CGSize(width: CommonFunction.kScreenWidth, height: 35)
     }
@@ -70,7 +69,19 @@ class ScenicSpotVideo: CustomTemplateViewController ,UICollectionViewDelegateFlo
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ScenicSpotCollectionCell
         cell.setData("360Panorama", isHiden: false, centerText: "VR")
+        cell.setcell(self.dataArray?[indexPath.row] as Any, .VRVideo)
         return cell
     }
-
+    //MARK: SlidingDelegate
+    func ScrollEnabledCan() {
+//        print("实现代理")
+        self.collectionView.isScrollEnabled = true
+    }
+    func ScrollEnabledNo() {
+//        print("实现代理")
+        self.collectionView.isScrollEnabled = false
+    }
+    deinit {    //销毁页面
+        debugPrint("VR视频首页 页面已经销毁")
+    }
 }

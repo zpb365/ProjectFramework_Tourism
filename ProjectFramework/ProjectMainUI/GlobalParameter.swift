@@ -29,7 +29,6 @@ class MyInfoModel:NSObject  {
 
 
 
-
 //支付宝AppScheme
 let ZFBAppScheme = "alisdknmsc"  //应用注册scheme,在AliSDKDemo-Info.plist定义URL types
 
@@ -79,7 +78,7 @@ let TabBar_StoryName = ["HoneMain","ClassifCation","Travel","My"]  //sb名称（
 let TabBar_SelectedImage = ["Home_Click","ClassifCation_Click","Travel_Click","My_Click"]        //选择的图片
 let TabBar_NoSelectedImage = ["Home_Default","ClassifCation_Default","Travel_Default","My_Default"]      //未选择图片
 
- 
+
 
 
 

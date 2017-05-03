@@ -10,55 +10,77 @@ import UIKit
 
 class BeautyImage: CustomTemplateViewController{
     var width: CGFloat!
-    var images: Array<UIImage>!
     var collectionView:UICollectionView!
     let reuseIdentifier = "CustomWaterCell"
+    var viewModel = BeautyImageViewModel()
+    var PageIndex: Int = 1
+    var PageSize: Int = 10
     
+    override func viewWillDisappear(_ animated: Bool)  {
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.white
         self.initUI()
+        self.GetHtpsData()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    //MARK: Refresh
+    override func footerRefresh() {
+        PageIndex = PageIndex + 1
+        self.GetHtpsData()
+        self.footer.endRefreshing()
     }
-    override func viewWillAppear(_ animated: Bool) {
+    override func headerRefresh() {
+        self.footer.resetNoMoreData()
+        PageIndex = 1
+        self.GetHtpsData()
+        self.header.endRefreshing()
+    }
+    //MARK:获取数据
+    func GetHtpsData() {
+        
+        viewModel.GetChannelsBeautifulPicture(PageIndex: PageIndex, PageSize: PageSize) { (result,NoMore) in
+            
+            if  result == true {
+                if(NoMore==true){
+                    self.footer.endRefreshingWithNoMoreData()
+                }else{
+                    self.numberOfRowsInSection = self.viewModel.ListData.count
+                    self.RefreshRequest(isLoading: false, isHiddenFooter: false)
+                }
+            }
+            else{
+                self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: true)
+            }
+        }
         
     }
+    ///数据请求出错了处理事件
+    override func Error_Click() {
+        PageIndex = 1
+        GetHtpsData()
+    }
+
     func initUI() -> Void {
-         width = (view.bounds.size.width - 20)/3
+        
         let layout = WaterCollectionViewLayout()
-        images = []
-        for i in 1..<9 {
-            let image = UIImage(named: String.init(format: "Classif\(i).jpg"))
-            images.append(image!)
-        }
-        print(self.view.bounds)
         collectionView = UICollectionView(frame: CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 94), collectionViewLayout: layout)
         collectionView.register(CustomWaterCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.backgroundColor = UIColor.white
         self.InitCongifCollection(collectionView,  nil)
-        self.numberOfSections=1
+        self.numberOfSections = 1
         view.addSubview(collectionView)
-        layout.setSize = {_ in
-            return self.images
-        }
     }
-    
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
-    }
+     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CustomWaterCell
-        cell.mainImageView.backgroundColor = CommonFunction.RGBA(CGFloat(arc4random() % 255), g: CGFloat(arc4random() % 255), b: CGFloat(arc4random() % 255), a: 1)
-        cell.setData("", isHiden: true, centerText: "")
+                cell.setData("", isHiden: true, centerText: "")
+        cell.setCell(viewModel.ListData[indexPath.row], tepy: .BeautyImage)
         return cell
     }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = CommonFunction.ViewControllerWithStoryboardName("BeautyPhotoAlbum", Identifier: "BeautyPhotoAlbum") as! BeautyPhotoAlbum
+        vc.dataArray = viewModel.ListData[indexPath.row].List!
         self.navigationController?.show(vc, sender: self  )
 
     }

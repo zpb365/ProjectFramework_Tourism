@@ -8,25 +8,26 @@
 
 import UIKit
 
-class ScenicSpotAttractions: CustomTemplateViewController ,UICollectionViewDelegateFlowLayout {
+class ScenicSpotAttractions: CustomTemplateViewController ,UICollectionViewDelegateFlowLayout ,ScrollEnabledDelegate{
 
     @IBOutlet weak var collectionView: UICollectionView!
     let reuseIdentifier = "ScenicSpotCollectionCell"
+    var dataArray:[ScenicAttractionsList_Item]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.blue
         self.initUI()
+        self.RefreshRequest(isLoading: false, isHiddenFooter: true)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     func initUI() -> Void {
         //基控制器
         self.InitCongifCollection(collectionView, nil)
-        self.collectionView.frame = self.view.bounds
-        self.numberOfSections=1//显示行数
+        self.collectionView.frame = CGRect.init(x: 0, y: 0, width: CommonFunction.kScreenWidth, height: CommonFunction.kScreenHeight - 64 - 30)
+        self.header.isHidden = true
+        self.collectionView.isScrollEnabled = false
+        self.numberOfSections=1
+        self.numberOfRowsInSection=(self.dataArray?.count)!//显示行数
         self.collectionView.register(UINib(nibName: "ScenicSpotCollectionCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.register(ScenicSpotHeaderReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
     }
@@ -45,9 +46,6 @@ class ScenicSpotAttractions: CustomTemplateViewController ,UICollectionViewDeleg
         let showrowsitem:CGFloat=2  //竖屏显示的数目 （暂时未做横屏手机item  间距直接也存在点差异 ipad 没事 iPhone需要修改
         
         return CGSize(width: (self.view.bounds.size.width - 15.0)/showrowsitem, height: ((self.view.bounds.size.width - 15.0)/showrowsitem) * 0.8)
-    }
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return  CGSize(width: CommonFunction.kScreenWidth, height: 35)
@@ -69,8 +67,20 @@ class ScenicSpotAttractions: CustomTemplateViewController ,UICollectionViewDeleg
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ScenicSpotCollectionCell
         cell.setData("", isHiden: true, centerText: "")
+        cell.setcell(self.dataArray?[indexPath.row] as Any, .Attractions)
         return cell
     }
-
+    //MARK: SlidingDelegate
+    func ScrollEnabledCan() {
+//        print("实现代理")
+        self.collectionView.isScrollEnabled = true
+    }
+    func ScrollEnabledNo() {
+//        print("实现代理")
+        self.collectionView.isScrollEnabled = false
+    }
+    deinit {    //销毁页面
+        debugPrint("景点 页面已经销毁")
+    }
 
 }

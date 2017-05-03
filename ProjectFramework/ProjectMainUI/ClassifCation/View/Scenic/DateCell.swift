@@ -22,9 +22,11 @@ class DateCell: UICollectionViewCell {
     
     var dateLable = UILabel()
     var priceLable = UILabel()
+    var model: ScenicDatePriceList_Item?=nil
     
     override init(frame:CGRect){
         super.init(frame: frame)
+        self.clipsToBounds = true
         self.backgroundColor = UIColor.white
         dateLable.frame = CGRect.init(x: 0, y: 5, width: CommonFunction.kScreenWidth/7, height: 15)
         dateLable.textAlignment = .center
@@ -50,7 +52,7 @@ class DateCell: UICollectionViewCell {
         else{
             dateLable.text = String(time)
         }
-        priceLable.text = "¥17"
+//        priceLable.text = "¥17"
     }
     func selectored() -> Void {
         selectorView.isHidden = false
@@ -59,5 +61,10 @@ class DateCell: UICollectionViewCell {
     func reduction() -> Void {
         selectorView.isHidden = true
         self.dateLable.textColor = UIColor.black
+    }
+    override func InitConfig(_ cell: Any) {
+        let model = cell as! ScenicDatePriceList_Item
+        self.model = model
+        priceLable.text = "¥\(model.Price)"
     }
 }

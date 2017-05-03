@@ -56,6 +56,16 @@ extension UIView{
         
         return view
     }
+    func setIntroduceView(height:CGFloat , title : String) -> UIView {
+        let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: CommonFunction.kScreenWidth, height: height))
+        view.backgroundColor = UIColor.white
+        let lable = UILabel.init(frame: CGRect.init(x: 15, y: 0, width: 100, height: 15))
+        lable.center.y = view.center.y
+        lable.text = title
+        lable.font = UIFont.systemFont(ofSize: 12)
+        view.addSubview(lable)
+        return view
+    }
 }
 
                                             

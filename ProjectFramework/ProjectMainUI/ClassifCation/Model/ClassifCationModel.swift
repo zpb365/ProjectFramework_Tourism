@@ -9,10 +9,12 @@
 import UIKit
 
 class ClassifCationModel: NSObject {
-    //图片
-    var Img    : String=""
-    //标题
-    var Title  : String=""
-    //分类id
-    var TypeId : String=""
+    //频道id
+    var _channelid=0
+    //站点
+    var _siteid=0
+    //频道名称
+    var _channelname : String=""
+    var _coverphoto=""
+    
 }

@@ -9,25 +9,23 @@
 import UIKit
 
 class HotelReserveModel: NSObject {
-    //图片
-    var Img=""
+    //酒店ID
+    var HotelID=0
     //标题
-    var Title=""
-    //id
-    var Id=""
-    //距离
-    var Distance=""
-    //特色
-    var Feature = ""
-    //设施服务
-    var Service = ""
+    var HotelName=""
+    //图片
+    var CoverPhoto=""
+    //精度
+    var Lng=0
+    //纬度
+    var Lat = 0
     //价格
-    var Price=""
-    //评论
-    var CommentCounts:Int = 0
-    //满意度
-    var Satisfaction=""
-    //销量
-    var SellCount :Int = 0
+    var lowestPrice=0
+    //评论数
+    var CommentsCount=0
+    //评分
+    var Score=0.0
+    //标签
+    var tab=""
     
 }

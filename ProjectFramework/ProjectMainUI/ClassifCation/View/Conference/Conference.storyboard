@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,8 +21,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Mpl-Yx-KRt">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Mpl-Yx-KRt">
+                                <rect key="frame" x="0.0" y="94" width="375" height="573"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="XEb-xJ-oc2">
                                     <size key="itemSize" width="165" height="199"/>
@@ -131,17 +132,20 @@
                                             <constraint firstItem="Kxf-79-q81" firstAttribute="top" secondItem="Opx-GZ-mjH" secondAttribute="bottom" constant="4" id="uXt-Ds-kUU"/>
                                             <constraint firstItem="ik4-gR-RuS" firstAttribute="top" secondItem="PZh-Ct-Kaq" secondAttribute="top" constant="3" id="yhq-uC-sjV"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="distance" destination="Kxf-79-q81" id="RPG-dt-Tc8"/>
+                                            <outlet property="mainImageView" destination="g4L-Dt-hEb" id="lqE-DY-DlW"/>
+                                            <outlet property="persentCount" destination="mUf-0u-gLe" id="6mj-Ey-Uxl"/>
+                                            <outlet property="price" destination="7Jt-9e-jtq" id="bFF-2d-eQc"/>
+                                            <outlet property="rommCount" destination="21b-El-s3a" id="m0D-OQ-5ci"/>
+                                            <outlet property="scorce" destination="ik4-gR-RuS" id="78a-VF-Fur"/>
+                                            <outlet property="titleLable" destination="Opx-GZ-mjH" id="HO9-A8-I9w"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Mpl-Yx-KRt" secondAttribute="trailing" id="4sl-O4-4Yy"/>
-                            <constraint firstItem="Nqo-Zl-duX" firstAttribute="top" secondItem="Mpl-Yx-KRt" secondAttribute="bottom" id="AVl-ax-AjN"/>
-                            <constraint firstItem="Mpl-Yx-KRt" firstAttribute="leading" secondItem="Yyr-ph-O02" secondAttribute="leading" id="hTO-lz-FVy"/>
-                            <constraint firstItem="Mpl-Yx-KRt" firstAttribute="top" secondItem="Yyr-ph-O02" secondAttribute="top" constant="64" id="jkU-O8-C93"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="Mpl-Yx-KRt" id="f2N-BD-Qsu"/>

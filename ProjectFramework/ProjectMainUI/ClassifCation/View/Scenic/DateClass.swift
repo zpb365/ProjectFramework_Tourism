@@ -17,14 +17,28 @@ class DateClass: NSObject {
         return (Int(array[0])!,Int(array[1])!,Int(array[2])!)
     }
     static func getCountOfDaysInMonth(year:Int,month:Int)->(count:Int,week:Int){
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM"
-        let date = dateFormatter.date(from: String(year)+"-"+String(month))
-        let calender = Calendar(identifier: Calendar.Identifier.gregorian)
-        let range = (calender as NSCalendar?)?.range(of: NSCalendar.Unit.day, in: NSCalendar.Unit.month, for: date!)
-        let comps = (calender as NSCalendar?)?.components(NSCalendar.Unit.weekday, from: date!)
-        let week = comps?.weekday
-        return((range?.length)!,week!)
+        
+        if month <= 12 {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM"
+            let date = dateFormatter.date(from: String(year)+"-"+String(month))
+            let calender = Calendar(identifier: Calendar.Identifier.gregorian)
+            let range = (calender as NSCalendar?)?.range(of: NSCalendar.Unit.day, in: NSCalendar.Unit.month, for: date!)
+            let comps = (calender as NSCalendar?)?.components(NSCalendar.Unit.weekday, from: date!)
+            let week = comps?.weekday
+            
+            return((range?.length)!,week!)
+        }else{
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM"
+            let date = dateFormatter.date(from: String(year+1)+"-"+String(month-12))
+            let calender = Calendar(identifier: Calendar.Identifier.gregorian)
+            let range = (calender as NSCalendar?)?.range(of: NSCalendar.Unit.day, in: NSCalendar.Unit.month, for: date!)
+            let comps = (calender as NSCalendar?)?.components(NSCalendar.Unit.weekday, from: date!)
+            let week = comps?.weekday
+            
+            return((range?.length)!,week!)
+        }
     }
     static func getYearAndMonth(_ year:Int,month:Int) -> (year:Int,month:Int,count:Int,week:Int){
         var y = year

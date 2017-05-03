@@ -10,6 +10,10 @@ import UIKit
 
 class TravelAcyCell: UITableViewCell {
 
+    @IBOutlet weak var titleLable: UILabel!
+    @IBOutlet weak var mainImageView: UIImageView!
+
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,5 +24,9 @@ class TravelAcyCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    override func InitConfig(_ cell: Any) {
+        let model = cell as! TravelAgencyModel_Item
+        mainImageView.ImageLoad(PostUrl: HttpsUrlImage + model.CoverPhoto)
+        titleLable.text = model.Title
+    }
 }

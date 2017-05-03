@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum ModelTepy{
+    case BeautyImage//美图
+    case PanoramaImage//全景
+    case VRVideo//VR
+}
+
 class CustomWaterCell: UICollectionViewCell {
 
     
@@ -152,5 +158,30 @@ class CustomWaterCell: UICollectionViewCell {
         centerLable.isHidden = isHiden
         centerIcon.image = UIImage.init(named: image)
         centerLable.text = centerText
+    }
+    func setCell(_ Model:Any, tepy:ModelTepy) -> Void {
+        switch tepy {
+        case .BeautyImage:
+            let model = Model as! ClassBeautifulPictureList
+            mainImageView.ImageLoad(PostUrl: HttpsUrlImage+model.CoverPhoto)
+            titleLable.text = model.AlbumName
+            dateLable.text = model.UpdateTime
+            browseLable.text = "\(model.Views + 99)"
+            break
+        case .PanoramaImage:
+            let model = Model as! ClassPanorama360List
+            mainImageView.ImageLoad(PostUrl: HttpsUrlImage+model.CoverPhoto)
+            titleLable.text = model.Title
+            dateLable.text = model.CreateTime
+            browseLable.text = "\(model.Views + 99)"
+            break
+        case .VRVideo:
+            let model = Model as! ClassVRVideoClassList
+            mainImageView.ImageLoad(PostUrl: HttpsUrlImage+model.CoverPhoto)
+            titleLable.text = model.VideoName
+            dateLable.text = model.CreateTime
+            browseLable.text = "\(model.Views + 99)"
+            break
+        }
     }
 }

@@ -10,6 +10,9 @@ import UIKit
 
 class SpecialtyCell: UITableViewCell {
 
+    @IBOutlet weak var mainImageView: UIImageView!
+    @IBOutlet weak var titleLable: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -18,7 +21,11 @@ class SpecialtyCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
-
+    
+    override func InitConfig(_ cell: Any) {
+        let model = cell as! SpecialitiesModel
+        mainImageView.ImageLoad(PostUrl: HttpsUrlImage+model.CoverPhoto)
+        titleLable.text = model.SpecialitiesName
+    }
 }

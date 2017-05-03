@@ -79,6 +79,8 @@
             <connections>
                 <outlet property="icon" destination="e8M-gX-x87" id="CmF-yI-Eav"/>
                 <outlet property="lable" destination="JB8-ja-MFy" id="Slp-co-riP"/>
+                <outlet property="mainImageView" destination="I5A-eL-dzd" id="yZR-xQ-1WE"/>
+                <outlet property="titleLable" destination="WHi-FV-dCW" id="4qR-WT-Bts"/>
             </connections>
             <point key="canvasLocation" x="84" y="121"/>
         </collectionViewCell>

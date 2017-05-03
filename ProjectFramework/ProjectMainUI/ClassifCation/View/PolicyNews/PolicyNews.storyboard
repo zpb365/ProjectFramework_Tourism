@@ -46,6 +46,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="titleLable" destination="TAT-Cn-fak" id="1xD-qC-Y8C"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

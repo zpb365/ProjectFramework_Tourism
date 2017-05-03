@@ -60,6 +60,12 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="address" destination="9iM-hh-9Cx" id="35M-hm-3EX"/>
+                                            <outlet property="look" destination="O7Z-fV-UBp" id="WjP-2U-Jhr"/>
+                                            <outlet property="mainImageView" destination="65V-m3-LJk" id="JJ2-ox-vQv"/>
+                                            <outlet property="titleLable" destination="F5l-d2-eDX" id="N4h-ve-GdC"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

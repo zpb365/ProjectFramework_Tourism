@@ -16,7 +16,7 @@ class VisualFeast: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setNavbar()
+        //self.setNavbar()
         self.initUI()
         
     }
@@ -34,7 +34,7 @@ class VisualFeast: UIViewController{
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage().ImageWithColor(color: CommonFunction.SystemColor(), size: CGSize.init(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)),for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage().ImageWithColor(color: UIColor().TransferStringToColor("#FF4081"), size: CGSize.init(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)),for: UIBarMetrics.default)
     }
     //MARK: initUI
     func initUI() -> Void {
