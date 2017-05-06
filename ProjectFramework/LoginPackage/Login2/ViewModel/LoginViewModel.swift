@@ -39,27 +39,25 @@ class LoginViewModel {
                 
                 //------------用户名处理
                 if(name==""){
+                    CommonFunction.HUD("账号不可为空", type: .error)
                     //空值处理
                     return Observable.just(ValidationResult.empty)
                 }
-                if(name.characters.count != 11){
-                    //校验手机号码
-                    return Observable.just(ValidationResult.error)
-                    
-                }
-                
-                
+               
                 //----------------密码处理
                 if(pwd==""){
                     //空值处理
+                    CommonFunction.HUD("密码不可为空", type: .error)
                     return Observable.just(ValidationResult.empty)
                     
                 }
                 if(pwd.characters.count < 6){
                     //密码位数不能小于6位
+                    CommonFunction.HUD("密码不可少于6位数", type: .error)
                     return Observable.just(ValidationResult.error)
-                    
                 }
+                
+                
                 
                 return Observable.just(ValidationResult.ok)
                 
@@ -67,6 +65,39 @@ class LoginViewModel {
         
         
         
+    }
+    
+    func SetLogin( result:((_ result:Bool?) -> Void)?){
+        let parameters=["Phone":username.value,"PassWord":password.value]
+        CommonFunction.Global_Post(entity: LoginMode(), IsListData: false, url: HttpsUrl+"api/Login/SetLogin", isHUD: true, isHUDMake: false, parameters: parameters as NSDictionary) { (resultData) in
+            if(resultData?.Success==true){
+                let model = resultData?.Content as! LoginMode
+                
+                Global_UserInfo.HeadImgPath=model._userlogo
+                Global_UserInfo.PhoneNo=model._phone
+                Global_UserInfo.RealName=model._username
+                Global_UserInfo.Sex=model._sex
+                Global_UserInfo.userid=model._userid
+                Global_UserInfo.IsLogin=true
+                
+                //登陆成功后 存储到数据库
+                CommonFunction.ExecuteUpdate("update MemberInfo set userid = (?), PhoneNo = (?) , Token = (?), IsLogin = (?) ,RealName=(?),Sex=(?),HeadImgPath=(?)",
+                                             [Global_UserInfo.userid as AnyObject
+                                                ,Global_UserInfo.PhoneNo as AnyObject
+                                                ,"" as AnyObject
+                                                ,true as AnyObject
+                                                ,Global_UserInfo.RealName as AnyObject
+                                                ,Global_UserInfo.Sex as AnyObject
+                                                ,Global_UserInfo.HeadImgPath as AnyObject
+                    ], callback: nil )
+                
+           
+                
+                    result?(true)
+            }else{
+                    CommonFunction.HUD(resultData!.Result, type: .error)
+            }
+        }
     }
     
     

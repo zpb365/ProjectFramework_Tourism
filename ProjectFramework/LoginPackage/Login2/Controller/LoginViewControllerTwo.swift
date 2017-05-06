@@ -53,11 +53,11 @@ class LoginViewControllerTwo: UIViewController
         self.view.addSubview(backbtn)
         
         _LoginView?.UserNameText.rx.text.orEmpty
-            .bindTo(_LoginViewModel.username) //手机号绑定
+            .bind(to: _LoginViewModel.username) //手机号绑定
             .addDisposableTo(disposeBag)
         
         _LoginView?.pawNameText.rx.text.orEmpty
-            .bindTo(_LoginViewModel.password) //手机号绑定
+            .bind(to: _LoginViewModel.password) //手机号绑定
             .addDisposableTo(disposeBag)
          
         _LoginView?.registerbtn.rx.tap.subscribe(      //注册事件
@@ -67,17 +67,17 @@ class LoginViewControllerTwo: UIViewController
         }).addDisposableTo(disposeBag)
         
         
-        _LoginView?.loginbtn.rx.tap.subscribe(      //登录事件
-            onNext:{ [weak self] value in
-                 print("登录")
-        }).addDisposableTo(disposeBag)
-        
-        
+         _LoginView?.loginbtn.rx.tap
+            .bind(to: self._LoginViewModel.LoginEvent)  //绑定事件 (点击登陆)
+            .addDisposableTo(self.disposeBag)
+ 
         _LoginView?.Forgetpassword.rx.tap.subscribe(      //忘记密码事件
             onNext:{ [weak self] value in
                 let vc = ForgotPasswordController()
                 self?.present(vc, animated: true, completion: nil)
         }).addDisposableTo(disposeBag)
+        
+        Result()
         
     }
  
@@ -86,6 +86,30 @@ class LoginViewControllerTwo: UIViewController
         super.didReceiveMemoryWarning()
     }
    
+    
+    //返回数据
+    func Result(){
+        
+        _ = self._LoginViewModel.LoginResult?.subscribe(onNext: {[weak self] (result) in
+            switch result {
+            case   .ok: //处理登录成功的业务
+                self?._LoginViewModel.SetLogin( result: { (result) in
+                    if(result==true){
+                            self?.myCallbackValue?(true)
+                          self?.dismiss(animated: true, completion: nil)
+                    } 
+                })
+                break
+            case   .empty:
+                debugPrint("空值判断")
+                break
+            case   .error:
+                debugPrint("error")
+                break
+            }
+        }).addDisposableTo(self.disposeBag)
+    }
+    
     
     deinit {
         debugPrint("页面销毁")

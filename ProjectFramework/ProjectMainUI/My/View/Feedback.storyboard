@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -51,9 +51,6 @@
                                 <state key="normal" title="提交">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="submitClick:" destination="8jg-Bb-P2c" eventType="touchUpInside" id="XOz-qJ-PYo"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0/500" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1a2-VH-nNU">
                                 <rect key="frame" x="304" y="202" width="56" height="21"/>
@@ -70,6 +67,7 @@
                         <outlet property="contactLable" destination="751-RT-Rn5" id="b7a-Nc-47a"/>
                         <outlet property="promptLable" destination="zCh-nH-q7E" id="vkA-MI-qhU"/>
                         <outlet property="showCount" destination="1a2-VH-nNU" id="yeO-MY-3c2"/>
+                        <outlet property="submit" destination="rWT-MI-rMa" id="ziA-Eo-l1Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gG9-8G-KRx" userLabel="First Responder" sceneMemberID="firstResponder"/>

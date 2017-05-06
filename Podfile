@@ -14,7 +14,6 @@ target "ProjectFramework_Tourism" do
     pod 'FDFullscreenPopGesture', '1.1'         #pop滑动库 (oc)
     pod 'CYLTabBarController'                   #拓展的Tabbar (oc)
     pod 'DOPDropDownMenu-Enhanced', '~> 1.0.0'  #多级菜单 (oc)
-    pod 'SWTableViewCell', '~> 0.3.7'           #可左右滑动的Cell (oc)
     pod 'IQKeyboardManager'                     #键盘管理 (oc)
     pod 'DZNEmptyDataSet'                       #UITableview UICollectionView 空值时视图
     pod 'BaiduMapKit'                           #百度地图SDK
@@ -24,4 +23,5 @@ target "ProjectFramework_Tourism" do
     pod 'RxSwift',    '~> 3.0'              #响应式编程库(swift)
     pod 'RxCocoa',    '~> 3.0'              #响应式编程库(swift)
     pod 'RxDataSources', '~> 1.0'           #响应式编程库 主要用于tableivew等控件封装(swift)
+    pod 'pop', '~> 1.0'     #Facebook开源的动画框架-Pop。
 end

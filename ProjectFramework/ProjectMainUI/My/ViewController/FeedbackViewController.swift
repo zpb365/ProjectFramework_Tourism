@@ -7,24 +7,39 @@
 //
 
 import UIKit
+import RxSwift
 
 class FeedbackViewController: UIViewController,UITextFieldDelegate ,UITextViewDelegate {
 
+    fileprivate let disposeBag   = DisposeBag() //创建一个处理包（通道）
+    let _FeedbackViewModel = FeedbackViewModel()   //数据处理 (VM)
+    
     
     @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var promptLable: UILabel!//textview文本提示文本
     @IBOutlet weak var contactLable: UITextField!//联系文本
     @IBOutlet weak var showCount: UILabel!
+    @IBOutlet weak var submit: UIButton!
     
-    @IBAction func submitClick(_ sender: Any) {
-        
-        
-    }
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.initUI()
         
+        commentTextView.rx.text.orEmpty
+            .bind(to: _FeedbackViewModel.Description) //绑定
+            .addDisposableTo(disposeBag)
+        
+        contactLable.rx.text.orEmpty
+            .bind(to: _FeedbackViewModel.QQPhone) //绑定
+            .addDisposableTo(disposeBag)
+        
+        submit.rx.tap
+            .bind(to: self._FeedbackViewModel.Event)  //绑定事件 (点击)
+            .addDisposableTo(self.disposeBag)
+        
+         Result()   //点击按钮后接收的数据返回
     }
 
     override func didReceiveMemoryWarning() {
@@ -80,6 +95,15 @@ class FeedbackViewController: UIViewController,UITextFieldDelegate ,UITextViewDe
         }
     }
     
-  
+    //返回数据
+    func Result(){
+        _ = self._FeedbackViewModel.Result?.subscribe(onNext: {(result) in
+            
+        }).addDisposableTo(self.disposeBag)
+    }
+    
+    deinit {
+        debugPrint("释放了 ")
+    }
 
 }

@@ -46,7 +46,7 @@ class ForgotPasswordController: UIViewController,UITableViewDelegate,UITableView
             btn.layer.cornerRadius=4
             btn.layer.masksToBounds=true
             btn.rx.tap
-                .bindTo(self._ForgotPasswordViewModel.SaveEvent)  //绑定事件 (点击注册)
+                .bind(to: self._ForgotPasswordViewModel.SaveEvent)  //绑定事件 (点击注册)
                 .addDisposableTo(self.disposeBag)
             
             return btn
@@ -137,7 +137,7 @@ class ForgotPasswordController: UIViewController,UITableViewDelegate,UITableView
             cell.VerificationCode=true
             cell.inpuText.placeholder="请输入手机号码"
             cell.inpuText.rx.text.orEmpty
-                .bindTo(_ForgotPasswordViewModel.username) //手机号绑定
+                .bind(to: _ForgotPasswordViewModel.username) //手机号绑定
                 .addDisposableTo(disposeBag)
             cell.VerificationCodeBtn.rx.tap.subscribe(
                 onNext:{  [weak self]  in
@@ -150,7 +150,7 @@ class ForgotPasswordController: UIViewController,UITableViewDelegate,UITableView
             cell.lab.text="验证码"
             cell.inpuText.placeholder="请输入验证码"
             cell.inpuText.rx.text.orEmpty
-                .bindTo(_ForgotPasswordViewModel.VerificationCode) //绑定密码
+                .bind(to: _ForgotPasswordViewModel.VerificationCode) //绑定密码
                 .addDisposableTo(disposeBag)
             break
         case 2:
@@ -158,7 +158,7 @@ class ForgotPasswordController: UIViewController,UITableViewDelegate,UITableView
             cell.inpuText.placeholder="请输入新密码"
             cell.inpuText.keyboardType = .phonePad
             cell.inpuText.rx.text.orEmpty
-                .bindTo(_ForgotPasswordViewModel.password) //绑定验证码
+                .bind(to: _ForgotPasswordViewModel.password) //绑定验证码
                 .addDisposableTo(disposeBag)
        
             break

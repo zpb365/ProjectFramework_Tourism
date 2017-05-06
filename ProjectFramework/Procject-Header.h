@@ -27,6 +27,9 @@
 #import "UMSocialQQHandler.h"                  //QQ
 #import "UMSocialSinaSSOHandler.h"             //新浪
 
+// Facebook开源的动画框架-Pop。
+#import <pop/POP.h>
+
 //支付宝
 #import <AlipaySDK/AlipaySDK.h> 
 #import "Order.h"
@@ -56,8 +59,7 @@
 #import <MJRefresh/MJRefresh.h>                //上啦下拉刷新第三方
 #import <MJExtension/MJExtension.h>                 
 #import <CYLTabBarController/CYLTabBarController.h> //第三方 TabBarcontroller
-#import <CWStatusBarNotification/CWStatusBarNotification.h> //系统通知Notification
-#import <SWTableViewCell/SWTableViewCell.h> //tableviewCell左右滑动
+#import <CWStatusBarNotification/CWStatusBarNotification.h> //系统通知Notification 
 #import <FMDB/FMDB.h> //数据库SQLliite
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h> //Tableview CollectionView 空视图
  
@@ -66,4 +68,5 @@
 #import "PYSearchViewController.h" //搜索UI 
 #import "XHStarRateView.h"         //评分星星
 #import "PanoramaViewController.h"      // 全景图
+#import "HcdPopMenu.h"              //动画菜单
 

@@ -42,7 +42,7 @@
 			<string>pay</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>alisdknmsc</string>
+				<string>alisdknmsclv</string>
 			</array>
 		</dict>
 	</array>

@@ -45,7 +45,7 @@ class registerViewController: UIViewController,UITableViewDelegate,UITableViewDa
             btn.layer.cornerRadius=4
             btn.layer.masksToBounds=true
             btn.rx.tap
-                .bindTo(self._regiestViewModel.registerEvent)  //绑定事件 (点击注册)
+                .bind(to: self._regiestViewModel.registerEvent)  //绑定事件 (点击注册)
                 .addDisposableTo(self.disposeBag)
             
             return btn
@@ -137,14 +137,14 @@ class registerViewController: UIViewController,UITableViewDelegate,UITableViewDa
             cell.lab.text="手机号"
             cell.inpuText.placeholder="请输入手机号码"
             cell.inpuText.rx.text.orEmpty
-                .bindTo(_regiestViewModel.username) //手机号绑定
+                .bind(to: _regiestViewModel.username) //手机号绑定
                 .addDisposableTo(disposeBag)
             break
         case 1:
             cell.lab.text="密码"
             cell.inpuText.placeholder="请输入密码"
             cell.inpuText.rx.text.orEmpty
-                .bindTo(_regiestViewModel.password) //绑定密码
+                .bind(to: _regiestViewModel.password) //绑定密码
                 .addDisposableTo(disposeBag)
             break
         case 2:
@@ -153,7 +153,7 @@ class registerViewController: UIViewController,UITableViewDelegate,UITableViewDa
             cell.inpuText.placeholder="请输入短信验证码"
             cell.inpuText.keyboardType = .phonePad
             cell.inpuText.rx.text.orEmpty
-                .bindTo(_regiestViewModel.VerificationCode) //绑定验证码
+                .bind(to: _regiestViewModel.VerificationCode) //绑定验证码
                 .addDisposableTo(disposeBag)
 //            cell.VerificationCodeBtn.rx.tap.subscribe(      //验证码事件
 //                onNext:{
@@ -163,7 +163,7 @@ class registerViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
             _ =  _regiestViewModel.VerificationCodeEvent1=cell
             cell.VerificationCodeBtn.rx.tap
-                .bindTo(_regiestViewModel.VerificationCodeEvent)
+                .bind(to: _regiestViewModel.VerificationCodeEvent)
                 .addDisposableTo(self.disposeBag)
             
             

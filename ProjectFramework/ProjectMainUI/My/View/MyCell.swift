@@ -35,6 +35,9 @@ class MyCell: UITableViewCell {
     
    
     func _InitConfig(_ ImageList: [String],_ TitleList:[String]) {
+        while self.contentView.subviews.last != nil {   //去除重复
+            self.contentView.subviews.last?.removeFromSuperview()
+        }
         let lineView=UIView(frame: CGRect.init(x: 0, y: 8, width: self.contentView.frame.width, height: 8))
         lineView.backgroundColor=CommonFunction.LineColor()
         self.contentView.addSubview(lineView)

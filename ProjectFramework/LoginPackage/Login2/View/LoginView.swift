@@ -14,7 +14,7 @@ class LoginView: UIView
     lazy var backgroundImage:UIImageView =
         {
         let Imageview = UIImageView(frame: self.frame)
-            Imageview.image=UIImage(named: "Login2Resource.bundle/登录背景.png")
+            Imageview.image=UIImage(named: "Login2Resource.bundle/登录页面背景.jpg")
         return Imageview
         }()
     
@@ -22,7 +22,7 @@ class LoginView: UIView
     lazy var UserImage:UIImageView = {
         let imgWh:CGFloat=90
         let img = UIImageView(frame: CGRect(x: self.bounds.width/2-imgWh/2, y: 100, width:imgWh, height: imgWh))
-        img.image=UIImage.init(named: "new_feature_1")
+        img.image=UIImage.init(named: "userIcon_defualt")
         img.layer.borderColor=UIColor.white.cgColor
         img.layer.borderWidth=4
         img.layer.cornerRadius=imgWh/2
@@ -75,6 +75,7 @@ class LoginView: UIView
         newTextField.font=UIFont.systemFont(ofSize: 12)
         newTextField.clearButtonMode = .always
         newTextField.textColor=UIColor.white
+        newTextField.isSecureTextEntry=true
         newTextField.attributedPlaceholder=NSAttributedString(string: newTextField.placeholder!, attributes: [NSForegroundColorAttributeName:UIColor.white])    //修改placeholder的颜色
         return newTextField
     }()
@@ -139,7 +140,6 @@ class LoginView: UIView
     
     
     private func ShowView( ){
-        
         self.addSubview(backgroundImage)
         
         self.addSubview(UserImage)

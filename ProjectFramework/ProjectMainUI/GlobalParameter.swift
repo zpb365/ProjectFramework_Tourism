@@ -30,7 +30,8 @@ class MyInfoModel:NSObject  {
 
 
 //支付宝AppScheme
-let ZFBAppScheme = "alisdknmsc"  //应用注册scheme,在AliSDKDemo-Info.plist定义URL types
+let ZFBAppScheme = "alisdknmsclv"  //应用注册scheme,在Info.plist定义URL types  (特注说明：如果一个app下存在多个相同公司产品 那么他的 Scheme不能一样 否则调整支付宝后无法跳转回来该应用)
+let ZFBPayNoticeResultStatus="PayResultStatus"      //支付宝通知的Name
 
 let placeholderImage="loadimg"  //SDWebImage 默认加载图片
 

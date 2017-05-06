@@ -8,14 +8,16 @@
 
 import UIKit
 import SwiftTheme
+import SDWebImage
 
 class My: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     let identifier="MyCell"
     
-    let ImageList = ["订单","订单","订单","订单","订单","订单","订单"]
-    let TitleList = ["我的订单","订单查询","游记管理","个人信息","我要反馈","联系客服","清除缓存"]
+    var ImageList = ["订单","订单","订单","订单","订单","订单","订单"]
+    var TitleList = ["我的订单","游记管理","个人信息","我要反馈","联系客服","清除缓存","安全退出"]
     
+    let _MyHeadUIView=MyHeadUIView()
     
     ///圆角（消息NavItem）属性
     lazy var BadgenumberLabel:UILabel = {
@@ -54,9 +56,16 @@ class My: UIViewController,UITableViewDelegate,UITableViewDataSource {
         self.tableView.backgroundColor = UIColor.clear
         tableView.register(MyCell.self, forCellReuseIdentifier: identifier)
         self.view.addSubview(tableView)
-        _ = MyHeadUIView()._layer(tableHeaderView: tableView, target: self, selector: #selector(UserInfoEdit))
-        
+        _ = _MyHeadUIView._layer(tableHeaderView: tableView, target: self, selector: #selector(UserInfoEdit))
         SetupNavBar()
+        if(Global_UserInfo.IsLogin==true){
+            self._MyHeadUIView.Imgbtn.imageView?.ImageLoad(PostUrl: HttpsUrlImage+Global_UserInfo.HeadImgPath)
+            self._MyHeadUIView.LabName.text=Global_UserInfo.RealName
+        }else{
+            self.TitleList.remove(at: self.TitleList.count-1)
+            self.ImageList.remove(at: self.ImageList.count-1)
+            self.tableView.reloadData()
+        }
     }
     
     
@@ -123,26 +132,34 @@ class My: UIViewController,UITableViewDelegate,UITableViewDataSource {
                 self?.navigationController?.show(vc, sender: self  )
                 break;
             case 101:
-                let vc = CommonFunction.ViewControllerWithStoryboardName("OrderSearch", Identifier: "OrderSearch") as! OrderSearch
-                self?.navigationController?.show(vc, sender: self  )
-                break;
-            case 102:
                 let vc = CommonFunction.ViewControllerWithStoryboardName("TravelManagement", Identifier: "TravelManagement") as! TravelManagement
                 self?.navigationController?.show(vc, sender: self  )
                 break;
-            case 103:
+            case 102:
                 let vc = CommonFunction.ViewControllerWithStoryboardName("Myinfo", Identifier: "Myinfo") as! MyInfoViewController
                 self?.navigationController?.show(vc, sender: nil)
                 break;
-            case 104:
+            case 103:
                 let vc = CommonFunction.ViewControllerWithStoryboardName("Feedback", Identifier: "Feedback") as! FeedbackViewController
                 self?.navigationController?.show(vc, sender: nil)
                 break;
+            case 104:
+           CommonFunction.CallPhone(self!, number: "15907740425")
+                break;
             case 105:
-                CommonFunction.CallPhone(self!, number: "15907740425")
+                print("缓存")
+                //显示缓存大小
+                let intg: Int = Int(SDImageCache.shared().getSize())
+                let currentVolum: String = "\(self!.fileSizeWithInterge(intg))"
+                
+                SDImageCache.shared().clearDisk(onCompletion: {
+                    //清除缓存
+                    SDImageCache.shared().clearMemory()
+                    CommonFunction.MessageNotification("为您清除了"+currentVolum, interval: 2, msgtype: .success,font: UIFont.systemFont(ofSize: 13))
+                })
                 break;
             case 106:
-                
+                self?.Cancellation()
                 break;
             default:
                 
@@ -163,15 +180,78 @@ class My: UIViewController,UITableViewDelegate,UITableViewDataSource {
     ///用户信息
     func UserInfoEdit (){
         
-//        if(Global_UserInfo.IsLogin==false){ //未登录 
-//            let vc = LoginViewControllerTwo()
-//            self.present(vc, animated: true, completion: nil)
-//        }else{  //已登录
+        if(Global_UserInfo.IsLogin==false){ //未登录 
+            let vc = LoginViewControllerTwo()
+            vc.Callback_Value({[weak self] (isOk) in
+                 //登录成功
+                
+                self?._MyHeadUIView.Imgbtn.imageView?.ImageLoad(PostUrl: HttpsUrlImage+Global_UserInfo.HeadImgPath)  
+                self?._MyHeadUIView.LabName.text=Global_UserInfo.RealName
+                self?.ImageList.append("订单")
+                self?.TitleList.append("安全退出")
+                self?.tableView.reloadData()
+            })
+            self.present(vc, animated: true, completion: nil)
+        }else{  //已登录
             let vc = CommonFunction.ViewControllerWithStoryboardName("Myinfo", Identifier: "Myinfo") as! MyInfoViewController
             self.navigationController?.show(vc, sender: nil)
-//        }
-        
+        }
+    
+    }
+    
+    //注销账户
+    func Cancellation(){
+        CommonFunction.AlertController(self, title: "注销", message: "确定注销该账户吗？", ok_name: "确定", cancel_name: "取消", style: .alert, OK_Callback: {
+            
+            CommonFunction.ExecuteUpdate("update MemberInfo set userid = (?), PhoneNo = (?) , Token = (?), IsLogin = (?) ,RealName=(?),Sex=(?),HeadImgPath=(?)",
+                                         ["" as AnyObject
+                                            ,"" as AnyObject
+                                            ,"" as AnyObject
+                                            ,false as AnyObject
+                                            ,"" as AnyObject
+                                            ,"" as AnyObject
+                                            ,"" as AnyObject
+                ], callback: nil)
+            
+            Global_UserInfo=MyInfoModel()
+            
+            self._MyHeadUIView.Imgbtn.setImage(UIImage.init(named: "userIcon_defualt"), for: .normal)
+            self._MyHeadUIView.LabName.text="Hi,给我取个名字吧"
+            self.TitleList.remove(at: self.TitleList.count-1)
+            self.ImageList.remove(at: self.ImageList.count-1)
+            //移除极光推送别名
+            //JPUSHService.setAlias(Global_UserInfo.userid, callbackSelector: nil, object: self )
+            self.tableView.reloadData()
+        }, Cancel_Callback: {
+            
+        })
     }
  
+    
+    
+    
+    //获取缓存大小
+    func fileSizeWithInterge(_ size: Int) -> String {
+        // 1k = 1024, 1m = 1024k
+        if size < 1024 {
+            // 小于1k
+            return "\(Int(size))B"
+        }
+        else if size < 1024 * 1024 {
+            // 小于1m
+            let aFloat: CGFloat = CGFloat(size) / 1024
+            return String(format: "%.0fK", aFloat)
+        }
+        else if size < 1024 * 1024 * 1024 {
+            // 小于1G
+            let aFloat: CGFloat = CGFloat(size) / (1024 * 1024)
+            return String(format: "%.1fM", aFloat)
+        }
+        else {
+            let aFloat: CGFloat = CGFloat(size) / (1024 * 1024 * 1024)
+            return String(format: "%.1fG", aFloat)
+        }
+        
+    }
 
 }

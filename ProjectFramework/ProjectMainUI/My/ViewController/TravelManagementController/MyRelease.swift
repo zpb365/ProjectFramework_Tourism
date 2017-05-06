@@ -8,58 +8,110 @@
 
 import UIKit
 
-class MyRelease: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class MyRelease:CustomTemplateViewController {
     
     
     @IBOutlet weak var tableView: UITableView!
     let identiFier = "MyReleaseCell"
-    var dataArray = Array<Any>()
+    let viewModel=MyReleaseTravelViewModel()
+    var isDelete:Bool=false
+    var PageIndex: Int = 1
+    var PageSize: Int = 10
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "我的发布"
-        
-        // Do any additional setup after loading the view.
         self.initUI()
-        self.getData(count: 15)
+        GetHtpsData()
     }
-
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    //MARK: getData
-    func getData(count : Int) -> Void {
-        for i in 0..<count{
-            dataArray.append(String(i))
-        }
-        tableView.reloadData()
-    }
+ 
     //MARK: initUI
     func initUI() -> Void {
-        self.tableView.frame = CGRect.init(x: 0, y: 0, width: CommonFunction.kScreenWidth, height: CommonFunction.kScreenHeight)
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-//        self.tableView.isEditing = true
-        self.tableView.tableFooterView = UIView.init()
-        
+        self.tableView.frame = CGRect.init(x: 0, y: CommonFunction.NavigationControllerHeight, width: CommonFunction.kScreenWidth, height: self.view.frame.height-CommonFunction.NavigationControllerHeight)
+        self.InitCongif( self.tableView)
+        self.numberOfSections=1 
+        self.tableViewheightForRowAt=150//行高
+        self.header.isHidden=true
     }
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+ 
+    //MARK: Refresh
+    override func footerRefresh() {
+        PageIndex = PageIndex + 1
+        self.GetHtpsData()
     }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataArray.count
+    
+    //MARK: 获取数据
+    func GetHtpsData() {
+        isDelete=false
+        viewModel.GetMyReleaseTravelsList(PageIndex: PageIndex, PageSize: PageSize) { (result,NoMore) in
+            if  result == true {
+                if(NoMore==true){
+                    self.footer.endRefreshingWithNoMoreData()
+                }else{
+                    if(self.viewModel.ListData.count==0){
+                        self.RefreshRequest(isLoading: false, isHiddenFooter: true)
+                        return
+                    }
+                    if(self.numberOfRowsInSection  < self.PageSize ){
+                           self.footer.endRefreshingWithNoMoreData()
+                    }
+                    self.RefreshRequest(isLoading: false, isHiddenFooter: false)
+                }
+            }
+            else{
+                self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: true)
+            }
+        }
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+    
+    override func Error_Click() {
+        PageIndex = 1
+        viewModel.ListData.removeAll()
+        GetHtpsData()
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: identiFier, for: indexPath)as! MyReleaseCell
+        cell.InitConfig(viewModel.ListData[indexPath.row] as Any)
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = CommonFunction.ViewControllerWithStoryboardName("TravelDetail", Identifier: "TravelDetail") as! TravelDetail
+        vc.TravelsId=viewModel.ListData[indexPath.row].TravelsId
+        self.navigationController?.show(vc, sender: self  )
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let count = self.viewModel.ListData.count
+        if(count==0&&isDelete==true){
+             isDelete=false
+             self.RefreshRequest(isLoading: false, isHiddenFooter: true)
+           
+        }
+        return count
+    }
+  
     @objc(tableView:commitEditingStyle:forRowAtIndexPath:) func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        dataArray.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .left)
+        isDelete=true
+
+        viewModel.DeleteMyTravels(TravelsID: viewModel.ListData[indexPath.row].TravelsId) { (result) in
+            if(result==true){
+                self.viewModel.ListData.remove(at: indexPath.row)
+              tableView.deleteRows(at: [IndexPath(row:indexPath.row, section: 0)], with: .left)
+            }else{
+                CommonFunction.HUD("删除失败", type: .error)
+            }
+        }
+        
+        
+   
     }
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true

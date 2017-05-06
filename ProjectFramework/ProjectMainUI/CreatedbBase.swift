@@ -78,7 +78,7 @@ class CreatedbBase {
         CommonFunction.ExecuteQuery("select *  from MemberInfo", nil) { (Result) in
             
             if(!Result.next()){
-                CommonFunction.ExecuteUpdate("insert into MemberInfo (MemberID,PhoneNo,RealName,Sex,HeadImgPath,Token,IsLogin ) values (?,?,?,?,?,?,? ) ", ["0" as AnyObject,"" as AnyObject,"" as AnyObject,"" as AnyObject,"" as AnyObject,"" as AnyObject,false as AnyObject]) { (isOk) in
+                CommonFunction.ExecuteUpdate("insert into MemberInfo (userid,PhoneNo,RealName,Sex,HeadImgPath,Token,IsLogin ) values (?,?,?,?,?,?,? ) ", ["0" as AnyObject,"" as AnyObject,"" as AnyObject,"" as AnyObject,"" as AnyObject,"" as AnyObject,false as AnyObject]) { (isOk) in
                 }
             }else{
                 CommonFunction.ExecuteQuery("select * from MemberInfo", nil, callback: { (Result) in

@@ -10,10 +10,13 @@ import UIKit
 
 class MyHeadUIView: UIView {
     
-    var displayLink:CADisplayLink?=nil
-    var shapeLayer:CAShapeLayer?=nil
-    var shapeLayer1:CAShapeLayer?=nil
-    var dong:CGFloat = 0.0
+    fileprivate  var displayLink:CADisplayLink?=nil
+    fileprivate  var shapeLayer:CAShapeLayer?=nil
+    fileprivate  var shapeLayer1:CAShapeLayer?=nil
+    fileprivate  var dong:CGFloat = 0.0
+    
+    var Imgbtn:UIButton!
+    var LabName:UILabel!
     
     //用代码创建的时候会进入这个init函数体
     override init(frame: CGRect) {
@@ -27,12 +30,12 @@ class MyHeadUIView: UIView {
         super.init(coder: aDecoder)
         load()
     }
-
+    
     fileprivate  func load(){
         displayLink = CADisplayLink(target: self, selector:#selector(funcdisPlayLink))
         displayLink?.add(to: RunLoop.current, forMode: .commonModes)
     }
-   
+    
     func funcdisPlayLink(){
         self.dong=self.dong+0.05
         self.shapeLayer?.path=getWavePath(8, w: 0.04, d: 25+60, dong: 0).cgPath
@@ -51,22 +54,22 @@ class MyHeadUIView: UIView {
         self.layer.addSublayer(layer2)  //添加半椭圆
         
         let imgWh:CGFloat=70
-        let btn = UIButton(frame: CGRect(x: self.bounds.width/2-imgWh/2, y: 40, width:imgWh, height: imgWh))
-        btn.setImage(UIImage.init(named: "index1"), for: .normal)
-        btn.layer.borderColor=UIColor.white.cgColor
-        btn.layer.borderWidth=2
-        btn.layer.cornerRadius=imgWh/2
-        btn.layer.masksToBounds=true
-        btn.addTarget(target, action: selector, for: .touchUpInside)
-        self.addSubview(btn)    //添加图片
+        Imgbtn = UIButton(frame: CGRect(x: self.bounds.width/2-imgWh/2, y: 40, width:imgWh, height: imgWh))
+        Imgbtn.setImage(UIImage.init(named: "userIcon_defualt"), for: .normal)
+        Imgbtn.layer.borderColor=UIColor.white.cgColor
+        Imgbtn.layer.borderWidth=2
+        Imgbtn.layer.cornerRadius=imgWh/2
+        Imgbtn.layer.masksToBounds=true
+        Imgbtn.addTarget(target, action: selector, for: .touchUpInside)
+        self.addSubview(Imgbtn)    //添加图片
         
-        let lab=UILabel(frame: CGRect(x: self.bounds.width/2-100/2, y: btn.frame.maxY+5, width: 100, height: 20))
-        lab.text="我是hcy"
-        lab.contentMode = .center
-        lab.textColor=UIColor.white
-        lab.textAlignment = .center
-        lab.font = UIFont.systemFont(ofSize: 13)
-        self.addSubview(lab)    //添加文字
+        LabName=UILabel(frame: CGRect(x: 0, y: Imgbtn.frame.maxY+5, width: CommonFunction.kScreenWidth, height: 20))
+        LabName.text="Hi,给我取个名字吧"
+        LabName.contentMode = .center
+        LabName.textColor=UIColor.white
+        LabName.textAlignment = .center
+        LabName.font = UIFont.systemFont(ofSize: 13)
+        self.addSubview(LabName)    //添加文字
         
         let layer = CAShapeLayer()
         layer.fillColor = UIColor.white.cgColor
@@ -123,7 +126,7 @@ class MyHeadUIView: UIView {
     }
     
     deinit {
-        print("释放")
+        debugPrint("释放")
     }
-
+    
 }

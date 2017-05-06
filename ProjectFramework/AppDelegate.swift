@@ -324,11 +324,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKMapViewDelegate, BMKLo
         if url.host=="safepay" {
             // 支付跳转支付宝钱包进行支付，处理支付结果
             AlipaySDK.defaultService().processOrder(withPaymentResult: url, standbyCallback: { (resultDic) in
-                print("reslut = \(resultDic)")
-                if let Alipayjson = resultDic as? NSDictionary{
+                debugPrint("reslut = \(String(describing: resultDic))")
+                if let Alipayjson = resultDic as NSDictionary?{
                     let resultStatus = Alipayjson.value(forKey: "resultStatus") as! String
                     //利用KVO通知支付页面已经完成
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "PayResultStatus"), object: nil, userInfo: ["resultStatus": resultStatus])
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: ZFBPayNoticeResultStatus), object: nil, userInfo: ["resultStatus": resultStatus])
                 }
             })
             // 授权跳转支付宝钱包进行支付，处理支付结果

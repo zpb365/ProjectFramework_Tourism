@@ -41,21 +41,40 @@ class OderDetail: CustomTemplateViewController {
         typeButton.setTitle("待评价", for: .normal)
         typeButton.setTitleColor(UIColor.white, for: .normal)
         typeButton.titleLabel?.font = UIFont.systemFont(ofSize: 13)
-        typeButton.addTarget(self, action: #selector(buttonClick), for: .touchUpInside)
+        typeButton.addTarget(self, action: #selector(buttonClick(_ :)), for: .touchUpInside)
         return typeButton
     }()
     
     
     @IBOutlet weak var tabbleView: UITableView!
     @IBOutlet weak var tableViewHead: UIView!
+    
+    @IBOutlet weak var Pic: UIImageView!
+    
+    @IBOutlet weak var S_Title: UILabel!
+    
+    @IBOutlet weak var ProductTitle: UILabel!
+    
+    @IBOutlet weak var Describe: UILabel!
+    
+    @IBOutlet weak var S_OrderNumber: UILabel!
+    
+    @IBOutlet weak var CreationTime: UILabel!
+    
+    @IBOutlet weak var PayType: UILabel!
+    
     let identiFier = "OderContactCell"
-    var keyArray = ["联系人","联系电话","备注"]
-    var ValueArray = ["黄朝艺","1888888888","很棒"]
+    
+    var OrderNumber=""  //订单号
+    
+    var _MyOrderModel:MyOrderModel?  //订单列表模型
+    
+    let viewModel = MyOrderDetailViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initUI()
-        
+        GetHtpsData()
         // Do any additional setup after loading the view.
     }
 
@@ -70,28 +89,101 @@ class OderDetail: CustomTemplateViewController {
         self.InitCongif(self.tabbleView)
         self.tabbleView.frame = CommonFunction.CGRect_fram(0, y: 64, w: CommonFunction.kScreenWidth, h: CommonFunction.kScreenHeight - 64 - 40)
         self.numberOfSections = 1
-        self.numberOfRowsInSection = 3
         self.tableViewheightForRowAt = 40
         self.header.isHidden = true
         self.Backfooter.isHidden = true
-        self.tabbleView.tableHeaderView = tableViewHead
         self.tabbleView.tableFooterView = UIView.init(frame: CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: 0.001))
         self.view.addSubview(self.bottomBar)
         self.bottomBar.addSubview(self.priceLabel)
         self.bottomBar.addSubview(self.typeButton)
-        self.tabbleView.reloadData()
-        self.footer.isHidden=true
     }
+    
+    //MARK: 获取数据
+    func GetHtpsData() {
+        
+        self.tableViewHead.isHidden=true
+        self.bottomBar.isHidden=true
+        viewModel.GetMyOrderDetails(OrderNumber:self.OrderNumber) { (result,NoMore) in
+            if  result == true {
+                
+                if(NoMore==true){
+                     self.numberOfRowsInSection=0
+                 self.RefreshRequest(isLoading: false, isHiddenFooter: true)
+                }else{
+                    self.tableViewHead.isHidden=false
+                    self.bottomBar.isHidden=false
+                     self.tabbleView.tableHeaderView = self.tableViewHead
+                     self.numberOfRowsInSection=4
+                    self.SetUIData()
+                    self.RefreshRequest(isLoading: false, isHiddenFooter: true)
+                }
+            }
+            else{
+                self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: true)
+            }
+        }
+    }
+    
+    override func Error_Click() {
+        GetHtpsData()
+    }
+    
+    //设置UI数据
+    func SetUIData(){
+         
+        Pic.ImageLoad(PostUrl:  HttpsUrlImage+Global_UserInfo.HeadImgPath)
+        S_Title.text=viewModel.ListData.Title
+        ProductTitle.text=viewModel.ListData.TitleProduct
+        Describe.text=viewModel.ListData.Describe
+        S_OrderNumber.text="订单编号:"+viewModel.ListData.OrderNumber
+        CreationTime.text="创建时间:"+viewModel.ListData.S_CreateTime
+        PayType.text="支付类型:"+viewModel.ListData.PayType
+        priceLabel.text=viewModel.ListData.OrderAmount.description
+        
+        if(_MyOrderModel?.IsPay=="1"&&_MyOrderModel?.Isevaluate=="0"){    //是否待付款
+            typeButton.setTitle("待付款", for: .normal)
+            typeButton.tag=0   //0 代表付款
+        }
+        if(_MyOrderModel?.IsPay=="0"&&_MyOrderModel?.Isevaluate=="1"){    //是否待付款
+            typeButton.setTitle("待评价", for: .normal)
+            typeButton.tag=1   //1 代表评价
+        }
+    }
+    
+    
     //MARK: tableViewDelegate
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: identiFier, for: indexPath) as! OderContactCell
-        cell.setCell(key: keyArray[indexPath.row], value: ValueArray[indexPath.row])
+        switch indexPath.row {
+        case 0:
+             cell.setCell(key: "联系人", value:viewModel.ListData.TouristName)
+            break
+        case 1:
+            cell.setCell(key: "联系电话", value:viewModel.ListData.TouristPhone)
+            break
+        case 2:
+            cell.setCell(key: "备注", value:viewModel.ListData.Remark)
+            break
+        case 3:
+            cell.setCell(key: "", value:"")
+            break
+        default:
+            break
+        }
+       
         return cell
     }
     //MARK: 支付类型
-    func buttonClick(_ button: UIButton) -> Void {
-        let vc = CommonFunction.ViewControllerWithStoryboardName("OderComment", Identifier: "OderComment") as! OderComment
-        self.navigationController?.show(vc, sender: self  )
-        print("待评价")
+    func buttonClick(_ sender: UIButton) -> Void {
+        if(sender.tag==0){  //待付款
+           let vc =   PayClass(parameters: ["OrderNumber":viewModel.ListData.OrderNumber],Channels: 0)
+            self.present(vc, animated: false, completion: nil)
+        }
+        if(sender.tag==1){  //待评价
+            let vc = CommonFunction.ViewControllerWithStoryboardName("OderComment", Identifier: "OderComment") as! OderComment
+            vc._OrderNumber=viewModel.ListData.OrderNumber
+            self.navigationController?.show(vc, sender: self  )
+        }
+        
     }
 }
