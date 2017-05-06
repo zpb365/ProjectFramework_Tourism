@@ -84,11 +84,10 @@ class PulickIntroduceView: UIView,UITableViewDelegate,UITableViewDataSource {
     //MARK: tableViewDelegate && tableViewDataSource
     func numberOfSections(in tableView: UITableView) -> Int{
         if (self.sectionArray.count) > 0 {
-            print((self.sectionArray.count))
+//            print((self.sectionArray.count))
         }
         return (self.sectionArray.count)
     }
-//    var _numberOfRowsInSection = [3,5]
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (self.sectionArray[section].List?.count)!
     }
@@ -114,13 +113,20 @@ class PulickIntroduceView: UIView,UITableViewDelegate,UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        let str = "我是自适应文本我是自"
-        return str.ContentSize(font: UIFont.systemFont(ofSize: 11), maxSize: CGSize(width: CommonFunction.kScreenWidth - 20, height: 0)).height + 35
+        if (self.sectionArray[indexPath.section].List?.count)! > 0 {
+            let model = self.sectionArray[indexPath.section].List?[indexPath.row]
+            return model!.Describel.ContentSize(font: UIFont.systemFont(ofSize: 11), maxSize: CGSize(width: CommonFunction.kScreenWidth - 20, height: 0)).height + 35
+        }else{
+            return 0
+        }
+        
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = PulickIntroduceCell.init(style: .subtitle, reuseIdentifier: identiFier)
         cell.selectionStyle = .none
-        cell.InitConfig("我是自适应文本我是自")
+        if (self.sectionArray[indexPath.section].List?.count)! > 0 {
+            cell.InitConfig(self.sectionArray[indexPath.section].List?[indexPath.row] as Any)
+        }
         return cell
     }
 }

@@ -18,6 +18,7 @@ class PulickWebCell: UITableViewCell,UIWebViewDelegate {
     lazy var costomWebView:UIWebView={
         let costomWebView = UIWebView.init(frame: CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: 10))
         costomWebView.scrollView.bounces = false
+        costomWebView.scrollView.isScrollEnabled = false
         costomWebView.delegate = self
         costomWebView.backgroundColor = UIColor.white
         
@@ -35,6 +36,7 @@ class PulickWebCell: UITableViewCell,UIWebViewDelegate {
     }
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.clipsToBounds = true
         self.contentView.addSubview(self.costomWebView)
     }
     
@@ -53,7 +55,7 @@ class PulickWebCell: UITableViewCell,UIWebViewDelegate {
         webView.stringByEvaluatingJavaScript(from: str)
         
         let height = webView.scrollView.contentSize.height
-        costomWebView.frame = CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: height)
+        costomWebView.frame = CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: height * 0.72)
         if (myCallbackValue != nil) {
             myCallbackValue!(height * 0.72)//改变字体大小以后会有多余的高度出来  乘以比例 13 px/18 px
         }

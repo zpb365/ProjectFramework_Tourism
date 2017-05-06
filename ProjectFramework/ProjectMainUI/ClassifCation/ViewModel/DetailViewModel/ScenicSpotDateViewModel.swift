@@ -17,6 +17,10 @@ class ScenicSpotDateViewModel {
         CommonFunction.Global_Get(entity: ScenicDatePriceModel(), IsListData: true, url: HttpsUrl+"api/Channels/GetScenicSelectedTimeList", isHUD: false, isHUDMake: false, parameters: parameters as NSDictionary) { (resultModel) in
             
             if(resultModel?.Success==true){
+                if resultModel?.ret == 5{
+                    result?(false)
+                    return
+                }
                 self.ListData = resultModel?.Content   as!  [ScenicDatePriceModel]
                 result?(true)
             }

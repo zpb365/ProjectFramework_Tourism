@@ -106,6 +106,8 @@ class Restaurant: CustomTemplateViewController,PYSearchViewControllerDelegate {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = CommonFunction.ViewControllerWithStoryboardName("RestaurantDetail", Identifier: "RestaurantDetail") as! RestaurantDetail
+        vc.RestaurantID = viewModel.ListData[indexPath.row].RestaurantID
+        vc.ChannelID = ChannelID
         self.navigationController?.show(vc, sender: self  )
     }
     // MARK:    菜单栏

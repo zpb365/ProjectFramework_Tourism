@@ -17,29 +17,41 @@ class RestaurantDetail: CustomTemplateViewController {
         return sectionConment as! UIView
     }()
     
-    lazy var sectionIntroduce: PulickIntroduceView = {
-        let sectionIntroduce = PulickIntroduceView()
-        sectionIntroduce.createTableView(frame: CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: 50))
-        sectionIntroduce.FuncCallbackValue(value: { [weak self](height) in
-            self?.height = height
-            self?.sectionIntroduce.frame = CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: height)
-            self?.sectionIntroduce.customTableView.frame = (self?.sectionIntroduce.bounds)!
+    //酒店设施那些
+    lazy var footderIntroduce: PulickIntroduceView = {
+        let footderIntroduce = PulickIntroduceView()
+        footderIntroduce.createTableView(frame: CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: 50))
+        footderIntroduce.FuncCallbackValue(value: { [weak self](height) in
+            self?.footderHeight = height
+            self?.footderIntroduce.frame = CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: height)
+            self?.footderIntroduce.customTableView.frame = (self?.footderIntroduce.bounds)!
             self?.tableView.reloadData()
-            //            print("介绍的tableview高度====",height)
+            
         })
-        return sectionIntroduce
+        return footderIntroduce
     }()
     
     lazy var sectionView: UIView = {
         let sectionView = UIView.init().headView(width: CommonFunction.kScreenWidth, height: 40, leftViewColor: UIColor.init().TransferStringToColor("#26C6DA"), title: "套餐价格", titleColor: UIColor.black)
         return sectionView
     }()
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewHead: UIView!
     @IBOutlet weak var buttonBar: UIView!
+    @IBOutlet weak var headImage: UIImageView!
+    @IBOutlet weak var adress: UIView!
+    @IBOutlet weak var VRvideo: UIView!
+    @IBOutlet weak var phone: UIImageView!
+    @IBOutlet weak var restaurantName: UILabel!
+    @IBOutlet weak var adressLable: UILabel!
+    @IBOutlet weak var tabLable: UILabel!
+    
     
     let identiFier = "RestaurantComboCell"
     let identifier = "UserCommentCell"
+    let indetifer1 = "cell1"
+    let indetifer2 = "cell2"
     
     var CustomNavBar:UINavigationBar!=nil
     var backBtn:UIButton!=nil
@@ -47,35 +59,122 @@ class RestaurantDetail: CustomTemplateViewController {
     var cellectionBtn:UIButton!=nil
     var shareBtn:UIButton!=nil
     var alph: CGFloat = 0
-    var modelArray = Array<Any>()
-    var height: CGFloat = 50
     var isChange: Bool = false
+    var ChannelID = 0
+    var RestaurantID=0
+    var viewModel = RestaurantDetailViewModel()
+    var cViewModel = CommentViewModel()
+    var PageIndex: Int = 1
+    var PageSize:  Int = 10
+    var IntroduceHeight: CGFloat = 10//餐厅介绍的高度
+    var BookingHeight: CGFloat = 10//预定须知的高度
+    var footderHeight: CGFloat = 0//餐厅
     
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage().ImageWithColor(color: UIColor().TransferStringToColor("#00BDD1"), size: CGSize.init(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)),for: UIBarMetrics.default)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage().ImageWithColor(color: UIColor().TransferStringToColor("#00BDD1"), size: CGSize.init(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)),for: UIBarMetrics.default)
+
+    override func viewDidLayoutSubviews() {
+        headImage.tag = 1000
+        adress.tag = 1001
+        phone.tag = 1002
+        VRvideo.tag = 1003
+        headImage.isUserInteractionEnabled = true
+        phone.isUserInteractionEnabled = true
+        
+        let tap1 = UITapGestureRecognizer.init(target: self, action: #selector(tapClick))
+        let tap2 = UITapGestureRecognizer.init(target: self, action: #selector(tapClick))
+        let tap3 = UITapGestureRecognizer.init(target: self, action: #selector(tapClick))
+        let tap4 = UITapGestureRecognizer.init(target: self, action: #selector(tapClick))
+        headImage.addGestureRecognizer(tap1)
+        adress.addGestureRecognizer(tap2)
+        phone.addGestureRecognizer(tap3)
+        VRvideo.addGestureRecognizer(tap4)
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNavBar()
         self.initUI()
         self.setHeadView()
+        self.GetHtpsData()
     }
-    
+    override func footerRefresh() {
+        PageIndex = PageIndex + 1
+        self.GetCommentData()
+    }
+    //出错操作
+    override func Error_Click() {
+        self.footer.resetNoMoreData()
+        PageIndex = 1
+        self.GetHtpsData()
+    }
+    //MARK: 请求评论数据
+    func GetCommentData() -> Void {
+        cViewModel.GetAllCommentMsg(ChannelsID: ChannelID, ChannelsListID: RestaurantID, PageIndex: PageIndex, PageSize: PageSize) { (result, noMore) in
+            if result == true{
+                //没有更多数据
+                if noMore == true {
+                    self.footer.endRefreshingWithNoMoreData()
+                }
+                
+                 self.RefreshRequest(isLoading: false, isHiddenFooter: false)
+            }else{
+                self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: true)
+            }
+        }
+    }
+    //MARK: 请求网络数据
+    func GetHtpsData() -> Void {
+        viewModel.GetChannelsRestaurantDetails(RestaurantID: RestaurantID, PageIndex: PageIndex, PageSize: PageSize) { (result) in
+            if result == true{
+                self.setData()
+                self.GetCommentData()
+            }else{
+                 self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: true)
+            }
+        }
+    }
+    func setData() -> Void {
+        headImage.ImageLoad(PostUrl: HttpsUrlImage+viewModel.ListData.CoverPhoto)
+        restaurantName.text = " 1/\(viewModel.ListData.ImageList!.count) \(viewModel.ListData.RestaurantName)"
+        adressLable.text = viewModel.ListData.Address
+        tabLable.text = viewModel.ListData.tab
+        
+    }
+    func tapClick(tap:UITapGestureRecognizer) -> Void {
+        switch tap.view!.tag {
+        case 1000:
+            if (viewModel.ListData.ImageList?.count)! > 0 {
+                var Imagelist = Array<String>()//图片组
+                var ImageTab  = Array<String>()//标签组
+                for i in 0..<(viewModel.ListData.ImageList?.count)!{
+                    let model = viewModel.ListData.ImageList?[i]
+                    Imagelist.append(HttpsUrlImage+model!.PhotoUrl)
+                    ImageTab.append(model!.Tab)
+                }
+                
+                let vc = ImagePreviewViewController( ImageUrlList: Imagelist ,IsDescribe: true,DescribeList: ImageTab )
+                self.navigationController?.pushViewController(vc, animated: true )
+            }
+            
+        case 1001:
+            print("跳转到百度地图")
+        case 1002:
+            if viewModel.ListData.Phone != "" {
+                CommonFunction.CallPhone(self, number: viewModel.ListData.Phone)
+            }
+        case 1003:
+            print("跳转到全景动画")
+        default:
+            break
+        }
+    }
+
     //MARK: tableViewDelegate
-    //MARK: 开始拖动时调用的方法
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         isChange = true
-//        self.sectionIntroduce.setData(object: self, textArray: ["酒店政策","设施服务"])//后期网络接口传值
+        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView){
@@ -108,14 +207,17 @@ class RestaurantDetail: CustomTemplateViewController {
             
         }
         if isChange {
-            if (offset < 10 * 80 + tableViewHead.frame.height) {
+            if (offset < CGFloat(viewModel.ListData.RestaurantProduct!.count * 80) + tableViewHead.frame.height) {
                 self.btoomLineMove(tag: 1)
             }
-            if (offset > 10 * 80 + tableViewHead.frame.height && offset < 10 * 80 + tableViewHead.frame.height + height - 40) {
+            if (offset > CGFloat(viewModel.ListData.RestaurantProduct!.count * 80) + tableViewHead.frame.height && offset < CGFloat(viewModel.ListData.RestaurantProduct!.count * 80) + tableViewHead.frame.height + IntroduceHeight - 40) {
                 self.btoomLineMove(tag: 2)
             }
-            if (offset > 10 * 80 + tableViewHead.frame.height + height) {
+            if (offset > CGFloat(viewModel.ListData.RestaurantProduct!.count * 80) + tableViewHead.frame.height + IntroduceHeight && offset < CGFloat(viewModel.ListData.RestaurantProduct!.count * 80) + tableViewHead.frame.height + IntroduceHeight + BookingHeight) {
                 self.btoomLineMove(tag: 3)
+            }
+            if (offset > CGFloat(viewModel.ListData.RestaurantProduct!.count * 80) + tableViewHead.frame.height + IntroduceHeight + BookingHeight) {
+                self.btoomLineMove(tag: 4)
             }
         }
     }
@@ -128,42 +230,114 @@ class RestaurantDetail: CustomTemplateViewController {
     }
     //组数
     override func numberOfSections(in tableView: UITableView) -> Int {        
-        return 3
+        return 4
     }
-    var _viewForHeaderInSection = [UIView(),UIView(),UIView()]
+    var _viewForHeaderInSection = [UIView(),UIView(),UIView(),UIView()]
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
         _viewForHeaderInSection[0] = sectionView
-        _viewForHeaderInSection[1] = sectionIntroduce
-        _viewForHeaderInSection[2] = sectionConment
+        _viewForHeaderInSection[1] = UIView().setIntroduceView(height: 40, title: "餐厅介绍")
+        _viewForHeaderInSection[2] = UIView().setIntroduceView(height: 40, title: "预定介绍")
+        _viewForHeaderInSection[3] = sectionConment
         return _viewForHeaderInSection[section]
     }
-    var _heightForHeaderInSection = [40,50,50]
+    var _heightForHeaderInSection = [40,40,40,50]
     //组头高
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        _heightForHeaderInSection[1] = Int(height) > 50 ? Int(height) : 50
         return CGFloat(_heightForHeaderInSection[section])
     }
-    var _numberOfRowsInSection = [10,0,10]
+    //组尾
+    var isSetData = false
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section == 1 {
+            if viewModel.ListData.DescribeName != nil {
+                if isSetData == false {
+                    self.footderIntroduce.setData(object: viewModel.ListData.DescribeName as Any)
+                    isSetData = true
+                }
+                return self.footderIntroduce
+            }else{
+                return UIView()
+            }
+        }else{
+            return UIView()
+            
+        }
+    }
+    //组尾高
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 1 {
+            if viewModel.ListData.DescribeName != nil {
+                return self.footderHeight
+            }else{
+                return 0.0001
+            }
+        }else{
+            return 0.0001
+        }
+    }
+    var _numberOfRowsInSection = [0,1,1,0]
     //组个数
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        if viewModel.ListData.RestaurantProduct != nil {
+            _numberOfRowsInSection[0] = (viewModel.ListData.RestaurantProduct?.count)!
+        }
+        if cViewModel.ListData.count > 0 {
+            _numberOfRowsInSection[3] = cViewModel.ListData.count
+        }
         return _numberOfRowsInSection[section]
     }
-    var _heightForRowAt = [CGFloat(80),CGFloat(0),CGFloat(0)]
+    var _heightForRowAt = [CGFloat(80),CGFloat(0),CGFloat(0),CGFloat(0)]
     //行高
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        let model = self.modelArray[0] as! UserCommentModel //暂时为了显示数据  有接口就移除
-        _heightForRowAt[2] = self.tableView.getHeightWithCell(lableWidth: CommonFunction.kScreenWidth - 35, commont: model.comment, imageArray: model.imageArray, showCount: model.imageArray.count, rowCount: 4, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10) + 48 + 10
+        _heightForRowAt[1] = IntroduceHeight > CGFloat(10) ? IntroduceHeight :CGFloat(0)
+        _heightForRowAt[2] = BookingHeight > CGFloat(10) ? IntroduceHeight :CGFloat(0)
+        if cViewModel.ListData.count > 0 {
+            let model = cViewModel.ListData[indexPath.row]
+            _heightForRowAt[3] = self.tableView.getHeightWithCell(lableWidth: CommonFunction.kScreenWidth - 35, commont: model.ContentMsg, imageArray: [], showCount: 0, rowCount: 4, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10) + 48 + 10
+        }
         return _heightForRowAt[indexPath.section]
     }
     //数据源
+    var isfirst1: Bool = false
+    var isfirst2: Bool = false
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->UITableViewCell{
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier: identiFier, for: indexPath) as! RestaurantComboCell
+            cell.InitConfig(viewModel.ListData.RestaurantProduct?[indexPath.row] as  Any)
+            cell.FuncCallbackValue(value: {[weak self] (str) in
+                let vc = CommonFunction.ViewControllerWithStoryboardName("RestaurantOderWrite", Identifier: "RestaurantOderWrite") as! RestaurantOderWrite
+                vc.ResturantProduct = self?.viewModel.ListData.RestaurantProduct?[indexPath.row]
+                self?.navigationController?.show(vc, sender: self  )
+            })
             return cell
         }
-        if (indexPath.section == 2){
+        if (indexPath.section == 1) {
+            let cell = tableView.dequeueReusableCell(withIdentifier: indetifer1, for: indexPath)as!PulickWebCell
+            if viewModel.ListData.Introduce != "" {
+                cell.loadHtmlString(html: viewModel.ListData.Introduce, isFirst: isfirst1)
+                isfirst1 = true
+                cell.FuncCallbackValue(value: {[weak self] (height) in
+                    self?.IntroduceHeight = height
+                    self?.tableView.reloadData()
+                })
+            }
+        }
+        if (indexPath.section == 2) {
+            let cell = tableView.dequeueReusableCell(withIdentifier: indetifer2, for: indexPath)as!PulickWebCell
+            if viewModel.ListData.BookInformation != "" {
+                cell.loadHtmlString(html: viewModel.ListData.Introduce, isFirst: isfirst2)
+                isfirst2 = true
+                cell.FuncCallbackValue(value: {[weak self] (height) in
+                    self?.BookingHeight = height
+                    self?.tableView.reloadData()
+                })
+            }
+        }
+        if (indexPath.section == 3){
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)as!UserCommentCell
-            cell.InitConfig(self.modelArray[0])
+            if cViewModel.ListData.count > 0 {
+                cell.InitConfig(cViewModel.ListData[indexPath.row] as Any)
+            }
             return cell
         }
         else{
@@ -179,19 +353,27 @@ class RestaurantDetail: CustomTemplateViewController {
             let line = self.buttonBar.viewWithTag(666)
             line?.center.x = button.center.x
         }
-        //  1 预定餐厅   2 餐厅简介  3 用户点评
+        //  1 预定餐厅   2 餐厅简介  3 预定须知 4 用户评论
         
-        if (button.tag == 2) {
-//            self.sectionIntroduce.setData(object: self, textArray: ["酒店政策","设施服务"])//后期网络接口传值
-            self.tableView.setContentOffset(CGPoint.init(x: 0, y: 80 * 10 + tableViewHead.frame.height - 64), animated: true)
+        if (button.tag == 1) {
+
+            self.tableView.setContentOffset(CGPoint.init(x: 0, y: tableViewHead.frame.height - 104), animated: true)
+        }else{
+            if button.tag - 1 == 3 {
+                if viewModel.ListData.CommentMes!.count == 0 {
+                    self.tableView.setContentOffset(CGPoint.init(x: 0, y: CGFloat(viewModel.ListData.RestaurantProduct!.count * 80) + tableViewHead.frame.height + IntroduceHeight + BookingHeight + 80 + footderHeight), animated: true)
+                }else{
+                    self.tableView.scrollToRow(at: IndexPath(row: 0, section: button.tag - 1), at: .middle, animated: true)
+                }
+            }else{
+                self.tableView.scrollToRow(at: IndexPath(row: 0, section: button.tag - 1), at: .middle, animated: true)
+            }
         }
-        else {
-            self.tableView.scrollToRow(at: IndexPath(row: 0, section: button.tag - 1), at: .middle, animated: true)
-        }
+
     }
     //MARK: 设置头部
     func setHeadView() -> Void {
-        let titleArray: Array=["预定餐饮","餐厅简介","用户点评"]
+        let titleArray: Array=["预定餐饮","餐厅简介","预定须知","用户点评"]
         for i in 0..<titleArray.count {
             let title = titleArray[i]
             let button = UIButton.init(type: .system)
@@ -217,17 +399,16 @@ class RestaurantDetail: CustomTemplateViewController {
 
     //MARK: initUI
     func initUI() -> Void {
-        let model = UserCommentModel()
-        model.comment = "呵呵呵呵呵呵呵呵呵呵额呵呵撒会受到hi欧委会IQ哦好滴哦我去hi噢hi噢hi噢hi哦我回去低耦合我我哦青海地区哦和我我odhqioifuheui手动切换为我哦亲hi殴打hi哦我去hi哦"
-        model.imageArray = ["icon0.jpg","icon0.jpg","icon0.jpg","icon0.jpg","icon0.jpg","icon0.jpg","icon0.jpg"]
-        model.nickName = "住朋购友"
-        modelArray.append(model)
+
         
         self.InitCongif(tableView)
         self.tableView.frame = CommonFunction.CGRect_fram(0, y:0, w: self.view.frame.width, h: self.view.frame.height)
         self.tableView.tableHeaderView = tableViewHead
+        self.tableView.tableFooterView = UIView()
         self.header.isHidden = true
         self.tableView.register(UserCommentCell.self, forCellReuseIdentifier: identifier)
+        self.tableView.register(PulickWebCell.self, forCellReuseIdentifier: indetifer1)
+        self.tableView.register(PulickWebCell.self, forCellReuseIdentifier: indetifer2)
     }
     //MARK: 设置导航栏
     func setNavBar() -> Void {

@@ -23,4 +23,5 @@ class UserInfoModel: NSObject {
     var UserName=""
     var NickName=""
     var UserLogo=""
+    var Sex=""
 }

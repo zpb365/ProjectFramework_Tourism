@@ -16,7 +16,7 @@ class DateSectionView: UIView {
     
     var day=0
     
-    func setDate(startYear:Int ,startMoon:Int ,startDay:Int,endYear:Int ,endMoon:Int,endDay:Int) -> Void {
+    func setDate(startYear:Int ,startMoon:Int ,startDay:Int,endYear:Int ,endMoon:Int,endDay:Int) -> Int {
         
         //一年结束且开始的情况
         if startMoon == 12 && endMoon == 1 {
@@ -58,6 +58,7 @@ class DateSectionView: UIView {
         startButon.setTitle("\(startMoon)月\(startDay)日", for: .normal)
         endButton.setTitle("\(endMoon)月\(endDay)日", for: .normal)
         dateCount.text = "共\(day)晚"
+        return day
     }
 
 }

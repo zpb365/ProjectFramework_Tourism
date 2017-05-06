@@ -41,10 +41,8 @@ class PulickWebView: UIView,UIWebViewDelegate{
      func webViewDidFinishLoad(_ webView: UIWebView){
         print("加载完成")
         
-        var str = "document.body.style.fontSize = '13px';"
+        let str = "document.body.style.fontSize = '13px';"
         
-        webView.stringByEvaluatingJavaScript(from: str)
-        str="<style> img {max-width:400px;height:auto'}</style>"
         webView.stringByEvaluatingJavaScript(from: str)
         
         let height = webView.scrollView.contentSize.height

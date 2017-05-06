@@ -142,7 +142,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="手机号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GEl-wu-HCq">
                                         <rect key="frame" x="9" y="15" width="50" height="21"/>
@@ -224,6 +224,7 @@
                         <outlet property="backbtn" destination="2HY-5x-b3R" id="anA-Xf-lar"/>
                         <outlet property="detailLable" destination="F2z-86-Erf" id="oOC-ic-jB9"/>
                         <outlet property="nextBtn" destination="T6D-8m-sr6" id="HhK-MD-1wW"/>
+                        <outlet property="nextView" destination="Mbb-b9-mL4" id="emO-t8-zTb"/>
                         <outlet property="numberLable" destination="JwD-Ld-pEH" id="W19-rJ-Q5u"/>
                         <outlet property="payforBtn" destination="qFD-Wf-HcU" id="zI5-bt-5Hh"/>
                         <outlet property="phoneTextField" destination="G8e-y7-LaE" id="4jq-RB-aHl"/>

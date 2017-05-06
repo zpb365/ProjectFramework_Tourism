@@ -13,5 +13,11 @@ class CommentSectionView: UIView {
     @IBOutlet weak var Satisfaction: UILabel!
     @IBOutlet weak var conmontCount: UILabel!
     
-    
+    func setData(scorce:CGFloat , CommentCount:Int) -> Void {
+        if scorce != 0 {
+            let num = scorce / 5 * 100
+            Satisfaction.text = "\(num)%满意"
+        }
+        conmontCount.text = "共\(CommentCount)人点评"
+    }
 }

@@ -141,7 +141,7 @@ class UpLoadPicManagerView: UIView, UICollectionViewDelegate, UICollectionViewDa
         for url in imgUrl {
             let data = NSData(contentsOf: URL(string: HttpsUrlImage+url)!)
             if(data != nil ){
-               let img = UIImage(data: data! as Data)
+               let img = UIImage(data: data as! Data)
                 if(img != nil ) {
                         self.ImgItem.append(img!)
                 }else{

@@ -63,7 +63,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="ProductLable" destination="m6b-c6-9t4" id="aPC-aj-quP"/>
                         <outlet property="headImage" destination="cdk-UQ-DqQ" id="cLb-3M-qMa"/>
+                        <outlet property="imageCount" destination="CAP-el-0Xg" id="KcW-wk-1Bj"/>
                         <outlet property="tableView" destination="a9y-kR-Vl5" id="5Tg-4A-g8r"/>
                         <outlet property="tableViewHead" destination="KqV-w2-AGQ" id="TzK-VO-BhD"/>
                     </connections>

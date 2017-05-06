@@ -14,7 +14,7 @@ class ScenicDetailViewModel {
     func GetChannelsScenicDetails(ScenicID:Int,result:((_ result:Bool?) -> Void)?) {
         let parameters=["ScenicID":ScenicID]
         
-        CommonFunction.Global_Get(entity: ScenicDetailModel(), IsListData: false, url: HttpsUrl+"api/Channels/GetChannelsScenicDetails", isHUD: false, isHUDMake: false, parameters: parameters as NSDictionary) { (resultModel) in
+        CommonFunction.Global_Get(entity: ScenicDetailModel(), IsListData: false, url: HttpsUrl+"api/Channels/GetChannelsScenicDetails", isHUD: true, isHUDMake: false, parameters: parameters as NSDictionary) { (resultModel) in
             if(resultModel?.Success==true){
                 
                 self.ListData = resultModel?.Content   as!  ScenicDetailModel

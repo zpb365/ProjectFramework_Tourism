@@ -24,6 +24,7 @@ class ScenicSpotOderWrite: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var zhixuBtn: UIButton!//购买须知
     @IBOutlet weak var payforBtn: UIButton!//支付订单
     @IBOutlet weak var nextBtn: UIButton!
+    @IBOutlet weak var nextView: UIView!
     
     
     var ticketItem: ScenicTicketList?=nil
@@ -48,6 +49,21 @@ class ScenicSpotOderWrite: UIViewController,UITextFieldDelegate {
         trueNameTextField.delegate = self
         phoneTextField.delegate    = self
         
+        let tap = UITapGestureRecognizer.init(target: self, action: #selector(tapClick))
+        nextView.addGestureRecognizer(tap)
+        
+        
+    }
+    func tapClick() -> Void {
+        var title = [String]()
+        for i in 0..<10 {
+            title.append((i+1).description)
+        }
+        CommonFunction.ActionSheet(ShowTitle: title,sheetWithTitle:"请选择购买的张数" ,ItemsTextColor: UIColor().TransferStringToColor("#52B0E9"), ReturnSelectedIndex: { (index, string) in
+            self.Number = index + 1
+            self.setData()
+        })
+        print("下一步")
     }
     //MARK: 设置数据
     func setData() -> Void {

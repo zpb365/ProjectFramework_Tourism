@@ -10,10 +10,22 @@ import UIKit
 
 class HotelRoomReserveCell: UITableViewCell {
 
+    typealias CallbackValue=(_ value:String)->Void //类似于OC中的typedef
+    var myCallbackValue:CallbackValue?  //声明一个闭包 类似OC的Block属性
+    func  FuncCallbackValue(value:CallbackValue?){
+        myCallbackValue = value //返回值
+    }
+    @IBAction func PatforClick(_ sender: Any) {
+        if myCallbackValue != nil{
+            myCallbackValue!("")
+        }
+    }
+    
     @IBOutlet weak var imageIcon: UIImageView!
     @IBOutlet weak var titleLable: UILabel!
     @IBOutlet weak var describeLable: UILabel!
     @IBOutlet weak var priceLable: UILabel!
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,7 +40,7 @@ class HotelRoomReserveCell: UITableViewCell {
         let model = cell as! HotelProduct_List
         imageIcon.ImageLoad(PostUrl: HttpsUrlImage+model.CoverPhoto)
         titleLable.text = model.Title
-        describeLable.text = "\(model.BedType)|\(model.Network)|\(model.Acreage)|\(model.Policy)"
+        describeLable.text = "\(model.BedType) | \(model.Network) | \(model.Acreage) | \(model.Policy)"
         priceLable.text = "¥\(model.Price)"
     }
 }

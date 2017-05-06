@@ -46,11 +46,13 @@ class UserCommentCell: UITableViewCell {
         return timeLable
     }()
     //评分
-    lazy var startView: UIImageView = {
-        let startView = UIImageView.init(frame: CommonFunction.CGRect_fram(self.userNickName.frame.minX, y: self.userNickName.frame.maxY+5, w: 80, h: 16))
-        startView.backgroundColor = UIColor.blue
-        return startView
+    lazy var startView: XHStarRateView = {
+        let startView = XHStarRateView.init(frame: CommonFunction.CGRect_fram(self.userNickName.frame.minX, y: self.userNickName.frame.maxY+3, w: 80, h: 12), numberOfStars: 5, rateStyle: .HalfStar, isAnination: true, delegate: self)
+//        startView?.backgroundColor = UIColor.blue
+        startView!.isUserInteractionEnabled = false
+        return startView!
     }()
+
     //评论内容
     lazy var commentLable: UILabel = {
         let commentLable = UILabel.init(frame: CommonFunction.CGRect_fram(15, y: self.userIcon.frame.maxY + 5, w: CommonFunction.kScreenWidth - 30, h:0 ))
@@ -94,20 +96,30 @@ class UserCommentCell: UITableViewCell {
     
     override func InitConfig(_ cell: Any) {
         if (!flag){
-            let model = cell as! UserCommentModel
-            let nickNameWidth = model.nickName.getContenSizeWidth(font: UIFont.systemFont(ofSize: 11))
-            let commontHeight = model.comment.ContentSize(font: UIFont.systemFont(ofSize: 11), maxSize: CGSize(width: CommonFunction.kScreenWidth - 35, height: 0)).height
-            let photoViewHeight = UITableView().getCommentPhotoViewHeight(imageArray: model.imageArray, showCount: model.imageArray.count, rowCount: 4, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10)
+            let model = cell as! CommentMeModel
+            let nickNameWidth = model.UserInfo?.NickName.getContenSizeWidth(font: UIFont.systemFont(ofSize: 11))
+            let commontHeight = model.ContentMsg.ContentSize(font: UIFont.systemFont(ofSize: 11), maxSize: CGSize(width: CommonFunction.kScreenWidth - 35, height: 0)).height
+//            let photoViewHeight = UITableView().getCommentPhotoViewHeight(imageArray: [], showCount: 0, rowCount: 4, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10)
             
-            userNickName.frame = CommonFunction.CGRect_fram(userNickName.frame.origin.x, y: userNickName.frame.origin.y, w: nickNameWidth, h: userNickName.frame.height)
+            userNickName.frame = CommonFunction.CGRect_fram(userNickName.frame.origin.x, y: userNickName.frame.origin.y, w: nickNameWidth!, h: userNickName.frame.height)
             userSexy.frame = CommonFunction.CGRect_fram(userNickName.frame.maxX + 5, y: 5, w: 15, h: 15)
             commentLable.frame = CommonFunction.CGRect_fram(commentLable.frame.origin.x, y: commentLable.frame.origin.y, w: CommonFunction.kScreenWidth - 35, h: commontHeight)
-            photoView.frame = CommonFunction.CGRect_fram(commentLable.frame.origin.x, y: commentLable.frame.maxY + 5, w: CommonFunction.kScreenWidth - 35, h: photoViewHeight)
-            commentLable.text = model.comment
-            if model.imageArray.count > 0 {
-                _ = photoView.initCommentPhotoView(model.imageArray, showCount: model.imageArray.count, rowCount: 4, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10)                
-                flag = true
+//            photoView.frame = CommonFunction.CGRect_fram(commentLable.frame.origin.x, y: commentLable.frame.maxY + 5, w: CommonFunction.kScreenWidth - 35, h: photoViewHeight)
+            commentLable.text = model.ContentMsg
+            userNickName.text = model.UserInfo?.NickName
+            startView.setscore(CGFloat(model.Score))
+            userIcon.ImageLoad(PostUrl: HttpsUrlImage+model.UserInfo!.UserLogo)
+            timeLable.text = model.CommentTime
+            if model.UserInfo?.Sex == "男" {
+                userSexy.image = UIImage.init(named: "sexy_man")
+            }else{
+                userSexy.image = UIImage.init(named: "sexy_women")
             }
+            //有图片时候的UI
+//            if model.imageArray.count > 0 {
+//                _ = photoView.initCommentPhotoView(model.imageArray, showCount: model.imageArray.count, rowCount: 4, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10)                
+                flag = true
+//            }
         }
     }
 }

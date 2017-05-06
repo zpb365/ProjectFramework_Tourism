@@ -70,3 +70,4 @@
 #import "PanoramaViewController.h"      // 全景图
 #import "HcdPopMenu.h"              //动画菜单
 
+#import "ZFChooseTimeViewController.h"//酒店时间选择

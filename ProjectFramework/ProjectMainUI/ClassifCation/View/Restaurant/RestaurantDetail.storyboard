@@ -81,7 +81,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ZFBlogo" translatesAutoresizingMaskIntoConstraints="NO" id="6gp-52-HVm">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="phone" translatesAutoresizingMaskIntoConstraints="NO" id="6gp-52-HVm">
                                                     <rect key="frame" x="342" y="10" width="20" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -185,6 +185,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RDW-I3-yzc">
                                                     <rect key="frame" x="314" y="25.5" width="55.5" height="44.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                                    <connections>
+                                                        <action selector="parForClick:" destination="aD6-O5-hjK" eventType="touchUpInside" id="0Ms-JO-459"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="998" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvd-HL-j8x">
                                                     <rect key="frame" x="161" y="53" width="53" height="21"/>
@@ -197,6 +200,10 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="disCountPrice" destination="tvd-HL-j8x" id="0pU-ke-PMt"/>
+                                            <outlet property="mainImage" destination="1Hj-3e-8Jf" id="FGH-Rt-3Qg"/>
+                                            <outlet property="price" destination="Tjh-lX-XLl" id="BpY-ru-hWg"/>
+                                            <outlet property="tab" destination="nwG-6m-Hey" id="m6E-oS-6wb"/>
+                                            <outlet property="titleLable" destination="ouc-py-dBM" id="3Bk-nH-ac4"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -205,7 +212,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="VRvideo" destination="b9k-f7-ESs" id="CbR-Hv-S5h"/>
+                        <outlet property="adress" destination="mST-hv-gT3" id="Pne-qF-L5m"/>
+                        <outlet property="adressLable" destination="wBH-55-929" id="bA6-0w-VuY"/>
                         <outlet property="buttonBar" destination="mcC-Le-GAF" id="y7w-PR-yZd"/>
+                        <outlet property="headImage" destination="Jon-wE-W1y" id="CPx-4G-Nlm"/>
+                        <outlet property="phone" destination="6gp-52-HVm" id="6sA-lF-u2u"/>
+                        <outlet property="restaurantName" destination="e5i-lt-TOr" id="ZUK-VC-dpR"/>
+                        <outlet property="tabLable" destination="1CN-5a-OZy" id="R4m-xp-Wcd"/>
                         <outlet property="tableView" destination="O7k-Tq-hrE" id="t7r-qH-r0U"/>
                         <outlet property="tableViewHead" destination="c4H-wm-06V" id="9E1-Wz-Xdj"/>
                     </connections>
@@ -216,9 +230,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ZFBlogo" width="300" height="300"/>
         <image name="address1" width="32" height="32"/>
         <image name="ionicons" width="138" height="138"/>
+        <image name="phone" width="32" height="32"/>
         <image name="taopiao" width="24" height="24"/>
         <image name="testimg" width="800" height="530"/>
         <image name="vedio" width="16" height="16"/>

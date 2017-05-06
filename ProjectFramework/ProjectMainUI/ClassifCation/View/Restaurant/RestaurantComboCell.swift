@@ -10,6 +10,12 @@ import UIKit
 
 class RestaurantComboCell: UITableViewCell {
     
+    typealias CallbackValue=(_ value:String)->Void //类似于OC中的typedef
+    var myCallbackValue:CallbackValue?  //声明一个闭包 类似OC的Block属性
+    func  FuncCallbackValue(value:CallbackValue?){
+        myCallbackValue = value //返回值
+    }
+    
     //线
     lazy var line: UILabel = {
         let line = UILabel.init()
@@ -17,7 +23,16 @@ class RestaurantComboCell: UITableViewCell {
         return line
     }()
     @IBOutlet weak var disCountPrice: UILabel!
+    @IBOutlet weak var mainImage: UIImageView!
+    @IBOutlet weak var titleLable: UILabel!
+    @IBOutlet weak var tab: UILabel!
+    @IBOutlet weak var price: UILabel!
     
+    @IBAction func parForClick(_ sender: Any) {
+        if myCallbackValue != nil{
+            myCallbackValue!("")
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -28,7 +43,14 @@ class RestaurantComboCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
-
+    
+    override func InitConfig(_ cell: Any) {
+        let model = cell as! RestaurantProduct_List
+        titleLable.text = model.Title
+        mainImage.ImageLoad(PostUrl: HttpsUrlImage+model.CoverPhoto)
+        price.text = "¥\(model.DefaultPrice)"
+        disCountPrice.text = "¥\(model.OriginalPrice)"
+        tab.text = model.Description+"|"+model.Reservation
+    }
 }

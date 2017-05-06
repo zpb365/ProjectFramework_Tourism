@@ -24,7 +24,7 @@ class HotelFacilities: UIViewController,UITableViewDelegate,UITableViewDataSourc
     }()
     lazy var payforBtn: UIButton = {
         let payforBtn = UIButton.init(type: .system)
-        payforBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        payforBtn.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         payforBtn.backgroundColor = UIColor().TransferStringToColor("#FF5722")
         payforBtn.setTitle("立即订购", for: .normal)
         payforBtn.setTitleColor(UIColor.white, for: .normal)
@@ -48,7 +48,7 @@ class HotelFacilities: UIViewController,UITableViewDelegate,UITableViewDataSourc
         let textView = UITextView.init()
         textView.isUserInteractionEnabled = false
         textView.backgroundColor = UIColor().TransferStringToColor("#F0F0F2")
-        textView.text = "1.正确选择酒店：根据公司差旅政策选择重点城市的协议酒店。员工可以根据出差地的具体位置，与差旅平台中标志性建筑或当地公司等信息相匹配后搜索酒店资源并选择符合出差标准的酒店下单。差旅平台所提供的会员酒店资源目前正处于系统维护中，可以通过国旅服务热线进行预订。2.协议价格使用：a差旅平台首页有“经济型酒店”专区。登陆后点击链接可查询宝钢已签集团大客户协议的酒店资源、对应协议折扣及优惠条件（链接所显示的酒店官网价格属于散客门市价）。预订可通过国旅服务热线进行预订。b隔月预订差旅协议酒店，由于部分酒店资源会有阶段性变价，最终请以国旅确认短信为准。3.通常情况下酒店在房态紧张的情况下会要求客人预支房款。例如：特殊时期、大型展会活动（旅游文化节等）、黄金周期间。a在国旅确认订单成功生成同时，此类订单是需要全额支付房费。如未在指定最晚时间之前付款，订单将自动取消。b如客人在酒店前台延住，请通知国旅客服，否则将无法继续享受优惠价格，出现的价格分歧国旅将不负任何责任。c正常情况下订单成功支付后是不可以取消及变更。如遇不可抗力因素需要取消订单，请及时联系国旅客服，我们将尽力与酒店协调，最终以酒店回复为准。（担保订单开具的是“宝钢集团上海国际旅行社”提供的发票）"
+        textView.text = "本平台只是提供产品展示，不参与运营过程，一旦出现费用纠纷将由消费者承担，本平台 不承担任何后果。"
         return textView
     }()
     lazy var deleteBtn: UIButton = {
@@ -62,8 +62,20 @@ class HotelFacilities: UIViewController,UITableViewDelegate,UITableViewDataSourc
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewHead: UIView!
     @IBOutlet weak var headImage: UIImageView!
+    @IBOutlet weak var ProductLable: UILabel!
+    @IBOutlet weak var imageCount: UILabel!
     
     let identiFier = "PulickIntroduceCell"//政策和设施服务那些
+    var startYear=0
+    var startMoon=0
+    var startDay=0
+    var endYear=0
+    var endMoon=0
+    var endDay=0
+    var DateTimeBegin = ""
+    var DateTimeEnd = ""
+    var totalNumber = 0
+    var HotelProduct: HotelProduct_List?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,26 +83,37 @@ class HotelFacilities: UIViewController,UITableViewDelegate,UITableViewDataSourc
         self.initUI()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage().ImageWithColor(color: UIColor().TransferStringToColor("#5E7D8A"), size: CGSize.init(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)),for: UIBarMetrics.default)
         
     }
+    override func viewDidLayoutSubviews() {
+        ProductLable.text = HotelProduct?.Title
+        headImage.ImageLoad(PostUrl: HttpsUrlImage+HotelProduct!.CoverPhoto)
+        if (HotelProduct?.ImageList?.count)! > 0 {
+            imageCount.text = " 1/\((HotelProduct?.ImageList?.count)!) "
+        }else{
+            imageCount.text = ""
+        }
+        payforBtn.setTitle("¥\(HotelProduct!.Price)  立即订购", for: .normal)
+    }
     //MARK: 图片点击事件
     func tapClick(tap:UITapGestureRecognizer) -> Void {
-        let urllist=["http://pic9.nipic.com/20100902/2029588_234330095230_2.jpg"
-            ,"http://pic1a.nipic.com/2008-08-26/200882614319401_2.jpg"
-            ,"http://www.ahhnh.com/data/upload/2015-10/2015101940975833.jpg"
-            ,"http://pic10.nipic.com/20100929/4879567_114926982000_2.jpg"
-            ,"http://img2.imgtn.bdimg.com/it/u=2081796248,4191591232&fm=21&gp=0.jpg"]
-        let describeList=["张三","李四","李四","李四","李四"]
-        let vc = ImagePreviewViewController( ImageUrlList: urllist ,IsDescribe: true,DescribeList: describeList )
-        self.navigationController?.pushViewController(vc, animated: true )
+        
+        if (HotelProduct?.ImageList?.count)! > 0 {
+            var Imagelist = Array<String>()//图片组
+            var ImageTab  = Array<String>()//标签组
+            for i in 0..<(HotelProduct?.ImageList?.count)! {
+                let model = HotelProduct?.ImageList?[i]
+                Imagelist.append(HttpsUrlImage+model!.PhotoUrl)
+                ImageTab.append(model!.PhotoDescribe)
+            }
+            let vc = ImagePreviewViewController( ImageUrlList: Imagelist ,IsDescribe: true,DescribeList: ImageTab )
+            self.navigationController?.pushViewController(vc, animated: true )
+
+        }
     }
     //MARK: initUI
     func initUI() -> Void {
@@ -127,6 +150,17 @@ class HotelFacilities: UIViewController,UITableViewDelegate,UITableViewDataSourc
     func buttonClick(button: UIButton) -> Void {
         if button.tag == 100 {
             self.showInstructionsView()
+        }
+        if button.tag == 101 {
+            if HotelProduct?.IsInventory == true {
+                let vc = CommonFunction.ViewControllerWithStoryboardName("HotelOderWrite", Identifier: "HotelOderWrite") as! HotelOderWrite
+                vc.HotelProduct = HotelProduct
+                vc.totalNumber  = totalNumber
+                vc.text         = "\(startMoon)月\(startDay)日 - \(endMoon)月\(endDay)日"
+                self.navigationController?.show(vc, sender: self  )
+            }else{
+                CommonFunction.HUD("该产品暂无库存！", type: .error)
+            }
         }
         if button.tag == 102 {
             instructionsView.removeFromSuperview()
@@ -168,16 +202,22 @@ class HotelFacilities: UIViewController,UITableViewDelegate,UITableViewDataSourc
     }
     //MARK: tableViewDelegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return (HotelProduct?.DescribeName?.count)!
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        let str = "我是自适应文本我是自"
-        return str.ContentSize(font: UIFont.systemFont(ofSize: 11), maxSize: CGSize(width: CommonFunction.kScreenWidth - 20, height: 0)).height + 35
+        if (HotelProduct?.DescribeName?.count)! > 0 {
+            return (HotelProduct?.DescribeName?[indexPath.row].Describel.ContentSize(font: UIFont.systemFont(ofSize: 11), maxSize: CGSize(width: CommonFunction.kScreenWidth - 20, height: 0)).height)! + 35
+        }else{
+            return 0
+        }
+        
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = PulickIntroduceCell.init(style: .subtitle, reuseIdentifier: identiFier)
         cell.selectionStyle = .none
-        cell.InitConfig("我是自适应文本我是自")
+        if (HotelProduct?.DescribeName?.count)! > 0 {
+            cell.InitConfig(HotelProduct?.DescribeName?[indexPath.row] as Any)
+        }
         return cell
     }
 }

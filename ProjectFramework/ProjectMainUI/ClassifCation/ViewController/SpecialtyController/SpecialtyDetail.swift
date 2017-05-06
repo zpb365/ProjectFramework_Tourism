@@ -108,8 +108,8 @@ class SpecialtyDetail: CustomTemplateViewController {
     var _heightForRowAt = [CGFloat(80),CGFloat(0),CGFloat(0)]
     //行高
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        let model = self.modelArray[0] as! UserCommentModel //暂时为了显示数据  有接口就移除
-        _heightForRowAt[2] = self.tableView.getHeightWithCell(lableWidth: CommonFunction.kScreenWidth - 35, commont: model.comment, imageArray: model.imageArray, showCount: model.imageArray.count, rowCount: 4, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10) + 48 + 10
+//        let model = self.modelArray[0] as! UserCommentModel //暂时为了显示数据  有接口就移除
+//        _heightForRowAt[2] = self.tableView.getHeightWithCell(lableWidth: CommonFunction.kScreenWidth - 35, commont: model.comment, imageArray: model.imageArray, showCount: model.imageArray.count, rowCount: 4, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10) + 48 + 10
         return _heightForRowAt[indexPath.section]
     }
     //数据源
@@ -165,11 +165,11 @@ class SpecialtyDetail: CustomTemplateViewController {
 
     //MARK: initUI
     func initUI() -> Void {
-        let model = UserCommentModel()
-        model.comment = "呵呵呵呵呵呵呵呵呵呵额呵呵撒会受到hi欧委会IQ哦好滴哦我去hi噢hi噢hi噢hi哦我回去低耦合我我哦青海地区哦和我我odhqioifuheui手动切换为我哦亲hi殴打hi哦我去hi哦"
-        model.imageArray = ["icon0.jpg","icon0.jpg","icon0.jpg","icon0.jpg","icon0.jpg","icon0.jpg","icon0.jpg"]
-        model.nickName = "住朋购友"
-        modelArray.append(model)
+//        let model = UserCommentModel()
+//        model.comment = "呵呵呵呵呵呵呵呵呵呵额呵呵撒会受到hi欧委会IQ哦好滴哦我去hi噢hi噢hi噢hi哦我回去低耦合我我哦青海地区哦和我我odhqioifuheui手动切换为我哦亲hi殴打hi哦我去hi哦"
+//        model.imageArray = ["icon0.jpg","icon0.jpg","icon0.jpg","icon0.jpg","icon0.jpg","icon0.jpg","icon0.jpg"]
+//        model.nickName = "住朋购友"
+//        modelArray.append(model)
         
         self.InitCongif(tableView)
         self.tableView.frame = CommonFunction.CGRect_fram(0, y:0, w: self.view.frame.width, h: self.view.frame.height)

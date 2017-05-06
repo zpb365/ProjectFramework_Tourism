@@ -159,5 +159,7 @@ typedef void(^completeBlock)(CGFloat currentScore);
     
     [self setNeedsLayout];
 }
-
+-(void)setscore:(CGFloat)score{
+    [self setCurrentScore:score];
+}
 @end

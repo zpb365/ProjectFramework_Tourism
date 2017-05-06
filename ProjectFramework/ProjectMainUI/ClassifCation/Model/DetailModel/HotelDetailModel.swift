@@ -20,7 +20,7 @@ class HotelDetailModel: NSObject {
     var Lat=""
     var TrafficGuide=""
     var tab=""
-    var Score=""
+    var Score=0.0
     var CommentsCount=0
     var BookInformation=""
     var ToDayOrderNumber=""

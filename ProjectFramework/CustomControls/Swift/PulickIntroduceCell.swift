@@ -55,10 +55,11 @@ class PulickIntroduceCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     override func InitConfig(_ cell: Any) {
-        let string = cell as! String
-        let height = string.ContentSize(font: UIFont.systemFont(ofSize: 11), maxSize: CGSize(width: CommonFunction.kScreenWidth - 20, height: 0)).height
+        let model  = cell as! DescribeName_ListItem
+        let height = model.Describel.ContentSize(font: UIFont.systemFont(ofSize: 11), maxSize: CGSize(width: CommonFunction.kScreenWidth - 20, height: 0)).height
         self.describe.frame = CommonFunction.CGRect_fram(10, y: self.titleLable.frame.maxY + 5, w: CommonFunction.kScreenWidth - 20, h:height )
-        self.describe.text = string
+        self.describe.text = model.Describel
+        self.titleLable.text = model.Title
     }
     
 }

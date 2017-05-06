@@ -39,7 +39,9 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
         controller9.title = "门票预订"
         //请求回来的数据在这里正向传值
         controller1.ScenicHomeModel = self.ViewModel.ListData.ScenicHome!
-        controller2.ScenicNewsModel = self.ViewModel.ListData.ScenicNews!
+//        if self.ViewModel.ListData.ScenicNews != nil {
+            controller2.ScenicNewsModel = self.ViewModel.ListData.ScenicNews!
+//        }
         controller3.dataArray       = self.ViewModel.ListData.Panorama360!
         controller4.dataArray       = self.ViewModel.ListData.VRVideoClass!
         controller5.dataArray       = self.ViewModel.ListData.BeautifulPicture!
@@ -122,6 +124,7 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
         if ViewModel.ListData.Tel != "" {
             CommonFunction.CallPhone(self, number: ViewModel.ListData.Tel)
         }
+        
     }
     
     var CustomNavBar:UINavigationBar!=nil
@@ -180,7 +183,7 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
         var Imagelist  = Array<String>()
         for i in 0..<num{
             let model = self.ViewModel.ListData.ScenicDetailsAdv![i]
-            Imagelist.append(model.Img)
+            Imagelist.append(HttpsUrlImage+model.Img)
         }
         let vc = ScrollViewPageViewController(Enabletimer: true,   //是否启动滚动
             timerInterval: 4,     //如果启用滚动，滚动秒数
