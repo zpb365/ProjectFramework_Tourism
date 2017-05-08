@@ -95,6 +95,9 @@ class LoginViewControllerTwo: UIViewController
             case   .ok: //处理登录成功的业务
                 self?._LoginViewModel.SetLogin( result: { (result) in
                     if(result==true){
+                        
+                        //极光推送添加别名
+                        JPUSHService.setAlias(Global_UserInfo.userid.description, callbackSelector: nil, object: self )
                             self?.myCallbackValue?(true)
                           self?.dismiss(animated: true, completion: nil)
                     } 

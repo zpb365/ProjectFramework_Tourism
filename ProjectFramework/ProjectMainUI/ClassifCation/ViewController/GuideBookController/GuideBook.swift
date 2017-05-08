@@ -183,7 +183,11 @@ class GuideBook: CustomTemplateViewController ,UICollectionViewDelegateFlowLayou
         return cell
     }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("点击详情页");
+        
+       
+        let vc =   CommonFunction.ViewControllerWithStoryboardName("GuideBookDetails", Identifier: "GuideBookDetails") as! GuideBookDetailsViewController
+        vc.CiceroneID=viewModel.ListData[indexPath.row].CiceroneID
+        self.navigationController?.show(vc, sender: self)
     }
 
 }

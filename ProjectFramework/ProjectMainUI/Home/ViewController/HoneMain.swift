@@ -218,7 +218,7 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
         case 6: return Int((CGFloat(self.viewModel.ListData.TravelAgency!.count) / 2.0).description.components(separatedBy: ".")[1])! > 0 ? (self.viewModel.ListData.TravelAgency!.count/2)+1:self.viewModel.ListData.TravelAgency!.count/2  //旅行社
         case 7: return Int((CGFloat(self.viewModel.ListData.Meeting!.count) / 3.0).description.components(separatedBy: ".")[1])! > 0 ? (self.viewModel.ListData.Meeting!.count/3)+1:self.viewModel.ListData.Meeting!.count/3   //会展
         case 8: return Int((CGFloat(self.viewModel.ListData.Specialities!.count) / 2.0).description.components(separatedBy: ".")[1])! > 0 ? (self.viewModel.ListData.Specialities!.count/2)+1:self.viewModel.ListData.Specialities!.count/2  //特产
-        case 9: return 2    //游记攻略
+        case 9: return self.viewModel.ListData.Travels!.count   //游记攻略
         default:
             break
         }
@@ -383,6 +383,7 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
             return  cell
         case 9:
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier[indexPath.section], for: indexPath) as! TravelGuideViewCell   //游记
+            cell.InitConfig(viewModel.ListData.Travels[indexPath.row])
             cell.delegate=self
             return  cell
         default:
@@ -398,6 +399,11 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
             vc.title=viewModel.ListData.NewsList![currentHeadlinesBtn.tag].List![indexPath.row].Title
             vc.Content = viewModel.ListData.NewsList![currentHeadlinesBtn.tag].List![indexPath.row].NewsContent
             self.navigationController?.show(vc, sender: self)
+            break
+        case 9 :    //游记
+            let vc = CommonFunction.ViewControllerWithStoryboardName("TravelDetail", Identifier: "TravelDetail") as! TravelDetail
+            vc.TravelsId=viewModel.ListData.Travels[indexPath.row].TravelsId
+            self.navigationController?.show(vc, sender: self  )
             break
         default:
             break

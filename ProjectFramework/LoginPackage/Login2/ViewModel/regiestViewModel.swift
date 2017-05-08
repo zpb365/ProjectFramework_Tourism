@@ -25,7 +25,7 @@ class regiestViewModel {
     var VerificationCodeEvent1:registerViewCell?=nil
     // 注册返回数据
     var registeResult: Observable<ValidationResult>? = nil
-   
+    
     init( ) {
         register()
         GetVerificationCode()
@@ -33,34 +33,43 @@ class regiestViewModel {
     
     //注册
     func register(){
-       
         
         
-       let parameter = Observable.combineLatest(username.asObservable(),password.asObservable(),VerificationCode.asObservable()){($0,$1,$2)}
+        
+        let parameter = Observable.combineLatest(username.asObservable(),password.asObservable(),VerificationCode.asObservable()){($0,$1,$2)}
         registeResult = registerEvent.asObserver()
             .withLatestFrom(parameter)
             .flatMapLatest({ (name,pwd,vercode) -> Observable<ValidationResult> in
-            //业务处理逻辑处理
+                //业务处理逻辑处理
                 
                 //------------用户名处理
                 if(name==""){
-                //空值处理
-                     return Observable.just(ValidationResult.empty)
-                 }
-                  if(name.characters.count != 11){
+                    //空值处理
+                    CommonFunction.HUD("手机号不可为空", type: .error)
+                    return Observable.just(ValidationResult.empty)
+                }
+                
+                if(name.characters.count != 11){
                     //校验手机号码
+                    CommonFunction.HUD("手机号码不正确", type: .error)
                     return Observable.just(ValidationResult.error)
-                  
-                 }
+                }
+                else{
+                    if(!Validate.phoneNum(name).isRight){
+                        CommonFunction.HUD("非法手机号码", type: .error)
+                        return Observable.just(ValidationResult.error)
+                    }
+                }
                 
                 
                 //----------------密码处理
                 if(pwd==""){
-                    //空值处理
+                    CommonFunction.HUD("密码不可为空", type: .error)
                     return Observable.just(ValidationResult.empty)
                     
-                 }
-                 if(pwd.characters.count < 6){
+                }
+                if(pwd.characters.count < 6){
+                    CommonFunction.HUD("密码不可小于6位数", type: .error)
                     //密码位数不能小于6位
                     return Observable.just(ValidationResult.error)
                     
@@ -68,15 +77,16 @@ class regiestViewModel {
                 
                 
                 //----------验证码处理
-                 if(vercode==""){
+                if(vercode==""){
                     //空值处理
+                    CommonFunction.HUD("验证码不可为空", type: .error)
                     return Observable.just(ValidationResult.empty)
                     
-                 }
+                }
                 
-            return Observable.just(ValidationResult.ok)
-            
-        }).shareReplay(1)
+                return Observable.just(ValidationResult.ok)
+                
+            }).shareReplay(1)
         
         
         
@@ -86,37 +96,41 @@ class regiestViewModel {
     func GetVerificationCode(){
         
         _ =  VerificationCodeEvent.subscribe( onNext:{
-    
+            if(self.username.value==""){
+                CommonFunction.HUD("手机号不可为空", type: .error)
+                return
+            }
+            if(!Validate.phoneNum(self.username.value).isRight){
+                CommonFunction.HUD("非法手机号码", type: .error)
+                return
+            }
             self.VerificationCodeEvent1?.StartTime()   //开启计时器
-            
-           // ------ 发送网络请求
+            CommonFunction.Global_Post(entity: nil, IsListData: false, url: HttpsUrl+"api/Login/RegisterVerificationCode", isHUD: true,HUDMsg: "正在获取验证码...", isHUDMake: false, parameters: ["Phone":self.username.value], Model: { (resultData) in
+                if(resultData?.Success==true){
+                     CommonFunction.HUD("发送成功", type: .success)
+                }else{
+                    CommonFunction.HUD(resultData!.Result, type: .error)
+                }
+            }) 
         }
         )
-//       
-//       _ = VerificationCodeEvent.asObserver().flatMapLatest { () ->  Observable<ValidationResult> in
-//            
-//            //------------用户名处理
-//            if(self.username.value==""){
-//                //空值处理
-//                print("空处理")
-//                return  Observable.just(ValidationResult.empty)
-//            }
-//            if(self.username.value.characters.count != 11){
-//                //校验手机号码
-//                return  Observable.just(ValidationResult.error)
-//            }
-//            
-//            return Observable.just(ValidationResult.ok)
-//            
-//        }.shareReplay(1)
-       
-        
-        
         
     }
     
+    ///注册
+    func SetRegister(){
+        let parameters = ["Phone":username.value,"PassWord":password.value,"VerificationCode":VerificationCode.value]
+        CommonFunction.Global_Post(entity: nil, IsListData: false, url:  HttpsUrl+"api/Login/SetRegister", isHUD: true,HUDMsg: "正在提交中...", isHUDMake: false, parameters:parameters as NSDictionary) { (resultData) in
+            if(resultData?.Success==true){
+                CommonFunction.HUD("注册成功", type: .success)
+            }else{
+                CommonFunction.HUD(resultData!.Result, type: .success)
+            }
+        }
+    }
     
-  
+    
+    
     
     
     

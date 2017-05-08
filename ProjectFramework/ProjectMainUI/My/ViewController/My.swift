@@ -128,18 +128,31 @@ class My: UIViewController,UITableViewDelegate,UITableViewDataSource {
             
             switch button.tag {
             case 100:
+                if(Global_UserInfo.IsLogin==false){
+                 self?.loginFunc()
+                    return
+                }
                 let vc = CommonFunction.ViewControllerWithStoryboardName("MyOder", Identifier: "MyOder") as! MyOder
                 self?.navigationController?.show(vc, sender: self  )
                 break;
             case 101:
+                if(Global_UserInfo.IsLogin==false){
+                    self?.loginFunc()
+                    return
+                }
                 let vc = CommonFunction.ViewControllerWithStoryboardName("TravelManagement", Identifier: "TravelManagement") as! TravelManagement
                 self?.navigationController?.show(vc, sender: self  )
                 break;
             case 102:
+                if(Global_UserInfo.IsLogin==false){
+                    self?.loginFunc()
+                    return
+                }
                 let vc = CommonFunction.ViewControllerWithStoryboardName("Myinfo", Identifier: "Myinfo") as! MyInfoViewController
                 self?.navigationController?.show(vc, sender: nil)
                 break;
             case 103:
+                
                 let vc = CommonFunction.ViewControllerWithStoryboardName("Feedback", Identifier: "Feedback") as! FeedbackViewController
                 self?.navigationController?.show(vc, sender: nil)
                 break;
@@ -181,22 +194,26 @@ class My: UIViewController,UITableViewDelegate,UITableViewDataSource {
     func UserInfoEdit (){
         
         if(Global_UserInfo.IsLogin==false){ //未登录 
-            let vc = LoginViewControllerTwo()
-            vc.Callback_Value({[weak self] (isOk) in
-                 //登录成功
-                
-                self?._MyHeadUIView.Imgbtn.imageView?.ImageLoad(PostUrl: HttpsUrlImage+Global_UserInfo.HeadImgPath)  
-                self?._MyHeadUIView.LabName.text=Global_UserInfo.RealName
-                self?.ImageList.append("订单")
-                self?.TitleList.append("安全退出")
-                self?.tableView.reloadData()
-            })
-            self.present(vc, animated: true, completion: nil)
+          loginFunc()
         }else{  //已登录
             let vc = CommonFunction.ViewControllerWithStoryboardName("Myinfo", Identifier: "Myinfo") as! MyInfoViewController
             self.navigationController?.show(vc, sender: nil)
         }
     
+    }
+    //登录
+    func loginFunc(){
+        let vc = LoginViewControllerTwo()
+        vc.Callback_Value({[weak self] (isOk) in
+            //登录成功
+            
+            self?._MyHeadUIView.Imgbtn.imageView?.ImageLoad(PostUrl: HttpsUrlImage+Global_UserInfo.HeadImgPath)
+            self?._MyHeadUIView.LabName.text=Global_UserInfo.RealName
+            self?.ImageList.append("订单")
+            self?.TitleList.append("安全退出")
+            self?.tableView.reloadData()
+        })
+        self.present(vc, animated: true, completion: nil)
     }
     
     //注销账户
@@ -220,7 +237,7 @@ class My: UIViewController,UITableViewDelegate,UITableViewDataSource {
             self.TitleList.remove(at: self.TitleList.count-1)
             self.ImageList.remove(at: self.ImageList.count-1)
             //移除极光推送别名
-            //JPUSHService.setAlias(Global_UserInfo.userid, callbackSelector: nil, object: self )
+            JPUSHService.setAlias(Global_UserInfo.userid.description, callbackSelector: nil, object: self )
             self.tableView.reloadData()
         }, Cancel_Callback: {
             

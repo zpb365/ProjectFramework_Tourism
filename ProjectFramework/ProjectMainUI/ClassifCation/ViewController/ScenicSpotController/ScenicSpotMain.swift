@@ -6,7 +6,8 @@
 //  Copyright © 2017年 HCY. All rights reserved.
 //
 
-import UIKit 
+import UIKit
+import FDFullscreenPopGesture
 
 //子控制器的滑动协议
 protocol ScrollEnabledDelegate {
@@ -48,6 +49,7 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
         controller6.dataArray       = self.ViewModel.ListData.ScenicAttractions!
 //        controller7.dataArray       = self.ViewModel.ListData.BeautifulPicture!
         controller9.dataArray       = self.ViewModel.ListData.ScenicTicket!
+        controller8._ScenicParkingList = self.ViewModel.ListData.ScenicParking!
         controller9.ScenicID        = self.ScenicID
         
         controllerArray.append(controller1)
@@ -81,7 +83,8 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
             .unselectedMenuItemLabelColor(UIColor.black),
             .menuHeight(30.0),
             .menuItemWidth(50.0),
-            .centerMenuItems(true)
+            .centerMenuItems(true),
+            .scrollEnabled(false)
         ]
 
        let pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0, y: self.headView.frame.maxY, width:CommonFunction.kScreenWidth, height: CommonFunction.kScreenHeight - 64), pageMenuOptions: parameters)
@@ -153,6 +156,8 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //禁用这个流行的姿态一个视图控制器:
+        self.fd_interactivePopDisabled = true
         self.setNavBar()
         self.initUI()
         self.GetHtpsData()

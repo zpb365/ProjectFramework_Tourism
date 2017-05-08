@@ -82,6 +82,7 @@ public enum CAPSPageMenuOption {
     case scrollAnimationDurationOnMenuItemTap(Int)
     case centerMenuItems(Bool)
     case hideTopMenuBar(Bool)
+    case scrollEnabled(Bool)
 }
 
 open class CAPSPageMenu: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate {
@@ -128,6 +129,7 @@ open class CAPSPageMenu: UIViewController, UIScrollViewDelegate, UIGestureRecogn
     open var centerMenuItems : Bool = false
     open var enableHorizontalBounce : Bool = true
     open var hideTopMenuBar : Bool = false
+    open var scrollEnabled : Bool = true
     
     var currentOrientationIsPortrait : Bool = true
     var pageIndexForOrientationChange : Int = 0
@@ -223,7 +225,11 @@ open class CAPSPageMenu: UIViewController, UIScrollViewDelegate, UIGestureRecogn
                     centerMenuItems = value
                 case let .hideTopMenuBar(value):
                     hideTopMenuBar = value
+                case let .scrollEnabled(value):
+                    scrollEnabled = value
                 }
+                
+                
             }
             
             if hideTopMenuBar {
@@ -331,7 +337,7 @@ open class CAPSPageMenu: UIViewController, UIScrollViewDelegate, UIGestureRecogn
         // Disable scrollsToTop for menu and controller scroll views so that iOS finds scroll views within our pages on status bar tap gesture.
         menuScrollView.scrollsToTop = false;
         controllerScrollView.scrollsToTop = false;
-        
+        controllerScrollView.isScrollEnabled=scrollEnabled
         // Configure menu scroll view
         if useMenuLikeSegmentedControl {
             menuScrollView.isScrollEnabled = false

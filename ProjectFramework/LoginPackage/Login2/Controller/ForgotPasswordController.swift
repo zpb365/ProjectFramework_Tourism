@@ -126,7 +126,7 @@ class ForgotPasswordController: UIViewController,UITableViewDelegate,UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Identifier, for: indexPath) as! registerViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Identifier, for: indexPath) as! ForgotPasswordCell
         
         cell.selectionStyle = .none
         
@@ -138,19 +138,18 @@ class ForgotPasswordController: UIViewController,UITableViewDelegate,UITableView
             cell.inpuText.placeholder="请输入手机号码"
             cell.inpuText.rx.text.orEmpty
                 .bind(to: _ForgotPasswordViewModel.username) //手机号绑定
-                .addDisposableTo(disposeBag)
-            cell.VerificationCodeBtn.rx.tap.subscribe(
-                onNext:{  [weak self]  in
-                    cell.StartTime() //启动计时器
-            }
-                ).addDisposableTo(disposeBag)
+                .addDisposableTo(disposeBag) 
+            _ =  _ForgotPasswordViewModel.VerificationCodeEvent1=cell
+            cell.VerificationCodeBtn.rx.tap
+                .bind(to: _ForgotPasswordViewModel.VerificationCodeEvent)
+                .addDisposableTo(self.disposeBag)
             
             break
         case 1:
             cell.lab.text="验证码"
             cell.inpuText.placeholder="请输入验证码"
             cell.inpuText.rx.text.orEmpty
-                .bind(to: _ForgotPasswordViewModel.VerificationCode) //绑定密码
+                .bind(to: _ForgotPasswordViewModel.VerificationCode)
                 .addDisposableTo(disposeBag)
             break
         case 2:
@@ -158,7 +157,7 @@ class ForgotPasswordController: UIViewController,UITableViewDelegate,UITableView
             cell.inpuText.placeholder="请输入新密码"
             cell.inpuText.keyboardType = .phonePad
             cell.inpuText.rx.text.orEmpty
-                .bind(to: _ForgotPasswordViewModel.password) //绑定验证码
+                .bind(to: _ForgotPasswordViewModel.password)
                 .addDisposableTo(disposeBag)
        
             break
@@ -183,7 +182,7 @@ class ForgotPasswordController: UIViewController,UITableViewDelegate,UITableView
         _ = self._ForgotPasswordViewModel.SaveResult?.subscribe(onNext: { (result) in
             switch result {
             case   .ok: //处理登录成功的业务
-                print("ok")
+                self._ForgotPasswordViewModel.SetOK()
                 break
             case   .empty:
                 print("空值判断")

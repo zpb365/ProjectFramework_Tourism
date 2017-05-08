@@ -9,16 +9,17 @@
 import Foundation
 
 class HomeModel: NSObject {
-    var advList:[ClassAdvList]? //轮播
-    var NewsList:[ClassNewsList]?   //资讯（智慧头条)
-    var HotList:[ClassHotList]?   //热门推荐
-    var VisualFeast:ClassVisualFeast?   //视觉盛宴
-    var Scenic:[ScenicModel]?   //景区
-    var Hotel:[HotelModel]?   //酒店
-    var Restaurant:[RestaurantModel]?   //餐厅
-    var TravelAgency:[TravelAgencyModel]? //旅行社
-    var Meeting:[MeetingModel]?   //会议会展
-    var Specialities:[SpecialitiesModel]? //特产
+    var advList:[ClassAdvList]! //轮播
+    var NewsList:[ClassNewsList]!   //资讯（智慧头条)
+    var HotList:[ClassHotList]!   //热门推荐
+    var VisualFeast:ClassVisualFeast!   //视觉盛宴
+    var Scenic:[ScenicModel]!   //景区
+    var Hotel:[HotelModel]!   //酒店
+    var Restaurant:[RestaurantModel]!   //餐厅
+    var TravelAgency:[TravelAgencyModel]! //旅行社
+    var Meeting:[MeetingModel]!   //会议会展
+    var Specialities:[SpecialitiesModel]! //特产
+    var Travels:[TravelsModel]! //游记
     
     
     override static func mj_objectClassInArray() -> [AnyHashable : Any]! {
@@ -30,7 +31,8 @@ class HomeModel: NSObject {
                 "Restaurant":RestaurantModel.self,
                 "TravelAgency":TravelAgencyModel.self,
                 "Meeting":MeetingModel.self,
-                "Specialities":SpecialitiesModel.self
+                "Specialities":SpecialitiesModel.self,
+                "Travels":TravelsModel.self
                 ]
     }
 }

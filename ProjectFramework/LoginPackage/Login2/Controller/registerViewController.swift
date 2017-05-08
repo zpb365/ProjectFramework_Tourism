@@ -155,12 +155,6 @@ class registerViewController: UIViewController,UITableViewDelegate,UITableViewDa
             cell.inpuText.rx.text.orEmpty
                 .bind(to: _regiestViewModel.VerificationCode) //绑定验证码
                 .addDisposableTo(disposeBag)
-//            cell.VerificationCodeBtn.rx.tap.subscribe(      //验证码事件
-//                onNext:{
-//                   cell.StartTime() //启动计时器
-//            }
-//            ).addDisposableTo(disposeBag) 
-        
             _ =  _regiestViewModel.VerificationCodeEvent1=cell
             cell.VerificationCodeBtn.rx.tap
                 .bind(to: _regiestViewModel.VerificationCodeEvent)
@@ -189,8 +183,8 @@ class registerViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
         _ = self._regiestViewModel.registeResult?.subscribe(onNext: { (result) in
             switch result {
-            case   .ok: //处理登录成功的业务
-                print("ok")
+            case   .ok: //处理成功的业务
+                self._regiestViewModel.SetRegister()
                 break
             case   .empty:
                 print("空值判断")

@@ -7,51 +7,56 @@
 //
 
 import UIKit
+import FDFullscreenPopGesture
 
-class ScenicSpotPark: UIViewController,ScrollEnabledDelegate,BMKMapViewDelegate   {
+//地图列表数据模型
+class MapListModel: NSObject {
     
-    var mapView: BMKMapView!
+    var  lat=""
+    var  lng=""
+    var title=""
     
-    var _ScenicParkingList=[ScenicParkingList]()
-    
-    var  _latitude:CLLocationDegrees=0 //景区
-    var  _longitude:CLLocationDegrees=0 //景区
+}
 
+class PublicMapShowListViewController: UIViewController,BMKMapViewDelegate   {
+    
+    private  var mapView: BMKMapView!
+    
+    var models=[MapListModel]()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //禁用这个流行的姿态一个视图控制器:
+        self.fd_interactivePopDisabled = true
+        self.title="地图"
         mapView = BMKMapView(frame: self.view.frame)
         self.view = mapView
         mapView.isBuildingsEnabled=true
-        
-        if(_latitude==0&&_longitude==0){
-            _latitude=Global_latitude
-            _longitude=Global_longitude 
-        }
+  
         //添加所有已知的市场标注
-        for index in _ScenicParkingList{
+        for index in models{
             
-            let lat = CLLocationDegrees(index.Lat)
-            let Lng = CLLocationDegrees(index.Lng)
+            let lat = CLLocationDegrees(index.lat)
+            let Lng = CLLocationDegrees(index.lng)
             let annotation =  BMKPointAnnotation()  // 添加一个标记点(PointAnnotation）
             //地图中心点坐标
             let center = CLLocationCoordinate2D(latitude: lat!, longitude: Lng!)
             annotation.coordinate = center
-            annotation.title = index.parkingName
-            
+            annotation.title = index.title 
             mapView.addAnnotation(annotation)
         }
         
-        //定位到最近的停车场
-        let center = CLLocationCoordinate2D(latitude: CLLocationDegrees(_ScenicParkingList[0].Lat)!, longitude:  CLLocationDegrees(_ScenicParkingList[0].Lng)!)
+        //定位到第一个地址
+        let center = CLLocationCoordinate2D(latitude: CLLocationDegrees(models[0].lat)!, longitude:  CLLocationDegrees(models[0].lng)!)
         let span = BMKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         
         let region = BMKCoordinateRegion(center: center, span: span)
         mapView.region=region
-
+        
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -67,17 +72,9 @@ class ScenicSpotPark: UIViewController,ScrollEnabledDelegate,BMKMapViewDelegate 
         mapView.delegate = nil  // 不用时，置nil
     }
     
-    //MARK: SlidingDelegate
-    func ScrollEnabledCan() {
-//        print("实现代理")
-        //        self.WebView. = true
-    }
-    func ScrollEnabledNo() {
-//        print("实现代理")
-        //        self.WebView.isScrollEnabled = false
-    }
+ 
     deinit {    //销毁页面
-        debugPrint("停车场 页面已经销毁")
+        debugPrint("Map页面已经销毁")
         if ((mapView) != nil) {
             mapView = nil
         }

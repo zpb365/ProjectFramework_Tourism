@@ -114,30 +114,30 @@ class MyInfoViewController: UITableViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    
     //保存
     func Save(){
-//        let data = UIImageJPEGRepresentation(pic.image!, 0.9)!
-//        let http = MyinfoHttps()
-//        CommonFunction.HUD("数据保存中...", type: .load)
-//        http.UpUserInfo(data: data, parameters: ["MemberID":Global_UserInfo.MemberID,"RealName":name.text! ,"Sex":sex.text!] ) { (model) in
-//            CommonFunction.HUDHide()
-//            if(model?.Success==true){
-//                Global_UserInfo.RealName=self.name.text!
-//                Global_UserInfo.Sex=self.sex.text!
-//                Global_UserInfo.HeadImgPath=model?.Content! as! String
-//                CommonFunction.ExecuteUpdate("update MemberInfo  set RealName=(?),Sex=(?),HeadImgPath=(?)  ", [
-//                    Global_UserInfo.RealName as AnyObject,
-//                    Global_UserInfo.Sex as AnyObject,
-//                    Global_UserInfo.HeadImgPath as AnyObject,
-//                    ], callback: nil)
-//                
-//                CommonFunction.HUD("保存成功", type: .success)
-//            }else{
-//                CommonFunction.HUD("保存失败", type: .error)
-//                debugPrint(model?.Result)
-//            }
-//        }
+        let data = UIImageJPEGRepresentation(pic.image!, 0.9)!
+        let http = MyinfoHttps()
+        CommonFunction.HUD("数据保存中...", type: .load)
+        http.UpUserInfo(data: data, parameters: ["UserID":Global_UserInfo.userid,"RealName":name.text! ,"Sex":sex.text!,"Phone":phone.text!] ) { (model) in
+            CommonFunction.HUDHide()
+            if(model?.Success==true){
+                Global_UserInfo.RealName=self.name.text!
+                Global_UserInfo.Sex=self.sex.text!
+                Global_UserInfo.HeadImgPath=model?.Content! as! String
+                Global_UserInfo.PhoneNo=self.phone.text!
+                CommonFunction.ExecuteUpdate("update MemberInfo  set RealName=(?),Sex=(?),HeadImgPath=(?),PhoneNo=(?)  ", [
+                    Global_UserInfo.RealName as AnyObject,
+                    Global_UserInfo.Sex as AnyObject,
+                    Global_UserInfo.HeadImgPath as AnyObject,
+                    Global_UserInfo.PhoneNo as AnyObject,
+                    ], callback: nil)
+                
+                CommonFunction.HUD("保存成功", type: .success)
+            }else{
+                CommonFunction.HUD("保存失败", type: .error) 
+            }
+        }
         
     }
     

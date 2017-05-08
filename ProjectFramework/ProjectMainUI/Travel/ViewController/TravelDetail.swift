@@ -25,12 +25,15 @@ class TravelDetail: CustomTemplateViewController{
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var contentLabel: UILabel!
     
-    var CustomNavBar:UINavigationBar!=nil
-    var height: CGFloat = 50
+    fileprivate var backBtn:UIButton!=nil
+    fileprivate var alph: CGFloat = 0
+    
+    fileprivate var CustomNavBar:UINavigationBar!=nil
+    fileprivate var height: CGFloat = 50
+    fileprivate var PageIndex: Int = 1
+    fileprivate var PageSize: Int = 10
+    fileprivate var viewModel = TravelDetailViewModel()
     var TravelsId=0
-    var PageIndex: Int = 1
-    var PageSize: Int = 10
-    var viewModel = TravelDetailViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +91,7 @@ class TravelDetail: CustomTemplateViewController{
     
     override func Error_Click() {
         self.numberOfRowsInSection = 0
+        self.RefreshRequest(isLoading: true, isHiddenFooter: true)
         GetHtpsData()
     }
     
@@ -95,13 +99,13 @@ class TravelDetail: CustomTemplateViewController{
     func setNavBar() -> Void{
         CustomNavBar = UINavigationBar(frame: CGRect.init(x: 0, y: 0, width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight))
         //把导航栏渐变效果移除
-        CustomNavBar.setBackgroundImage(UIImage().ImageWithColor(color: UIColor.clear, size: CGSize(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)), for: .default)
+        CustomNavBar.setBackgroundImage(UIImage().ImageWithColor(color: CommonFunction.SystemColor().withAlphaComponent(alph), size: CGSize(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)), for: .default)
         CustomNavBar.clipsToBounds=true
         self.view.addSubview(CustomNavBar)
         
         let CustomNavItem = UINavigationItem()
         //返回按钮
-        let backBtn = UIButton(type: .custom)
+          backBtn = UIButton(type: .custom)
         backBtn.frame = CommonFunction.CGRect_fram(0, y: 0, w: 30, h: 30)
         backBtn.tag = 100
         backBtn.backgroundColor = UIColor.gray
@@ -111,10 +115,26 @@ class TravelDetail: CustomTemplateViewController{
         CustomNavItem.leftBarButtonItem=UIBarButtonItem.init(customView: backBtn)
         CustomNavBar.pushItem(CustomNavItem, animated: true)
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView){
+        let offset: CGFloat = scrollView.contentOffset.y
+        if (offset <= 64) {
+            CustomNavBar.setBackgroundImage(UIImage().ImageWithColor(color: CommonFunction.SystemColor().withAlphaComponent(0), size: CGSize(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)), for: .default)
+            backBtn.backgroundColor = UIColor.gray
+        }
+        else{
+            alph = 1-((200 - offset)/200)
+            CustomNavBar.setBackgroundImage(UIImage().ImageWithColor(color:  CommonFunction.SystemColor().withAlphaComponent(alph), size: CGSize(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)), for: .default)
+            backBtn.backgroundColor = UIColor.gray.withAlphaComponent(1-alph)
+        }
+        
+    }
+    
     //导航栏按钮方法
     func buttonClick(_ button: UIButton){
         _ = self.navigationController?.popViewController(animated: true)
     }
+    
     //MARK: tableViewDelegate
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return UITableViewCell()

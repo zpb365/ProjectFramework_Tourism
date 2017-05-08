@@ -10,6 +10,11 @@ import UIKit
 
 class TravelGuideViewCell: UITableViewCell {
     
+    @IBOutlet weak var Img: UIImageView!
+    
+    @IBOutlet weak var Title: UILabel!
+    
+    @IBOutlet weak var dateTime: UILabel!
     weak var delegate:UIViewController?=nil
     
     override func awakeFromNib() {
@@ -17,6 +22,15 @@ class TravelGuideViewCell: UITableViewCell {
         // Initialization code
     }
 
+    override func InitConfig(_ cell: Any) {
+        let model =  cell as! TravelsModel
+        
+        Img.ImageLoad(PostUrl: HttpsUrlImage+model.CoverPhoto)
+        Title.text=model.TravelsTitle
+        dateTime.text=model.UpdateTime
+        
+        
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

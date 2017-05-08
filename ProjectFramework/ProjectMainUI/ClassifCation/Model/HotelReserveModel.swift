@@ -16,9 +16,9 @@ class HotelReserveModel: NSObject {
     //图片
     var CoverPhoto=""
     //精度
-    var Lng=0
+    var Lng = ""
     //纬度
-    var Lat = 0
+    var Lat = ""
     //价格
     var lowestPrice=0
     //评论数

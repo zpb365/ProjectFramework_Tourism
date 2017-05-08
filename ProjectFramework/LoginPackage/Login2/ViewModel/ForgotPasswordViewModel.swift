@@ -22,6 +22,7 @@ class ForgotPasswordViewModel {
     let SaveEvent = PublishSubject<Void>()
     // 验证码按钮点击 绑定的 事件
     let VerificationCodeEvent = PublishSubject<Void>()
+    var VerificationCodeEvent1:ForgotPasswordCell?=nil
     
     // 保存返回数据
     var SaveResult: Observable<ValidationResult>? = nil
@@ -44,22 +45,29 @@ class ForgotPasswordViewModel {
                 //------------用户名处理
                 if(name==""){
                     //空值处理
+                    CommonFunction.HUD("手机号不可为空", type: .error)
                     return Observable.just(ValidationResult.empty)
                 }
                 if(name.characters.count != 11){
                     //校验手机号码
+                    CommonFunction.HUD("手机号码不正确", type: .error)
                     return Observable.just(ValidationResult.error)
-                    
                 }
-                
-                
+                else{
+                    if(!Validate.phoneNum(name).isRight){
+                        CommonFunction.HUD("非法手机号码", type: .error)
+                        return Observable.just(ValidationResult.error)
+                    }
+                }
+                 
                 //----------------密码处理
                 if(pwd==""){
-                    //空值处理
+                    CommonFunction.HUD("密码不可为空", type: .error)
                     return Observable.just(ValidationResult.empty)
                     
                 }
                 if(pwd.characters.count < 6){
+                    CommonFunction.HUD("密码不可小于6位数", type: .error)
                     //密码位数不能小于6位
                     return Observable.just(ValidationResult.error)
                     
@@ -69,6 +77,7 @@ class ForgotPasswordViewModel {
                 //----------验证码处理
                 if(vercode==""){
                     //空值处理
+                    CommonFunction.HUD("验证码不可为空", type: .error)
                     return Observable.just(ValidationResult.empty)
                     
                 }
@@ -85,26 +94,41 @@ class ForgotPasswordViewModel {
     func GetVerificationCode(){
         
         
-        _ = VerificationCodeEvent.asObserver().flatMapLatest { () ->  Observable<ValidationResult> in
-            
-            //------------用户名处理
+        _ =  VerificationCodeEvent.subscribe( onNext:{
             if(self.username.value==""){
-                //空值处理
-                print("空处理")
-                return  Observable.just(ValidationResult.empty)
+                CommonFunction.HUD("手机号不可为空", type: .error)
+                return
             }
-            if(self.username.value.characters.count != 11){
-                //校验手机号码
-                return  Observable.just(ValidationResult.error)
+            if(!Validate.phoneNum(self.username.value).isRight){
+                CommonFunction.HUD("非法手机号码", type: .error)
+                return
             }
-            
-            return Observable.just(ValidationResult.ok)
-            
-            }.shareReplay(1)
-        
-        
-        
+            self.VerificationCodeEvent1?.StartTime()   //开启计时器
+            CommonFunction.Global_Post(entity: nil, IsListData: false, url: HttpsUrl+"api/Login/ForgetPasswordVerificationCode", isHUD: true,HUDMsg: "正在获取验证码...", isHUDMake: false, parameters: ["Phone":self.username.value], Model: { (resultData) in
+                if(resultData?.Success==true){
+                    CommonFunction.HUD("发送成功", type: .success)
+                }else{
+                    CommonFunction.HUD(resultData!.Result, type: .error)
+                }
+            })
+      
+        }
+        )
         
     }
+    
+    
+    ///保存
+    func SetOK(){
+        let parameters = ["Phone":username.value,"NewPassWord":password.value,"VerificationCode":VerificationCode.value]
+        CommonFunction.Global_Post(entity: nil, IsListData: false, url:  HttpsUrl+"api/Login/SetForgetPassword", isHUD: true,HUDMsg: "正在提交中...", isHUDMake: false, parameters:parameters as NSDictionary) { (resultData) in
+            if(resultData?.Success==true){
+                CommonFunction.HUD("修改成功", type: .success)
+            }else{
+                CommonFunction.HUD(resultData!.Result, type: .success)
+            }
+        }
+    }
+    
     
 }
