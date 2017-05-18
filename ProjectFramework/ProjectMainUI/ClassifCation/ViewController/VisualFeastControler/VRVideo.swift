@@ -84,4 +84,9 @@ class VRVideo: CustomTemplateViewController {
         cell.setCell(viewModel.ListData[indexPath.row], tepy: .VRVideo)
         return cell
     }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = Public360ViewController()
+        vc.url = HttpsVR+viewModel.ListData[indexPath.row].VideoID.description
+        self.present(vc, animated: true, completion: nil)
+    }
 }

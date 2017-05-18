@@ -18,7 +18,7 @@ class ScenicSpotDateViewModel {
             
             if(resultModel?.Success==true){
                 if resultModel?.ret == 5{
-                    result?(false)
+                    result?(true)
                     return
                 }
                 self.ListData = resultModel?.Content   as!  [ScenicDatePriceModel]

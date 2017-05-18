@@ -60,13 +60,14 @@ class TravelDetail: CustomTemplateViewController{
  
     //MARK: initUI
     func initUI() -> Void {
-        BaseView.frame = CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: contentLabel.frame.maxY + 20 )
+//        self.BaseView.frame = CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: self.contentLabel.frame.maxY + 20 )
         tableView.snp.makeConstraints { (make) in
             make.left.equalTo(0)
             make.right.equalTo(0)
             make.top.equalTo(-20)
             make.bottom.equalTo(0)
         }
+
     }
     
     
@@ -80,6 +81,9 @@ class TravelDetail: CustomTemplateViewController{
                 self.contentLabel.text=self.viewModel.ListData.TravelsNote
                 self.customWeb.loadHtmlString(html: self.viewModel.ListData.TravelsContent)
                 self.numberOfRowsInSection = 1
+//                let height_ = self.viewModel.ListData.TravelsContent.ContentSize(font: UIFont.systemFont(ofSize: 12), maxSize: CGSize.init(width: CommonFunction.kScreenWidth - 30, height: 0)).height
+//                self.BaseView.frame = CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: 150 + height_ )
+//                self.tableView.tableHeaderView = self.BaseView
                 self.RefreshRequest(isLoading: false, isHiddenFooter: true)
                 
             }

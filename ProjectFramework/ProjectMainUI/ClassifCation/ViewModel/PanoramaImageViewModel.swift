@@ -16,7 +16,10 @@ class PanoramaImageViewModel{
         
         CommonFunction.Global_Get(entity: ClassPanorama360List(), IsListData: true, url: HttpsUrl+"api/Channels/GetChannelsPanorama360", isHUD: false, isHUDMake: false, parameters: parameters as NSDictionary) { (resultModel) in
             if(resultModel?.Success==true){
-                
+                if(resultModel?.ret==5){
+                    result?(true,false)
+                    return
+                }
                 if(resultModel?.ret==6){
                     result?(true,true)
                     return

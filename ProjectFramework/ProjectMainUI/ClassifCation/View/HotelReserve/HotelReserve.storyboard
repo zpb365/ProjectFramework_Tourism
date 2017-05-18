@@ -33,7 +33,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="testimg" translatesAutoresizingMaskIntoConstraints="NO" id="KbR-HL-ao4">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KbR-HL-ao4">
                                                     <rect key="frame" x="5" y="9" width="95" height="71"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -103,6 +103,5 @@
     </scenes>
     <resources>
         <image name="GoodFaith" width="210" height="48"/>
-        <image name="testimg" width="800" height="530"/>
     </resources>
 </document>

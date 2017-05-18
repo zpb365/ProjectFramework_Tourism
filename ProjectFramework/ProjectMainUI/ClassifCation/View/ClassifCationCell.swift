@@ -18,6 +18,10 @@ class ClassifCationCell: UICollectionViewCell {
         super.awakeFromNib()
         
     }
+//    override func layoutSubviews() {
+//        self.layer.borderWidth = 1
+//        self.layer.borderColor = UIColor.lightGray.cgColor
+//    }
     override func InitConfig(_ cell: Any) {
         let model = cell as! ClassifCationModel
         mainImageView.ImageLoad(PostUrl: HttpsUrlImage+model._coverphoto)

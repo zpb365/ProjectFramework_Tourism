@@ -16,13 +16,11 @@ import UIKit
 
 class ScenicSpotTickets: CustomTemplateViewController,ScrollEnabledDelegate {
 
-    lazy var footderView: PulickIntroduceView = {
-        let footderView = PulickIntroduceView()
-        footderView.createTableView(frame: CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: 50))
-        footderView.FuncCallbackValue(value: { [weak self](height) in
-            self?.footderView.frame = CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: height)
-            self?.footderView.customTableView.frame = (self?.footderView.bounds)!
-            self?.tableView.reloadData()
+    lazy var footderView: PulickWebView = {
+        let footderView = PulickWebView.init(frame: CGRect.init(x: 0, y: 0, width: CommonFunction.kScreenWidth, height: 0))
+        footderView.FuncCallbackValue(value: {[weak self] (height) in
+            self?.footderView.frame = CGRect.init(x: 0, y: 0, width: CommonFunction.kScreenWidth, height: height)
+            self?.RefreshRequest(isLoading: false, isHiddenFooter: true)
         })
         return footderView
     }()
@@ -32,11 +30,10 @@ class ScenicSpotTickets: CustomTemplateViewController,ScrollEnabledDelegate {
     let identiFier  = "ScenicSpotTicketCell"
     var dataArray:[ScenicTicketList]?
     var ScenicID = 0
-    
+    var BookingNotes=""
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initUI()
-//        self.footderView.setData(object: "", textArray: ["预定须知"])
         self.RefreshRequest(isLoading: false, isHiddenFooter: true)
         
     }
@@ -46,11 +43,19 @@ class ScenicSpotTickets: CustomTemplateViewController,ScrollEnabledDelegate {
         
         self.InitCongif(tableView)
         self.tableView.frame = self.view.bounds
+        if dataArray ==  nil {
+            self.numberOfRowsInSection = 0
+        }else{
+            self.numberOfRowsInSection = (self.dataArray?.count)!
+        }
         self.numberOfSections = 1
-        self.numberOfRowsInSection = (self.dataArray?.count)!
         self.tableViewheightForRowAt = 100
         self.header.isHidden = true
-//        self.tableView.tableFooterView = self.footderView
+        if (self.dataArray?.count)! > 0 {
+            self.tableView.tableFooterView = self.footderView
+            self.footderView.loadHtmlString(html: self.BookingNotes)
+        }
+        
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: identiFier, for: indexPath) as! ScenicSpotTicketCell
@@ -58,11 +63,8 @@ class ScenicSpotTickets: CustomTemplateViewController,ScrollEnabledDelegate {
         cell.FuncCallbackValue {[weak self] (model) in
             let vc = ScenicSpotDateChoose()
             vc.ScenicID = (self?.ScenicID)!//景区id
-//            vc.ScenicProductID = (self?.dataArray?[indexPath.row].ScenicProductID)!//票id
             vc.ticketItem = self?.dataArray![indexPath.row]
-            self?.present(vc, animated: true, completion: {
-                
-            })
+            self?.navigationController?.show(vc, sender: self)
         }
         return cell
     }

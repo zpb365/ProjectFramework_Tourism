@@ -12,6 +12,7 @@ import Foundation
 
 ///视觉盛宴实体 --->  美图 ------
 class ClassBeautifulPictureList: NSObject {
+    var AlbumID=0
     var CoverPhoto=""
     var AlbumName=""
     var AlbumDescribe=""
@@ -33,6 +34,7 @@ class ClassBeautifulPictureList_Item: NSObject {
 
 ///视觉盛宴实体 --->  全景 ------
 class ClassPanorama360List: NSObject {
+    var Panorama360ID=0
     var Title=""
     var CoverPhoto=""
     var Describe=""
@@ -67,10 +69,13 @@ class ClassVRVideoClassList: NSObject {
     
 }
 class ClassVRVideoClassList_Item: NSObject {
+    var VideoID=0
     var VideoTitle=""
     var CoverPhoto=""
     var VideoDescribe=""
     var ItemName=""
     var VideoUrl=""
+    var CreateTime=""
+    var Views=0
 }
 

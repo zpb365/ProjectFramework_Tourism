@@ -12,6 +12,28 @@ import CYLTabBarController
 
 class  CYLBaseNavigationController:UINavigationController  {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //导航栏颜色渐变---需要的时候开启 不需要不用开启
+        //self.navigationBar.layer.insertSublayer(gradientLayer(), at: 0)
+        
+    }
+    
+    func gradientLayer() -> CAGradientLayer {
+        let gradientLayer = CAGradientLayer()
+        // CGColor是无法放入数组中的，必须要转型。
+        gradientLayer.colors = [(UIColor(red: CGFloat(78 / 255.0), green: CGFloat(143 / 255.0), blue: CGFloat(1.0), alpha: CGFloat(1.0)).cgColor),
+                                CommonFunction.SystemColor().cgColor,
+                                (UIColor(red: CGFloat(60 / 255.0), green: CGFloat(143 / 255.0), blue: CGFloat(1.0), alpha: CGFloat(1.0)).cgColor)]
+        // 颜色分割线
+        gradientLayer.locations = [0, 0.8, 1.5]
+        // 颜色渐变的起点和终点，范围为 (0~1.0, 0~1.0)
+        gradientLayer.startPoint = CGPoint(x: CGFloat(0), y: CGFloat(0))
+        gradientLayer.endPoint = CGPoint(x: CGFloat(1.0), y: CGFloat(0))
+        gradientLayer.frame = CGRect(x: CGFloat(0), y: CGFloat(-20), width: CGFloat(navigationBar.bounds.size.width), height: CGFloat(20 + navigationBar.bounds.size.height))
+        return gradientLayer
+    }
+    
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         if (self.viewControllers.count > 0) {
             //如果当前的viewcontroller.count大于0 表示不再这个页面内 则 隐藏掉TabbarController

@@ -34,6 +34,9 @@ class ScenicSpotOderWrite: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
         self.setData()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
     //加载子视图
     override func viewDidLayoutSubviews() {
         backbtn.tag     = 100
@@ -78,20 +81,25 @@ class ScenicSpotOderWrite: UIViewController,UITextFieldDelegate {
         switch button.tag {
         case 100:
             CommonFunction.AlertController(self, title: "取消订单", message: "您暂未支付该订单，是否要取消订单？", ok_name: "确定", cancel_name: "取消", OK_Callback: {
-                self.dismiss(animated: true, completion: {
-                    
-                })
+                    self.navigationController?.popViewController(animated: true)
+
             }, Cancel_Callback: {
                 
             })
             break
         case 101:
-            let Instructionsview = PulickPayforInstructions.init(frame: self.view.bounds)
-            Instructionsview.setText(text: "本平台只是提供产品展示，不参与运营过程，一旦出现费用纠纷将由消费者承担，本平台 不承担任何后果。")
-            self.view.addSubview(Instructionsview)
+            let vc = PulickInformation()
+            self.present(vc, animated: true, completion:nil)
             break
         case 102:
-            var canPayfor: Bool = false
+            //是否登录
+            if(Global_UserInfo.IsLogin==false){
+                let vc = LoginViewControllerTwo()
+                self.present(vc, animated: true, completion: nil)
+                return
+            }
+            
+            var canPayfor: Bool = false//是否能支付
             if trueNameTextField.text == "" {
                 CommonFunction.HUD("请输入真实姓名", type: .error)
                 return
@@ -102,7 +110,9 @@ class ScenicSpotOderWrite: UIViewController,UITextFieldDelegate {
                 if Number > self.timeModel!.Inventory {
                     CommonFunction.HUD("您购买的票库存不足\(Number)张",type: .error)
                 }else{
-                    print("调起支付模板")
+                    let parameters = ["ScenicProductID":(ticketItem?.ScenicProductID)!,"UserID":Global_UserInfo.userid,"Number":Number,"DateTimeSelectedID":(timeModel?.DateTimeSelectedID)!,"TouristName":(trueNameTextField.text)!,"TouristPhone":(phoneTextField.text)!,"Remark":""] as [String : Any]
+                    let vc =   PayClass(parameters: parameters,Channels: 1,delegate:self)
+                    self.present(vc, animated: false, completion: nil)
                 }
                 
             }else{

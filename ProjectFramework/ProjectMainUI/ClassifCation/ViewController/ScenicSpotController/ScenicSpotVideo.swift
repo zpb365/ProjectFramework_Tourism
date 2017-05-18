@@ -13,7 +13,7 @@ class ScenicSpotVideo: CustomTemplateViewController ,UICollectionViewDelegateFlo
     @IBOutlet weak var collectionView: UICollectionView!
     
     let reuseIdentifier = "ScenicSpotCollectionCell"
-    var dataArray:[ClassVRVideoClassList]?
+    var dataArray:[ClassVRVideoClassList_Item]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +71,11 @@ class ScenicSpotVideo: CustomTemplateViewController ,UICollectionViewDelegateFlo
         cell.setData("360Panorama", isHiden: false, centerText: "VR")
         cell.setcell(self.dataArray?[indexPath.row] as Any, .VRVideo)
         return cell
+    }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = Public360ViewController()
+        vc.url = HttpsVR+(dataArray?[indexPath.row].VideoID)!.description
+        self.present(vc, animated: true, completion:nil)
     }
     //MARK: SlidingDelegate
     func ScrollEnabledCan() {

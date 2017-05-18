@@ -11,7 +11,7 @@ import UIKit
 class RecommendedViewCell: UITableViewCell {
 
     @IBOutlet weak var ScrollView: UIScrollView!
-    
+    weak var delegate:UIViewController?=nil
     fileprivate  var imageW:CGFloat!
     fileprivate var imageH:CGFloat!
     fileprivate var imageY:CGFloat!
@@ -81,6 +81,9 @@ class RecommendedViewCell: UITableViewCell {
     
     func handleTapGesture(sender: UITapGestureRecognizer){
         print("点击了"+sender.ExpTagString)
+        
+        let vc = MCWebViewController.init(url: sender.ExpTagString, ProcesscColor: UIColor.clear)
+        delegate?.navigationController?.show(vc, sender: self)
     }
 
 }

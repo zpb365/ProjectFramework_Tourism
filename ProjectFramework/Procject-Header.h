@@ -4,7 +4,7 @@
 //
 //  Created by hcy on 16/4/4.
 //  Copyright © 2016年 HCY. All rights reserved.
-// 
+//
 
 
 //系统  ↓
@@ -33,7 +33,6 @@
 //支付宝
 #import <AlipaySDK/AlipaySDK.h> 
 #import "Order.h"
-#import "DataSigner.h" 
 //百度API ↓
 #import <BaiduMapAPI_Base/BMKBaseComponent.h>//引入base相关所有的头文件
 #import <BaiduMapAPI_Map/BMKMapComponent.h>//引入地图功能所有的头文件
@@ -71,3 +70,4 @@
 #import "HcdPopMenu.h"              //动画菜单
 
 #import "ZFChooseTimeViewController.h"//酒店时间选择
+

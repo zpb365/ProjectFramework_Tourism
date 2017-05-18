@@ -70,9 +70,15 @@ class ScenicSpotAttractions: CustomTemplateViewController ,UICollectionViewDeleg
         cell.setcell(self.dataArray?[indexPath.row] as Any, .Attractions)
         return cell
     }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = AttactionsDetail()
+        vc.url = (dataArray?[indexPath.row].AttractionsContent)!
+        vc.title = dataArray?[indexPath.row].AttractionsName
+        self.navigationController?.show(vc, sender: self  )
+    }
     //MARK: SlidingDelegate
     func ScrollEnabledCan() {
-//        print("实现代理")
+        print("全景实现代理")
         self.collectionView.isScrollEnabled = true
     }
     func ScrollEnabledNo() {

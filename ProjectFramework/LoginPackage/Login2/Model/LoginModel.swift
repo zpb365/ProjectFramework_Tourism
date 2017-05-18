@@ -16,5 +16,5 @@ class LoginMode: NSObject
     var _phone=""
     var _sex=""
     var _userlogo=""
- 
+    var _authorizationtype=0
 }

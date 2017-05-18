@@ -36,7 +36,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="izA-9P-kgk">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="111"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testimg" translatesAutoresizingMaskIntoConstraints="NO" id="Y4G-Qg-LNd">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y4G-Qg-LNd">
                                                             <rect key="frame" x="10" y="5" width="355" height="101"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" alpha="0.75" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Oo-gV-9Ca">
@@ -99,7 +99,4 @@
             <point key="canvasLocation" x="69.599999999999994" y="80.50974512743629"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="testimg" width="800" height="530"/>
-    </resources>
 </document>

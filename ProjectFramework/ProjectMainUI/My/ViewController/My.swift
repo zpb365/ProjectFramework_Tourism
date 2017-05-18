@@ -14,8 +14,8 @@ class My: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     let identifier="MyCell"
     
-    var ImageList = ["订单","订单","订单","订单","订单","订单","订单"]
-    var TitleList = ["我的订单","游记管理","个人信息","我要反馈","联系客服","清除缓存","安全退出"]
+    var ImageList = ["我的订单","游记","个人信息","反馈","联系客服","清除缓存","关于我们","安全退出"]
+    var TitleList = ["我的订单","游记管理","个人信息","我要反馈","联系客服","清除缓存","关于我们","安全退出"]
     
     let _MyHeadUIView=MyHeadUIView()
     
@@ -48,6 +48,7 @@ class My: UIViewController,UITableViewDelegate,UITableViewDataSource {
         return tabview
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // 239 191 133
@@ -59,8 +60,14 @@ class My: UIViewController,UITableViewDelegate,UITableViewDataSource {
         _ = _MyHeadUIView._layer(tableHeaderView: tableView, target: self, selector: #selector(UserInfoEdit))
         SetupNavBar()
         if(Global_UserInfo.IsLogin==true){
-            self._MyHeadUIView.Imgbtn.imageView?.ImageLoad(PostUrl: HttpsUrlImage+Global_UserInfo.HeadImgPath)
+            self._MyHeadUIView.Imgbtn?.ImageLoad(PostUrl: HttpsUrlImage+Global_UserInfo.HeadImgPath)
             self._MyHeadUIView.LabName.text=Global_UserInfo.RealName
+            if Global_UserInfo.authorizationtype == 1{
+                ImageList.insert("挖掘", at: self.TitleList.count-1)
+                TitleList.insert("数据挖掘", at: self.TitleList.count-1)
+                
+                self.tableView.reloadData()
+            }
         }else{
             self.TitleList.remove(at: self.TitleList.count-1)
             self.ImageList.remove(at: self.ImageList.count-1)
@@ -100,6 +107,11 @@ class My: UIViewController,UITableViewDelegate,UITableViewDataSource {
     }
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        if(Global_UserInfo.IsLogin==true){
+            self._MyHeadUIView.Imgbtn?.ImageLoad(PostUrl: HttpsUrlImage+Global_UserInfo.HeadImgPath)
+        }else{
+            self._MyHeadUIView.Imgbtn?.image = UIImage.init(named: "userIcon_defualt")
+        }
     }
     
     
@@ -157,7 +169,7 @@ class My: UIViewController,UITableViewDelegate,UITableViewDataSource {
                 self?.navigationController?.show(vc, sender: nil)
                 break;
             case 104:
-           CommonFunction.CallPhone(self!, number: "15907740425")
+           CommonFunction.CallPhone(self!, number: "0771-96355")
                 break;
             case 105:
                 print("缓存")
@@ -172,6 +184,19 @@ class My: UIViewController,UITableViewDelegate,UITableViewDataSource {
                 })
                 break;
             case 106:
+                let vc = CommonFunction.ViewControllerWithStoryboardName("About", Identifier: "About") as! AboutViewController
+                self?.show(vc, sender: self)
+                break
+            case 107:
+                if (self?.ImageList.count)! == 9{
+                    let vc = Public360ViewController()
+                    vc.url = "http://wj.8gsky.com"
+                    self?.present(vc, animated: true, completion:nil)
+                }else{
+                    self?.Cancellation()
+                }
+                break;
+            case 108:
                 self?.Cancellation()
                 break;
             default:
@@ -207,10 +232,16 @@ class My: UIViewController,UITableViewDelegate,UITableViewDataSource {
         vc.Callback_Value({[weak self] (isOk) in
             //登录成功
             
-            self?._MyHeadUIView.Imgbtn.imageView?.ImageLoad(PostUrl: HttpsUrlImage+Global_UserInfo.HeadImgPath)
+            self?._MyHeadUIView.Imgbtn.ImageLoad(PostUrl: HttpsUrlImage+Global_UserInfo.HeadImgPath)
             self?._MyHeadUIView.LabName.text=Global_UserInfo.RealName
-            self?.ImageList.append("订单")
+            self?.ImageList.append("安全退出")
             self?.TitleList.append("安全退出")
+            
+            if Global_UserInfo.authorizationtype == 1{
+                self?.ImageList.insert("挖掘", at: (self?.TitleList.count)!-1)
+                self?.TitleList.insert("数据挖掘", at: (self?.TitleList.count)!-1)
+                self?.tableView.reloadData()
+            }
             self?.tableView.reloadData()
         })
         self.present(vc, animated: true, completion: nil)
@@ -232,8 +263,10 @@ class My: UIViewController,UITableViewDelegate,UITableViewDataSource {
             
             Global_UserInfo=MyInfoModel()
             
-            self._MyHeadUIView.Imgbtn.setImage(UIImage.init(named: "userIcon_defualt"), for: .normal)
+            self._MyHeadUIView.Imgbtn.image=UIImage.init(named: "userIcon_defualt")
             self._MyHeadUIView.LabName.text="Hi,给我取个名字吧"
+            self.TitleList.remove(at: self.TitleList.count-1)
+            self.ImageList.remove(at: self.ImageList.count-1)
             self.TitleList.remove(at: self.TitleList.count-1)
             self.ImageList.remove(at: self.ImageList.count-1)
             //移除极光推送别名
@@ -251,7 +284,7 @@ class My: UIViewController,UITableViewDelegate,UITableViewDataSource {
     func fileSizeWithInterge(_ size: Int) -> String {
         // 1k = 1024, 1m = 1024k
         if size < 1024 {
-            // 小于1k
+            // 小于1k                                         
             return "\(Int(size))B"
         }
         else if size < 1024 * 1024 {

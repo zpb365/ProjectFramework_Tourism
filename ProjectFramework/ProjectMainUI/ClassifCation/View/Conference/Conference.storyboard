@@ -39,7 +39,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="165" height="199"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testimg" translatesAutoresizingMaskIntoConstraints="NO" id="g4L-Dt-hEb">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g4L-Dt-hEb">
                                                     <rect key="frame" x="0.0" y="0.0" width="165" height="128"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="全季酒店" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Opx-GZ-mjH">
@@ -158,6 +158,5 @@
     </scenes>
     <resources>
         <image name="GoodFaith" width="210" height="48"/>
-        <image name="testimg" width="800" height="530"/>
     </resources>
 </document>

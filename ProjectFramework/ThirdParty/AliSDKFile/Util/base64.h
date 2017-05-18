@@ -6,7 +6,6 @@
 
 #define XYSSL_ERR_BASE64_INVALID_CHARACTER              -0x0012
 #define XYSSL_ERR_BASE64_BUFFER_TOO_SMALL               -0x0010
-
 #import <Foundation/Foundation.h>
 #ifdef __cplusplus
 extern "C" {

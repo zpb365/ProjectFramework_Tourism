@@ -9,17 +9,25 @@
 import UIKit
 
 class ConferenceReserveCell: UITableViewCell {
-    lazy var line: UILabel = {
-        let line = UILabel.init()
-        line.backgroundColor = UIColor.darkGray
-        return line
-    }()
-    @IBOutlet weak var disPrice: UILabel!
+    typealias CallbackValue=(_ items: Any...)->Void //类似于OC中的typedef
+    var myCallbackValue:CallbackValue?  //声明一个闭包 类似OC的Block属性
+    func  FuncCallbackValue(value:CallbackValue?){
+        myCallbackValue = value //返回值
+    }
+    
+    @IBOutlet weak var mainImage: UIImageView!
+    @IBOutlet weak var titleName: UILabel!
+    @IBOutlet weak var tab: UILabel!
+    @IBOutlet weak var price: UILabel!
+    
+    @IBAction func payForClick(_ sender: Any) {
+        if myCallbackValue != nil{
+            myCallbackValue!("","","")
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        self.line.frame = CommonFunction.CGRect_fram(disPrice.frame.origin.x - 2, y: disPrice.center.y, w: 30, h: 1)
-        self.contentView.addSubview(self.line)
+    
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -27,5 +35,11 @@ class ConferenceReserveCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    override func InitConfig(_ cell: Any) {
+        let model = cell as! MeetingProduct_List
+        mainImage.ImageLoad(PostUrl: HttpsUrlImage+model.CoverPhoto)
+        titleName.text = model.Title
+        tab.text = "\(model.Acreage) | \(model.Capacity) | \(model.AdditionalServices)"
+        price.text = "¥ \(model.Price)"
+    }
 }

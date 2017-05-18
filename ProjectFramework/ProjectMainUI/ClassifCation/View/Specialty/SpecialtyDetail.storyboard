@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,11 +25,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="668"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="Voa-H7-J4e">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="290"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="Voa-H7-J4e" customClass="ViewTest" customModule="智慧旅游平台" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="335"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="testimg" translatesAutoresizingMaskIntoConstraints="NO" id="oxO-gE-QT2">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oxO-gE-QT2">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         </imageView>
@@ -37,7 +37,7 @@
                                             <rect key="frame" x="0.0" y="160" width="375" height="40"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="武鸣柠檬鸭" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q3c-Sf-Drn">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q3c-Sf-Drn">
                                                     <rect key="frame" x="9" y="10" width="351" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -51,7 +51,7 @@
                                             <rect key="frame" x="0.0" y="201" width="375" height="40"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="广西南宁青秀区青山路19号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPe-fV-7Ch">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPe-fV-7Ch">
                                                     <rect key="frame" x="36" y="10" width="287" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -62,7 +62,7 @@
                                                     <rect key="frame" x="343" y="6" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ZFBlogo" translatesAutoresizingMaskIntoConstraints="NO" id="10t-TL-GX1">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="address1" translatesAutoresizingMaskIntoConstraints="NO" id="10t-TL-GX1">
                                                     <rect key="frame" x="8" y="10" width="20" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -70,8 +70,29 @@
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
                                         <view tag="99" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JyA-ff-qQM">
-                                            <rect key="frame" x="0.0" y="250" width="375" height="40"/>
+                                            <rect key="frame" x="0.0" y="295" width="375" height="40"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Whg-xk-gNR">
+                                            <rect key="frame" x="0.0" y="242" width="375" height="45"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ne8-9C-zTf">
+                                                    <rect key="frame" x="14" y="12" width="93" height="27"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.90980392156862744" green="0.30588235294117649" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-5" maxY="0.0"/>
+                                                    <inset key="imageEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    <state key="normal" title="联系电话" image="tel">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="Callphone:" destination="p7J-MF-Cnk" eventType="touchUpInside" id="dLo-v1-gnV"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
                                     </subviews>
@@ -79,10 +100,10 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SpecialtyReserveCell" rowHeight="80" id="7hJ-gh-rPz" customClass="SpecialtyReserveCell" customModule="智慧旅游平台" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="346" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="390.5" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7hJ-gh-rPz" id="8m6-bt-HnW">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="高峰柠檬鸭" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zc4-rW-39E">
@@ -99,12 +120,17 @@
                                                     <color key="textColor" red="1" green="0.3411764706" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="testimg" translatesAutoresizingMaskIntoConstraints="NO" id="vav-fY-UKT">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vav-fY-UKT">
                                                     <rect key="frame" x="19" y="11" width="82" height="58"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="mainImage" destination="vav-fY-UKT" id="grM-lW-uMn"/>
+                                            <outlet property="price" destination="ifC-dO-zwb" id="Fwm-6o-NgI"/>
+                                            <outlet property="productName" destination="zc4-rW-39E" id="tvP-ir-gLU"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -112,7 +138,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="Specialty_Name" destination="q3c-Sf-Drn" id="Lqd-np-2KC"/>
+                        <outlet property="Specialty_address" destination="CPe-fV-7Ch" id="gxz-La-N36"/>
+                        <outlet property="addressView" destination="ser-k7-PkD" id="aGm-lU-XTN"/>
                         <outlet property="buttonBar" destination="JyA-ff-qQM" id="ROM-wP-kOW"/>
+                        <outlet property="headImage" destination="oxO-gE-QT2" id="SBr-3Q-Vja"/>
                         <outlet property="tableView" destination="2t1-w6-irg" id="2ui-9X-Sgy"/>
                         <outlet property="tableViewHead" destination="Voa-H7-J4e" id="YSR-oU-0hD"/>
                     </connections>
@@ -123,8 +153,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ZFBlogo" width="300" height="300"/>
+        <image name="address1" width="32" height="32"/>
         <image name="ionicons" width="138" height="138"/>
-        <image name="testimg" width="800" height="530"/>
+        <image name="tel" width="16" height="16"/>
     </resources>
 </document>

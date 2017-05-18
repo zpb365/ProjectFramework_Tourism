@@ -23,16 +23,11 @@ class ClassifCation: CustomTemplateViewController ,UICollectionViewDelegateFlowL
         //基控制器
         self.InitCongifCollection(CollectView, nil)
         self.header.isHidden = true
-        self.footer.isHidden = true
-        CollectView.reloadData()
         self.GetHtpsData()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.navigationBar.setBackgroundImage(UIImage().ImageWithColor(color: CommonFunction.SystemColor(), size: CGSize.init(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)),for: UIBarMetrics.default)
     }
     //MARK: getDta

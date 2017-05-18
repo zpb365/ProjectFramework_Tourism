@@ -15,7 +15,7 @@ class HotelDetailViewModel {
         let parameters=["HotelID":HotelID,"PageIndex":PageIndex,"PageSize":PageSize,"DateTimeBegin":DateTimeBegin,"DateTimeEnd":DateTimeEnd] as [String : Any]
         
         
-        CommonFunction.Global_Get(entity: HotelDetailModel(), IsListData: false, url: HttpsUrl+"api/Channels/GetChannelsHotelDetails", isHUD: true, isHUDMake: false, parameters: parameters as NSDictionary) { (resultModel) in
+        CommonFunction.Global_Get(entity: HotelDetailModel(), IsListData: false, url: HttpsUrl+"api/Channels/GetChannelsHotelDetails", isHUD: false, isHUDMake: false, parameters: parameters as NSDictionary) { (resultModel) in
             if(resultModel?.Success==true){
                 
                 self.ListData = resultModel?.Content   as!  HotelDetailModel
@@ -36,7 +36,8 @@ class HotelDetailViewModel {
             if(resultModel?.Success==true){
                 //没有数据
                 if(resultModel?.ret==5){
-                    result?(false)
+                    self.ListData.HotelProduct?.removeAll()
+                    result?(true)
                     return 
                 }
                 self.ListData.HotelProduct?=resultModel?.Content   as!  [HotelProduct_List]

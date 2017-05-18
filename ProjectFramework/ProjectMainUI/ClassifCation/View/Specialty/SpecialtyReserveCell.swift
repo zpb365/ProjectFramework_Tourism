@@ -10,6 +10,9 @@ import UIKit
 
 class SpecialtyReserveCell: UITableViewCell {
 
+    @IBOutlet weak var mainImage: UIImageView!
+    @IBOutlet weak var productName: UILabel!
+    @IBOutlet weak var price: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,5 +23,11 @@ class SpecialtyReserveCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    override func InitConfig(_ cell: Any) {
+        let model = cell as! SpecialitiesProduct_List
+        mainImage.ImageLoad(PostUrl: HttpsUrlImage+model.CoverPhoto)
+        productName.text = model.Title
+        price.text = "¥\(model.DefaultPrice)"
+    }
 }

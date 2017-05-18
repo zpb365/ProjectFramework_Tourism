@@ -16,6 +16,10 @@ class MessageViewModel    {
         //如果登录了 则有userid  否则就是0
         CommonFunction.Global_Get(entity: PushMessageInfoModel(), IsListData: true, url: HttpsUrl+"api/Home/GetPushMessageInfo", isHUD: false, isHUDMake: false, parameters: ["UserID":Global_UserInfo.userid]) { (resultModel) in
             if(resultModel?.Success==true){
+                if(resultModel?.ret==5){
+                     result?(true)
+                    return
+                }
                  self.ListData = resultModel?.Content   as!  [PushMessageInfoModel]
                 result?(true)
             }else{

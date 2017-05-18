@@ -41,9 +41,9 @@ class ScenicSpotCollectionCell: UICollectionViewCell {
             titleLable.text = model.Title
             break
         case .VRVideo:
-            let model = cell as! ClassVRVideoClassList
+            let model = cell as! ClassVRVideoClassList_Item
             mainImageView.ImageLoad(PostUrl: HttpsUrlImage + model.CoverPhoto)
-            titleLable.text = model.VideoName
+            titleLable.text = model.VideoTitle
             break
         case .BeautyImage:
             let model = cell as! ClassBeautifulPictureList
@@ -55,7 +55,7 @@ class ScenicSpotCollectionCell: UICollectionViewCell {
             mainImageView.ImageLoad(PostUrl: HttpsUrlImage + model.CoverPhoto)
             titleLable.text = model.AttractionsName
             break
-        default: break
+        default:break
             
         }
     }

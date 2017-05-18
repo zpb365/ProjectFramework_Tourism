@@ -16,6 +16,7 @@ class ScenicSpotImage: CustomTemplateViewController ,UICollectionViewDelegateFlo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print((dataArray?.count)!)
         self.initUI()
         self.RefreshRequest(isLoading: false, isHiddenFooter: true)
     }

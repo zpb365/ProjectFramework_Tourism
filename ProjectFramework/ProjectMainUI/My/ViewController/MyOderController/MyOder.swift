@@ -69,8 +69,8 @@ class MyOder: CustomTemplateViewController {
      //MARK: Refresh
     override func headerRefresh() {
         PageIndex = 1
-        viewModel.ListData.removeAll()
-        self.numberOfRowsInSection=viewModel.ListData.count
+//        viewModel.ListData.removeAll()
+//        self.numberOfRowsInSection=viewModel.ListData.count
         self.RefreshRequest(isLoading: true, isHiddenFooter: true )
         GetHtpsData()
     }
@@ -136,7 +136,7 @@ class MyOder: CustomTemplateViewController {
         cell.InitConfig(viewModel.ListData[indexPath.row])
         cell.FuncCallbackValue {[weak self] (OrderType) in
             if(OrderType==0){//待付款
-              let vc =   PayClass(parameters: ["OrderNumber":(self?.viewModel.ListData[indexPath.row].OrderNumber)!],Channels: 0) 
+              let vc =   PayClass(parameters: ["OrderNumber":(self?.viewModel.ListData[indexPath.row].OrderNumber)!],Channels: 0,delegate:self!) 
                 self?.present(vc, animated: false, completion: nil)
             }
             if(OrderType==1){//待评价

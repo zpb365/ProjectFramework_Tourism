@@ -15,7 +15,7 @@ class HotelModel: NSObject {
     var CoverPhoto=""
     var Lng=""
     var Lat=""
-    var lowestPrice=0
+    var lowestPrice=0.0
     var CommentsCount=0
     var tab=""
     var Score=0.0

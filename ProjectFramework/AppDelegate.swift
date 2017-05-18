@@ -306,22 +306,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKMapViewDelegate, BMKLo
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool{
+        if(url.scheme==ZFBAppScheme){
+          return  safepay(url: url as URL)
+        }
         
-        return safepay(url: url as URL)
+        return true
     }
     
     
     
     // NOTE: 9.0以后使用新API接口
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+       
+        if(url.scheme==ZFBAppScheme){
+          return safepay(url: url)
+        }
         
-        return safepay(url: url)
+        return true
     }
     
     //支付宝处理结果
     func safepay (url: URL) ->Bool{
         
-        if url.host=="safepay" {
+        if url.scheme==ZFBAppScheme {
             // 支付跳转支付宝钱包进行支付，处理支付结果
             AlipaySDK.defaultService().processOrder(withPaymentResult: url, standbyCallback: { (resultDic) in
                 debugPrint("reslut = \(String(describing: resultDic))")

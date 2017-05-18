@@ -34,7 +34,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="139.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Orderquery.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Lcv-dr-kP0">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lcv-dr-kP0">
                                                     <rect key="frame" x="13" y="8" width="169" height="124"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="124" id="nQ2-kd-Fho"/>
@@ -50,7 +50,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Orderquery.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="rHN-la-4pU">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rHN-la-4pU">
                                                     <rect key="frame" x="192" y="8" width="169" height="124"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="124" id="o6K-iR-Vu4"/>
@@ -176,6 +176,5 @@
     </scenes>
     <resources>
         <image name="360Panorama" width="32" height="32"/>
-        <image name="Orderquery.jpg" width="804" height="1024"/>
     </resources>
 </document>

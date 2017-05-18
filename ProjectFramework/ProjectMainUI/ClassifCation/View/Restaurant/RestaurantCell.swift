@@ -40,6 +40,6 @@ class RestaurantCell: UITableViewCell {
         priceLable.text = "¥\(model.lowestPrice)起"
         let score = model.Score / 5 * 100
         scoreLable.text = "\(score)%满意"
-        describeLable.text = model.tab
+        describeLable.text = "  \(model.tab)"
     }
 }

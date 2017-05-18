@@ -52,6 +52,9 @@ class Restaurant: CustomTemplateViewController,PYSearchViewControllerDelegate {
         self.remexParmeter(tag: true, searchText: "")
         self.header.endRefreshing()
     }
+    override func Error_Click() {
+        self.remexParmeter(tag: true, searchText: "")
+    }
     //MARK: 获取筛选数据
     func getSiftDate() -> Void {
         siftViewModel.GetScreeningCondition(ChannelID:self.ChannelID) { (result) in
@@ -61,6 +64,7 @@ class Restaurant: CustomTemplateViewController,PYSearchViewControllerDelegate {
             }
         }
     }
+
     //MARK: 获取数据
     func GetHtpsData() {
         viewModel.GetChannelsRestaurantList(SearchTitle: searchText!, ScreenTitle: Title_Name, SalesPriorityEnum: SalesPriorityEnum, ComprehensiveSortingEnum: ComprehensiveSortingEnum, PageIndex: PageIndex, PageSize: PageSize) { (result, NoMore,NoData) in
@@ -217,7 +221,21 @@ class Restaurant: CustomTemplateViewController,PYSearchViewControllerDelegate {
     }
 
     func GetAdress() {
-        print("当前地址")
+        //跳转到地图
+        let vc = PublicMapShowListViewController()
+        var  model  = [MapListModel]()
+        for   item in viewModel.ListData {
+            if(item.Lng==""||item.Lng==""){
+                continue
+            }
+            let mapmodel = MapListModel()
+            mapmodel.lat = item.Lat
+            mapmodel.lng = item.Lng
+            mapmodel.title = item.RestaurantName
+            model.append(mapmodel)
+        }
+        vc.models=model
+        self.navigationController?.show(vc, sender: self)
     }
 
 

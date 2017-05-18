@@ -166,21 +166,21 @@ class CustomWaterCell: UICollectionViewCell {
             mainImageView.ImageLoad(PostUrl: HttpsUrlImage+model.CoverPhoto)
             titleLable.text = model.AlbumName
             dateLable.text = model.UpdateTime
-            browseLable.text = "\(model.Views + 99)"
+            browseLable.text = "\(model.Views)"
             break
         case .PanoramaImage:
             let model = Model as! ClassPanorama360List
             mainImageView.ImageLoad(PostUrl: HttpsUrlImage+model.CoverPhoto)
             titleLable.text = model.Title
             dateLable.text = model.CreateTime
-            browseLable.text = "\(model.Views + 99)"
+            browseLable.text = "\(model.Views)"
             break
         case .VRVideo:
-            let model = Model as! ClassVRVideoClassList
+            let model = Model as! ClassVRVideoClassList_Item
             mainImageView.ImageLoad(PostUrl: HttpsUrlImage+model.CoverPhoto)
-            titleLable.text = model.VideoName
+            titleLable.text = model.VideoTitle
             dateLable.text = model.CreateTime
-            browseLable.text = "\(model.Views + 99)"
+            browseLable.text = "\(model.Views)"
             break
         }
     }

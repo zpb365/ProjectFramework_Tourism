@@ -52,7 +52,7 @@ class CreatedbBase {
  
         var DBItem=[String]()
         //用户信息
-        let createSql1:String = "CREATE TABLE IF NOT EXISTS MemberInfo (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, userid integer , PhoneNo text , RealName text ,  Sex text , HeadImgPath text , Token text  , IsLogin bit  )"
+        let createSql1:String = "CREATE TABLE IF NOT EXISTS MemberInfo (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, userid integer , PhoneNo text , RealName text ,  Sex text , HeadImgPath text , Token text  , IsLogin bit , authorizationtype integer)"
         
         DBItem.append(createSql1) // 用户信息
         
@@ -78,7 +78,7 @@ class CreatedbBase {
         CommonFunction.ExecuteQuery("select *  from MemberInfo", nil) { (Result) in
             
             if(!Result.next()){
-                CommonFunction.ExecuteUpdate("insert into MemberInfo (userid,PhoneNo,RealName,Sex,HeadImgPath,Token,IsLogin ) values (?,?,?,?,?,?,? ) ", ["0" as AnyObject,"" as AnyObject,"" as AnyObject,"" as AnyObject,"" as AnyObject,"" as AnyObject,false as AnyObject]) { (isOk) in
+                CommonFunction.ExecuteUpdate("insert into MemberInfo (userid,PhoneNo,RealName,Sex,HeadImgPath,Token,IsLogin ,authorizationtype) values (?,?,?,?,?,?,?,? ) ", ["0" as AnyObject,"" as AnyObject,"" as AnyObject,"" as AnyObject,"" as AnyObject,"" as AnyObject,false as AnyObject,"0" as AnyObject]) { (isOk) in
                 }
             }else{
                 CommonFunction.ExecuteQuery("select * from MemberInfo", nil, callback: { (Result) in
@@ -91,6 +91,8 @@ class CreatedbBase {
                         let HeadImgPath = Result.string(forColumn: "HeadImgPath") as String
                         let Token = Result.string(forColumn: "Token") as String
                         let IsLogin = Result.bool(forColumn: "IsLogin") as Bool
+                        
+                        let authorizationtype = Result.int(forColumn: "authorizationtype") as Int32
                          
                         Global_UserInfo.IsLogin=IsLogin
                         Global_UserInfo.userid=Int(userid)
@@ -99,6 +101,7 @@ class CreatedbBase {
                         Global_UserInfo.Sex=Sex
                         Global_UserInfo.HeadImgPath=HeadImgPath
                         Global_UserInfo.Token=Token
+                        Global_UserInfo.authorizationtype=Int(authorizationtype)
                         
                     }
                     

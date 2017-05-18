@@ -19,7 +19,6 @@
  */
 //#include "stdafx.h"
 #include "config.h"
-
 #import <Foundation/Foundation.h>
 #if defined(XYSSL_BASE64_C)
 

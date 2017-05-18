@@ -51,6 +51,9 @@ class HotelReserve: CustomTemplateViewController,PYSearchViewControllerDelegate 
         self.remexParmeter(tag: true, searchText: "")
         self.header.endRefreshing()
     }
+    override func Error_Click() {
+        self.remexParmeter(tag: true, searchText: "")
+    }
     //MARK: 获取筛选数据
     func getSiftDate() -> Void {
         siftViewModel.GetScreeningCondition(ChannelID:self.ChannelID) { (result) in
@@ -91,9 +94,7 @@ class HotelReserve: CustomTemplateViewController,PYSearchViewControllerDelegate 
             print("当前数组个数\(self.viewModel.ListData.count)")
         }
     }
-    override func Error_Click() {
-        
-    }
+    
     // MARK: tableViewDelegate
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -107,6 +108,7 @@ class HotelReserve: CustomTemplateViewController,PYSearchViewControllerDelegate 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = CommonFunction.ViewControllerWithStoryboardName("HotelDetail", Identifier: "HotelDetail") as! HotelDetail
         vc.HotelID = viewModel.ListData[indexPath.row].HotelID
+        vc.ChannelID = ChannelID
         self.navigationController?.show(vc, sender: self  )
     }
     
@@ -224,6 +226,7 @@ class HotelReserve: CustomTemplateViewController,PYSearchViewControllerDelegate 
         }
     }
     func GetAdress() {
+        
         //跳转到地图
         let vc = PublicMapShowListViewController()
         var  model  = [MapListModel]()

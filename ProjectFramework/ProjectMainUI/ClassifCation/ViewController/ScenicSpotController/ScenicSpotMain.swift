@@ -15,7 +15,7 @@ protocol ScrollEnabledDelegate {
     func ScrollEnabledNo()
 }
 
-class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class ScenicSpotMain: CustomTemplateViewController {
     
     lazy var pageMenu: CAPSPageMenu = {
         var controllerArray : [UIViewController] = []
@@ -40,17 +40,17 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
         controller9.title = "门票预订"
         //请求回来的数据在这里正向传值
         controller1.ScenicHomeModel = self.ViewModel.ListData.ScenicHome!
-//        if self.ViewModel.ListData.ScenicNews != nil {
-            controller2.ScenicNewsModel = self.ViewModel.ListData.ScenicNews!
-//        }
+        controller2.ScenicNewsModel = self.ViewModel.ListData.ScenicNews!
         controller3.dataArray       = self.ViewModel.ListData.Panorama360!
-        controller4.dataArray       = self.ViewModel.ListData.VRVideoClass!
+        controller4.dataArray       = self.ViewModel.ListData.VRVideoDTO!
         controller5.dataArray       = self.ViewModel.ListData.BeautifulPicture!
         controller6.dataArray       = self.ViewModel.ListData.ScenicAttractions!
-//        controller7.dataArray       = self.ViewModel.ListData.BeautifulPicture!
-        controller9.dataArray       = self.ViewModel.ListData.ScenicTicket!
+        controller7.url             = self.ViewModel.ListData.ScenicContent
         controller8._ScenicParkingList = self.ViewModel.ListData.ScenicParking!
+        controller9.dataArray       = self.ViewModel.ListData.ScenicTicket!
         controller9.ScenicID        = self.ScenicID
+        controller9.BookingNotes    = self.ViewModel.ListData.BookingNotes
+        
         
         controllerArray.append(controller1)
         controllerArray.append(controller2)
@@ -86,14 +86,14 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
             .centerMenuItems(true),
             .scrollEnabled(false)
         ]
-
-       let pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0, y: self.headView.frame.maxY, width:CommonFunction.kScreenWidth, height: CommonFunction.kScreenHeight - 64), pageMenuOptions: parameters)
+        
+        let pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0, y: self.headView.frame.maxY, width:CommonFunction.kScreenWidth, height: CommonFunction.kScreenHeight - 64), pageMenuOptions: parameters)
         pageMenu.view.tag = 99
         self.addChildViewController(pageMenu)
         self.view.addSubview(pageMenu.view)
         pageMenu.didMove(toParentViewController: self)
         controller1.FuncCallbackValue(value: { [weak self] (tag) in
-           self?.pageMenu.moveToPage(tag - 99)
+            self?.pageMenu.moveToPage(tag - 99)
         })
         return pageMenu
     }()
@@ -129,6 +129,21 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
         }
         
     }
+    @IBAction func adressPush(_ sender: Any) {
+        //景区地址跳转百度地图
+        if (ViewModel.ListData.Lng != "" && ViewModel.ListData.Lat != ""){
+            var  model  = [MapListModel]()
+            let mapmodel = MapListModel()
+            mapmodel.lat = ViewModel.ListData.Lat
+            mapmodel.lng = ViewModel.ListData.Lng
+            mapmodel.title = ViewModel.ListData.ScenicName
+            model.append(mapmodel)
+            
+            let vc = PublicMapShowListViewController()
+            vc.models=model
+            self.navigationController?.show(vc, sender: self)
+        }
+    }
     
     var CustomNavBar:UINavigationBar!=nil
     var backBtn:UIButton!=nil
@@ -158,25 +173,40 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
         super.viewDidLoad()
         //禁用这个流行的姿态一个视图控制器:
         self.fd_interactivePopDisabled = true
+        self.GetHtpsData()
         self.setNavBar()
         self.initUI()
-        self.GetHtpsData()
         
+        
+    }
+    override func Error_Click() {
+        GetHtpsData()
     }
     //MARK: 获取数据
     func GetHtpsData() -> Void {
         ViewModel.GetChannelsScenicDetails(ScenicID: ScenicID) { (result) in
             if result == true{
-                
-                //print(self.ViewModel.ListData.ScenicNews?.News?[0].ScenicNews?[0].Title)
+                //没有数据的情况下
+                if self.ViewModel.ListData.ScenicName == ""{
+                    self.numberOfRowsInSection = 0
+                    self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: false)
+                    return
+                }
+                self.headView.isHidden = false
+                self.numberOfSections = 1
+                self.numberOfRowsInSection = 1
+                self.tableView.isScrollEnabled = true
                 self.setData()
+                self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: false)
+            }else{
+                self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: true)
             }
         }
     }
     //数据赋值
     func setData() -> Void {
         address.text = self.ViewModel.ListData.Address
-        describeLable.text = self.ViewModel.ListData.ScenicName + "---" + self.ViewModel.ListData.ScenicContent
+        describeLable.text = self.ViewModel.ListData.ScenicName
         phoneNumber.text = self.ViewModel.ListData.Tel
         mainImageView.ImageLoad(PostUrl: HttpsUrlImage + self.ViewModel.ListData.Logo)
         self.InitAdv()
@@ -188,8 +218,9 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
         var Imagelist  = Array<String>()
         for i in 0..<num{
             let model = self.ViewModel.ListData.ScenicDetailsAdv![i]
-            Imagelist.append(HttpsUrlImage+model.Img)
+            Imagelist.append(model.Img)
         }
+
         let vc = ScrollViewPageViewController(Enabletimer: true,   //是否启动滚动
             timerInterval: 4,     //如果启用滚动，滚动秒数
             ImageList:Imagelist  ,//图片
@@ -210,11 +241,13 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
         self.mainImageView.layer.borderColor = UIColor.white.cgColor
         self.mainImageView.clipsToBounds = true
         
+        self.InitCongif(tableView)
         self.tableView.frame = CGRect.init(x: 0, y: -20, width: CommonFunction.kScreenWidth, height: CommonFunction.kScreenHeight + 20)
         self.tableView.tag = 100
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+        self.tableViewheightForRowAt = 0
         self.tableView.tableHeaderView = headView
+        headView.isHidden = true
+        self.header.isHidden = true
         self.tableView.tableFooterView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: CommonFunction.kScreenWidth, height: 0.0001))
         
         self.view.addSubview(self.topButton)
@@ -268,10 +301,10 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
             delegate.ScrollEnabledCan()
             //异步线程加载结束回到主线程渲染UI
             DispatchQueue.main.async(execute: {() -> Void in
-            
+                
             })
         })
-
+        
     }
     func setDelegateDoneCancle(delegate:ScrollEnabledDelegate) -> Void {
         DispatchQueue.global(qos: .default).async(execute: {() -> Void in
@@ -282,19 +315,8 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
             })
         })
     }
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 0
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
-    }
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         //判断是否是请求数据回来了，是就返回自定义控件
         if self.ViewModel.ListData.ScenicName != "" {
             return self.pageMenu.view
@@ -302,7 +324,7 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
             return UIView()
         }
     }
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CommonFunction.kScreenHeight - 64
     }
     
@@ -343,7 +365,7 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
         shareBtn.addTarget(self, action:#selector(buttonClick) , for: .touchUpInside)
         
         CustomNavItem.leftBarButtonItem=UIBarButtonItem.init(customView: backBtn)
-        CustomNavItem.rightBarButtonItems=[UIBarButtonItem.init(customView: shareBtn),UIBarButtonItem.init(customView: cellectionBtn)]
+//        CustomNavItem.rightBarButtonItems=[UIBarButtonItem.init(customView: shareBtn),UIBarButtonItem.init(customView: cellectionBtn)]
         CustomNavBar.pushItem(CustomNavItem, animated: true)
     }
     //导航栏按钮方法
@@ -361,7 +383,7 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
         case 103:
             isChange = true
             self.tableView.setContentOffset(CGPoint.init(x: 0, y:(-20)), animated: true)
-
+            
             self.setDelegateDoneCancle(delegate: ScrollEnabledDelegate1!)
             self.setDelegateDoneCancle(delegate: ScrollEnabledDelegate2!)
             self.setDelegateDoneCancle(delegate: ScrollEnabledDelegate3!)
@@ -377,5 +399,5 @@ class ScenicSpotMain: UIViewController,UITableViewDelegate,UITableViewDataSource
         }
         
     }
-
+    
 }

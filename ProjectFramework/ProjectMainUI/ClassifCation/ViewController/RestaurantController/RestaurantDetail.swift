@@ -11,10 +11,10 @@ import UIKit
 class RestaurantDetail: CustomTemplateViewController {
 
     
-    lazy var sectionConment:UIView = {
+    lazy var sectionConment:CommentSectionView = {
         let sectionConment = Bundle.main.loadNibNamed("CommentSectionView", owner: self, options: nil)?.last
         
-        return sectionConment as! UIView
+        return sectionConment as! CommentSectionView
     }()
     
     //酒店设施那些
@@ -94,10 +94,11 @@ class RestaurantDetail: CustomTemplateViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.GetHtpsData()
         self.setNavBar()
         self.initUI()
         self.setHeadView()
-        self.GetHtpsData()
+        
     }
     override func footerRefresh() {
         PageIndex = PageIndex + 1
@@ -116,9 +117,16 @@ class RestaurantDetail: CustomTemplateViewController {
                 //没有更多数据
                 if noMore == true {
                     self.footer.endRefreshingWithNoMoreData()
+                }else{
+                    self.tableViewHead.isHidden = false
+                    self.sectionView.isHidden = false
+                    self.sectionConment.isHidden = false
+                    self.footderIntroduce.isHidden = false
+                    self._numberOfRowsInSection[1]=1
+                    self._numberOfRowsInSection[2]=1
+                    self.RefreshRequest(isLoading: false, isHiddenFooter: false, isLoadError: false)
+                    self.footer.endRefreshing()
                 }
-                
-                 self.RefreshRequest(isLoading: false, isHiddenFooter: false)
             }else{
                 self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: true)
             }
@@ -126,8 +134,18 @@ class RestaurantDetail: CustomTemplateViewController {
     }
     //MARK: 请求网络数据
     func GetHtpsData() -> Void {
+        self.tableViewHead.isHidden = true
+        self.sectionView.isHidden = true
+        self.sectionConment.isHidden = true
+        self.footderIntroduce.isHidden = true
         viewModel.GetChannelsRestaurantDetails(RestaurantID: RestaurantID, PageIndex: PageIndex, PageSize: PageSize) { (result) in
             if result == true{
+                //没有数据的操作
+                if(self.viewModel.ListData.RestaurantID == 0){
+                    self.numberOfRowsInSection=0
+                    self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: false)
+                    return
+                }
                 self.setData()
                 self.GetCommentData()
             }else{
@@ -151,7 +169,7 @@ class RestaurantDetail: CustomTemplateViewController {
                 for i in 0..<(viewModel.ListData.ImageList?.count)!{
                     let model = viewModel.ListData.ImageList?[i]
                     Imagelist.append(HttpsUrlImage+model!.PhotoUrl)
-                    ImageTab.append(model!.Tab)
+                    ImageTab.append(model!.PhotoDescribe)
                 }
                 
                 let vc = ImagePreviewViewController( ImageUrlList: Imagelist ,IsDescribe: true,DescribeList: ImageTab )
@@ -159,12 +177,29 @@ class RestaurantDetail: CustomTemplateViewController {
             }
             
         case 1001:
+            if (viewModel.ListData.Lng != "" && viewModel.ListData.Lat != ""){
+                var  model  = [MapListModel]()
+                let mapmodel = MapListModel()
+                mapmodel.lat = viewModel.ListData.Lat
+                mapmodel.lng = viewModel.ListData.Lng
+                mapmodel.title = viewModel.ListData.RestaurantName
+                model.append(mapmodel)
+                
+                let vc = PublicMapShowListViewController()
+                vc.models=model
+                self.navigationController?.show(vc, sender: self)
+            }
             print("跳转到百度地图")
         case 1002:
             if viewModel.ListData.Phone != "" {
                 CommonFunction.CallPhone(self, number: viewModel.ListData.Phone)
             }
         case 1003:
+            if viewModel.ListData.Panorama360 != nil {
+                let vc = Public360ViewController()
+                vc.url = HttpsPanorama360+(viewModel.ListData.Panorama360?.description)!
+                self.present(vc, animated: true, completion:nil)
+            }
             print("跳转到全景动画")
         default:
             break
@@ -235,9 +270,12 @@ class RestaurantDetail: CustomTemplateViewController {
     var _viewForHeaderInSection = [UIView(),UIView(),UIView(),UIView()]
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
         _viewForHeaderInSection[0] = sectionView
-        _viewForHeaderInSection[1] = UIView().setIntroduceView(height: 40, title: "餐厅介绍")
-        _viewForHeaderInSection[2] = UIView().setIntroduceView(height: 40, title: "预定介绍")
+        if viewModel.ListData.RestaurantID != 0 {
+            _viewForHeaderInSection[1] = UIView().setIntroduceView(height: 40, title: "餐厅介绍")
+            _viewForHeaderInSection[2] = UIView().setIntroduceView(height: 40, title: "预定须知")
+        }
         _viewForHeaderInSection[3] = sectionConment
+        sectionConment.setData(scorce: CGFloat(viewModel.ListData.Score), CommentCount: viewModel.ListData.CommentsCount)
         return _viewForHeaderInSection[section]
     }
     var _heightForHeaderInSection = [40,40,40,50]
@@ -275,7 +313,7 @@ class RestaurantDetail: CustomTemplateViewController {
             return 0.0001
         }
     }
-    var _numberOfRowsInSection = [0,1,1,0]
+    var _numberOfRowsInSection = [0,0,0,0]
     //组个数
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         if viewModel.ListData.RestaurantProduct != nil {
@@ -291,7 +329,7 @@ class RestaurantDetail: CustomTemplateViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         _heightForRowAt[1] = IntroduceHeight > CGFloat(10) ? IntroduceHeight :CGFloat(0)
         _heightForRowAt[2] = BookingHeight > CGFloat(10) ? IntroduceHeight :CGFloat(0)
-        if cViewModel.ListData.count > 0 {
+        if cViewModel.ListData.count > 0 && indexPath.section == 3 {
             let model = cViewModel.ListData[indexPath.row]
             _heightForRowAt[3] = self.tableView.getHeightWithCell(lableWidth: CommonFunction.kScreenWidth - 35, commont: model.ContentMsg, imageArray: [], showCount: 0, rowCount: 4, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10) + 48 + 10
         }
@@ -321,17 +359,19 @@ class RestaurantDetail: CustomTemplateViewController {
                     self?.tableView.reloadData()
                 })
             }
+            return cell
         }
         if (indexPath.section == 2) {
             let cell = tableView.dequeueReusableCell(withIdentifier: indetifer2, for: indexPath)as!PulickWebCell
             if viewModel.ListData.BookInformation != "" {
-                cell.loadHtmlString(html: viewModel.ListData.Introduce, isFirst: isfirst2)
+                cell.loadHtmlString(html: viewModel.ListData.BookInformation, isFirst: isfirst2)
                 isfirst2 = true
                 cell.FuncCallbackValue(value: {[weak self] (height) in
                     self?.BookingHeight = height
                     self?.tableView.reloadData()
                 })
             }
+            return cell
         }
         if (indexPath.section == 3){
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)as!UserCommentCell
@@ -344,7 +384,13 @@ class RestaurantDetail: CustomTemplateViewController {
             return UITableViewCell()
         }
     }
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            let vc = CommonFunction.ViewControllerWithStoryboardName("RestaurantMenuDetail", Identifier: "RestaurantMenuDetail") as! RestaurantMenuDetail
+            vc.ResturantProduct = self.viewModel.ListData.RestaurantProduct?[indexPath.row]
+            self.navigationController?.show(vc, sender: self  )
+        }
+    }
     //MARK: 悬浮按钮方法
     func headerClick(_ button: UIButton) {
         isChange = false
@@ -447,7 +493,7 @@ class RestaurantDetail: CustomTemplateViewController {
         shareBtn.addTarget(self, action:#selector(buttonClick) , for: .touchUpInside)
         
         CustomNavItem.leftBarButtonItem=UIBarButtonItem.init(customView: backBtn)
-        CustomNavItem.rightBarButtonItems=[UIBarButtonItem.init(customView: shareBtn),UIBarButtonItem.init(customView: cellectionBtn)]
+//        CustomNavItem.rightBarButtonItems=[UIBarButtonItem.init(customView: shareBtn),UIBarButtonItem.init(customView: cellectionBtn)]
         
         CustomNavBar.pushItem(CustomNavItem, animated: true)
     }

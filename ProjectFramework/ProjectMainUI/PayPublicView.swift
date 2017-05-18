@@ -15,9 +15,12 @@ class PayClass:UIViewController {
     fileprivate var OrderNumber=""
     fileprivate var parameters:Any?      //请求参数
     fileprivate var Url=""
+    fileprivate weak var delegate:UIViewController?=nil
     
-    init(parameters:Any,Channels:Int) {
+    
+    init(parameters:Any,Channels:Int,delegate:UIViewController) {
         super.init(nibName: nil, bundle: nil)
+        self.delegate=delegate
         self.parameters=parameters
         view.backgroundColor=UIColor(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.01)
         switch Channels {
@@ -82,8 +85,14 @@ class PayClass:UIViewController {
             
             if(resultData?.Success==true){
                 if resultData?.Content != nil {
+                    if(PaymenType==0){
+                        print("weix")
+                    }
+                    if(PaymenType==1){
+                        self.AliplayFunc(OrderString: resultData?.Content as! String)
+                    }
                     
-                    self.AliplayFunc(OrderString: resultData?.Content as! String)
+                    
                 }
             }else{
                 CommonFunction.HUD(resultData!.Result, type: .error)
@@ -112,28 +121,35 @@ class PayClass:UIViewController {
         let dic = notification.userInfo as! [String:Any]
         let resultStatus =  dic["resultStatus"] as! String
         
-        self.menu?.menuItemdismiss()
-        self.dismiss(animated: false, completion: nil)
-        
         if resultStatus == "9000"{
             print("OK,支付完成")
+            self.delegate?.navigationController?.popToRootViewController(animated: true)
+            CommonFunction.MessageNotification("您已支付成功", interval: 3, msgtype: .success)
             
         }else if resultStatus == "8000" {
             print("正在处理中")
         }else if resultStatus == "4000" {
             print("订单支付失败")
-            
+            CommonFunction.MessageNotification("支付失败，订单已生成，请到我的订单查看", interval: 3, msgtype: .error)
         }else if resultStatus == "6001" {
             print("用户中途取消")
+            self.delegate?.navigationController?.popToRootViewController(animated: true)
+            // self.delegate?.navigationController.pop
+            CommonFunction.MessageNotification("您的订单已生成，请到我的订单查看", interval: 3, msgtype: .success)
         }else if resultStatus == "6002" {
             print("网络连接出错")
         }
+        
+        self.menu?.menuItemdismiss()
+        self.dismiss(animated: false, completion: nil)
+        
     }
     
     deinit {    //销毁当前通知 通道
         print("deinit 进入了")
         NotificationCenter.default.removeObserver(self)
     }
+    
     
     
 }

@@ -14,7 +14,7 @@ class LoginView: UIView
     lazy var backgroundImage:UIImageView =
         {
         let Imageview = UIImageView(frame: self.frame)
-            Imageview.image=UIImage(named: "Login2Resource.bundle/登录页面背景.jpg")
+            Imageview.image=UIImage(named: "Login2Resource.bundle/登录页面背景.png")
         return Imageview
         }()
     

@@ -42,6 +42,10 @@ class PolicyNews: CustomTemplateViewController {
             }
         })
     }
+    
+    override func Error_Click() {
+        self.GetHtpsData()
+    }
     // MARK: 设置导航栏
     func setNavbar(){
         
@@ -97,9 +101,6 @@ class PolicyNews: CustomTemplateViewController {
         vc.Content = viewModel.ListData[indexPath.section].News![indexPath.row].NewsContent
         self.navigationController?.show(vc, sender: self)
     }
-    ///数据请求出错了处理事件
-    override func Error_Click() {
-        GetHtpsData()
-    }
+    
 
 }

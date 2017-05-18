@@ -16,7 +16,7 @@ class ScenicSpotPark: UIViewController,ScrollEnabledDelegate,BMKMapViewDelegate 
     
     var  _latitude:CLLocationDegrees=0 //景区
     var  _longitude:CLLocationDegrees=0 //景区
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,7 +26,7 @@ class ScenicSpotPark: UIViewController,ScrollEnabledDelegate,BMKMapViewDelegate 
         
         if(_latitude==0&&_longitude==0){
             _latitude=Global_latitude
-            _longitude=Global_longitude 
+            _longitude=Global_longitude
         }
         //添加所有已知的市场标注
         for index in _ScenicParkingList{
@@ -43,15 +43,18 @@ class ScenicSpotPark: UIViewController,ScrollEnabledDelegate,BMKMapViewDelegate 
         }
         
         //定位到最近的停车场
-        let center = CLLocationCoordinate2D(latitude: CLLocationDegrees(_ScenicParkingList[0].Lat)!, longitude:  CLLocationDegrees(_ScenicParkingList[0].Lng)!)
-        let span = BMKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        if _ScenicParkingList.count > 0 {
+            let center = CLLocationCoordinate2D(latitude: CLLocationDegrees(_ScenicParkingList[0].Lat)!, longitude:  CLLocationDegrees(_ScenicParkingList[0].Lng)!)
+            let span = BMKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+            
+            let region = BMKCoordinateRegion(center: center, span: span)
+            mapView.region=region
+        }
         
-        let region = BMKCoordinateRegion(center: center, span: span)
-        mapView.region=region
-
+        
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -69,11 +72,11 @@ class ScenicSpotPark: UIViewController,ScrollEnabledDelegate,BMKMapViewDelegate 
     
     //MARK: SlidingDelegate
     func ScrollEnabledCan() {
-//        print("实现代理")
+        //        print("实现代理")
         //        self.WebView. = true
     }
     func ScrollEnabledNo() {
-//        print("实现代理")
+        //        print("实现代理")
         //        self.WebView.isScrollEnabled = false
     }
     deinit {    //销毁页面

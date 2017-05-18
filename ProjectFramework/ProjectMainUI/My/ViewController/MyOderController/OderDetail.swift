@@ -148,6 +148,9 @@ class OderDetail: CustomTemplateViewController {
             typeButton.setTitle("待评价", for: .normal)
             typeButton.tag=1   //1 代表评价
         }
+        if(_MyOrderModel?.IsPay=="0"&&_MyOrderModel?.Isevaluate=="0"){
+            typeButton.isHidden = true
+        }
     }
     
     
@@ -176,7 +179,7 @@ class OderDetail: CustomTemplateViewController {
     //MARK: 支付类型
     func buttonClick(_ sender: UIButton) -> Void {
         if(sender.tag==0){  //待付款
-           let vc =   PayClass(parameters: ["OrderNumber":viewModel.ListData.OrderNumber],Channels: 0)
+           let vc =   PayClass(parameters: ["OrderNumber":viewModel.ListData.OrderNumber],Channels: 0,delegate:self)
             self.present(vc, animated: false, completion: nil)
         }
         if(sender.tag==1){  //待评价

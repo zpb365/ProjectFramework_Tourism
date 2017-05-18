@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="168" height="188"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Orderquery.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="I5A-eL-dzd">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I5A-eL-dzd">
                         <rect key="frame" x="0.0" y="0.0" width="168" height="188"/>
                     </imageView>
                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="360Panorama" translatesAutoresizingMaskIntoConstraints="NO" id="e8M-gX-x87">
@@ -87,6 +87,5 @@
     </objects>
     <resources>
         <image name="360Panorama" width="32" height="32"/>
-        <image name="Orderquery.jpg" width="804" height="1024"/>
     </resources>
 </document>

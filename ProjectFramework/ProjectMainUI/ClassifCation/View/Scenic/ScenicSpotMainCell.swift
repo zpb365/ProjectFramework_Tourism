@@ -35,7 +35,7 @@ class ScenicSpotMainCell: UITableViewCell {
     @IBOutlet weak var titleLable1: UILabel!
     @IBOutlet weak var bottomView: UILabel!
     
-    weak var controller:ScenicSpotHome?=nil
+    weak var delegate:UIViewController?=nil
     var flag = 0
     var model1: Any?=nil
     var model2: Any?=nil
@@ -117,7 +117,7 @@ class ScenicSpotMainCell: UITableViewCell {
                 mainImageView1.ImageLoad(PostUrl: HttpsUrlImage + item1.CoverPhoto)
                 titleLable1.text = item1.Title
                 
-                let item2 = model1 as! ClassPanorama360List
+                let item2 = model2 as! ClassPanorama360List
                 mainImageView2.ImageLoad(PostUrl: HttpsUrlImage + item2.CoverPhoto)
                 titleLable2.text = item2.Title
             }
@@ -134,7 +134,7 @@ class ScenicSpotMainCell: UITableViewCell {
                 mainImageView1.ImageLoad(PostUrl: HttpsUrlImage + item1.CoverPhoto)
                 titleLable1.text = item1.AttractionsName
                 
-                let item2 = model1 as! ScenicAttractionsList_Item
+                let item2 = model2 as! ScenicAttractionsList_Item
                 mainImageView2.ImageLoad(PostUrl: HttpsUrlImage + item2.CoverPhoto)
                 titleLable2.text = item2.AttractionsName
             }
@@ -151,7 +151,7 @@ class ScenicSpotMainCell: UITableViewCell {
                 mainImageView1.ImageLoad(PostUrl: HttpsUrlImage + item1.CoverPhoto)
                 titleLable1.text = item1.AlbumName
                 
-                let item2 = model1 as! ClassBeautifulPictureList
+                let item2 = model2 as! ClassBeautifulPictureList
                 mainImageView2.ImageLoad(PostUrl: HttpsUrlImage + item2.CoverPhoto)
                 titleLable2.text = item2.AlbumName
             }
@@ -159,18 +159,18 @@ class ScenicSpotMainCell: UITableViewCell {
         case .VRVideo:
             self.flag = 4
             if model2isNull == true {
-                let item = model1 as! ClassVRVideoClassList
+                let item = model1 as! ClassVRVideoClassList_Item
                 mainImageView1.ImageLoad(PostUrl: HttpsUrlImage + item.CoverPhoto)
-                titleLable1.text = item.VideoName
+                titleLable1.text = item.VideoTitle
             }
             else{
-                let item1 = model1 as! ClassVRVideoClassList
+                let item1 = model1 as! ClassVRVideoClassList_Item
                 mainImageView1.ImageLoad(PostUrl: HttpsUrlImage + item1.CoverPhoto)
-                titleLable1.text = item1.VideoName
+                titleLable1.text = item1.VideoTitle
                 
-                let item2 = model1 as! ClassVRVideoClassList
+                let item2 = model2 as! ClassVRVideoClassList_Item
                 mainImageView2.ImageLoad(PostUrl: HttpsUrlImage + item2.CoverPhoto)
-                titleLable2.text = item2.VideoName
+                titleLable2.text = item2.VideoTitle
             }
             break
         default:
@@ -180,28 +180,35 @@ class ScenicSpotMainCell: UITableViewCell {
     }
     //跳转
     func pushTap(_ tap:UITapGestureRecognizer) -> Void {
-//        print(tap.ExpTagInt)
+
         //全景
         if self.flag == 1 {
             var item: ClassPanorama360List!=nil
             if tap.ExpTagInt == 1 {
-                item = (self.model1 as? ClassPanorama360List)!
+              item = self.model1 as! ClassPanorama360List
             }
             if tap.ExpTagInt == 2 {
-                item = (self.model2 as? ClassPanorama360List)!
+               item = self.model2 as! ClassPanorama360List
             }
-            print("跳转到全景图")
+            let vc = Public360ViewController()
+            vc.url = HttpsPanorama360+item.Panorama360ID.description
+            delegate?.present(vc, animated: true, completion: {
+                
+            })
             
         }
         if self.flag == 2 {
-            var item: ScenicAttractionsList_Item?=nil
+            var item: ScenicAttractionsList_Item!=nil
             if tap.ExpTagInt == 1 {
                 item = (self.model1 as? ScenicAttractionsList_Item)!
             }
             if tap.ExpTagInt == 2 {
                 item = (self.model2 as? ScenicAttractionsList_Item)!
             }
-            print("跳转到景点")
+            let vc = AttactionsDetail()
+            vc.url = item.AttractionsContent
+            vc.title = item.AttractionsName
+            delegate?.navigationController?.show(vc, sender: self  )
         }
         if self.flag == 3 {
             var item: ClassBeautifulPictureList?=nil
@@ -213,18 +220,21 @@ class ScenicSpotMainCell: UITableViewCell {
             }
             let vc = CommonFunction.ViewControllerWithStoryboardName("BeautyPhotoAlbum", Identifier: "BeautyPhotoAlbum") as! BeautyPhotoAlbum
             vc.dataArray = (item?.List)!
-            self.controller?.navigationController?.show(vc, sender: self  )
-            print("跳转到美图")
+            delegate?.navigationController?.show(vc, sender: self  )
+            
         }
         if self.flag == 4 {
-            var item: ClassVRVideoClassList?=nil
+            var item: ClassVRVideoClassList_Item?=nil
             if tap.ExpTagInt == 1 {
-                item = (self.model1 as? ClassVRVideoClassList)!
+                item = (self.model1 as? ClassVRVideoClassList_Item)!
             }
             if tap.ExpTagInt == 2 {
-                item = (self.model2 as? ClassVRVideoClassList)!
+                item = (self.model2 as? ClassVRVideoClassList_Item)!
             }
-            print("跳转到VR视频")
+            let vc = Public360ViewController()
+            vc.url = HttpsVR+(item?.VideoID.description)!
+            delegate?.present(vc, animated: true, completion: nil)
+            
         }
     }
 }

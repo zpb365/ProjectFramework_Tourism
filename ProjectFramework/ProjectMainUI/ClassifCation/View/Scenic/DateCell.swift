@@ -36,7 +36,7 @@ class DateCell: UICollectionViewCell {
         priceLable.textColor = UIColor.lightGray
         priceLable.text = ""
         priceLable.textAlignment = .center
-        priceLable.font = UIFont.systemFont(ofSize: 13)
+        priceLable.font = UIFont.systemFont(ofSize: 11)
         self.contentView.addSubview(self.selectorView)
         self.contentView.addSubview(dateLable)
         self.contentView.addSubview(priceLable)

@@ -32,33 +32,7 @@ class HotelFacilities: UIViewController,UITableViewDelegate,UITableViewDataSourc
         payforBtn.addTarget(self, action: #selector(buttonClick), for: .touchUpInside)
         return payforBtn
     }()
-    //购买须知文本
-    lazy var instructionsView: UIView = {
-        let instructionsView = UIView()
-        instructionsView.backgroundColor = UIColor.white
-        return instructionsView
-    }()
-    lazy var lable: UILabel = {
-        let lable = UILabel()
-        lable.text = "购买须知"
-        lable.font = UIFont.systemFont(ofSize: 12)
-        return lable
-    }()
-    lazy var textView: UITextView = {
-        let textView = UITextView.init()
-        textView.isUserInteractionEnabled = false
-        textView.backgroundColor = UIColor().TransferStringToColor("#F0F0F2")
-        textView.text = "本平台只是提供产品展示，不参与运营过程，一旦出现费用纠纷将由消费者承担，本平台 不承担任何后果。"
-        return textView
-    }()
-    lazy var deleteBtn: UIButton = {
-        let deleteBtn = UIButton.init(type: .custom)
-        deleteBtn.tag = 102
-        deleteBtn.setImage(UIImage.init(named: "delete"), for: .normal)
-        deleteBtn.addTarget(self, action: #selector(buttonClick), for: .touchUpInside)
-        return deleteBtn
-    }()
-    
+
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewHead: UIView!
     @IBOutlet weak var headImage: UIImageView!
@@ -149,58 +123,25 @@ class HotelFacilities: UIViewController,UITableViewDelegate,UITableViewDataSourc
     //MARK: buttonClick
     func buttonClick(button: UIButton) -> Void {
         if button.tag == 100 {
-            self.showInstructionsView()
+            let vc = PulickInformation()
+            self.present(vc, animated: true, completion:nil)
         }
         if button.tag == 101 {
             if HotelProduct?.IsInventory == true {
                 let vc = CommonFunction.ViewControllerWithStoryboardName("HotelOderWrite", Identifier: "HotelOderWrite") as! HotelOderWrite
                 vc.HotelProduct = HotelProduct
                 vc.totalNumber  = totalNumber
+                vc.DateTimeBegin = self.DateTimeBegin
+                vc.DateTimeEnd = self.DateTimeEnd
                 vc.text         = "\(startMoon)月\(startDay)日 - \(endMoon)月\(endDay)日"
                 self.navigationController?.show(vc, sender: self  )
             }else{
                 CommonFunction.HUD("该产品暂无库存！", type: .error)
             }
         }
-        if button.tag == 102 {
-            instructionsView.removeFromSuperview()
-        }
+
     }
-    //MARK: 购买须知
-    func showInstructionsView() -> Void {
-        
-        UIApplication.shared.keyWindow?.rootViewController?.view.addSubview(instructionsView)
-        instructionsView.addSubview(lable)
-        instructionsView.addSubview(deleteBtn)
-        instructionsView.addSubview(textView)
-        
-        instructionsView.snp.makeConstraints { (make) in
-            make.left.equalTo(0)//宽高相等
-            make.top.equalTo(0)//右边相对父控件的约束条件r
-            make.bottom.equalTo(0)//底部相对父控件的约束条件
-            make.right.equalTo(0)
-        }
-        lable.snp.makeConstraints { (make) in
-            make.left.equalTo(10)//宽高相等
-            make.top.equalTo(10)//右边相对父控件的约束条件r
-            make.width.equalTo(80)//底部相对父控件的约束条件
-            make.height.equalTo(20)
-        }
-        deleteBtn.snp.makeConstraints { (make) in
-            make.top.equalTo(10)//右边相对父控件的约束条件r
-            make.width.equalTo(40)//底部相对父控件的约束条件
-            make.height.equalTo(30)
-            make.right.equalTo(0)
-        }
-        textView.snp.makeConstraints { (make) in
-            make.top.equalTo(40)//右边相对父控件的约束条件r
-            make.left.equalTo(0)//底部相对父控件的约束条件
-            make.bottom.equalTo(0)
-            make.right.equalTo(0)
-        }
-        
-    }
-    //MARK: tableViewDelegate
+        //MARK: tableViewDelegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (HotelProduct?.DescribeName?.count)!
     }

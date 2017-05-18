@@ -22,7 +22,7 @@ class ScenicSpotHome: CustomTemplateViewController,ScrollEnabledDelegate {
     @IBOutlet weak var tableView: UITableView!
     
     var sectionLable = UILabel()
-    var ScenicHomeModel = ScenicHomeItem()
+    var ScenicHomeModel: ScenicHomeItem?=nil
     let titleArray = ["景区资讯","全景","视频","美图","景点"]
     
     let identifier = "ScenicSpotHomeNewsCell"
@@ -31,7 +31,6 @@ class ScenicSpotHome: CustomTemplateViewController,ScrollEnabledDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initUI()
-        self.RefreshRequest(isLoading: false, isHiddenFooter: true)
 
     }
 
@@ -44,9 +43,14 @@ class ScenicSpotHome: CustomTemplateViewController,ScrollEnabledDelegate {
         tableView.register(UINib(nibName: "ScenicSpotHomeNewsCell", bundle: nil), forCellReuseIdentifier: identifier)
         self.InitCongif(tableView)
         self.tableView.frame = self.view.bounds
-        self.numberOfSections = 5//显示行数
+        if ScenicHomeModel == nil {
+            self.numberOfSections = 0//显示行数
+        }else{
+            self.numberOfSections = 5//显示行数
+        }
         self.header.isHidden = true
         self.tableView.isScrollEnabled = false//关闭滑动
+        self.RefreshRequest(isLoading: false, isHiddenFooter: true)
     }
     //MARK: tableViewDelegate
     
@@ -57,14 +61,15 @@ class ScenicSpotHome: CustomTemplateViewController,ScrollEnabledDelegate {
             return 140
         }
     }
+   
     var _numberOfRowsInSection = [0,0,0,0,0]
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        _numberOfRowsInSection[0] = (ScenicHomeModel.NewsClass?.ScenicNews?.count)!
-        _numberOfRowsInSection[1] = Int((CGFloat(self.ScenicHomeModel.Panorama360!.count) / 2.0).description.components(separatedBy: ".")[1])! > 0 ? (self.ScenicHomeModel.Panorama360!.count/2)+1:self.ScenicHomeModel.Panorama360!.count/2
-        _numberOfRowsInSection[2] = Int((CGFloat(self.ScenicHomeModel.VRVideoClass!.count) / 2.0).description.components(separatedBy: ".")[1])! > 0 ? (self.ScenicHomeModel.VRVideoClass!.count/2)+1:self.ScenicHomeModel.VRVideoClass!.count/2
-        _numberOfRowsInSection[3] = Int((CGFloat(self.ScenicHomeModel.BeautifulPicture!.count) / 2.0).description.components(separatedBy: ".")[1])! > 0 ? (self.ScenicHomeModel.BeautifulPicture!.count/2)+1:self.ScenicHomeModel.BeautifulPicture!.count/2
-        _numberOfRowsInSection[4] = Int((CGFloat(self.ScenicHomeModel.ScenicAttractions!.count) / 2.0).description.components(separatedBy: ".")[1])! > 0 ? (self.ScenicHomeModel.ScenicAttractions!.count/2)+1:self.ScenicHomeModel.ScenicAttractions!.count/2
+        _numberOfRowsInSection[0] = (ScenicHomeModel?.NewsClass?.ScenicNews?.count)!
+        _numberOfRowsInSection[1] = Int((CGFloat((self.ScenicHomeModel?.Panorama360!.count)!) / 2.0).description.components(separatedBy: ".")[1])! > 0 ? ((self.ScenicHomeModel?.Panorama360!.count)!/2)+1:(self.ScenicHomeModel?.Panorama360!.count)!/2
+        _numberOfRowsInSection[2] = Int((CGFloat((self.ScenicHomeModel?.VRVideoDTO!.count)!) / 2.0).description.components(separatedBy: ".")[1])! > 0 ? ((self.ScenicHomeModel?.VRVideoDTO!.count)!/2)+1:(self.ScenicHomeModel?.VRVideoDTO!.count)!/2
+        _numberOfRowsInSection[3] = Int((CGFloat((self.ScenicHomeModel?.BeautifulPicture!.count)!) / 2.0).description.components(separatedBy: ".")[1])! > 0 ? ((self.ScenicHomeModel?.BeautifulPicture!.count)!/2)+1:(self.ScenicHomeModel?.BeautifulPicture!.count)!/2
+        _numberOfRowsInSection[4] = Int((CGFloat((self.ScenicHomeModel?.ScenicAttractions!.count)!) / 2.0).description.components(separatedBy: ".")[1])! > 0 ? ((self.ScenicHomeModel?.ScenicAttractions!.count)!/2)+1:(self.ScenicHomeModel?.ScenicAttractions!.count)!/2
 //        print("数组个数",self.ScenicHomeModel.BeautifulPicture!.count)
         return _numberOfRowsInSection[section]
     }
@@ -72,60 +77,63 @@ class ScenicSpotHome: CustomTemplateViewController,ScrollEnabledDelegate {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! ScenicSpotHomeNewsCell
-            cell.InitConfig(ScenicHomeModel.NewsClass?.ScenicNews?[indexPath.row] as Any)
+            cell.InitConfig(ScenicHomeModel?.NewsClass?.ScenicNews?[indexPath.row] as Any)
             return cell
             
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: identiFier, for: indexPath) as! ScenicSpotMainCell
             cell.setData("360Panorama", isHiden: false, centerText: " 360°")
             //下标为偶数
-            if( self.ScenicHomeModel.Panorama360!.count > (indexPath.row*2+0)  ){  //判断元素 否则就越界了 出错
-                cell.setcell(model1: self.ScenicHomeModel.Panorama360![(indexPath.row*2+0)], model2: "",model2isNull: true, type: .PanoramaImage)
+            if( (self.ScenicHomeModel?.Panorama360!.count)! > (indexPath.row*2+0)  ){  //判断元素 否则就越界了 出错
+                cell.setcell(model1: self.ScenicHomeModel?.Panorama360![(indexPath.row*2+0)] as Any, model2: "",model2isNull: true, type: .PanoramaImage)
             }
             //下标为奇数
-            if( self.ScenicHomeModel.Panorama360!.count > (indexPath.row*2+1)  ){    //判断元素 否则就越界了 出错
-                cell.setcell(model1: self.ScenicHomeModel.Panorama360![(indexPath.row*2+0)], model2: self.ScenicHomeModel.Panorama360![(indexPath.row*2+1)],model2isNull: false, type: .PanoramaImage)
+            if( (self.ScenicHomeModel?.Panorama360!.count)! > (indexPath.row*2+1)  ){    //判断元素 否则就越界了 出错
+                cell.setcell(model1: self.ScenicHomeModel?.Panorama360![(indexPath.row*2+0)] as Any, model2: self.ScenicHomeModel?.Panorama360![(indexPath.row*2+1)] as Any
+                    ,model2isNull: false, type: .PanoramaImage)
             }
-            cell.controller = self
+            cell.delegate = self
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: identiFier, for: indexPath) as! ScenicSpotMainCell
             cell.setData("360Panorama", isHiden: false, centerText: "VR")
             //下标为偶数
-            if( self.ScenicHomeModel.VRVideoClass!.count > (indexPath.row*2+0)  ){  //判断元素 否则就越界了 出错
-                cell.setcell(model1: self.ScenicHomeModel.VRVideoClass![(indexPath.row*2+0)], model2: "",model2isNull: true, type: .VRVideo)
+            if( (self.ScenicHomeModel?.VRVideoDTO!.count)! > (indexPath.row*2+0)  ){  //判断元素 否则就越界了 出错
+                cell.setcell(model1: self.ScenicHomeModel?.VRVideoDTO![(indexPath.row*2+0)] as Any, model2: "",model2isNull: true, type: .VRVideo)
             }
             //下标为奇数
-            if( self.ScenicHomeModel.VRVideoClass!.count > (indexPath.row*2+1)  ){    //判断元素 否则就越界了 出错
-                cell.setcell(model1: self.ScenicHomeModel.VRVideoClass![(indexPath.row*2+0)], model2: self.ScenicHomeModel.VRVideoClass![(indexPath.row*2+1)],model2isNull: false, type: .VRVideo)
+            if( (self.ScenicHomeModel?.VRVideoDTO!.count)! > (indexPath.row*2+1)  ){    //判断元素 否则就越界了 出错
+                cell.setcell(model1: self.ScenicHomeModel?.VRVideoDTO![(indexPath.row*2+0)] as Any, model2: self.ScenicHomeModel?.VRVideoDTO![(indexPath.row*2+1)] as Any
+                    
+                    ,model2isNull: false, type: .VRVideo)
             }
-            cell.controller = self
+            cell.delegate = self
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: identiFier, for: indexPath) as! ScenicSpotMainCell
             cell.setData("", isHiden: true, centerText: "")
             //下标为偶数
-            if( self.ScenicHomeModel.BeautifulPicture!.count > (indexPath.row*2+0)  ){  //判断元素 否则就越界了 出错
-                cell.setcell(model1: self.ScenicHomeModel.BeautifulPicture![(indexPath.row*2+0)], model2: "",model2isNull: true, type: .BeautyImage)
+            if( (self.ScenicHomeModel?.BeautifulPicture!.count)! > (indexPath.row*2+0)  ){  //判断元素 否则就越界了 出错
+                cell.setcell(model1: self.ScenicHomeModel?.BeautifulPicture![(indexPath.row*2+0)] as Any, model2: "",model2isNull: true, type: .BeautyImage)
             }
             //下标为奇数
-            if( self.ScenicHomeModel.BeautifulPicture!.count > (indexPath.row*2+1)  ){    //判断元素 否则就越界了 出错
-                cell.setcell(model1: self.ScenicHomeModel.BeautifulPicture![(indexPath.row*2+0)], model2: self.ScenicHomeModel.BeautifulPicture![(indexPath.row*2+1)],model2isNull: false, type: .BeautyImage)
+            if( (self.ScenicHomeModel?.BeautifulPicture!.count)! > (indexPath.row*2+1)  ){    //判断元素 否则就越界了 出错
+                cell.setcell(model1: self.ScenicHomeModel?.BeautifulPicture![(indexPath.row*2+0)] as Any, model2: self.ScenicHomeModel?.BeautifulPicture![(indexPath.row*2+1)] as Any,model2isNull: false, type: .BeautyImage)
             }
-            cell.controller = self
+            cell.delegate = self
             return cell
         case 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: identiFier, for: indexPath) as! ScenicSpotMainCell
             cell.setData("", isHiden: true, centerText: "")
             //下标为偶数
-            if( self.ScenicHomeModel.ScenicAttractions!.count > (indexPath.row*2+0)  ){  //判断元素 否则就越界了 出错
-                cell.setcell(model1: self.ScenicHomeModel.ScenicAttractions![(indexPath.row*2+0)], model2: "",model2isNull: true, type: .Attractions)
+            if( (self.ScenicHomeModel?.ScenicAttractions!.count)! > (indexPath.row*2+0)  ){  //判断元素 否则就越界了 出错
+                cell.setcell(model1: self.ScenicHomeModel?.ScenicAttractions![(indexPath.row*2+0)] as Any, model2: "",model2isNull: true, type: .Attractions)
             }
             //下标为奇数
-            if( self.ScenicHomeModel.ScenicAttractions!.count > (indexPath.row*2+1)  ){    //判断元素 否则就越界了 出错
-                cell.setcell(model1: self.ScenicHomeModel.ScenicAttractions![(indexPath.row*2+0)], model2: self.ScenicHomeModel.ScenicAttractions![(indexPath.row*2+1)],model2isNull: false, type: .Attractions)
+            if( (self.ScenicHomeModel?.ScenicAttractions!.count)! > (indexPath.row*2+1)  ){    //判断元素 否则就越界了 出错
+                cell.setcell(model1: self.ScenicHomeModel?.ScenicAttractions![(indexPath.row*2+0)] as Any, model2: self.ScenicHomeModel?.ScenicAttractions![(indexPath.row*2+1)] as Any,model2isNull: false, type: .Attractions)
             }
-            cell.controller = self
+            cell.delegate = self
             return cell
         default:
             
@@ -150,6 +158,18 @@ class ScenicSpotHome: CustomTemplateViewController,ScrollEnabledDelegate {
         moreButton.addTarget(self, action: #selector(buttonClick), for: .touchUpInside)
         sectionView.addSubview(moreButton)
         return sectionView
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            let vc = InformationViewController()    //点击智慧头条的cell
+            vc.title = ScenicHomeModel?.NewsClass?.ScenicNews?[indexPath.row].Title
+            vc.Content = (ScenicHomeModel?.NewsClass?.ScenicNews?[indexPath.row].NewsContent)!
+            self.navigationController?.show(vc, sender: self)
+            break
+        default:
+            break
+        }
     }
     func buttonClick(_ button: UIButton){
         if  myCallbackValue != nil {

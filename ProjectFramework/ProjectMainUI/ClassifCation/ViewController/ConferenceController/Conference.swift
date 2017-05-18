@@ -48,6 +48,9 @@ class Conference: CustomTemplateViewController ,UICollectionViewDelegateFlowLayo
         self.remexParmeter(tag: true, searchText: "")
         self.header.endRefreshing()
     }
+    override func Error_Click() {
+        self.remexParmeter(tag: true, searchText: "")
+    }
     //MARK: 获取筛选数据
     func getSiftDate() -> Void {
         siftViewModel.GetScreeningCondition(ChannelID:self.ChannelID) { (result) in
@@ -195,7 +198,21 @@ class Conference: CustomTemplateViewController ,UICollectionViewDelegateFlowLayo
     }
 
     func GetAdress() {
-        print("当前地址")
+        //跳转到地图
+        let vc = PublicMapShowListViewController()
+        var  model  = [MapListModel]()
+        for   item in viewModel.ListData {
+            if(item.Lng==""||item.Lng==""){
+                continue
+            }
+            let mapmodel = MapListModel()
+            mapmodel.lat = item.Lat
+            mapmodel.lng = item.Lng
+            mapmodel.title = item.MeetingName
+            model.append(mapmodel)
+        }
+        vc.models=model
+        self.navigationController?.show(vc, sender: self)
     }
     // MARK: UILayoutDelegate,iOS 10之后需要在代理方法里实现
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -227,8 +244,9 @@ class Conference: CustomTemplateViewController ,UICollectionViewDelegateFlowLayo
         return cell
     }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("点击进入详情页");
         let vc = CommonFunction.ViewControllerWithStoryboardName("ConferenceDetail", Identifier: "ConferenceDetail") as! ConferenceDetail
+        vc.MeetingID = viewModel.ListData[indexPath.row].MeetingID
+        vc.ChannelID = self.ChannelID
         self.navigationController?.show(vc, sender: self  )
     }
 

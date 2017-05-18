@@ -23,18 +23,32 @@ class MessageViewController: CustomTemplateViewController {
         self.numberOfSections=1
         self.InitCongif(tableView)
         self.header.isHidden=true
-        
+        getData()
+     
+          
+    }
+    
+    func getData(){
         viewModel.GetPushMessageInfo { (result) in
             if(result==true){
-               self.numberOfRowsInSection=self.viewModel.ListData.count
-                self.RefreshRequest(isLoading: false,isHiddenFooter: true) 
+                self.numberOfRowsInSection=self.viewModel.ListData.count
+               
+                self.RefreshRequest(isLoading: false,isHiddenFooter: true)
             }else{
-                self.RefreshRequest(isLoading: false,isLoadError: true) 
+                self.RefreshRequest(isLoading: false,isHiddenFooter: true,isLoadError: true)
                 
             }
         }
-          
     }
+    
+    
+    override func Error_Click() {
+        self.viewModel.ListData.removeAll()
+        self.numberOfRowsInSection=self.viewModel.ListData.count
+        self.RefreshRequest(isLoading: true,isHiddenFooter: true)
+        getData()
+    }
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: identifier , for: indexPath) as! MessageViewCell
@@ -43,7 +57,8 @@ class MessageViewController: CustomTemplateViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-     CommonFunction.Panorama360Show(vc: self, url: "http://chuantu.biz/t5/64/1492055415x2890174292.jpg")
+//        let vc = PayForSuccess()
+//        self.present(vc, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

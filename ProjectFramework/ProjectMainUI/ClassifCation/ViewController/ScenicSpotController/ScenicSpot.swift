@@ -30,9 +30,10 @@ class ScenicSpot: CustomTemplateViewController,PYSearchViewControllerDelegate{
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.GetHtpsData()
         self.setNavbar()
         self.initUI()
-        self.GetHtpsData()
+        
     }
     //MARK: Refresh
     override func footerRefresh() {
@@ -52,12 +53,18 @@ class ScenicSpot: CustomTemplateViewController,PYSearchViewControllerDelegate{
         self.GetHtpsData()
         self.header.endRefreshing()
     }
+    override func Error_Click() {
+        PageIndex = 1
+        isSearch = true
+        self.GetHtpsData()
+    }
     //MARK:获取数据
     func GetHtpsData() {
         
         viewModel.GetChannelsScenicList(PageIndex: PageIndex, PageSize: PageSize) { (result,NoMore, NoData) in
             
             if  result == true {
+                self.tableView.tableHeaderView = UIView().headView(width: CommonFunction.kScreenWidth, height: 35, leftViewColor: UIColor().TransferStringToColor("#26C6DA"), title: "景区", titleColor: UIColor.black)
                 //没有数据
                 if NoData == true{
                     self.RefreshRequest(isLoading: false,isHiddenFooter: true)
@@ -91,7 +98,11 @@ class ScenicSpot: CustomTemplateViewController,PYSearchViewControllerDelegate{
                     self.footer.endRefreshingWithNoMoreData()
                 }else{
                     self.numberOfRowsInSection = self.viewModel.ListData.count
-                    self.RefreshRequest(isLoading: false, isHiddenFooter: false)
+                    if self.viewModel.ListData.count == 0 {
+                        self.RefreshRequest(isLoading: false, isHiddenFooter: true)
+                    }else{
+                        self.RefreshRequest(isLoading: false, isHiddenFooter: false)
+                    }
                 }
             }
             else{
@@ -122,7 +133,21 @@ class ScenicSpot: CustomTemplateViewController,PYSearchViewControllerDelegate{
 
     }
     func GetAdress() {
-        print("当前地址")
+        //跳转到地图
+        let vc = PublicMapShowListViewController()
+        var  model  = [MapListModel]()
+        for   item in viewModel.ListData {
+            if(item.Lng==""||item.Lng==""){
+                continue
+            }
+            let mapmodel = MapListModel()
+            mapmodel.lat = item.Lat
+            mapmodel.lng = item.Lng
+            mapmodel.title = item.ScenicName
+            model.append(mapmodel)
+        }
+        vc.models=model
+        self.navigationController?.show(vc, sender: self)
     }
     //PYSearchViewControllerDelegate 搜索时调用
     func searchViewController(_ searchViewController: PYSearchViewController!, didSearchWithsearchBar searchBar: UISearchBar!, searchText: String!) {
@@ -139,7 +164,6 @@ class ScenicSpot: CustomTemplateViewController,PYSearchViewControllerDelegate{
         self.InitCongif(tableView)
         self.tableView.frame           = CGRect.init(x: 0, y: 64, width: CommonFunction.kScreenWidth, height: CommonFunction.kScreenHeight - 64)
         //tableView
-        self.tableView.tableHeaderView = UIView().headView(width: CommonFunction.kScreenWidth, height: 35, leftViewColor: UIColor().TransferStringToColor("#26C6DA"), title: "景区", titleColor: UIColor.black)
         self.tableView.separatorStyle  = .singleLine
         self.tableView.separatorColor  = UIColor().TransferStringToColor("D6D6D6")
         self.numberOfSections=1//显示行数

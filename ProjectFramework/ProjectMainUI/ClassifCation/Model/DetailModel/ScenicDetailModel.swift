@@ -17,18 +17,18 @@ class ScenicDetailModel: NSObject {
     var Lat=""
     var Tel=""//电话
     var ScenicContent=""//内容简介
-    var BookingNotes=0//内容
+    var BookingNotes=""//内容
     var ScenicDetailsAdv:[ScenicDetailsAdvList_Item]?//轮播图
     var ScenicHome:ScenicHomeItem?//景区首页
     var ScenicNews:ScenicNews_Item?
     var Panorama360:[ClassPanorama360List]?
-    var VRVideoClass:[ClassVRVideoClassList]?
+    var VRVideoDTO:[ClassVRVideoClassList_Item]?
     var BeautifulPicture:[ClassBeautifulPictureList]?
     var ScenicAttractions:[ScenicAttractionsList_Item]?
     var ScenicParking:[ScenicParkingList]?
     var ScenicTicket:[ScenicTicketList]?
     override static func mj_objectClassInArray() -> [AnyHashable : Any]! {
-        return ["ScenicDetailsAdv":ScenicDetailsAdvList_Item.self,"ScenicHome":ScenicHomeItem.self,"ScenicNews":ScenicNews_Item.self,"ScenicHome":ScenicHomeItem.self,"Panorama360":ClassPanorama360List.self,"VRVideoClass":ClassVRVideoClassList.self,"BeautifulPicture":ClassBeautifulPictureList.self,"ScenicAttractions":ScenicAttractionsList_Item.self,"ScenicParking":ScenicParkingList.self,"ScenicTicket":ScenicTicketList.self]
+        return ["ScenicDetailsAdv":ScenicDetailsAdvList_Item.self,"ScenicHome":ScenicHomeItem.self,"ScenicNews":ScenicNews_Item.self,"ScenicHome":ScenicHomeItem.self,"Panorama360":ClassPanorama360List.self,"VRVideoDTO":ClassVRVideoClassList_Item.self,"BeautifulPicture":ClassBeautifulPictureList.self,"ScenicAttractions":ScenicAttractionsList_Item.self,"ScenicParking":ScenicParkingList.self,"ScenicTicket":ScenicTicketList.self]
     }
 
 }
@@ -43,10 +43,10 @@ class ScenicHomeItem: NSObject {
     var NewsClass:NewsClassItem?//资讯
     var ScenicAttractions:[ScenicAttractionsList_Item]?//景点
     var Panorama360:[ClassPanorama360List]?
-    var VRVideoClass:[ClassVRVideoClassList]?
+    var VRVideoDTO:[ClassVRVideoClassList_Item]?
     var BeautifulPicture:[ClassBeautifulPictureList]?
     override static func mj_objectClassInArray() -> [AnyHashable : Any]! {
-        return ["NewsClass":NewsClassItem.self,"ScenicAttractions":ScenicAttractionsList_Item.self,"Panorama360":ClassPanorama360List.self,"VRVideoClass":ClassVRVideoClassList.self,"BeautifulPicture":ClassBeautifulPictureList.self]
+        return ["NewsClass":NewsClassItem.self,"ScenicAttractions":ScenicAttractionsList_Item.self,"Panorama360":ClassPanorama360List.self,"VRVideoDTO":ClassVRVideoClassList_Item.self,"BeautifulPicture":ClassBeautifulPictureList.self]
     }
 }
 /********************  NewsClass  ********************/

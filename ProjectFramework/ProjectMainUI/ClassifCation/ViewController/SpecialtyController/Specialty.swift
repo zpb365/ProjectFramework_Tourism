@@ -105,6 +105,8 @@ class Specialty: CustomTemplateViewController,PYSearchViewControllerDelegate {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = CommonFunction.ViewControllerWithStoryboardName("SpecialtyDetail", Identifier: "SpecialtyDetail") as! SpecialtyDetail
+        vc.SpecialitiesID = viewModel.ListData[indexPath.row].SpecialitiesID
+        vc.ChannelID = self.ChannelID
         self.navigationController?.show(vc, sender: self  )
     }
     // MARK: 设置导航栏
@@ -214,7 +216,21 @@ class Specialty: CustomTemplateViewController,PYSearchViewControllerDelegate {
         }
     }
     func GetAdress() {
-        print("当前地址")
+        //跳转到地图
+        let vc = PublicMapShowListViewController()
+        var  model  = [MapListModel]()
+        for   item in viewModel.ListData {
+            if(item.Lng==""||item.Lng==""){
+                continue
+            }
+            let mapmodel = MapListModel()
+            mapmodel.lat = item.Lat
+            mapmodel.lng = item.Lng
+            mapmodel.title = item.SpecialitiesName
+            model.append(mapmodel)
+        }
+        vc.models=model
+        self.navigationController?.show(vc, sender: self)
     }
 
 }

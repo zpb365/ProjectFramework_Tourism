@@ -15,7 +15,7 @@ class MyHeadUIView: UIView {
     fileprivate  var shapeLayer1:CAShapeLayer?=nil
     fileprivate  var dong:CGFloat = 0.0
     
-    var Imgbtn:UIButton!
+    var Imgbtn:UIImageView!
     var LabName:UILabel!
     
     //用代码创建的时候会进入这个init函数体
@@ -54,13 +54,15 @@ class MyHeadUIView: UIView {
         self.layer.addSublayer(layer2)  //添加半椭圆
         
         let imgWh:CGFloat=70
-        Imgbtn = UIButton(frame: CGRect(x: self.bounds.width/2-imgWh/2, y: 40, width:imgWh, height: imgWh))
-        Imgbtn.setImage(UIImage.init(named: "userIcon_defualt"), for: .normal)
+        Imgbtn = UIImageView(frame: CGRect(x: self.bounds.width/2-imgWh/2, y: 40, width:imgWh, height: imgWh))
+        Imgbtn.isUserInteractionEnabled = true
+        Imgbtn.image=UIImage.init(named: "userIcon_defualt")
         Imgbtn.layer.borderColor=UIColor.white.cgColor
         Imgbtn.layer.borderWidth=2
         Imgbtn.layer.cornerRadius=imgWh/2
         Imgbtn.layer.masksToBounds=true
-        Imgbtn.addTarget(target, action: selector, for: .touchUpInside)
+        let tap = UITapGestureRecognizer.init(target: target, action: selector)
+        Imgbtn.addGestureRecognizer(tap)
         self.addSubview(Imgbtn)    //添加图片
         
         LabName=UILabel(frame: CGRect(x: 0, y: Imgbtn.frame.maxY+5, width: CommonFunction.kScreenWidth, height: 20))

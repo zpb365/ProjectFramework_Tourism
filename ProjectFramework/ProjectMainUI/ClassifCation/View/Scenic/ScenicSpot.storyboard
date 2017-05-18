@@ -33,7 +33,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Orderquery.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="65V-m3-LJk">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="65V-m3-LJk">
                                                     <rect key="frame" x="10" y="10" width="80" height="80"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -81,7 +81,4 @@
             <point key="canvasLocation" x="-191.19999999999999" y="105.69715142428787"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Orderquery.jpg" width="804" height="1024"/>
-    </resources>
 </document>

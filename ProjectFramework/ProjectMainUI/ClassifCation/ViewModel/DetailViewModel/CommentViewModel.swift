@@ -15,8 +15,10 @@ class CommentViewModel: NSObject {
         let parameters=["ChannelsID":ChannelsID,"ChannelsListID":ChannelsListID,"PageIndex":PageIndex,"PageSize":PageSize]
         
         CommonFunction.Global_Get(entity: CommentMeModel(), IsListData: true, url: HttpsUrl+"api/Channels/GetAllCommentMsg", isHUD: false, isHUDMake: false, parameters: parameters as NSDictionary) { (resultModel) in
+            
             if(resultModel?.Success==true){
                 
+                //没有更多数据
                 if(resultModel?.ret==6){
                     result!(true,true)
                     return
@@ -32,6 +34,7 @@ class CommentViewModel: NSObject {
                     }
                     result?(true,false)
                 }else{
+                    result?(true,false)
                     return 
                 }
                 

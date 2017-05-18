@@ -58,7 +58,7 @@
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </view>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="testimg" translatesAutoresizingMaskIntoConstraints="NO" id="r7n-Z4-D09">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r7n-Z4-D09">
                                                             <rect key="frame" x="11" y="3" width="357" height="94"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                         </imageView>
@@ -116,6 +116,5 @@
     </scenes>
     <resources>
         <image name="GoodFaith" width="210" height="48"/>
-        <image name="testimg" width="800" height="530"/>
     </resources>
 </document>

@@ -51,7 +51,9 @@ class TravelAcy: CustomTemplateViewController,PYSearchViewControllerDelegate {
         self.remexParmeter(tag: true, searchText: "")
         self.header.endRefreshing()
     }
-
+    override func Error_Click() {
+        self.remexParmeter(tag: true, searchText: "")
+    }
     //MARK: 获取筛选数据
     func getSiftDate() -> Void {
         siftViewModel.GetScreeningCondition(ChannelID:self.ChannelID) { (result) in
@@ -203,8 +205,24 @@ class TravelAcy: CustomTemplateViewController,PYSearchViewControllerDelegate {
     }
 
     func GetAdress() {
-        print("当前地址")
+        //跳转到地图
+        let vc = PublicMapShowListViewController()
+        var  model  = [MapListModel]()
+        for   item in viewModel.ListData {
+            if(item.Lng==""||item.Lng==""){
+                continue
+            }
+            let mapmodel = MapListModel()
+            mapmodel.lat = item.Lat
+            mapmodel.lng = item.Lng
+            mapmodel.title = item.TravelAgencyName
+            model.append(mapmodel)
+        }
+        vc.models=model
+        self.navigationController?.show(vc, sender: self)
+
     }
+
     // MARK: override func tableViewDelegate
     override func numberOfSections(in tableView: UITableView) -> Int {
         return self.viewModel.ListData.count
@@ -216,6 +234,12 @@ class TravelAcy: CustomTemplateViewController,PYSearchViewControllerDelegate {
         let sectionHeader = Bundle.main.loadNibNamed("TravelAcySectionHeader", owner: self, options: nil)?.last as! TravelAcySectionHeader
         if self.viewModel.ListData.count > 0 {
             sectionHeader.setData(object: self.viewModel.ListData[section])
+            sectionHeader.FuncCallbackValue(value: {[weak self] (str) in
+                let vc = CommonFunction.ViewControllerWithStoryboardName("TravelAcyDetail", Identifier: "TravelAcyDetail") as! TravelAcyDetail
+                vc.TravelAgencyID = (self?.viewModel.ListData[section].TravelAgencyID)!
+                vc.ChannelID = (self?.ChannelID)!
+                self?.navigationController?.show(vc, sender: self)
+            })
         }
         
         return sectionHeader
@@ -234,11 +258,10 @@ class TravelAcy: CustomTemplateViewController,PYSearchViewControllerDelegate {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = CommonFunction.ViewControllerWithStoryboardName("TravelAcyDetail", Identifier: "TravelAcyDetail") as! TravelAcyDetail
-        self.navigationController?.show(vc, sender: self  )
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        vc.TravelAgencyID = self.viewModel.ListData[indexPath.section].TravelAgencyID
+        vc.ChannelID = self.ChannelID
+        self.navigationController?.show(vc, sender: self)
+        
     }
     
 

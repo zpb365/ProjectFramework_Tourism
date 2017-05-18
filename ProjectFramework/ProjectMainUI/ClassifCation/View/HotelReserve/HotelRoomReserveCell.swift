@@ -40,7 +40,7 @@ class HotelRoomReserveCell: UITableViewCell {
         let model = cell as! HotelProduct_List
         imageIcon.ImageLoad(PostUrl: HttpsUrlImage+model.CoverPhoto)
         titleLable.text = model.Title
-        describeLable.text = "\(model.BedType) | \(model.Network) | \(model.Acreage) | \(model.Policy)"
+        describeLable.text = "\(model.BedType) | \(model.Network)  | \(model.Policy)"
         priceLable.text = "¥\(model.Price)"
     }
 }

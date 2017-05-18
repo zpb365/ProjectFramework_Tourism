@@ -27,7 +27,9 @@ class HotelOderWrite: UIViewController,UITableViewDelegate,UITableViewDataSource
     var text=""
     let textArray = ["入住人","手机号","备注"]
     let placeholderArray = ["请填写真实姓名","请填写真实号码","请输入备注"]
-    
+    var DateTimeBegin = ""
+    var DateTimeEnd = ""
+
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.navigationBar.setBackgroundImage(UIImage().ImageWithColor(color: UIColor().TransferStringToColor("#5E7D8A").withAlphaComponent(0.8), size: CGSize.init(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)),for: UIBarMetrics.default)
@@ -40,7 +42,7 @@ class HotelOderWrite: UIViewController,UITableViewDelegate,UITableViewDataSource
     override func viewDidLayoutSubviews() {
         baseView.layer.cornerRadius = 5
         titleLable.text = HotelProduct.Title
-        tabLable.text = "\(HotelProduct.BedType) | \(HotelProduct.Network) | \(HotelProduct.Acreage) | \(HotelProduct.Policy)"
+        tabLable.text = "\(HotelProduct.BedType) | \(HotelProduct.Network)  | \(HotelProduct.Policy)"
         parforPrice.text = "¥\(totalNumber*HotelProduct.Price)"
         dateLable.text = text
         dayCount.text  = "共\(totalNumber)晚"
@@ -53,13 +55,22 @@ class HotelOderWrite: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     //MARK: 按钮方法
     func buttonClick(_ button:UIButton) -> Void {
+        
+        
         switch button.tag {
         case 100:
-            let Instructionsview = PulickPayforInstructions.init(frame: CGRect.init(x: 0, y: 0, width: CommonFunction.kScreenWidth, height: CommonFunction.kScreenHeight))
-            Instructionsview.setText(text: "本平台只是提供产品展示，不参与运营过程，一旦出现费用纠纷将由消费者承担，本平台 不承担任何后果。")
-            UIApplication.shared.keyWindow?.rootViewController?.view.addSubview(Instructionsview)
+            let vc = PulickInformation()
+            self.present(vc, animated: true, completion: {
+                
+            })
             break
         case 101:
+            if(Global_UserInfo.IsLogin==false){
+                let vc = LoginViewControllerTwo()
+                self.present(vc, animated: true, completion: nil)
+                return
+            }
+            
             var canPayfor: Bool = false
             //入住人
             let index0 = IndexPath.init(row: 0, section: 0)
@@ -67,9 +78,9 @@ class HotelOderWrite: UIViewController,UITableViewDelegate,UITableViewDataSource
             //电话号码
             let index1 = IndexPath.init(row: 1, section: 0)
             let cell1 = tableView.cellForRow(at: index1) as! HotelOderWriteCell
-//            //备注
-//            let index2 = IndexPath.init(row: 2, section: 0)
-//            let cell2 = tableView.cellForRow(at: index2) as! HotelOderWriteCell
+            //备注
+            let index2 = IndexPath.init(row: 2, section: 0)
+            let cell2 = tableView.cellForRow(at: index2) as! HotelOderWriteCell
             
             if cell0.textField.text == "" {
                 CommonFunction.HUD("请输入真实姓名", type: .error)
@@ -77,7 +88,11 @@ class HotelOderWrite: UIViewController,UITableViewDelegate,UITableViewDataSource
             }
             canPayfor = Validate.phoneNum(cell1.textField.text!).isRight
             if canPayfor == true {
-                print("提交订单")
+                let parameters = ["HotelProductID":HotelProduct.HotelProductID,"UserID":Global_UserInfo.userid,"DateTimeBegin":DateTimeBegin,"DateTimeEnd":DateTimeEnd,"TouristName":(cell0.textField.text)!,"TouristPhone":(cell1.textField.text)!,"Remark":(cell2.textField.text)!] as [String : Any]
+                
+                let vc =   PayClass(parameters: parameters,Channels: 2,delegate:self)
+                self.present(vc, animated: false, completion: nil)
+
             }else{
                 CommonFunction.HUD("请输入正确的手机号码", type: .error)
             }

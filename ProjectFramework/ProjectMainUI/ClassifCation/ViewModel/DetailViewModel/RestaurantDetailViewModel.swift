@@ -14,9 +14,12 @@ class RestaurantDetailViewModel {
     func GetChannelsRestaurantDetails(RestaurantID:Int ,PageIndex:Int ,PageSize:Int  ,result:((_ result:Bool?) -> Void)?) {
         let parameters=["RestaurantID":RestaurantID,"PageIndex":PageIndex,"PageSize":PageSize]
         
-        CommonFunction.Global_Get(entity: RestaurantDetailModel(), IsListData: false, url: HttpsUrl+"api/Channels/GetChannelsRestaurantDetails", isHUD: true, isHUDMake: false, parameters: parameters as NSDictionary) { (resultModel) in
+        CommonFunction.Global_Get(entity: RestaurantDetailModel(), IsListData: false, url: HttpsUrl+"api/Channels/GetChannelsRestaurantDetails", isHUD: false, isHUDMake: false, parameters: parameters as NSDictionary) { (resultModel) in
             if(resultModel?.Success==true){
-                
+                if(resultModel?.ret == 5){
+                    result?(true)
+                    return
+                }
                 self.ListData = resultModel?.Content   as!  RestaurantDetailModel
                 result?(true)
             }else{

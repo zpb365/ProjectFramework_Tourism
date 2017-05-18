@@ -70,6 +70,11 @@ class ScenicSpotPanorma: CustomTemplateViewController ,UICollectionViewDelegateF
         cell.setcell(self.dataArray?[indexPath.row] as Any, .PanoramaImage)
         return cell
     }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = Public360ViewController()
+        vc.url = HttpsPanorama360+(dataArray?[indexPath.row].Panorama360ID)!.description
+        self.present(vc, animated: true, completion:nil)
+    }
     //MARK: SlidingDelegate
     func ScrollEnabledCan() {
 //        print("实现代理")

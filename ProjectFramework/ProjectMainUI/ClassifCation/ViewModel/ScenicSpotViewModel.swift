@@ -47,7 +47,11 @@ class ScenicSpotViewModel {
         let parameters = ["PageIndex":PageIndex,"PageSize":PageSize,"ChannelID":ChannelID,"Title":Title] as [String : Any]
         CommonFunction.Global_Get(entity: ScenicModel(), IsListData: true, url: HttpsUrl+"api/Channels/GetChannelsSearchList", isHUD: false, isHUDMake: false, parameters: parameters as NSDictionary) { (resultModel) in
             if(resultModel?.Success==true){
-                
+                if(resultModel?.ret==5){
+                    self.ListData.removeAll()
+                    result?(true,false)
+                    return
+                }
                 if(resultModel?.ret==6){
                     result?(true,true)
                     return

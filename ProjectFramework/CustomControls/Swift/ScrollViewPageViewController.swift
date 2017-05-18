@@ -76,6 +76,11 @@ class ScrollViewPageViewController: UIViewController, UIScrollViewDelegate {
         }
         self.myCallbackJumpValue=Callback_JumpValue
         self.view.frame=_frame
+        
+        //如果显示跳转按钮就把分页给隐藏掉
+        if isJumpBtn == true {
+            self.pageControl.isHidden = true
+        }
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -158,6 +163,8 @@ class ScrollViewPageViewController: UIViewController, UIScrollViewDelegate {
         
         self.view.addSubview(scrollView)
         self.view.addSubview(pageControl)
+        
+        
         if(isJumpBtn==true){
             self.view.addSubview(jump)
         }

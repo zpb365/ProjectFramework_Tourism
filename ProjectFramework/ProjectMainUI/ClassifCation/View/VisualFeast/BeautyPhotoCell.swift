@@ -32,6 +32,6 @@ class BeautyPhotoCell: UITableViewCell {
         let model = cell as! ClassBeautifulPictureList_Item
         mainImageView.ImageLoad(PostUrl: HttpsUrlImage+model.PhotoUrl)
         titleLable.text = model.PhotoDescribe
-        dateLable.text = model.CreateTime
+//        dateLable.text = model.CreateTime
     }
 }

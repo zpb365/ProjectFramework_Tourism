@@ -89,22 +89,29 @@ class ScenicSpotDateChoose: CustomTemplateViewController,UICollectionViewDelegat
         self.view.addSubview(self.collectionView)
         self.InitCongifCollection(collectionView, nil)
         self.header.isHidden = true
+        self.footer.isHidden = true
+        self.GetHtpsData()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    override func Error_Click() {
         self.GetHtpsData()
     }
     //MARK: 获取网络数据
     func GetHtpsData() -> Void {
         ViewModel.GetScenicSelectedTimeList(ScenicID: ScenicID, ScenicProductID: ticketItem!.ScenicProductID) { (result) in
             if result == true {
-//                print(self.ScenicID,self.ScenicProductID,self.ViewModel.ListData.count)
+                
                 self.getData()
+            }else{
+                self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: true)
+                
             }
         }
     }
     func buttonClick() -> Void {
-        
-        self.dismiss(animated: true) { 
-            
-        }
+        self.navigationController?.popViewController(animated: true)
     }
     //MARK: 预定
     func reservation() -> Void {
@@ -117,9 +124,7 @@ class ScenicSpotDateChoose: CustomTemplateViewController,UICollectionViewDelegat
                 let vc = CommonFunction.ViewControllerWithStoryboardName("ScenicSpotOderWrite", Identifier: "ScenicSpotOderWrite") as! ScenicSpotOderWrite
                 vc.ticketItem = self.ticketItem
                 vc.timeModel = self.model
-                self.present(vc, animated: true, completion: {
-                    
-                })
+                self.navigationController?.show(vc, sender: self)
             }
 
         }else{
@@ -142,8 +147,7 @@ class ScenicSpotDateChoose: CustomTemplateViewController,UICollectionViewDelegat
             dateArray.append(date.count)
             weekArray.append(date.week)
         }
-        self.collectionView.reloadData()
-        self.footer.isHidden = true
+        self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: false)
     }
     
     //MARK: collectionViewDelegate
@@ -235,7 +239,7 @@ class ScenicSpotDateChoose: CustomTemplateViewController,UICollectionViewDelegat
                     self.model = cell.model
                 }
                 selectedIndex = indexPath
-                self.collectionView.reloadData()
+                self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: false)
             }
         }
     }

@@ -262,7 +262,7 @@ class ImagePreviewViewController: UIViewController,UIScrollViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+//        super.viewWillAppear(true)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     override func viewWillDisappear(_ animated: Bool) {

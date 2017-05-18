@@ -54,7 +54,8 @@
  * derivative of this code cannot be changed.  i.e. this code cannot simply be
  * copied and put under another distribution licence
  * [including the GNU Public Licence.]
- */ 
+ */
+
 #ifndef HEADER_RSA_H
 #define HEADER_RSA_H
 

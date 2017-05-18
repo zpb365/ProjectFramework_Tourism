@@ -81,5 +81,11 @@ class PanoramaImage: CustomTemplateViewController {
         cell.setCell(viewModel.ListData[indexPath.row], tepy: .PanoramaImage)
         return cell
     }
-
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = Public360ViewController()
+        vc.url = HttpsPanorama360+viewModel.ListData[indexPath.row].Panorama360ID.description
+        self.present(vc, animated: true, completion: {
+            
+        })
+    }
 }

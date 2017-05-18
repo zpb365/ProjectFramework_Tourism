@@ -49,6 +49,9 @@ class GuideBook: CustomTemplateViewController ,UICollectionViewDelegateFlowLayou
         self.remexParmeter(tag: false, searchText: "")
         self.header.endRefreshing()
     }
+    override func Error_Click() {
+        self.remexParmeter(tag: false, searchText: "")
+    }
     //MARK: 获取数据
     func GetHtpsData() {
         viewModel.GetChannelsCiceroneList(PageIndex: PageIndex, PageSize: PageSize) { (result, NoMore, NoData) in
@@ -183,8 +186,6 @@ class GuideBook: CustomTemplateViewController ,UICollectionViewDelegateFlowLayou
         return cell
     }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-       
         let vc =   CommonFunction.ViewControllerWithStoryboardName("GuideBookDetails", Identifier: "GuideBookDetails") as! GuideBookDetailsViewController
         vc.CiceroneID=viewModel.ListData[indexPath.row].CiceroneID
         self.navigationController?.show(vc, sender: self)

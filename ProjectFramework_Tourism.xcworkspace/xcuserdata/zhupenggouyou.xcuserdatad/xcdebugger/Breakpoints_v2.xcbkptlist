@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ProjectFramework/ProjectMainUI/ClassifCation/ViewController/SpecialtyController/Specialty.swift"
-            timestampString = "514904867.458722"
+            filePath = "ProjectFramework/ProjectMainUI/Home/View/Home/SpecialtyViewCell.swift"
+            timestampString = "516697341.259717"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "GetHtpsData()"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "InitConfig(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

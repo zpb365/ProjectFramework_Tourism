@@ -185,7 +185,7 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
                 //设置视觉盛宴的总数  --> 全景
                 self.VisualShowCountArray.append(self.viewModel.ListData.VisualFeast!.Panorama360List!.count)    // 添加当前索引的总数（用用滑动刷新展示不同数据列)
                 //设置视觉盛宴的总数  --> VR视频
-                self.VisualShowCountArray.append(self.viewModel.ListData.VisualFeast!.VRVideoClassList!.count)    // 添加当前索引的总数（用用滑动刷新展示不同数据列)
+                self.VisualShowCountArray.append(self.viewModel.ListData.VisualFeast!.VRVideoDTO!.count)    // 添加当前索引的总数（用用滑动刷新展示不同数据列)
                 self.RefreshRequest(isLoading: false, isHiddenFooter: true)
                 
                 self.InitAdv(ClassAdvList: self.viewModel.ListData.advList!)
@@ -256,6 +256,7 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
             return  cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier[indexPath.section], for: indexPath) as! RecommendedViewCell //推荐
+            cell.delegate = self
             cell.InitConfig(viewModel.ListData.HotList as Any)
             return  cell
         case 2:
@@ -287,14 +288,14 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
                 }
             }
             if(currentVisualBtn.tag==2){    //点击视频
-                if( viewModel.ListData.VisualFeast!.VRVideoClassList!.count > (indexPath.row*3+0)  ){  //判断元素 否则就越界了 出错
-                    cell.VRVideoClassList.append( viewModel.ListData.VisualFeast!.VRVideoClassList![indexPath.row*3+0])
+                if( viewModel.ListData.VisualFeast!.VRVideoDTO!.count > (indexPath.row*3+0)  ){  //判断元素 否则就越界了 出错
+                    cell.VRVideoClassList.append( viewModel.ListData.VisualFeast!.VRVideoDTO![indexPath.row*3+0])
                 }
-                if( viewModel.ListData.VisualFeast!.VRVideoClassList!.count > (indexPath.row*3+1)  ){    //判断元素 否则就越界了 出错
-                    cell.VRVideoClassList.append( viewModel.ListData.VisualFeast!.VRVideoClassList![indexPath.row*3+1])
+                if( viewModel.ListData.VisualFeast!.VRVideoDTO!.count > (indexPath.row*3+1)  ){    //判断元素 否则就越界了 出错
+                    cell.VRVideoClassList.append( viewModel.ListData.VisualFeast!.VRVideoDTO![indexPath.row*3+1])
                 }
-                if( viewModel.ListData.VisualFeast!.VRVideoClassList!.count  > (indexPath.row*3+2)  ){   //判断元素 否则就越界了 出错
-                     cell.VRVideoClassList.append( viewModel.ListData.VisualFeast!.VRVideoClassList![indexPath.row*3+2])
+                if( viewModel.ListData.VisualFeast!.VRVideoDTO!.count  > (indexPath.row*3+2)  ){   //判断元素 否则就越界了 出错
+                     cell.VRVideoClassList.append( viewModel.ListData.VisualFeast!.VRVideoDTO![indexPath.row*3+2])
                 } 
             }
             cell.InitConfig("") 
@@ -446,12 +447,19 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
             timerInterval: 4,     //如果启用滚动，滚动秒数
             ImageList:Imagelist  ,//图片
             frame: Adv_View.frame,
-            Callback_SelectedValue: nil ,
+            Callback_SelectedValue: { (index, istrue) in
+                if ClassAdvList[index].LinkUrl != ""{
+                    let vc = MCWebViewController.init(url: ClassAdvList[index].LinkUrl, ProcesscColor: UIColor.clear)
+                    self.navigationController?.show(vc, sender: self)
+                }
+                print(index,istrue)
+        } ,
             isJumpBtn: nil,
             Callback_JumpValue: nil)
         
         Adv_View.addSubview(vc.view)
         
+       
     }
     
     ///数据请求出错了处理事件
@@ -472,8 +480,8 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
     //按下搜索时 或者点搜索列表时
     func searchViewController(_ searchViewController: PYSearchViewController!, didSearchWithsearchBar searchBar: UISearchBar!, searchText: String!) {
         searchViewController.dismiss(animated: false, completion: nil)
-        let vc = CommonFunction.ViewControllerWithStoryboardName("SearchProduct", Identifier: "SearchProduct") as! SearchProductViewController
-        vc.SearchText=searchText!
+        let vc = CommonFunction.ViewControllerWithStoryboardName("SearchProductViewController", Identifier: "SearchProductViewController") as! SearchProductViewController
+        vc.SearchTitle=searchText!
         self.navigationController?.show(vc, sender: nil  )
     }
     

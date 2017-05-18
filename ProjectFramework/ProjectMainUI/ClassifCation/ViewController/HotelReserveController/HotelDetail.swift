@@ -62,7 +62,9 @@ class HotelDetail: CustomTemplateViewController {
     var BookingHeight: CGFloat = 50//预定须知的高度
     var footderIntroduceHeght: CGFloat = 50//酒店设施那些
     var isChange: Bool = false//防止tableView重复滑动的标记
+    var ChannelID=0
     var viewModel = HotelDetailViewModel()
+    var cViewModel = CommentViewModel()
     var PageIndex: Int      = 1
     var PageSize:  Int      = 10
     var HotelID = 0
@@ -88,8 +90,9 @@ class HotelDetail: CustomTemplateViewController {
         self.getDate()
         self.setNavBar()
         self.setHeadView()
-        self.initUI()
         self.GetHtpsData()
+        self.initUI()
+        
         
     }
     
@@ -154,17 +157,66 @@ class HotelDetail: CustomTemplateViewController {
             if result == true{
                 self.RefreshRequest(isLoading: false, isHiddenFooter: false)
             }
-        }
-    }
-    //MARK: 请求数据
-    func GetHtpsData() -> Void {
-        
-        viewModel.GetChannelsHotelDetails(HotelID: HotelID, PageIndex: PageIndex, PageSize: PageSize, DateTimeBegin: DateTimeBegin, DateTimeEnd: DateTimeEnd) { (result) in
-            if result == true{
-                self.setData()
+            else{
+                self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: true)
             }
         }
     }
+    override func Error_Click() {
+        PageIndex = 0
+        self.GetHtpsData()
+    }
+    override func footerRefresh() {
+        PageIndex = PageIndex + 1
+        self.GetCommentData()
+    }
+    //MARK: 请求数据
+    func GetHtpsData() -> Void {
+        self.tableViewHead.isHidden = true
+        self.sectionDate.isHidden = true
+        self.sectionConment.isHidden = true
+        self.footderIntroduce.isHidden = true
+        viewModel.GetChannelsHotelDetails(HotelID: HotelID, PageIndex: PageIndex, PageSize: PageSize, DateTimeBegin: DateTimeBegin, DateTimeEnd: DateTimeEnd) { (result) in
+            if result == true{
+                //没有数据的操作
+                if(self.viewModel.ListData.HotelID == 0){
+                    self.numberOfRowsInSection=0
+                    self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: false)
+                    return
+                }
+                self.setData()
+                self.GetCommentData()
+            }else{
+                self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: true)
+            }
+        }
+    }
+    //MARK: 请求评论数据
+    func GetCommentData() -> Void {
+        cViewModel.GetAllCommentMsg(ChannelsID: ChannelID, ChannelsListID: HotelID, PageIndex: PageIndex, PageSize: PageSize) { (result, noMore) in
+            if result == true{
+                //没有更多数据
+                if noMore == true {
+                    self.footer.endRefreshingWithNoMoreData()
+                }else{
+                    
+                    self.tableViewHead.isHidden = false
+                    self.sectionDate.isHidden = false
+                    self.sectionConment.isHidden = false
+                    self.footderIntroduce.isHidden = false
+                    self._numberOfRowsInSection[1]=1
+                    self._numberOfRowsInSection[2]=1
+                    self.RefreshRequest(isLoading: false, isHiddenFooter: false, isLoadError: false)
+                    self.footer.endRefreshing()
+                }
+                
+            }else{
+                
+                self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: true)
+            }
+        }
+    }
+
     func setData() -> Void {
         hotelTilte.text = " 1/\(viewModel.ListData.ImageList!.count) \(viewModel.ListData.HotelName)"
         headimage.ImageLoad(PostUrl: HttpsUrlImage+viewModel.ListData.CoverPhoto)
@@ -186,7 +238,12 @@ class HotelDetail: CustomTemplateViewController {
         self.tableView.register(UserCommentCell.self, forCellReuseIdentifier: identifier)
         self.tableView.register(PulickWebCell.self, forCellReuseIdentifier: indetifer1)
         self.tableView.register(PulickWebCell.self, forCellReuseIdentifier: indetifer2)
-        
+        if tableView.responds(to:#selector(setter: UITableViewCell.separatorInset)) {
+            tableView.separatorInset = UIEdgeInsets.zero
+        }
+        if tableView.responds(to:#selector(setter: UIView.layoutMargins)) {
+            tableView.layoutMargins = UIEdgeInsets.zero
+        }
     }
     func tapClick(tap:UITapGestureRecognizer) -> Void {
         switch tap.view!.tag {
@@ -197,7 +254,7 @@ class HotelDetail: CustomTemplateViewController {
                 for i in 0..<(viewModel.ListData.ImageList?.count)!{
                     let model = viewModel.ListData.ImageList?[i]
                     Imagelist.append(HttpsUrlImage+model!.PhotoUrl)
-                    ImageTab.append(model!.Tab)
+                    ImageTab.append(model!.PhotoDescribe)
                 }
                 
                 let vc = ImagePreviewViewController( ImageUrlList: Imagelist ,IsDescribe: true,DescribeList: ImageTab )
@@ -205,12 +262,30 @@ class HotelDetail: CustomTemplateViewController {
             }
 
         case 1001:
+            if (viewModel.ListData.Lng != "" && viewModel.ListData.Lat != ""){
+                var  model  = [MapListModel]()
+                let mapmodel = MapListModel()
+                mapmodel.lat = viewModel.ListData.Lat
+                mapmodel.lng = viewModel.ListData.Lng
+                mapmodel.title = viewModel.ListData.HotelName
+                model.append(mapmodel)
+                
+                let vc = PublicMapShowListViewController()
+                vc.models=model
+                self.navigationController?.show(vc, sender: self)
+            }
             print("跳转到百度地图")
         case 1002:
             if viewModel.ListData.Phone != "" {
                 CommonFunction.CallPhone(self, number: viewModel.ListData.Phone)
             }
         case 1003:
+            if viewModel.ListData.Panorama360 != nil {
+                let vc = Public360ViewController()
+                vc.url = HttpsPanorama360+(viewModel.ListData.Panorama360?.description)!
+                self.present(vc, animated: true, completion:nil)
+            }
+            
             print("跳转到全景动画")
         default:
             break
@@ -253,7 +328,7 @@ class HotelDetail: CustomTemplateViewController {
         shareBtn.addTarget(self, action:#selector(buttonClick) , for: .touchUpInside)
         
         CustomNavItem.leftBarButtonItem=UIBarButtonItem.init(customView: backBtn)
-        CustomNavItem.rightBarButtonItems=[UIBarButtonItem.init(customView: shareBtn),UIBarButtonItem.init(customView: cellectionBtn)]
+//        CustomNavItem.rightBarButtonItems=[UIBarButtonItem.init(customView: shareBtn),UIBarButtonItem.init(customView: cellectionBtn)]
         
         CustomNavBar.pushItem(CustomNavItem, animated: true)
     }
@@ -291,6 +366,7 @@ class HotelDetail: CustomTemplateViewController {
             break
         case 101:
             print("收藏")
+            
             break
         case 102:
             print("分享")
@@ -393,8 +469,10 @@ class HotelDetail: CustomTemplateViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
         _viewForHeaderInSection[0] = sectionDate
         self.totalNumber = sectionDate.setDate(startYear: startYear, startMoon: startMoon, startDay: startDay, endYear: endYear, endMoon: endMoon, endDay: endDay)
-        _viewForHeaderInSection[1] = UIView().setIntroduceView(height: 40, title: "酒店介绍")
-        _viewForHeaderInSection[2] = UIView().setIntroduceView(height: 40, title: "预定须知")
+        if viewModel.ListData.HotelID != 0 {
+            _viewForHeaderInSection[1] = UIView().setIntroduceView(height: 40, title: "酒店介绍")
+            _viewForHeaderInSection[2] = UIView().setIntroduceView(height: 40, title: "预定须知")
+        }
         _viewForHeaderInSection[3] = sectionConment
         sectionConment.setData(scorce: CGFloat(viewModel.ListData.Score), CommentCount: viewModel.ListData.CommentsCount)
         return _viewForHeaderInSection[section]
@@ -434,7 +512,7 @@ class HotelDetail: CustomTemplateViewController {
             return 0.0001
         }
     }
-    var _numberOfRowsInSection = [0,1,1,0]
+    var _numberOfRowsInSection = [0,0,0,0]
     //组个数
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         //防崩溃
@@ -442,7 +520,7 @@ class HotelDetail: CustomTemplateViewController {
                 _numberOfRowsInSection[0] = (viewModel.ListData.HotelProduct?.count)!
         }
         if viewModel.ListData.CommentMes != nil {
-            _numberOfRowsInSection[3] = viewModel.ListData.CommentMes!.count
+            _numberOfRowsInSection[3] = cViewModel.ListData.count
         }
         return _numberOfRowsInSection[section]
         
@@ -454,7 +532,7 @@ class HotelDetail: CustomTemplateViewController {
         _heightForRowAt[1] = hotelIntroduceHeight > CGFloat(50) ? hotelIntroduceHeight : CGFloat(50)
         _heightForRowAt[2] = BookingHeight > CGFloat(50) ? BookingHeight : CGFloat(50)
         if viewModel.ListData.CommentMes != nil && indexPath.section == 3 {
-            if viewModel.ListData.CommentMes!.count != 0 {
+            if viewModel.ListData.CommentMes!.count > 0 && indexPath.section == 3{
                 let model = viewModel.ListData.CommentMes?[indexPath.row]
                 _heightForRowAt[3] = self.tableView.getHeightWithCell(lableWidth: CommonFunction.kScreenWidth - 35, commont: model!.ContentMsg, imageArray: [], showCount: 0, rowCount: 4, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10) + 48 + 10
             }
@@ -477,6 +555,8 @@ class HotelDetail: CustomTemplateViewController {
                         vc.HotelProduct = self?.viewModel.ListData.HotelProduct?[indexPath.row]
                         vc.totalNumber  = (self?.totalNumber)!
                         vc.text         = "\((self!.startMoon))月\(self!.startDay)日 - \(self!.endMoon)月\(self!.endDay)日"
+                        vc.DateTimeBegin = (self?.DateTimeBegin)!
+                        vc.DateTimeEnd = (self?.DateTimeEnd)!
                         self?.navigationController?.show(vc, sender: self  )
                     })
                  }else{
@@ -523,7 +603,7 @@ class HotelDetail: CustomTemplateViewController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            //检测是否有库存
+            
             if viewModel.ListData.HotelProduct!.count != 0 {
                 
                 let vc = CommonFunction.ViewControllerWithStoryboardName("HotelFacilities", Identifier: "HotelFacilities") as! HotelFacilities
@@ -539,5 +619,16 @@ class HotelDetail: CustomTemplateViewController {
             }
         }
     }
-    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 || indexPath.section == 2 {
+            if cell.responds(to:#selector(setter: UIView.layoutMargins)) {
+                cell.layoutMargins = UIEdgeInsets.zero
+            }
+            if cell.responds(to: #selector(setter: UITableViewCell.separatorInset)) {
+                cell.separatorInset = UIEdgeInsets.zero
+            }
+        }
+        
+        
+    }
 }

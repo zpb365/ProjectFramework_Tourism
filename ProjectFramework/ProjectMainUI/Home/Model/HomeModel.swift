@@ -74,12 +74,12 @@ class ClassHotList: NSObject {
 class ClassVisualFeast: NSObject {
     var BeautifulPictureList:[ClassBeautifulPictureList]?
     var Panorama360List:[ClassPanorama360List]?
-    var VRVideoClassList:[ClassVRVideoClassList]?
+    var VRVideoDTO:[ClassVRVideoClassList_Item]?
     
     override static func mj_objectClassInArray() -> [AnyHashable : Any]! {
         return ["BeautifulPictureList":ClassBeautifulPictureList.self,
                 "Panorama360List":ClassPanorama360List.self,
-                "VRVideoClassList":ClassVRVideoClassList.self]
+                "VRVideoDTO":ClassVRVideoClassList_Item.self]
     }
 }
 

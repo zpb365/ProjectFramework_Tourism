@@ -50,7 +50,7 @@ class HotelViewCell: UITableViewCell {
                 Title1.text=Hotel[i].HotelName
                 Score1.isHidden=false
                 Score1.text=Hotel[i].Score.format(".1")
-                Money1.text="￥"+Hotel[i].Score.format(".0")+"起"
+                Money1.text="￥"+Hotel[i].lowestPrice.format(".0")+"起"
                 Img1.gestureRecognizers?.removeAll()
                 let TapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(sender:)))
                 Img1.isUserInteractionEnabled=true
@@ -80,7 +80,9 @@ class HotelViewCell: UITableViewCell {
     }
     
     func handleTapGesture(sender: UITapGestureRecognizer){
-        print("点击了"+sender.ExpTagInt.description)
+        let vc = CommonFunction.ViewControllerWithStoryboardName("HotelDetail", Identifier: "HotelDetail") as! HotelDetail
+        vc.HotelID = sender.ExpTagInt
+        delegate?.navigationController?.show(vc, sender: self  )
     }
 
 

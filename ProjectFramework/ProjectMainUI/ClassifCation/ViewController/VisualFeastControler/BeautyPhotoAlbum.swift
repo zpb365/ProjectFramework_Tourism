@@ -14,9 +14,16 @@ class BeautyPhotoAlbum: CustomTemplateViewController {
     
     let identiFier = "BeautyPhotoCell"
     var dataArray = [ClassBeautifulPictureList_Item]()
+    var image_url = Array<String>()
+    var title_Array = Array<String>()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "美图相册"
+        for i in 0..<dataArray.count {
+            let url = "\(HttpsUrlImage)\(self.dataArray[i].PhotoUrl)"
+            image_url.append(url)
+            title_Array.append(self.dataArray[i].PhotoDescribe)
+        }
         self.initUI()
     }
 
@@ -26,7 +33,7 @@ class BeautyPhotoAlbum: CustomTemplateViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage().ImageWithColor(color: UIColor().TransferStringToColor("#FF4081"), size: CGSize.init(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)),for: UIBarMetrics.default)
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage().ImageWithColor(color: UIColor().TransferStringToColor("#FF4081"), size: CGSize.init(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)),for: UIBarMetrics.default)
         
     }
     //MARK: initUI
@@ -48,8 +55,8 @@ class BeautyPhotoAlbum: CustomTemplateViewController {
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let image_url = "\(HttpsUrlImage)\(self.dataArray[indexPath.row].PhotoUrl)"
-        let vc = ImagePreviewViewController( ImageUrlList: [image_url] ,IsDescribe: true,DescribeList: [self.dataArray[indexPath.row].PhotoDescribe] )
+        
+        let vc = ImagePreviewViewController( ImageUrlList: image_url ,IsDescribe: true,DescribeList: title_Array )
         self.navigationController?.pushViewController(vc, animated: true )
     }
     

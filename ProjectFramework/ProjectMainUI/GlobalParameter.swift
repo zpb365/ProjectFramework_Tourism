@@ -9,6 +9,7 @@
 import Foundation
 import SwiftTheme
 
+
 ///用户信息(个人信息)数据模型
 class MyInfoModel:NSObject  {
     ///是否已登录
@@ -25,6 +26,9 @@ class MyInfoModel:NSObject  {
     var  PhoneNo=""
     ///token
     var  Token=""
+    ///0 未授权 1数据挖掘
+    var authorizationtype=0
+    
 }
 
 
@@ -37,14 +41,19 @@ let placeholderImage="loadimg"  //SDWebImage 默认加载图片
 
 let UMAPPKey="58ad571299f0c768cc000f0d"      //友盟Appkey
 let BaiduMapKey="bkKIE4v1nTBGCRYZ4Zpg34LrynTExfXk" //百度地图key
-let JpushKey="f94230388fe4e446d9b86d5b"            //激光推送Key
+let JpushKey="d2bea33f0be75f93ed0fd1c8"            //激光推送Key
 
 #if DEBUG
 let HttpsUrl="http://192.168.1.20:5499/";
 let HttpsUrlImage="http://192.168.1.20:5488/";
+let HttpsPanorama360="http://www.8gsky.com/360/?id=";
+let HttpsVR="http://m.8gsky.com/vision/videoplay.aspx?app=1&id=";
 #else
-let HttpsUrl="http://api.gxzhnm.com/";
-let HttpsUrlImage="http://image.gxzhnm.com/";
+let HttpsUrl="http://api.8gsky.com/";
+let HttpsUrlImage="http://images.8gsky.com/";
+let HttpsPanorama360="http://www.8gsky.com/360/?id=";
+let HttpsVR="http://m.8gsky.com/vision/videoplay.aspx?app=1&id=";
+
 #endif
 
 /* 设置使用最新新浪微博SDK来处理SSO授权(通过客户端设置appkey进行访问)
@@ -71,7 +80,7 @@ var Global_latitude:CLLocationDegrees=0    //全局纬度
 var Global_longitude:CLLocationDegrees=0   //全局经度
 var Global_UserInfo=MyInfoModel()          //我的信息全局
 
-let StartOneImageList:[String] = ["index1","index2","index3","index4"]       //第一次启动引导页图片
+let StartOneImageList:[String] = ["index1","index2","index4"]       //第一次启动引导页图片
 
 /// TabBarController 全局参数变量
 let TabBar_Title = ["首页","频道","游记","我的"]      //标题

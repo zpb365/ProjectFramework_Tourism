@@ -16,6 +16,8 @@ class TravelAgencyModel: NSObject {
     var lowestPrice=0.0
     var CommentsCount=0
     var Score=0.0
+    var Lng=""
+    var Lat=""
     var List:[TravelAgencyModel_Item]?
     override static func mj_objectClassInArray() -> [AnyHashable : Any]! {
         return ["List":TravelAgencyModel_Item.self ]

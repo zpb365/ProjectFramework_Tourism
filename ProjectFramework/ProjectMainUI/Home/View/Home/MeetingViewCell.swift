@@ -57,21 +57,36 @@ class MeetingViewCell: UITableViewCell {
                 Title1.text=Meeting[i].MeetingName
                 Score1.isHidden=false
                 Score1.text=Meeting[i].Score.format(".1")
-                Money1.text="￥"+Meeting[i].Score.format(".0")+"起"
+                Money1.text="￥"+Meeting[i].lowestPrice.format(".0")+"起"
+                Img1.gestureRecognizers?.removeAll()
+                let TapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(sender:)))
+                Img1.isUserInteractionEnabled=true
+                Img1.addGestureRecognizer(TapGestureRecognizer)
+                TapGestureRecognizer.ExpTagInt=Meeting[i].MeetingID
             }
             if(i==1){
                 Img2.ImageLoad(PostUrl: HttpsUrlImage+Meeting[i].CoverPhoto)
                 Title2.text=Meeting[i].MeetingName
                 Score2.isHidden=false
                 Score2.text=Meeting[i].Score.format(".1")
-                Money2.text="￥"+Meeting[i].Score.format(".0")+"起"
+                Money2.text="￥"+Meeting[i].lowestPrice.format(".0")+"起"
+                Img2.gestureRecognizers?.removeAll()
+                let TapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(sender:)))
+                Img2.isUserInteractionEnabled=true
+                Img2.addGestureRecognizer(TapGestureRecognizer)
+                TapGestureRecognizer.ExpTagInt=Meeting[i].MeetingID
             }
             if(i==2){
                 Img3.ImageLoad(PostUrl: HttpsUrlImage+Meeting[i].CoverPhoto)
                 Title3.text=Meeting[i].MeetingName
                 Score3.isHidden=false
                 Score3.text=Meeting[i].Score.format(".1")
-                Money3.text="￥"+Meeting[i].Score.format(".0")+"起"
+                Money3.text="￥"+Meeting[i].lowestPrice.format(".0")+"起"
+                Img3.gestureRecognizers?.removeAll()
+                let TapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(sender:)))
+                Img3.isUserInteractionEnabled=true
+                Img3.addGestureRecognizer(TapGestureRecognizer)
+                TapGestureRecognizer.ExpTagInt=Meeting[i].MeetingID
             }
         }
         
@@ -81,5 +96,10 @@ class MeetingViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    func handleTapGesture(sender: UITapGestureRecognizer){
+        let vc = CommonFunction.ViewControllerWithStoryboardName("ConferenceDetail", Identifier: "ConferenceDetail") as! ConferenceDetail
+        vc.MeetingID = sender.ExpTagInt
+        vc.ChannelID = 5
+        delegate?.navigationController?.show(vc, sender: self  )
+    }
 }

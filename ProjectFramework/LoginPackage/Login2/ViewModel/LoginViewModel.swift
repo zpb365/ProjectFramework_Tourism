@@ -31,6 +31,7 @@ class LoginViewModel {
     func Login(){
         
         
+        
         let parameter = Observable.combineLatest(username.asObservable(),password.asObservable()){($0,$1)}
         LoginResult = LoginEvent.asObserver()
             .withLatestFrom(parameter)
@@ -80,8 +81,10 @@ class LoginViewModel {
                 Global_UserInfo.userid=model._userid
                 Global_UserInfo.IsLogin=true
                 
+                Global_UserInfo.authorizationtype=model._authorizationtype
+                
                 //登陆成功后 存储到数据库
-                CommonFunction.ExecuteUpdate("update MemberInfo set userid = (?), PhoneNo = (?) , Token = (?), IsLogin = (?) ,RealName=(?),Sex=(?),HeadImgPath=(?)",
+                CommonFunction.ExecuteUpdate("update MemberInfo set userid = (?), PhoneNo = (?) , Token = (?), IsLogin = (?) ,RealName=(?),Sex=(?),HeadImgPath=(?),authorizationtype=(?)",
                                              [Global_UserInfo.userid as AnyObject
                                                 ,Global_UserInfo.PhoneNo as AnyObject
                                                 ,"" as AnyObject
@@ -89,6 +92,7 @@ class LoginViewModel {
                                                 ,Global_UserInfo.RealName as AnyObject
                                                 ,Global_UserInfo.Sex as AnyObject
                                                 ,Global_UserInfo.HeadImgPath as AnyObject
+                                                ,Global_UserInfo.authorizationtype as AnyObject
                     ], callback: nil )
                 
            

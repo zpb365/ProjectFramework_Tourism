@@ -48,14 +48,24 @@ class SpecialtyViewCell: UITableViewCell {
                 Title1.text=Specialities[i].SpecialitiesName
                 Score1.isHidden=false
                 Score1.text=Specialities[i].Score.format(".1")
-                Money1.text="￥"+Specialities[i].Score.format(".0")+"起"
+                Money1.text="￥"+Specialities[i].lowestPrice.format(".0")+"起"
+                Img1.gestureRecognizers?.removeAll()
+                let TapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(sender:)))
+                Img1.isUserInteractionEnabled=true
+                Img1.addGestureRecognizer(TapGestureRecognizer)
+                TapGestureRecognizer.ExpTagInt=Specialities[i].SpecialitiesID
             }
             if(i==1){
                 Img2.ImageLoad(PostUrl: HttpsUrlImage+Specialities[i].CoverPhoto)
                 Title2.text=Specialities[i].SpecialitiesName
                 Score2.isHidden=false
                 Score2.text=Specialities[i].Score.format(".1")
-                Money2.text="￥"+Specialities[i].Score.format(".0")+"起"
+                Money2.text="￥"+Specialities[i].lowestPrice.format(".0")+"起"
+                Img2.gestureRecognizers?.removeAll()
+                let TapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(sender:)))
+                Img2.isUserInteractionEnabled=true
+                Img2.addGestureRecognizer(TapGestureRecognizer)
+                TapGestureRecognizer.ExpTagInt=Specialities[i].SpecialitiesID
             }
         }
         
@@ -66,5 +76,10 @@ class SpecialtyViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    func handleTapGesture(sender: UITapGestureRecognizer){
+        let vc = CommonFunction.ViewControllerWithStoryboardName("SpecialtyDetail", Identifier: "SpecialtyDetail") as! SpecialtyDetail
+        vc.SpecialitiesID = sender.ExpTagInt
+        vc.ChannelID = 6
+        delegate?.navigationController?.show(vc, sender: self  )
+    }
 }

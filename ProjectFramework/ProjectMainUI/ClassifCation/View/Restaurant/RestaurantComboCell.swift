@@ -51,6 +51,6 @@ class RestaurantComboCell: UITableViewCell {
         mainImage.ImageLoad(PostUrl: HttpsUrlImage+model.CoverPhoto)
         price.text = "¥\(model.DefaultPrice)"
         disCountPrice.text = "¥\(model.OriginalPrice)"
-        tab.text = model.Description+"|"+model.Reservation
+        tab.text = model.AdditionalServices+"|"+model.Reservation
     }
 }

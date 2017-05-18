@@ -34,10 +34,10 @@ class InformationViewController: CustomTemplateViewController ,WKNavigationDeleg
     }
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
         
-//        let str = "document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '400%'"
-//        webView.evaluateJavaScript(str) { (data , error) in
-//           
-//        }
+        let str = "document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '300%'"
+        webView.evaluateJavaScript(str) { (response, error) in
+            
+        }
     }
 
     
