@@ -548,20 +548,20 @@ class HotelDetail: CustomTemplateViewController {
             if viewModel.ListData.HotelProduct!.count > 0 && viewModel.ListData.HotelProduct != nil {
                 cell.InitConfig(viewModel.ListData.HotelProduct?[indexPath.row] as Any)
                 //检测是否有库存
-                 if viewModel.ListData.HotelProduct?[indexPath.row].IsInventory == true{
-                    
                     cell.FuncCallbackValue(value: {[weak self] (str) in
-                        let vc = CommonFunction.ViewControllerWithStoryboardName("HotelOderWrite", Identifier: "HotelOderWrite") as! HotelOderWrite
-                        vc.HotelProduct = self?.viewModel.ListData.HotelProduct?[indexPath.row]
-                        vc.totalNumber  = (self?.totalNumber)!
-                        vc.text         = "\((self!.startMoon))月\(self!.startDay)日 - \(self!.endMoon)月\(self!.endDay)日"
-                        vc.DateTimeBegin = (self?.DateTimeBegin)!
-                        vc.DateTimeEnd = (self?.DateTimeEnd)!
-                        self?.navigationController?.show(vc, sender: self  )
+                        if self?.viewModel.ListData.HotelProduct?[indexPath.row].IsInventory == true{
+                            let vc = CommonFunction.ViewControllerWithStoryboardName("HotelOderWrite", Identifier: "HotelOderWrite") as! HotelOderWrite
+                            vc.HotelProduct = self?.viewModel.ListData.HotelProduct?[indexPath.row]
+                            vc.totalNumber  = (self?.totalNumber)!
+                            vc.text         = "\((self!.startMoon))月\(self!.startDay)日 - \(self!.endMoon)月\(self!.endDay)日"
+                            vc.DateTimeBegin = (self?.DateTimeBegin)!
+                            vc.DateTimeEnd = (self?.DateTimeEnd)!
+                            self?.navigationController?.show(vc, sender: self  )
+                        }else{
+                            CommonFunction.HUD("该产品暂无库存！", type: .error)
+                        }
                     })
-                 }else{
-                    CommonFunction.HUD("该产品暂无库存！", type: .error)
-                }
+
             }
             return cell
         }

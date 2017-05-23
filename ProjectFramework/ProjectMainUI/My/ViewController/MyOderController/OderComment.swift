@@ -34,7 +34,6 @@ class OderComment: UIViewController,UITextViewDelegate {
         commentTextView.rx.text.orEmpty
             .bind(to: _OrderCommentViewModel.Description) //绑定
             .addDisposableTo(disposeBag)
-        
         submit.rx.tap
             .bind(to: _OrderCommentViewModel.Event)  //绑定事件 (点击)
             .addDisposableTo(self.disposeBag)

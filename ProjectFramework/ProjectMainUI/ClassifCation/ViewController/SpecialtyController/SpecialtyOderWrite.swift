@@ -66,7 +66,7 @@ class SpecialtyOderWrite: UIViewController,UITableViewDelegate,UITableViewDataSo
         for i in 0..<10 {
             title.append((i+1).description)
         }
-        CommonFunction.ActionSheet(ShowTitle: title,sheetWithTitle:"请选择购买的张数" ,ItemsTextColor: UIColor().TransferStringToColor("#52B0E9"), ReturnSelectedIndex: { (index, str) in
+        CommonFunction.ActionSheet(ShowTitle: title,sheetWithTitle:"请选择购买的数量" ,ItemsTextColor: UIColor().TransferStringToColor("#52B0E9"), ReturnSelectedIndex: { (index, str) in
             self.count = index + 1
             self.product_Count.text = "\(self.count)"
             self.payforPrice.text = "¥\(self.spePoduct!.DefaultPrice * self.count)"

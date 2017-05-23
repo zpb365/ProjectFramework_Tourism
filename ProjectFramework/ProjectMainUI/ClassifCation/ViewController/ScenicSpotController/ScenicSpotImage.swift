@@ -31,6 +31,14 @@ class ScenicSpotImage: CustomTemplateViewController ,UICollectionViewDelegateFlo
         self.collectionView.isScrollEnabled = false
         self.collectionView.register(UINib(nibName: "ScenicSpotCollectionCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.register(ScenicSpotHeaderReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
+        let swp = UISwipeGestureRecognizer.init(target: self, action: #selector(sliding))
+        swp.direction = .up
+        self.view.addGestureRecognizer(swp)
+    }
+    @objc private func sliding() -> Void {
+        self.ScrollEnabledCan()
+        self.collectionView.setContentOffset(CGPoint.init(x: 0, y: 100), animated: true)
+        print("我滑动了")
     }
     // MARK: UILayoutDelegate,iOS 10之后需要在代理方法里实现
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

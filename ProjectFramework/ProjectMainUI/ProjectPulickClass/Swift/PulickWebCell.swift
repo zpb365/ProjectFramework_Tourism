@@ -15,6 +15,7 @@ class PulickWebCell: UITableViewCell,UIWebViewDelegate {
     func  FuncCallbackValue(value:CallbackValue?){
         myCallbackValue = value //返回值
     }
+    
     lazy var costomWebView:UIWebView={
         let costomWebView = UIWebView.init(frame: CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: 10))
         costomWebView.scrollView.bounces = false
@@ -68,5 +69,5 @@ class PulickWebCell: UITableViewCell,UIWebViewDelegate {
             costomWebView.loadHTMLString(html, baseURL: nil)
         }
     }
-
+    
 }

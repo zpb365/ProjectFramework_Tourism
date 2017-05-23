@@ -55,7 +55,14 @@ class ScenicSpotTickets: CustomTemplateViewController,ScrollEnabledDelegate {
             self.tableView.tableFooterView = self.footderView
             self.footderView.loadHtmlString(html: self.BookingNotes)
         }
-        
+        let swp = UISwipeGestureRecognizer.init(target: self, action: #selector(sliding))
+        swp.direction = .up
+        self.view.addGestureRecognizer(swp)
+    }
+    @objc private func sliding() -> Void {
+        self.ScrollEnabledCan()
+        self.tableView.setContentOffset(CGPoint.init(x: 0, y: 100), animated: true)
+        print("我滑动了")
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: identiFier, for: indexPath) as! ScenicSpotTicketCell

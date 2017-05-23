@@ -23,8 +23,8 @@ class GuideBookCell: UICollectionViewCell {
         let model           = cell as! GuideModel
         mainImageView.ImageLoad(PostUrl: HttpsUrlImage+model.CoverPhoto)
         GuideName.text      = model.CiceroneName
-        ServiceArea.text    = model.ServiceArea
-        WorkingYears.text   = model.WorkingYears
+        ServiceArea.text    = "擅长区域: \(model.ServiceArea)"
+        WorkingYears.text   = "工作年限: \(model.WorkingYears)"
         if model.Sex == 0 {
             sexy.image = UIImage.init(named: "sexy_man")
         }else{

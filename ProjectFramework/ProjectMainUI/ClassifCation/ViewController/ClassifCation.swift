@@ -24,6 +24,7 @@ class ClassifCation: CustomTemplateViewController ,UICollectionViewDelegateFlowL
         self.InitCongifCollection(CollectView, nil)
         self.header.isHidden = true
         self.GetHtpsData()
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {

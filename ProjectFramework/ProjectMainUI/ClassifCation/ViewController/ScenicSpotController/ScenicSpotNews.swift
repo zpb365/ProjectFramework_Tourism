@@ -31,7 +31,14 @@ class ScenicSpotNews: CustomTemplateViewController,ScrollEnabledDelegate {
         self.tableView.isScrollEnabled = false
         self.tableView.frame = self.view.bounds
         self.header.isHidden = true
-//        self.tableView.tableHeaderView = UIView().headView(width: CommonFunction.kScreenWidth, height: 35, leftViewColor: UIColor().TransferStringToColor("#00ABEE"), title: "景区公告", titleColor: UIColor.black)
+        let swp = UISwipeGestureRecognizer.init(target: self, action: #selector(sliding))
+        swp.direction = .up
+        self.view.addGestureRecognizer(swp)
+    }
+    @objc private func sliding() -> Void {
+        self.ScrollEnabledCan()
+        self.tableView.setContentOffset(CGPoint.init(x: 0, y: 100), animated: true)
+        print("我滑动了")
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if ScenicNewsModel != nil{

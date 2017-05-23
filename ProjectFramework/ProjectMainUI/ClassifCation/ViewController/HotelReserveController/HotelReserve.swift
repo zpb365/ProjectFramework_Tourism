@@ -11,18 +11,18 @@ import UIKit
 class HotelReserve: CustomTemplateViewController,PYSearchViewControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-    var Menuview:MenuView?  = nil
-    var siftViewModel       = SiftParmterViewModel()
-    var viewModel           = HotelReserveViewModel()
-    var ChannelID           = 0
+    //var isSearch: Bool      = false//是否为搜索，用来重置PageIndex，调不同接口
     let identFier           = "HotelReserveCell"
+    var ChannelID           = 0
+    var ComprehensiveSortingEnum = 1
+    var Menuview:MenuView?  = nil
     var PageIndex: Int      = 1
     var PageSize:  Int      = 10
-    var Title_Name          = ""
     var SalesPriorityEnum   = 1
-    var ComprehensiveSortingEnum = 1
-    //var isSearch: Bool      = false//是否为搜索，用来重置PageIndex，调不同接口
+    var Title_Name          = ""
     var searchText: String? = ""
+    var siftViewModel       = SiftParmterViewModel()
+    var viewModel           = HotelReserveViewModel()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

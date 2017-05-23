@@ -33,6 +33,7 @@ class LoginViewModel {
         
         
         let parameter = Observable.combineLatest(username.asObservable(),password.asObservable()){($0,$1)}
+        
         LoginResult = LoginEvent.asObserver()
             .withLatestFrom(parameter)
             .flatMapLatest({ (name,pwd) -> Observable<ValidationResult> in
