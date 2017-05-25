@@ -432,7 +432,7 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
         CustomNavItem.rightBarButtonItem=rightitem  //消息
         
         
-        CustomNavItem.titleView=UIButton().SearchBtn(target: self,actionEvent: #selector(SearchEvent), placeholder: "请搜索")
+        CustomNavItem.titleView=UIButton().SearchBtn(target: self,actionEvent: #selector(SearchEvent), placeholder: "请输入搜索的信息")
         
     }
     

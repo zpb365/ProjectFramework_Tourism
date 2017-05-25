@@ -33,11 +33,11 @@ class GuideBookDetailsViewController: CustomTemplateViewController {
     
     @IBOutlet weak var ImageList: UILabel!
     
-    fileprivate    var CustomNavBar:UINavigationBar!=nil
-    fileprivate  var height: CGFloat = 50
-    fileprivate var backBtn:UIButton!=nil
+    fileprivate var CustomNavBar:UINavigationBar!=nil
+    fileprivate var height: CGFloat = 50
+    fileprivate var viewModel = GuideBookDetailViewModel()
     fileprivate var alph: CGFloat = 0
-    fileprivate  var viewModel = GuideBookDetailViewModel()
+    fileprivate var backBtn:UIButton!=nil
     var CiceroneID=0    //传进来的参数
     
     let identiFier  = "GuideBookDetailsCell"

@@ -174,7 +174,6 @@
 		6F371EB21ECD3BA400C8E6A2 /* Default-568h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F371EB11ECD3BA400C8E6A2 /* Default-568h@3x.png */; };
 		6F371EBA1ECD747300C8E6A2 /* PulickIntroduceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F371EB61ECD747300C8E6A2 /* PulickIntroduceCell.swift */; };
 		6F371EBB1ECD747300C8E6A2 /* PulickIntroduceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F371EB71ECD747300C8E6A2 /* PulickIntroduceView.swift */; };
-		6F371EBC1ECD747300C8E6A2 /* PulickPayforInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F371EB81ECD747300C8E6A2 /* PulickPayforInstructions.swift */; };
 		6F371EBD1ECD747300C8E6A2 /* PulickWebCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F371EB91ECD747300C8E6A2 /* PulickWebCell.swift */; };
 		6F371EBF1ECD749B00C8E6A2 /* PulickWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F371EBE1ECD749B00C8E6A2 /* PulickWebView.swift */; };
 		6F371EC11ECD74AE00C8E6A2 /* PulickInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F371EC01ECD74AE00C8E6A2 /* PulickInformation.swift */; };
@@ -668,7 +667,6 @@
 		6F371EB11ECD3BA400C8E6A2 /* Default-568h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@3x.png"; sourceTree = "<group>"; };
 		6F371EB61ECD747300C8E6A2 /* PulickIntroduceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulickIntroduceCell.swift; sourceTree = "<group>"; };
 		6F371EB71ECD747300C8E6A2 /* PulickIntroduceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulickIntroduceView.swift; sourceTree = "<group>"; };
-		6F371EB81ECD747300C8E6A2 /* PulickPayforInstructions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulickPayforInstructions.swift; sourceTree = "<group>"; };
 		6F371EB91ECD747300C8E6A2 /* PulickWebCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulickWebCell.swift; sourceTree = "<group>"; };
 		6F371EBE1ECD749B00C8E6A2 /* PulickWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulickWebView.swift; sourceTree = "<group>"; };
 		6F371EC01ECD74AE00C8E6A2 /* PulickInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulickInformation.swift; sourceTree = "<group>"; };
@@ -1697,7 +1695,6 @@
 				6F371EC71ECD75FE00C8E6A2 /* UIView+Extension.swift */,
 				6F371EB61ECD747300C8E6A2 /* PulickIntroduceCell.swift */,
 				6F371EB71ECD747300C8E6A2 /* PulickIntroduceView.swift */,
-				6F371EB81ECD747300C8E6A2 /* PulickPayforInstructions.swift */,
 				6F371EB91ECD747300C8E6A2 /* PulickWebCell.swift */,
 				6F371EBE1ECD749B00C8E6A2 /* PulickWebView.swift */,
 				6F371EC01ECD74AE00C8E6A2 /* PulickInformation.swift */,
@@ -2554,6 +2551,7 @@
 					};
 					27609BDF1CB257810041E8B7 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 9A5L5W6464;
 						LastSwiftMigration = 0800;
 						TestTargetID = 27609BCB1CB257810041E8B7;
 					};
@@ -3042,7 +3040,6 @@
 				6FFE5D931EC092DD006969F5 /* RestaurantModel.swift in Sources */,
 				6F371EBF1ECD749B00C8E6A2 /* PulickWebView.swift in Sources */,
 				6F1F877D1E9DFD56008E9B09 /* RestaurantViewCell.swift in Sources */,
-				6F371EBC1ECD747300C8E6A2 /* PulickPayforInstructions.swift in Sources */,
 				6FFE5E171EC092DD006969F5 /* HotelReserveViewModel.swift in Sources */,
 				6F371EC51ECD74FA00C8E6A2 /* CommentPhotoView.swift in Sources */,
 				6FFE5D8F1EC092DD006969F5 /* HotelModel.swift in Sources */,
@@ -3290,6 +3287,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 9A5L5W6464;
 				INFOPLIST_FILE = ProjectFrameworkTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
