@@ -93,7 +93,7 @@ class PayForSuccess: UIViewController {
         isLoginEnable
             .bind(to: logiBtn.rx.isEnabled)
             .disposed(by: disposeBag)
-
+        
 
     }
     
