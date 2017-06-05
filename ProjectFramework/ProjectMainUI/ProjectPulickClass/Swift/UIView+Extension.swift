@@ -62,7 +62,8 @@ extension UIView{
         let lable = UILabel.init(frame: CGRect.init(x: 15, y: 0, width: 100, height: 15))
         lable.center.y = view.center.y
         lable.text = title
-        lable.font = UIFont.boldSystemFont(ofSize: 14)
+        lable.textColor = CommonFunction.SystemColor()
+        lable.font = UIFont.boldSystemFont(ofSize: 15)
         view.addSubview(lable)
         return view
     }

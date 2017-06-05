@@ -269,10 +269,10 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
                 if( viewModel.ListData.VisualFeast!.BeautifulPictureList!.count > (indexPath.row*3+0)  ){  //判断元素 否则就越界了 出错
                 cell.BeautifulPictureList.append(viewModel.ListData.VisualFeast!.BeautifulPictureList![indexPath.row*3+0])
                 }
-                if( viewModel.ListData.VisualFeast!.BeautifulPictureList!.count > (indexPath.row*3+0)  ){  //判断元素 否则就越界了 出错
+                if( viewModel.ListData.VisualFeast!.BeautifulPictureList!.count > (indexPath.row*3+1)  ){  //判断元素 否则就越界了 出错
                 cell.BeautifulPictureList.append(viewModel.ListData.VisualFeast!.BeautifulPictureList![indexPath.row*3+1])
                 }
-                if( viewModel.ListData.VisualFeast!.BeautifulPictureList!.count > (indexPath.row*3+0)  ){  //判断元素 否则就越界了 出错
+                if( viewModel.ListData.VisualFeast!.BeautifulPictureList!.count > (indexPath.row*3+2)  ){  //判断元素 否则就越界了 出错
                 cell.BeautifulPictureList.append(viewModel.ListData.VisualFeast!.BeautifulPictureList![indexPath.row*3+2])
                 }
             }
@@ -280,10 +280,10 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
                 if( viewModel.ListData.VisualFeast!.Panorama360List!.count > (indexPath.row*3+0)  ){  //判断元素 否则就越界了 出错
                 cell.Panorama360List.append(viewModel.ListData.VisualFeast!.Panorama360List![indexPath.row*3+0])
                 }
-                if( viewModel.ListData.VisualFeast!.Panorama360List!.count > (indexPath.row*3+0)  ){  //判断元素 否则就越界了 出错
+                if( viewModel.ListData.VisualFeast!.Panorama360List!.count > (indexPath.row*3+1)  ){  //判断元素 否则就越界了 出错
                 cell.Panorama360List.append(viewModel.ListData.VisualFeast!.Panorama360List![indexPath.row*3+1])
                 }
-                if( viewModel.ListData.VisualFeast!.Panorama360List!.count > (indexPath.row*3+0)  ){  //判断元素 否则就越界了 出错
+                if( viewModel.ListData.VisualFeast!.Panorama360List!.count > (indexPath.row*3+2)  ){  //判断元素 否则就越界了 出错
                 cell.Panorama360List.append(viewModel.ListData.VisualFeast!.Panorama360List![indexPath.row*3+2])
                 }
             }

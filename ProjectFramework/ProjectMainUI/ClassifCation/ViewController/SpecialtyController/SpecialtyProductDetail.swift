@@ -92,7 +92,23 @@ class SpecialtyProductDetail: UIViewController ,UIWebViewDelegate{
     func webViewDidFinishLoad(_ webView: UIWebView){
         let str = "document.body.style.fontSize = '13px';"
         webView.stringByEvaluatingJavaScript(from: str)
-        
+        var  imageauto = "var script = document.createElement('script');"
+        imageauto+="script.type = 'text/javascript';"
+        imageauto+="script.text = \"function ResizeImages() { "
+        imageauto+="var myimg,oldwidth;"
+        imageauto+="var maxwidth = %f;"
+        imageauto+="for(i=0;i <document.images.length;i++){"
+        imageauto+="myimg = document.images[i];"
+        imageauto+="if(myimg.width > maxwidth){"
+        imageauto+="oldwidth = myimg.width;"
+        imageauto+="myimg.width = %f;"
+        imageauto+="}"
+        imageauto+="}"
+        imageauto+="}\";"
+        imageauto+="document.getElementsByTagName('head')[0].appendChild(script);"
+        imageauto = String(format: imageauto, UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.width - 15)
+        webView.stringByEvaluatingJavaScript(from: imageauto)
+        webView.stringByEvaluatingJavaScript(from: "ResizeImages();")
     }
     
 
