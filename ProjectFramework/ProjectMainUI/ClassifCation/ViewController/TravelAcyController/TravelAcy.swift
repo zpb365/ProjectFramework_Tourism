@@ -60,12 +60,16 @@ class TravelAcy: CustomTemplateViewController,PYSearchViewControllerDelegate {
             if result == true{
                 self.setMeunView()
                 self.GetHtpsData()
+            }else{
+                self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: true)
             }
         }
     }
     //MARK: 获取数据
     func GetHtpsData() {
+        
         viewModel.GetChannelsTravelAgencyList(SearchTitle:searchText!,ScreenTitle:Title_Name, SalesPriorityEnum: SalesPriorityEnum, ComprehensiveSortingEnum: ComprehensiveSortingEnum, PageIndex: PageIndex, PageSize: PageSize) { (result, NoMore,NoData) in
+            
             if  result == true {
                 //没有数据
                 if NoData == true{
@@ -77,16 +81,15 @@ class TravelAcy: CustomTemplateViewController,PYSearchViewControllerDelegate {
                     self.footer.endRefreshingWithNoMoreData()
                     self.RefreshRequest(isLoading: false, isHiddenFooter: false)
                 }else{
-                    self.numberOfRowsInSection = self.viewModel.ListData.count
                     self.numberOfSections=1//显示行数
+                    self.numberOfRowsInSection = self.viewModel.ListData.count
                     //数据小于pagesize
                     if self.viewModel.ListData.count < self.PageSize{
                         self.footer.endRefreshingWithNoMoreData()
                     }
                     self.RefreshRequest(isLoading: false, isHiddenFooter: false)
                 }
-            }
-            else{
+            }else{
                 self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: true)
             }
             print("当前数组个数\(self.viewModel.ListData.count)")
@@ -178,7 +181,6 @@ class TravelAcy: CustomTemplateViewController,PYSearchViewControllerDelegate {
     func searchViewController(_ searchViewController: PYSearchViewController!, didSearchWithsearchBar searchBar: UISearchBar!, searchText: String!) {
         searchViewController.dismiss(animated: false) {
             self.remexParmeter(tag: true,searchText: searchText)
-            print("结束了")
         }
     }
     //重设参数
@@ -191,8 +193,9 @@ class TravelAcy: CustomTemplateViewController,PYSearchViewControllerDelegate {
             self.searchText                 = searchText
             self.viewModel.ListData.removeAll()
             self.numberOfRowsInSection      = self.viewModel.ListData.count
-            self.RefreshRequest(isLoading: true, isHiddenFooter: true,isLoadError: false)
+            self.RefreshRequest(isLoading: true, isHiddenFooter: false,isLoadError: false)
             self.GetHtpsData()
+            
         }
         else{
             self.viewModel.ListData.removeAll()

@@ -74,7 +74,7 @@ class ForgotPasswordController: UIViewController,UITableViewDelegate,UITableView
             let tableview = UITableView(frame: CGRect(x: 0, y: 64, width: self.view.bounds.width, height: self.view.bounds.height))
             tableview.dataSource=self
             tableview.delegate=self
-            tableview.register(registerViewCell.self, forCellReuseIdentifier: self.Identifier)  //注册tableview
+            tableview.register(ForgotPasswordCell.self, forCellReuseIdentifier: self.Identifier)  //注册tableview
             let footview=UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
             footview.addSubview(self.ForgotPasswordbtn)
             tableview.tableFooterView=footview
@@ -99,7 +99,7 @@ class ForgotPasswordController: UIViewController,UITableViewDelegate,UITableView
             })
             .addDisposableTo(  disposeBag)
         self.view.addGestureRecognizer(tapBackground)
-        ForgotPasswordResult()
+        //ForgotPasswordResult()
     }
     
     override func didReceiveMemoryWarning()
@@ -142,7 +142,7 @@ class ForgotPasswordController: UIViewController,UITableViewDelegate,UITableView
             _ =  _ForgotPasswordViewModel.VerificationCodeEvent1=cell
             cell.VerificationCodeBtn.rx.tap
                 .bind(to: _ForgotPasswordViewModel.VerificationCodeEvent)
-                .addDisposableTo(self.disposeBag)
+                .addDisposableTo(disposeBag)
             
             break
         case 1:

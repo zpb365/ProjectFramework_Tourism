@@ -14,8 +14,9 @@ class CommentMeModel: NSObject {
     var Score=0
     var UserID=0
     var UserInfo:UserInfoModel?
+    var Photos:[Photos_List]?
     override static func mj_objectClassInArray() -> [AnyHashable : Any]! {
-        return ["UserInfo":UserInfoModel.self]
+        return ["UserInfo":UserInfoModel.self,"Photos":Photos_List.self]
     }
 }
 class UserInfoModel: NSObject {
@@ -24,4 +25,8 @@ class UserInfoModel: NSObject {
     var NickName=""
     var UserLogo=""
     var Sex=""
+}
+class Photos_List: NSObject {
+    var CommentID=0
+    var ImgPath=""
 }

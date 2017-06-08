@@ -27,6 +27,8 @@ class ImagePreviewViewController: UIViewController,UIScrollViewDelegate {
     fileprivate var imageY:CGFloat!
     fileprivate var CustomNavBar:UINavigationBar!=nil
     fileprivate var backBtn:UIButton!=nil
+    
+    
     /**
      图片浏览
      
@@ -175,6 +177,8 @@ class ImagePreviewViewController: UIViewController,UIScrollViewDelegate {
             self.view.bringSubview(toFront: DescribeLab!)  //把当前描述的控件置顶
         }
         self.view.backgroundColor=UIColor.black  //背景色为黑色,要设置 不然设置透明bar就会出现白色底部
+        
+        
     }
     
     //UIScrollViewDelegate方法，每次滚动结束后调用
@@ -270,7 +274,6 @@ class ImagePreviewViewController: UIViewController,UIScrollViewDelegate {
        
     }
     
-    
-    
+
     
 }

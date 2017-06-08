@@ -163,7 +163,7 @@ class HotelDetail: CustomTemplateViewController {
         }
     }
     override func Error_Click() {
-        PageIndex = 0
+        PageIndex = 1
         self.GetHtpsData()
     }
     override func footerRefresh() {
@@ -274,7 +274,7 @@ class HotelDetail: CustomTemplateViewController {
                 vc.models=model
                 self.navigationController?.show(vc, sender: self)
             }
-            print("跳转到百度地图")
+            
         case 1002:
             if viewModel.ListData.Phone != "" {
                 CommonFunction.CallPhone(self, number: viewModel.ListData.Phone)
@@ -286,7 +286,6 @@ class HotelDetail: CustomTemplateViewController {
                 self.present(vc, animated: true, completion:nil)
             }
             
-            print("跳转到全景动画")
         default:
             break
         }
@@ -519,7 +518,7 @@ class HotelDetail: CustomTemplateViewController {
         if viewModel.ListData.HotelProduct != nil && section == 0{
                 _numberOfRowsInSection[0] = (viewModel.ListData.HotelProduct?.count)!
         }
-        if viewModel.ListData.CommentMes != nil {
+        if cViewModel.ListData.count > 0 {
             _numberOfRowsInSection[3] = cViewModel.ListData.count
         }
         return _numberOfRowsInSection[section]
@@ -532,9 +531,9 @@ class HotelDetail: CustomTemplateViewController {
         _heightForRowAt[1] = hotelIntroduceHeight > CGFloat(50) ? hotelIntroduceHeight : CGFloat(50)
         _heightForRowAt[2] = BookingHeight > CGFloat(50) ? BookingHeight : CGFloat(50)
         if viewModel.ListData.CommentMes != nil && indexPath.section == 3 {
-            if viewModel.ListData.CommentMes!.count > 0 && indexPath.section == 3{
-                let model = viewModel.ListData.CommentMes?[indexPath.row]
-                _heightForRowAt[3] = self.tableView.getHeightWithCell(lableWidth: CommonFunction.kScreenWidth - 35, commont: model!.ContentMsg, imageArray: [], showCount: 0, rowCount: 4, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10) + 48 + 10
+            if cViewModel.ListData.count > 0 && indexPath.section == 3{
+                let model = cViewModel.ListData[indexPath.row]
+                _heightForRowAt[3] = self.tableView.getHeightWithCell(lableWidth: CommonFunction.kScreenWidth - 35, commont: model.ContentMsg, imageArray: [], showCount: (model.Photos?.count)!, rowCount: 3, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10) + 48 + 10
             }
         }
         return _heightForRowAt[indexPath.section]
@@ -593,7 +592,7 @@ class HotelDetail: CustomTemplateViewController {
         else if (indexPath.section == 3){
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)as!UserCommentCell
             if viewModel.ListData.CommentMes!.count != 0 {
-                cell.InitConfig(viewModel.ListData.CommentMes?[indexPath.row] as Any)
+                cell.InitConfig(cViewModel.ListData[indexPath.row] as Any)
             }
             return cell
         }

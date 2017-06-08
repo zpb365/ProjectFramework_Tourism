@@ -328,10 +328,12 @@ class RestaurantDetail: CustomTemplateViewController {
     //行高
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         _heightForRowAt[1] = IntroduceHeight > CGFloat(10) ? IntroduceHeight :CGFloat(0)
-        _heightForRowAt[2] = BookingHeight > CGFloat(10) ? IntroduceHeight :CGFloat(0)
-        if cViewModel.ListData.count > 0 && indexPath.section == 3 {
-            let model = cViewModel.ListData[indexPath.row]
-            _heightForRowAt[3] = self.tableView.getHeightWithCell(lableWidth: CommonFunction.kScreenWidth - 35, commont: model.ContentMsg, imageArray: [], showCount: 0, rowCount: 4, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10) + 48 + 10
+        _heightForRowAt[2] = BookingHeight > CGFloat(10) ? BookingHeight :CGFloat(0)
+        if viewModel.ListData.CommentMes != nil && indexPath.section == 3 {
+            if cViewModel.ListData.count > 0 && indexPath.section == 3{
+                let model = cViewModel.ListData[indexPath.row]
+                _heightForRowAt[3] = self.tableView.getHeightWithCell(lableWidth: CommonFunction.kScreenWidth - 35, commont: model.ContentMsg, imageArray: [], showCount: (model.Photos?.count)!, rowCount: 3, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10) + 48 + 10
+            }
         }
         return _heightForRowAt[indexPath.section]
     }

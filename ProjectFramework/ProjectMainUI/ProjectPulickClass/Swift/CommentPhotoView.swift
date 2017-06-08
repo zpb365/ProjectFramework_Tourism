@@ -35,7 +35,7 @@ class CommentPhotoView: UIView {
             imageView.frame = CommonFunction.CGRect_fram(X, y: Y, w: width, h: width)
             imageView.image = UIImage.init(named: imageArray[i])
             if  (imageView.image == nil) {
-                imageView.ImageLoad(PostUrl: imageArray[i])
+                imageView.ImageLoad(PostUrl: HttpsUrlImage + imageArray[i])
             }
             self.addSubview(imageView)
         }

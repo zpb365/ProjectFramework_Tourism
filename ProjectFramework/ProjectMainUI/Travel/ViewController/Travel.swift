@@ -23,7 +23,7 @@ class Travel: CustomTemplateViewController {
         super.viewDidLoad()
         //基控制器
         self.InitCongif(tableView)
-        self.tableView.tableHeaderView = headView
+        self.headView.isHidden = true
         self.tableView.frame = CGRect.init(x: 0, y: CommonFunction.NavigationControllerHeight, width: self.view.frame.width, height: self.view.frame.height-CommonFunction.NavigationControllerHeight-49)
         self.numberOfSections=1//显示行数
         self.tableViewheightForRowAt=150//行高
@@ -49,6 +49,8 @@ class Travel: CustomTemplateViewController {
         
         viewModel.GetTravelsChannelsList(PageIndex: PageIndex, PageSize: PageSize) { (result,NoMore) in
             if  result == true {
+                self.headView.isHidden = false
+                self.tableView.tableHeaderView = self.headView
                 if(NoMore==true){
                     self.footer.endRefreshingWithNoMoreData()
                 }else{

@@ -58,6 +58,7 @@ class BeautyPhotoAlbum: CustomTemplateViewController {
         
         let vc = ImagePreviewViewController( ImageUrlList: image_url ,IsDescribe: true,DescribeList: title_Array )
         self.navigationController?.pushViewController(vc, animated: true )
+        
     }
     
 }

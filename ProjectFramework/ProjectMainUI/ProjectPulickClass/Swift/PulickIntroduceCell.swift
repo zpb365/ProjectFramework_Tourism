@@ -14,7 +14,7 @@ class PulickIntroduceCell: UITableViewCell {
         let titleLable = UILabel.init(frame: CommonFunction.CGRect_fram(self.line.frame.maxX + 5, y: 5, w: 100, h:15 ))
         titleLable.text = "我是标题"
         titleLable.textColor = UIColor.darkGray
-        titleLable.font = UIFont.systemFont(ofSize: 11)
+        titleLable.font = UIFont.systemFont(ofSize: 13)
         return titleLable
     }()
 
@@ -25,11 +25,16 @@ class PulickIntroduceCell: UITableViewCell {
     }()
 
     lazy var describe: UILabel = {
-        let describe = UILabel.init(frame: CommonFunction.CGRect_fram(10, y: self.titleLable.frame.maxY + 5, w: CommonFunction.kScreenWidth - 20, h:10 ))
-        describe.font = UIFont.systemFont(ofSize: 11)
-        describe.backgroundColor = UIColor().TransferStringToColor("#EBEBEB")
+        let describe = UILabel.init(frame: CommonFunction.CGRect_fram(5, y: 3, w: CommonFunction.kScreenWidth - 30, h:0 ))
+        describe.font = UIFont.systemFont(ofSize: 13)
         describe.numberOfLines = 0
         return describe
+    }()
+    lazy var baeseView: UIView = {
+        let baeseView = UIView.init(frame: CommonFunction.CGRect_fram(10, y: self.titleLable.frame.maxY + 5, w: CommonFunction.kScreenWidth - 20, h:10 ))
+        baeseView.backgroundColor = UIColor().TransferStringToColor("#EBEBEB")
+        baeseView.layer.cornerRadius = 4
+        return baeseView
     }()
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -48,7 +53,8 @@ class PulickIntroduceCell: UITableViewCell {
         self.backgroundColor = UIColor.white
         self.contentView.addSubview(self.line)
         self.contentView.addSubview(self.titleLable)
-        self.contentView.addSubview(self.describe)
+        self.contentView.addSubview(self.baeseView)
+        self.baeseView.addSubview(self.describe)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -56,8 +62,9 @@ class PulickIntroduceCell: UITableViewCell {
     }
     override func InitConfig(_ cell: Any) {
         let model  = cell as! DescribeName_ListItem
-        let height = model.Describel.ContentSize(font: UIFont.systemFont(ofSize: 11), maxSize: CGSize(width: CommonFunction.kScreenWidth - 20, height: 0)).height
-        self.describe.frame = CommonFunction.CGRect_fram(10, y: self.titleLable.frame.maxY + 5, w: CommonFunction.kScreenWidth - 20, h:height )
+        let height = model.Describel.ContentSize(font: UIFont.systemFont(ofSize: 13), maxSize: CGSize(width: CommonFunction.kScreenWidth - 30, height: 0)).height
+        self.baeseView.frame = CommonFunction.CGRect_fram(10, y: self.titleLable.frame.maxY + 5, w: CommonFunction.kScreenWidth - 20, h:height + 5 )
+        self.describe.frame = CommonFunction.CGRect_fram(5, y: 3, w: CommonFunction.kScreenWidth - 30, h:height )
         self.describe.text = model.Describel
         self.titleLable.text = model.Title
     }

@@ -19,6 +19,10 @@ class GuideBookCell: UICollectionViewCell {
     override func awakeFromNib() {
         
     }
+    override func layoutSubviews() {
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
+    }
     override func InitConfig(_ cell: Any) {
         let model           = cell as! GuideModel
         mainImageView.ImageLoad(PostUrl: HttpsUrlImage+model.CoverPhoto)

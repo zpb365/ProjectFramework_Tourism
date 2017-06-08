@@ -60,7 +60,7 @@ class My: UIViewController,UITableViewDelegate,UITableViewDataSource {
         _ = _MyHeadUIView._layer(tableHeaderView: tableView, target: self, selector: #selector(UserInfoEdit))
         SetupNavBar()
         if(Global_UserInfo.IsLogin==true){
-            self._MyHeadUIView.Imgbtn?.ImageLoad(PostUrl: HttpsUrlImage+Global_UserInfo.HeadImgPath)
+            self._MyHeadUIView.Imgbtn?.sd_setImage(with: URL.init(string: HttpsUrlImage+Global_UserInfo.HeadImgPath), placeholderImage: UIImage.init(named: "userIcon_defualt"))
             self._MyHeadUIView.LabName.text=Global_UserInfo.RealName
             if Global_UserInfo.authorizationtype == 1{
                 ImageList.insert("挖掘", at: self.TitleList.count-1)

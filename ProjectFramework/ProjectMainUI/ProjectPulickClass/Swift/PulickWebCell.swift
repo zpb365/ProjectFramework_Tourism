@@ -62,7 +62,7 @@ class PulickWebCell: UITableViewCell,UIWebViewDelegate {
         let height = webView.scrollView.contentSize.height
         costomWebView.frame = CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: height)
         if (myCallbackValue != nil) {
-            myCallbackValue!(height )//改变字体大小以后会有多余的高度出来  乘以比例 13 px/18 px
+            myCallbackValue!(height )
         }
     }
     func loadHtmlString(html:String, isFirst:Bool) -> Void {

@@ -114,16 +114,16 @@ class SpecialtyOderWrite: UIViewController,UITableViewDelegate,UITableViewDataSo
             var canPayfor: Bool = false
             //收获地址
             let index0 = IndexPath.init(row: 0, section: 0)
-            let cell0 = tableView.cellForRow(at: index0) as! HotelOderWriteCell
+            let cell0 = tableView.cellForRow(at: index0) as! SpecialtyOderWriteCell
             //真实姓名
             let index1 = IndexPath.init(row: 1, section: 0)
-            let cell1 = tableView.cellForRow(at: index1) as! HotelOderWriteCell
+            let cell1 = tableView.cellForRow(at: index1) as! SpecialtyOderWriteCell
             //电话
             let index2 = IndexPath.init(row: 2, section: 0)
-            let cell2 = tableView.cellForRow(at: index2) as! HotelOderWriteCell
+            let cell2 = tableView.cellForRow(at: index2) as! SpecialtyOderWriteCell
             //备注
             let index3 = IndexPath.init(row: 3, section: 0)
-            let cell3 = tableView.cellForRow(at: index3) as! HotelOderWriteCell
+            let cell3 = tableView.cellForRow(at: index3) as! SpecialtyOderWriteCell
 //            var isPost = 0
             //不是自取
             if isOpen == false {
@@ -138,7 +138,7 @@ class SpecialtyOderWrite: UIViewController,UITableViewDelegate,UITableViewDataSo
                 CommonFunction.HUD("请输入真实姓名", type: .error)
                 return
             }
-            canPayfor = Validate.phoneNum(cell2.textField.text!).isRight
+            canPayfor = Validate.phoneNum(cell2.textField.text!).isRight//校验手机号
             if canPayfor == true {
                 var isPost = 0//0邮寄 1自取
                 if isOpen == true {

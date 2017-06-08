@@ -55,7 +55,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ZFBlogo" translatesAutoresizingMaskIntoConstraints="NO" id="bkL-tz-6lV">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bkL-tz-6lV">
                                                     <rect key="frame" x="50" y="123" width="18" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="EDb-9F-CzZ"/>
@@ -63,7 +63,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hVD-gu-VHW">
-                                                    <rect key="frame" x="14" y="147" width="172" height="1"/>
+                                                    <rect key="frame" x="14" y="144" width="172" height="1"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="s4c-KE-yAr"/>
@@ -73,7 +73,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="擅长区域:  国内、港澳台、非洲、美洲" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MU9-dM-akX">
-                                                    <rect key="frame" x="5" y="153" width="184" height="15"/>
+                                                    <rect key="frame" x="5" y="148" width="184" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="Mvg-99-OTf"/>
                                                     </constraints>
@@ -82,7 +82,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="带团时间:  6年" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3j-9F-cec">
-                                                    <rect key="frame" x="5" y="173" width="184" height="17"/>
+                                                    <rect key="frame" x="5" y="166" width="184" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="17" id="dxa-gR-JdA"/>
                                                     </constraints>
@@ -98,10 +98,10 @@
                                             <constraint firstAttribute="trailing" secondItem="TCR-YZ-T5d" secondAttribute="trailing" id="NlJ-bO-05u"/>
                                             <constraint firstItem="zIl-LY-P4m" firstAttribute="leading" secondItem="Rr4-c5-643" secondAttribute="leading" constant="8" id="QIj-pj-UOq"/>
                                             <constraint firstItem="zIl-LY-P4m" firstAttribute="top" secondItem="TCR-YZ-T5d" secondAttribute="bottom" constant="5" id="Srx-ID-bHZ"/>
-                                            <constraint firstItem="r3j-9F-cec" firstAttribute="top" secondItem="MU9-dM-akX" secondAttribute="bottom" constant="5" id="Uwp-v2-Ost"/>
-                                            <constraint firstItem="hVD-gu-VHW" firstAttribute="top" secondItem="bkL-tz-6lV" secondAttribute="bottom" constant="6" id="VwN-Pb-TLZ"/>
+                                            <constraint firstItem="r3j-9F-cec" firstAttribute="top" secondItem="MU9-dM-akX" secondAttribute="bottom" constant="3" id="Uwp-v2-Ost"/>
+                                            <constraint firstItem="hVD-gu-VHW" firstAttribute="top" secondItem="bkL-tz-6lV" secondAttribute="bottom" constant="3" id="VwN-Pb-TLZ"/>
                                             <constraint firstItem="hVD-gu-VHW" firstAttribute="leading" secondItem="Rr4-c5-643" secondAttribute="leading" constant="14" id="ayu-fh-BwW"/>
-                                            <constraint firstItem="MU9-dM-akX" firstAttribute="top" secondItem="hVD-gu-VHW" secondAttribute="bottom" constant="5" id="b0V-1z-NVX"/>
+                                            <constraint firstItem="MU9-dM-akX" firstAttribute="top" secondItem="hVD-gu-VHW" secondAttribute="bottom" constant="3" id="b0V-1z-NVX"/>
                                             <constraint firstAttribute="trailing" secondItem="MU9-dM-akX" secondAttribute="trailing" constant="5" id="bV1-L4-S8I"/>
                                             <constraint firstAttribute="trailing" secondItem="hVD-gu-VHW" secondAttribute="trailing" constant="8" id="gCv-mk-exu"/>
                                             <constraint firstItem="bkL-tz-6lV" firstAttribute="leading" secondItem="zIl-LY-P4m" secondAttribute="trailing" constant="5" id="h4h-wk-jLd"/>
@@ -133,7 +133,4 @@
             <point key="canvasLocation" x="-245.59999999999999" y="-12.143928035982009"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="ZFBlogo" width="328" height="289"/>
-    </resources>
 </document>

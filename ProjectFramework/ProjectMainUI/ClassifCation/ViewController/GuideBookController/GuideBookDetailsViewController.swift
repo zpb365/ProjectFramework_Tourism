@@ -32,6 +32,7 @@ class GuideBookDetailsViewController: CustomTemplateViewController {
     @IBOutlet weak var Selfintroduction: UILabel!
     
     @IBOutlet weak var ImageList: UILabel!
+    @IBOutlet weak var baseImageView: UIImageView!
     
     fileprivate var CustomNavBar:UINavigationBar!=nil
     fileprivate var height: CGFloat = 50
@@ -67,13 +68,22 @@ class GuideBookDetailsViewController: CustomTemplateViewController {
                 self.HeadView.isHidden=false
                 self.CoverPhoto.isUserInteractionEnabled=true
                 self.CoverPhoto.ImageLoad(PostUrl: HttpsUrlImage+self.viewModel.ListData.CoverPhoto)
-                self.CiceroneName.text="导游姓名:"+self.viewModel.ListData.CiceroneName
-                self.WorkingYears.text="带团时间:"+self.viewModel.ListData.WorkingYears
-                self.Language.text="语言:"+self.viewModel.ListData.Language
-                self.CertificateID.text="导游证:"+self.viewModel.ListData.CertificateID
-                self.ServiceArea.text="擅长区域:"+self.viewModel.ListData.ServiceArea
-                self.Autograph.text="个性签名:"+self.viewModel.ListData.Autograph
-                self.Selfintroduction.text="自我介绍:"+self.viewModel.ListData.Selfintroduction
+                self.CiceroneName.text="导游姓名: "+self.viewModel.ListData.CiceroneName
+                self.WorkingYears.text="带团时间: "+self.viewModel.ListData.WorkingYears
+                self.Language.text="语言: "+self.viewModel.ListData.Language
+                self.CertificateID.text="导游证: "+self.viewModel.ListData.CertificateID
+                self.ServiceArea.text="擅长区域: "+self.viewModel.ListData.ServiceArea
+                self.Autograph.text="个性签名: "+self.viewModel.ListData.Autograph
+                self.Selfintroduction.text="自我介绍: "+self.viewModel.ListData.Selfintroduction
+                
+                //高度自适应
+                let height1 = ("个性签名: "+self.viewModel.ListData.Autograph).ContentSize(font: UIFont.systemFont(ofSize: 13), maxSize: CGSize.init(width: CommonFunction.kScreenWidth - 20, height: 0)).height
+                let height2 = ("自我介绍: "+self.viewModel.ListData.Selfintroduction).ContentSize(font: UIFont.systemFont(ofSize: 13), maxSize: CGSize.init(width: CommonFunction.kScreenWidth - 20, height: 0)).height
+                //重新设置坐标
+                self.Autograph.frame = CGRect.init(x: 10, y: self.Autograph.frame.origin.y, width: CommonFunction.kScreenWidth - 20, height: height1)
+                self.Selfintroduction.frame = CGRect.init(x: 10, y: self.Autograph.frame.origin.y + height1 + 5, width: CommonFunction.kScreenWidth - 20, height: height2)
+                self.HeadView.frame = CGRect.init(x: 0, y: 0, width: CommonFunction.kScreenWidth, height: self.Selfintroduction.frame.origin.y  + height2 + 10)
+                self.tableView.tableHeaderView = self.HeadView   //赋值头部
                 if(self.viewModel.ListData.ImageList.count==0){
                       self.ImageList.isHidden=true
                     self.Photoshadow.isHidden=true
@@ -102,9 +112,11 @@ class GuideBookDetailsViewController: CustomTemplateViewController {
     
     //MARK: initUI
     func initUI() -> Void {
+        //背景图可拉伸
+        self.baseImageView.clipsToBounds = true
+        self.baseImageView.contentMode = .scaleAspectFill
         //基控制器
         self.InitCongif(tableView)
-        self.tableView.tableHeaderView = HeadView   //赋值头部
         self.tableView.frame = CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height )
         self.numberOfSections=1//显示行数 
         self.header.isHidden=true
@@ -169,7 +181,14 @@ class GuideBookDetailsViewController: CustomTemplateViewController {
             CustomNavBar.setBackgroundImage(UIImage().ImageWithColor(color: UIColor().TransferStringToColor("#009689").withAlphaComponent(alph), size: CGSize(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)), for: .default)
             backBtn.backgroundColor = UIColor.gray.withAlphaComponent(1-alph) 
         }
-       
+        //放大TableView头部图片
+        if (offset < 0) {
+            var rect = self.baseImageView.frame
+            rect.origin.y = offset
+            rect.size.height = 130-offset
+            self.baseImageView.frame = rect
+            self.tableView.tableHeaderView?.clipsToBounds = false
+        }
     }
     
     var isfirst2: Bool = false

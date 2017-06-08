@@ -26,34 +26,22 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="pca-ES-dX7">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="207"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zWd-Fe-D2n">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zWd-Fe-D2n">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="130" id="XB7-hx-2OD"/>
-                                            </constraints>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tkB-K9-yzv">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="  " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tkB-K9-yzv">
                                             <rect key="frame" x="15" y="135" width="345" height="14.5"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="10" id="kuf-cB-a4N"/>
-                                            </constraints>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstItem="zWd-Fe-D2n" firstAttribute="leading" secondItem="pca-ES-dX7" secondAttribute="leading" id="063-sV-Wz8"/>
-                                        <constraint firstAttribute="trailing" secondItem="zWd-Fe-D2n" secondAttribute="trailing" id="MSM-qq-A1W"/>
-                                        <constraint firstAttribute="trailing" secondItem="tkB-K9-yzv" secondAttribute="trailing" constant="15" id="XDM-50-GB8"/>
-                                        <constraint firstItem="tkB-K9-yzv" firstAttribute="top" secondItem="zWd-Fe-D2n" secondAttribute="bottom" constant="5" id="bF7-Pm-QaP"/>
-                                        <constraint firstItem="tkB-K9-yzv" firstAttribute="leading" secondItem="pca-ES-dX7" secondAttribute="leading" constant="15" id="eUZ-eM-OuZ"/>
-                                        <constraint firstItem="zWd-Fe-D2n" firstAttribute="top" secondItem="pca-ES-dX7" secondAttribute="top" id="pKM-xK-tPE"/>
-                                    </constraints>
                                 </view>
                             </tableView>
                         </subviews>

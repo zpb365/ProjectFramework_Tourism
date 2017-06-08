@@ -173,7 +173,7 @@ class GuideBook: CustomTemplateViewController ,UICollectionViewDelegateFlowLayou
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let showrowsitem:CGFloat=2  //竖屏显示的数目 （暂时未做横屏手机item  间距直接也存在点差异 ipad 没事 iPhone需要修改
-        return CGSize(width: (self.view.bounds.size.width)/showrowsitem-12.0, height: 200)
+        return CGSize(width: (self.view.bounds.size.width)/showrowsitem-12.0, height: 190)
     }
     
     

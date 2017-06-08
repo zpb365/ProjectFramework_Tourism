@@ -20,6 +20,7 @@ class ScenicSpotTickets: CustomTemplateViewController,ScrollEnabledDelegate {
         let footderView = PulickWebView.init(frame: CGRect.init(x: 0, y: 0, width: CommonFunction.kScreenWidth, height: 0))
         footderView.FuncCallbackValue(value: {[weak self] (height) in
             self?.footderView.frame = CGRect.init(x: 0, y: 0, width: CommonFunction.kScreenWidth, height: height)
+            self?.tableView.tableFooterView = self?.footderView
             self?.RefreshRequest(isLoading: false, isHiddenFooter: true)
         })
         return footderView
@@ -42,7 +43,8 @@ class ScenicSpotTickets: CustomTemplateViewController,ScrollEnabledDelegate {
 //        print((self.dataArray?.count)!)
         
         self.InitCongif(tableView)
-        self.tableView.frame = self.view.bounds
+        self.tableView.frame = CGRect.init(x: 0, y: 0, width: CommonFunction.kScreenWidth, height: CommonFunction.kScreenHeight - 64 - 30)
+        print(self.tableView.frame)
         if dataArray ==  nil {
             self.numberOfRowsInSection = 0
         }else{
@@ -68,6 +70,12 @@ class ScenicSpotTickets: CustomTemplateViewController,ScrollEnabledDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: identiFier, for: indexPath) as! ScenicSpotTicketCell
         cell.InitConfig(self.dataArray?[indexPath.row] as Any)
         cell.FuncCallbackValue {[weak self] (model) in
+            //是否登录
+            if(Global_UserInfo.IsLogin==false){
+                let vc = LoginViewControllerTwo()
+                self?.present(vc, animated: true, completion: nil)
+                return
+            }
             let vc = ScenicSpotDateChoose()
             vc.ScenicID = (self?.ScenicID)!//景区id
             vc.ticketItem = self?.dataArray![indexPath.row]

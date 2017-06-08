@@ -71,11 +71,11 @@ class QQScanViewController: LBXScanViewController {
             debugPrint("%@",result.strScanned as Any)
         }
         
-        let result:LBXScanResult = arrayResult[0]
+        let result:LBXScanResult = arrayResult[0] 
         
-        debugPrint("扫描返回的结果",result)
-        let vc = MCWebViewController(url:result.strScanned!,ProcesscColor:CommonFunction.RGBA(0, g: 132, b: 235))
-        self.navigationController?.show(vc, sender: true)
+        debugPrint(result)
+//        let vc = MCWebViewController(url:result.strScanned!,ProcesscColor:CommonFunction.RGBA(0, g: 132, b: 235))
+//        self.navigationController?.show(vc, sender: true)
     }
     
     

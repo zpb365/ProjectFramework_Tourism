@@ -97,8 +97,9 @@ class PulickIntroduceView: UIView,UITableViewDelegate,UITableViewDataSource {
             let header = UIView.init(frame: CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: 30))
             header.backgroundColor = UIColor.white
             let lable = UILabel.init(frame: CommonFunction.CGRect_fram(15, y: 7.5, w: 100, h:15 ))
-            lable.font = UIFont.systemFont(ofSize: 13)
+            lable.font = UIFont.systemFont(ofSize: 14)
             lable.text = self.sectionArray[section].Name
+            lable.textColor = CommonFunction.SystemColor()
             header.addSubview(lable)
             return header
         }
@@ -115,7 +116,7 @@ class PulickIntroduceView: UIView,UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         if (self.sectionArray[indexPath.section].List?.count)! > 0 {
             let model = self.sectionArray[indexPath.section].List?[indexPath.row]
-            return model!.Describel.ContentSize(font: UIFont.systemFont(ofSize: 11), maxSize: CGSize(width: CommonFunction.kScreenWidth - 20, height: 0)).height + 35
+            return model!.Describel.ContentSize(font: UIFont.systemFont(ofSize: 13), maxSize: CGSize(width: CommonFunction.kScreenWidth - 30, height: 0)).height + 40
         }else{
             return 0
         }

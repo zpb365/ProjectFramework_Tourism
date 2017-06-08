@@ -60,11 +60,12 @@ class TravelDetail: CustomTemplateViewController{
  
     //MARK: initUI
     func initUI() -> Void {
-//        self.BaseView.frame = CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: self.contentLabel.frame.maxY + 20 )
+        self.imageView.clipsToBounds = true
+        self.imageView.contentMode = .scaleAspectFill
         tableView.snp.makeConstraints { (make) in
             make.left.equalTo(0)
             make.right.equalTo(0)
-            make.top.equalTo(-20)
+            make.top.equalTo(0)
             make.bottom.equalTo(0)
         }
 
@@ -81,9 +82,11 @@ class TravelDetail: CustomTemplateViewController{
                 self.contentLabel.text=self.viewModel.ListData.TravelsNote
                 self.customWeb.loadHtmlString(html: self.viewModel.ListData.TravelsContent)
                 self.numberOfRowsInSection = 1
-//                let height_ = self.viewModel.ListData.TravelsContent.ContentSize(font: UIFont.systemFont(ofSize: 12), maxSize: CGSize.init(width: CommonFunction.kScreenWidth - 30, height: 0)).height
-//                self.BaseView.frame = CommonFunction.CGRect_fram(0, y: 0, w: CommonFunction.kScreenWidth, h: 150 + height_ )
-//                self.tableView.tableHeaderView = self.BaseView
+                //计算高度
+                let height_ = self.viewModel.ListData.TravelsNote.ContentSize(font: UIFont.systemFont(ofSize: 12), maxSize: CGSize.init(width: self.contentLabel.frame.width, height: 0)).height
+                self.BaseView.frame = CGRect.init(x: 0, y: 0, width: CommonFunction.kScreenWidth, height: self.contentLabel.frame.origin.y + height_ + 10)
+                self.contentLabel.frame = CGRect.init(x: self.contentLabel.frame.origin.x, y: self.contentLabel.frame.origin.y, width: self.contentLabel.frame.width, height: height_)
+                
                 self.RefreshRequest(isLoading: false, isHiddenFooter: true)
                 
             }
@@ -132,6 +135,14 @@ class TravelDetail: CustomTemplateViewController{
             backBtn.backgroundColor = UIColor.gray.withAlphaComponent(1-alph)
         }
         
+        //放大TableView头部图片
+        if (offset < 0) {
+            var rect = self.imageView.frame
+            rect.origin.y = offset
+            rect.size.height = 130-offset
+            self.imageView.frame = rect
+            self.tableView.tableHeaderView?.clipsToBounds = false
+        }
     }
     
     //导航栏按钮方法

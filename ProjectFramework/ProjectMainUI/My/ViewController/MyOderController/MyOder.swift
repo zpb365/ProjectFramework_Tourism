@@ -65,6 +65,7 @@ class MyOder: CustomTemplateViewController {
     override func footerRefresh() {
         PageIndex = PageIndex + 1
         self.GetHtpsData()
+        self.footer.endRefreshing()//停止尾部刷新
     }
      //MARK: Refresh
     override func headerRefresh() {
@@ -81,6 +82,7 @@ class MyOder: CustomTemplateViewController {
         viewModel.GetMyOrderList(OrderType:currentBtn.tag,PageIndex: PageIndex, PageSize: PageSize) { (result,NoMore) in
             self.header.endRefreshing()
             if  result == true {
+                
                 if(NoMore==true){
                     self.footer.endRefreshingWithNoMoreData()
                 }else{
