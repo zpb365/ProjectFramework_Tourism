@@ -118,15 +118,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKMapViewDelegate, BMKLo
         }
         else{
             
-            //初始化BMKLocationService
-            locService = BMKLocationService()
-            locService?.delegate = self
-            //启动LocationService
-            locService?.startUserLocationService()
-            // 设置定位精确度，默认：kCLLocationAccuracyBest
-            locService?.desiredAccuracy=kCLLocationAccuracyBest
-            //指定最小距离更新(米)，默认：kCLDistanceFilterNone
-            locService?.distanceFilter=100
+//            //初始化BMKLocationService
+//            locService = BMKLocationService()
+//            locService?.delegate = self
+//            //启动LocationService
+//            locService?.startUserLocationService()
+//            // 设置定位精确度，默认：kCLLocationAccuracyBest
+//            locService?.desiredAccuracy=kCLLocationAccuracyBest
+//            //指定最小距离更新(米)，默认：kCLDistanceFilterNone
+//            locService?.distanceFilter=0.1
         }
     }
     
@@ -134,6 +134,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKMapViewDelegate, BMKLo
     //处理方向变更信息
     func didUpdateUserHeading(_ userLocation: BMKUserLocation!) {
         if(userLocation.location != nil){
+            //print("更新了地理位置")
             //纬度,经度
             Global_latitude=userLocation.location.coordinate.latitude
             Global_longitude=userLocation.location.coordinate.longitude
@@ -142,7 +143,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKMapViewDelegate, BMKLo
     
     //处理位置坐标更新
     func didUpdateBMKUserLocation(userLocation: BMKUserLocation!) {
-        debugPrint("处理位置坐标更新---",userLocation)
+        print("处理位置坐标更新---",userLocation)
     }
     
     // MARK: - 友盟分享
