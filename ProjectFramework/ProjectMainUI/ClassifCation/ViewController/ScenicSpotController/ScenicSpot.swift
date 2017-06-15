@@ -133,22 +133,20 @@ class ScenicSpot: CustomTemplateViewController,PYSearchViewControllerDelegate{
 
     }
     func GetAdress() {
-//        //跳转到地图
-//        let vc = PublicMapShowListViewController()
-//        var  model  = [MapListModel]()
-//        for   item in viewModel.ListData {
-//            if(item.Lng==""||item.Lng==""){
-//                continue
-//            }
-//            let mapmodel = MapListModel()
-//            mapmodel.lat = item.Lat
-//            mapmodel.lng = item.Lng
-//            mapmodel.title = item.ScenicName
-//            model.append(mapmodel)
-//        }
-//        vc.models=model
-//        self.navigationController?.show(vc, sender: self)
-        let vc = MapViewController()
+        //跳转到地图
+        let vc = PublicMapShowListViewController()
+        var  model  = [MapListModel]()
+        for   item in viewModel.ListData {
+            if(item.Lng==""||item.Lng==""){
+                continue
+            }
+            let mapmodel = MapListModel()
+            mapmodel.lat = item.Lat
+            mapmodel.lng = item.Lng
+            mapmodel.title = item.ScenicName
+            model.append(mapmodel)
+        }
+        vc.models=model
         self.navigationController?.show(vc, sender: self)
     }
     //PYSearchViewControllerDelegate 搜索时调用

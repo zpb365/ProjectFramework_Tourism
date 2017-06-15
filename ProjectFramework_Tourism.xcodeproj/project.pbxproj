@@ -184,7 +184,6 @@
 		6F371ECB1ECD777E00C8E6A2 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F371ECA1ECD777E00C8E6A2 /* ShareView.swift */; };
 		6F371ECE1ECD973B00C8E6A2 /* PayForSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F371ECC1ECD973B00C8E6A2 /* PayForSuccess.swift */; };
 		6F371ECF1ECD973B00C8E6A2 /* PublicMapShowListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F371ECD1ECD973B00C8E6A2 /* PublicMapShowListViewController.swift */; };
-		6F418C811EF1389D005E7D31 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F418C801EF1389D005E7D31 /* MapViewController.m */; };
 		6F6200E61EB9F7FD0083AE63 /* TravelDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6200E51EB9F7FD0083AE63 /* TravelDetailViewModel.swift */; };
 		6F6200E81EB9F83B0083AE63 /* TravelsDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6200E71EB9F83B0083AE63 /* TravelsDetailModel.swift */; };
 		6F63FA8C1EC2EB5F0004D43C /* FeedbackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F63FA871EC2EB5F0004D43C /* FeedbackViewModel.swift */; };
@@ -678,8 +677,6 @@
 		6F371ECA1ECD777E00C8E6A2 /* ShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		6F371ECC1ECD973B00C8E6A2 /* PayForSuccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayForSuccess.swift; sourceTree = "<group>"; };
 		6F371ECD1ECD973B00C8E6A2 /* PublicMapShowListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicMapShowListViewController.swift; sourceTree = "<group>"; };
-		6F418C7F1EF1389D005E7D31 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
-		6F418C801EF1389D005E7D31 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		6F6200E51EB9F7FD0083AE63 /* TravelDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TravelDetailViewModel.swift; path = ProjectFramework/ProjectMainUI/Home/ViewController/TravelDetailViewModel.swift; sourceTree = SOURCE_ROOT; };
 		6F6200E71EB9F83B0083AE63 /* TravelsDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TravelsDetailModel.swift; path = ProjectFramework/ProjectMainUI/Home/ViewController/TravelsDetailModel.swift; sourceTree = SOURCE_ROOT; };
 		6F63FA871EC2EB5F0004D43C /* FeedbackViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewModel.swift; sourceTree = "<group>"; };
@@ -1705,8 +1702,6 @@
 				6F371EC41ECD74FA00C8E6A2 /* CommentPhotoView.swift */,
 				6F371ECC1ECD973B00C8E6A2 /* PayForSuccess.swift */,
 				6F371ECD1ECD973B00C8E6A2 /* PublicMapShowListViewController.swift */,
-				6F418C7F1EF1389D005E7D31 /* MapViewController.h */,
-				6F418C801EF1389D005E7D31 /* MapViewController.m */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -2971,7 +2966,6 @@
 				6FFE5DAB1EC092DD006969F5 /* HotelOderWriteCell.swift in Sources */,
 				2E2611831E5E7A0E00CC70F9 /* HoneMain.swift in Sources */,
 				6F0638F91E965E7E00FB8E23 /* InformDetail.swift in Sources */,
-				6F418C811EF1389D005E7D31 /* MapViewController.m in Sources */,
 				6FFE5DE91EC092DD006969F5 /* ConferenceDetail.swift in Sources */,
 				6FF51D291EBD7E9E00021790 /* CustomImageView.swift in Sources */,
 				6FA105781E89169100A235F4 /* LoginLogicViewModel.swift in Sources */,

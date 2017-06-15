@@ -118,15 +118,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKMapViewDelegate, BMKLo
         }
         else{
             
-//            //初始化BMKLocationService
-//            locService = BMKLocationService()
-//            locService?.delegate = self
-//            //启动LocationService
-//            locService?.startUserLocationService()
-//            // 设置定位精确度，默认：kCLLocationAccuracyBest
-//            locService?.desiredAccuracy=kCLLocationAccuracyBest
-//            //指定最小距离更新(米)，默认：kCLDistanceFilterNone
-//            locService?.distanceFilter=0.1
+            //初始化BMKLocationService
+            locService = BMKLocationService()
+            locService?.delegate = self
+            //启动LocationService
+            locService?.startUserLocationService()
+            // 设置定位精确度，默认：kCLLocationAccuracyBest
+            locService?.desiredAccuracy=kCLLocationAccuracyBest
+            //指定最小距离更新(米)，默认：kCLDistanceFilterNone
+            locService?.distanceFilter=0.1
         }
     }
     
@@ -136,16 +136,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKMapViewDelegate, BMKLo
         if(userLocation.location != nil){
             //print("更新了地理位置")
             //纬度,经度
-            Global_latitude=userLocation.location.coordinate.latitude
-            Global_longitude=userLocation.location.coordinate.longitude
         }
     }
     
-    //处理位置坐标更新
-    func didUpdateBMKUserLocation(userLocation: BMKUserLocation!) {
-        print("处理位置坐标更新---",userLocation)
+//    //处理位置坐标更新  /********************  此代理方法在OC调用有效 在swift则不执行 ********************/
+//    func didUpdateBMKUserLocation(userLocation: BMKUserLocation!) {
+//        print("处理位置坐标更新---",userLocation)
+//    }
+    func didUpdate(_ userLocation: BMKUserLocation!) {
+        debugPrint("处理位置坐标更新---",userLocation)
+        Global_latitude=userLocation.location.coordinate.latitude
+        Global_longitude=userLocation.location.coordinate.longitude
     }
-    
     // MARK: - 友盟分享
     func InitUMshare(){
         
