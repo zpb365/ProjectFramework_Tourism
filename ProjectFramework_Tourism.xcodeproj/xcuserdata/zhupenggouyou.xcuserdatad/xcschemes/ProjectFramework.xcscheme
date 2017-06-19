@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "27609BCB1CB257810041E8B7"
-               BuildableName = "&#x667a;&#x6167;&#x65c5;&#x6e38;&#x5e73;&#x53f0;.app"
+               BuildableName = "tourism.app"
                BlueprintName = "ProjectFramework_Tourism"
                ReferencedContainer = "container:ProjectFramework_Tourism.xcodeproj">
             </BuildableReference>
@@ -53,7 +53,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "27609BCB1CB257810041E8B7"
-            BuildableName = "&#x667a;&#x6167;&#x65c5;&#x6e38;&#x5e73;&#x53f0;.app"
+            BuildableName = "tourism.app"
             BlueprintName = "ProjectFramework_Tourism"
             ReferencedContainer = "container:ProjectFramework_Tourism.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "27609BCB1CB257810041E8B7"
-            BuildableName = "&#x667a;&#x6167;&#x65c5;&#x6e38;&#x5e73;&#x53f0;.app"
+            BuildableName = "tourism.app"
             BlueprintName = "ProjectFramework_Tourism"
             ReferencedContainer = "container:ProjectFramework_Tourism.xcodeproj">
          </BuildableReference>
@@ -95,7 +95,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "27609BCB1CB257810041E8B7"
-            BuildableName = "&#x667a;&#x6167;&#x65c5;&#x6e38;&#x5e73;&#x53f0;.app"
+            BuildableName = "tourism.app"
             BlueprintName = "ProjectFramework_Tourism"
             ReferencedContainer = "container:ProjectFramework_Tourism.xcodeproj">
          </BuildableReference>

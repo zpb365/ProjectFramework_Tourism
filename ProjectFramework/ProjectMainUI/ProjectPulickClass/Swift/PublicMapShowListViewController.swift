@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 import FDFullscreenPopGesture
 import RxSwift
 import RxCocoa
@@ -26,13 +27,16 @@ class PublicMapShowListViewController: UIViewController,BMKMapViewDelegate,BMKLo
     fileprivate let disposeBag   = DisposeBag() //创建一个处理包（通道）
     var models=[MapListModel]()
     var locService: BMKLocationService!
-    
+    let a = 6378245.0
+    let ee = 0.00669342162296594323
     override func viewWillDisappear(_ animated: Bool) {
         mapView.viewWillDisappear()
         mapView.delegate = nil  // 不用时，置nil
     }
     override func viewDidAppear(_ animated: Bool) {
+        
         self.fd_interactivePopDisabled = true
+        
         //添加所有已知的市场标注
         for index in models{
             
@@ -98,7 +102,17 @@ class PublicMapShowListViewController: UIViewController,BMKMapViewDelegate,BMKLo
             goBtn.setTitle("导航", for: .normal)
             goBtn.rx.tap.subscribe(      //返回
                 onNext: { value in
-                    print("====",annotation.title!())
+                    CommonFunction.AlertController(self, title: "是否要开启导航？", message: "", ok_name: "确定", cancel_name: "取消", OK_Callback: {
+                        
+                        let location = self.bd_decrypt(bd_lat: annotation.coordinate.latitude, bd_lon: annotation.coordinate.longitude)//把百度坐标转成火星坐标
+                        let tranLocation = self.marsGS2WorldGS(location.coordinate)//把火星坐标转成GPS坐标
+                        //print(location.coordinate.latitude,annotation.coordinate.latitude,tranLocation.latitude)
+                        let currenItem = MKMapItem.forCurrentLocation()
+                        let locItem = MKMapItem.init(placemark: MKPlacemark.init(coordinate: tranLocation, addressDictionary: nil))
+                        _ = MKMapItem.openMaps(with: [currenItem,locItem], launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving, MKLaunchOptionsShowsTrafficKey: Int(true)])
+                    }, Cancel_Callback: {
+                      
+                    })
             }).addDisposableTo(self.disposeBag)
             paopaoView.addSubview(goBtn)
             
@@ -109,13 +123,80 @@ class PublicMapShowListViewController: UIViewController,BMKMapViewDelegate,BMKLo
             return nil
         }
     }
+    /********************  百度坐标转火星坐标  ********************/
+    func bd_decrypt(bd_lat:Double, bd_lon:Double) -> CLLocation {
+        
+        let x = bd_lon - 0.0065;
+        let y = bd_lat - 0.006;
+        let z = sqrt(x * x + y * y) - 0.00002 * sin(y * .pi);
+        let theta = atan2(y, x) - 0.000003 * cos(x * .pi);
+        let gglon = z * cos(theta);
+        let gglat = z * sin(theta);
+        let location = CLLocation.init(latitude: gglat, longitude: gglon)
+        return location
+    
+    }
+    //MARK: 坐标转换
+    //不在中国内
+    func outOfChina(_ location: CLLocation) -> Bool {
+        if location.coordinate.longitude < 72.004 || location.coordinate.longitude > 137.8347 {
+            return true
+        }
+        if location.coordinate.latitude < 0.8293 || location.coordinate.latitude > 55.8271 {
+            return true
+        }
+        return false
+    }
+    func transform(toMars location: CLLocation) -> CLLocation {
+        //是否在中国大陆之外
+        if (self.outOfChina(location)){
+            return location
+        }
+        var dLat: Double = self.transformLatWith(x: location.coordinate.longitude - 105.0, y: location.coordinate.latitude - 35.0)
+        var dLon: Double = self.transformLonWith(x: location.coordinate.longitude - 105.0, y: location.coordinate.latitude - 35.0)
+        let radLat: Double = location.coordinate.latitude / 180.0 * .pi
+        var magic: Double = sin(radLat)
+        magic = 1 - ee * magic * magic
+        let sqrtMagic: Double = sqrt(magic)
+        dLat = (dLat * 180.0) / ((a * (1 - ee)) / (magic * sqrtMagic) * .pi)
+        dLon = (dLon * 180.0) / (a / sqrtMagic * cos(radLat) * .pi)
+        return CLLocation(latitude: location.coordinate.latitude + dLat, longitude: location.coordinate.longitude + dLon)
+    }
+    /********************  火星坐标转地图坐标  ********************/
+    func marsGS2WorldGS(_ coordinate: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
+        let gLat: Double = coordinate.latitude
+        let gLon: Double = coordinate.longitude
+        var location = CLLocation(latitude: gLat, longitude: gLon)
+        location = self.transform(toMars: location)
+        let marsCoor: CLLocationCoordinate2D = location.coordinate
+        let dLat: Double = marsCoor.latitude - gLat
+        let dLon: Double = marsCoor.longitude - gLon
+        return CLLocationCoordinate2DMake(gLat - dLat, gLon - dLon)
+    }
+    
+    func transformLatWith(x: Double, y: Double) -> Double {
+        var ret: Double = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * sqrt(fabs(x))
+        ret += (20.0 * sin(6.0 * x * .pi) + 20.0 * sin(2.0 * x * .pi)) * 2.0 / 3.0
+        ret += (20.0 * sin(y * .pi) + 40.0 * sin(y / 3.0 * .pi)) * 2.0 / 3.0
+        ret += (160.0 * sin(y / 12.0 * .pi) + 320 * sin(y * .pi / 30.0)) * 2.0 / 3.0
+        return ret
+    }
+    
+    func transformLonWith(x: Double, y: Double) -> Double {
+        var ret: Double = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * sqrt(fabs(x))
+        ret += (20.0 * sin(6.0 * x * .pi) + 20.0 * sin(2.0 * x * .pi)) * 2.0 / 3.0
+        ret += (20.0 * sin(x * .pi) + 40.0 * sin(x / 3.0 * .pi)) * 2.0 / 3.0
+        ret += (150.0 * sin(x / 12.0 * .pi) + 300.0 * sin(x / 30.0 * .pi)) * 2.0 / 3.0
+        return ret
+    }
+
     //这个是点击的代理
 //    func mapView(_ mapView: BMKMapView!, didSelect view: BMKAnnotationView!) {
 //        print("点击了大头针",view.annotation.coordinate.longitude,view.annotation.title!())
 //        
 //    }
     func mapView(_ mapView: BMKMapView!, annotationViewForBubble view: BMKAnnotationView!) {
-        print("点击了泡泡",view.annotation.coordinate.longitude,view.annotation.title!())
+        //print("点击了泡泡",view.annotation.coordinate.longitude,view.annotation.title!())
     }
     //MARK: 位置更新代理
     func didUpdateUserHeading(_ userLocation: BMKUserLocation!) {

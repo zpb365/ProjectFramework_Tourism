@@ -11,7 +11,7 @@ import UIKit
 class ScenicSpotIntroduce: UIViewController ,ScrollEnabledDelegate,UIWebViewDelegate{
 
     lazy var costomWebView:UIWebView={
-        let costomWebView = UIWebView.init(frame: self.view.bounds)
+        let costomWebView = UIWebView.init(frame: CGRect.init(x: 0, y: 0, width: CommonFunction.kScreenWidth, height: CommonFunction.kScreenHeight - 64 - 30))
         costomWebView.scrollView.bounces = false
         costomWebView.delegate = self
         costomWebView.backgroundColor = UIColor.white

@@ -109,6 +109,7 @@ class My: UIViewController,UITableViewDelegate,UITableViewDataSource {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         if(Global_UserInfo.IsLogin==true){
             self._MyHeadUIView.Imgbtn?.ImageLoad(PostUrl: HttpsUrlImage+Global_UserInfo.HeadImgPath)
+            self._MyHeadUIView.LabName.text = Global_UserInfo.RealName
         }else{
             self._MyHeadUIView.Imgbtn?.image = UIImage.init(named: "userIcon_defualt")
         }

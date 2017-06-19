@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKMapViewDelegate, BMKLo
     var conn:Reachability?  //苹果提供的网络检测类
     var locService: BMKLocationService?
     var _mapManager:BMKMapManager?
-    
     // MARK: - 初始化
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         InitUI()    //初始化UI   (第一次启动的导航页，需要在里面设置)
@@ -128,6 +127,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKMapViewDelegate, BMKLo
             //指定最小距离更新(米)，默认：kCLDistanceFilterNone
             locService?.distanceFilter=0.1
         }
+        
+        
     }
     
     //实现相关delegate 处理位置信息更新
@@ -144,7 +145,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BMKMapViewDelegate, BMKLo
 //        print("处理位置坐标更新---",userLocation)
 //    }
     func didUpdate(_ userLocation: BMKUserLocation!) {
-        debugPrint("处理位置坐标更新---",userLocation)
+        //debugPrint("处理位置坐标更新---",userLocation)
         Global_latitude=userLocation.location.coordinate.latitude
         Global_longitude=userLocation.location.coordinate.longitude
     }

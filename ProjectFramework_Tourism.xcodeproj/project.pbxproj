@@ -15,14 +15,9 @@
 		27609BF01CB257810041E8B7 /* ProjectFrameworkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27609BEF1CB257810041E8B7 /* ProjectFrameworkUITests.swift */; };
 		27609BFE1CB257E40041E8B7 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 27609BFD1CB257E40041E8B7 /* Podfile */; };
 		27E6B8801CF34E3A00DD6418 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E6B87F1CF34E3A00DD6418 /* QuartzCore.framework */; };
-		27E6B8821CF34E5A00DD6418 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E6B8811CF34E5A00DD6418 /* Security.framework */; };
-		27E6B8841CF34E7C00DD6418 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E6B8831CF34E7C00DD6418 /* SystemConfiguration.framework */; };
-		27E6B8861CF34EE000DD6418 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E6B8851CF34EE000DD6418 /* CoreTelephony.framework */; };
 		27E6B8881CF34F1700DD6418 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E6B8871CF34F1700DD6418 /* libicucore.tbd */; };
 		27E6B88A1CF34F2C00DD6418 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E6B8891CF34F2C00DD6418 /* libz.tbd */; };
 		27E6B88C1CF34F3400DD6418 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E6B88B1CF34F3400DD6418 /* libstdc++.tbd */; };
-		27E6B88E1CF34F3F00DD6418 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E6B88D1CF34F3F00DD6418 /* JavaScriptCore.framework */; };
-		27E6B8901CF34F4A00DD6418 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E6B88F1CF34F4A00DD6418 /* ImageIO.framework */; };
 		27E6B8921CF34F5400DD6418 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E6B8911CF34F5400DD6418 /* libsqlite3.tbd */; };
 		27E6B8941CF34F5C00DD6418 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E6B8931CF34F5C00DD6418 /* MessageUI.framework */; };
 		2E025BD81DC10A31002687EF /* AppResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E025BD71DC10A31002687EF /* AppResultModel.swift */; };
@@ -101,7 +96,6 @@
 		2E27336F1DD4FFBB008D737C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079C974F1D17ADA300DD539F /* UIKit.framework */; };
 		2E2733711DD4FFCD008D737C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E2733701DD4FFCD008D737C /* Foundation.framework */; };
 		2E2733731DD504A0008D737C /* libz.1.1.3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E2733721DD504A0008D737C /* libz.1.1.3.tbd */; };
-		2E27337F1DD5069C008D737C /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E27337E1DD5069C008D737C /* CoreMotion.framework */; };
 		2E273D061DAB14D200457F75 /* MultilevelCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E273D041DAB14D200457F75 /* MultilevelCategoriesTableViewController.swift */; };
 		2E273D581DAB151A00457F75 /* CreatedbBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E273D081DAB151A00457F75 /* CreatedbBase.swift */; };
 		2E273D5E1DAB151A00457F75 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E273D171DAB151A00457F75 /* MainTabBarController.swift */; };
@@ -112,7 +106,6 @@
 		2E596AB41DD23F720027E03C /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2E596AB31DD23F720027E03C /* loading.gif */; };
 		2E5E84331D399B88008BAA08 /* TemplatesSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2E5E84321D399B88008BAA08 /* TemplatesSettings.bundle */; };
 		2E9FFC121D259F43009B7B81 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E9FFC111D259F43009B7B81 /* CFNetwork.framework */; };
-		2EB658FB1E26B2B8004A5DDF /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EB658FA1E26B2B7004A5DDF /* UserNotifications.framework */; };
 		2EB659041E26C680004A5DDF /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EB658FC1E26B2C9004A5DDF /* libresolv.tbd */; };
 		2EF5847D1D9309DF002A0DE0 /* ModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF5847C1D9309DF002A0DE0 /* ModifyViewController.swift */; };
 		2EF815BE1DB69AD100B6A378 /* GlobalParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF815BD1DB69AD100B6A378 /* GlobalParameter.swift */; };
@@ -460,7 +453,7 @@
 		079C974D1D17AD8B00DD539F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		079C974F1D17ADA300DD539F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1869CC6EE1A9E41A1D261904 /* Pods-ProjectFramework_Tourism.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectFramework_Tourism.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectFramework_Tourism/Pods-ProjectFramework_Tourism.debug.xcconfig"; sourceTree = "<group>"; };
-		27609BCC1CB257810041E8B7 /* 智慧旅游平台.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "智慧旅游平台.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		27609BCC1CB257810041E8B7 /* 智慧旅游平台.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "智慧旅游平台.app"; path = tourism.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27609BCF1CB257810041E8B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27609BD61CB257810041E8B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27609BDB1CB257810041E8B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -677,6 +670,8 @@
 		6F371ECA1ECD777E00C8E6A2 /* ShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		6F371ECC1ECD973B00C8E6A2 /* PayForSuccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayForSuccess.swift; sourceTree = "<group>"; };
 		6F371ECD1ECD973B00C8E6A2 /* PublicMapShowListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicMapShowListViewController.swift; sourceTree = "<group>"; };
+		6F45C85E1EF36F8D0035DB68 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		6F45C8631EF37FA10035DB68 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		6F6200E51EB9F7FD0083AE63 /* TravelDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TravelDetailViewModel.swift; path = ProjectFramework/ProjectMainUI/Home/ViewController/TravelDetailViewModel.swift; sourceTree = SOURCE_ROOT; };
 		6F6200E71EB9F83B0083AE63 /* TravelsDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TravelsDetailModel.swift; path = ProjectFramework/ProjectMainUI/Home/ViewController/TravelsDetailModel.swift; sourceTree = SOURCE_ROOT; };
 		6F63FA871EC2EB5F0004D43C /* FeedbackViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewModel.swift; sourceTree = "<group>"; };
@@ -1028,8 +1023,6 @@
 				6FDB2E071EC4612E0092FAFC /* libssl.a in Frameworks */,
 				6F1F878F1E9E071F008E9B09 /* OpenGLES.framework in Frameworks */,
 				2EB659041E26C680004A5DDF /* libresolv.tbd in Frameworks */,
-				2EB658FB1E26B2B8004A5DDF /* UserNotifications.framework in Frameworks */,
-				2E27337F1DD5069C008D737C /* CoreMotion.framework in Frameworks */,
 				2E2733731DD504A0008D737C /* libz.1.1.3.tbd in Frameworks */,
 				2E12CAB71E6F1E67009527BA /* jcore-ios-1.1.0.a in Frameworks */,
 				2E2733711DD4FFCD008D737C /* Foundation.framework in Frameworks */,
@@ -1046,14 +1039,9 @@
 				27E6B8881CF34F1700DD6418 /* libicucore.tbd in Frameworks */,
 				2E46C1B71D2DA9180027D95B /* CoreData.framework in Frameworks */,
 				2E9FFC121D259F43009B7B81 /* CFNetwork.framework in Frameworks */,
-				27E6B8901CF34F4A00DD6418 /* ImageIO.framework in Frameworks */,
 				079C974E1D17AD8B00DD539F /* CoreGraphics.framework in Frameworks */,
 				27E6B8941CF34F5C00DD6418 /* MessageUI.framework in Frameworks */,
-				27E6B88E1CF34F3F00DD6418 /* JavaScriptCore.framework in Frameworks */,
-				27E6B8861CF34EE000DD6418 /* CoreTelephony.framework in Frameworks */,
-				27E6B8841CF34E7C00DD6418 /* SystemConfiguration.framework in Frameworks */,
 				6FDB2E061EC4612E0092FAFC /* libcrypto.a in Frameworks */,
-				27E6B8821CF34E5A00DD6418 /* Security.framework in Frameworks */,
 				27E6B8801CF34E3A00DD6418 /* QuartzCore.framework in Frameworks */,
 				327B11301D58E414236AC24B /* Pods_ProjectFramework_Tourism.framework in Frameworks */,
 			);
@@ -2420,6 +2408,8 @@
 		C7E4B958DFAE3FA8DF8460B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6F45C8631EF37FA10035DB68 /* libstdc++.6.0.9.tbd */,
+				6F45C85E1EF36F8D0035DB68 /* AudioToolbox.framework */,
 				6F1F878E1E9E071F008E9B09 /* OpenGLES.framework */,
 				2EB658FC1E26B2C9004A5DDF /* libresolv.tbd */,
 				2EB658FA1E26B2B7004A5DDF /* UserNotifications.framework */,
@@ -3208,11 +3198,13 @@
 					"\"$(PROJECT_DIR)/ProjectFramework/ThirdParty/AliSDKFile\"",
 					"$(PROJECT_DIR)/ProjectFramework/ThirdParty/JPUSHServiceLib",
 					"$(PROJECT_DIR)/ProjectFramework/ThirdParty/AliSDKFile",
+					"$(PROJECT_DIR)/ProjectFramework/ThirdParty/BaiduNaviSDK",
+					"$(PROJECT_DIR)/ProjectFramework/ThirdParty/BaiduNaviSDK/thirdlibs",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited) -DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zp365.zhly;
-				PRODUCT_NAME = "智慧旅游平台";
+				PRODUCT_NAME = tourism;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_DISABLE_SAFETY_CHECKS = YES;
@@ -3253,12 +3245,14 @@
 					"\"$(PROJECT_DIR)/ProjectFramework/ThirdParty/AliSDKFile\"",
 					"$(PROJECT_DIR)/ProjectFramework/ThirdParty/JPUSHServiceLib",
 					"$(PROJECT_DIR)/ProjectFramework/ThirdParty/AliSDKFile",
+					"$(PROJECT_DIR)/ProjectFramework/ThirdParty/BaiduNaviSDK",
+					"$(PROJECT_DIR)/ProjectFramework/ThirdParty/BaiduNaviSDK/thirdlibs",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited) -DRELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zp365.zhly;
-				PRODUCT_NAME = "智慧旅游平台";
+				PRODUCT_NAME = tourism;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_DISABLE_SAFETY_CHECKS = YES;

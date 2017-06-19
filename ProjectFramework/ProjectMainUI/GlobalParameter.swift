@@ -41,6 +41,7 @@ let placeholderImage="loadimg"  //SDWebImage 默认加载图片
 
 let UMAPPKey="58ad571299f0c768cc000f0d"      //友盟Appkey
 let BaiduMapKey="bkKIE4v1nTBGCRYZ4Zpg34LrynTExfXk" //百度地图key
+let BaiduTTAppID="9311410"                         //百度地图开启语音功能需要用appid
 let JpushKey="d2bea33f0be75f93ed0fd1c8"            //激光推送Key
 
 #if DEBUG
