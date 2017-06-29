@@ -77,7 +77,7 @@ class UserCommentCell: UITableViewCell {
     //MARK: 构造方法
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+        self.clipsToBounds = true
         self.selectionStyle = .none
         self.contentView.addSubview(self.userIcon)
         self.contentView.addSubview(self.userNickName)
@@ -95,9 +95,11 @@ class UserCommentCell: UITableViewCell {
     //MARK: 创建UI
     
     override func InitConfig(_ cell: Any) {
+        
         if (!flag){
             let model = cell as! CommentMeModel
-            let nickNameWidth = model.UserInfo?.NickName.getContenSizeWidth(font: UIFont.systemFont(ofSize: 11))
+            
+            let nickNameWidth = model.UserInfo?.UserName.getContenSizeWidth(font: UIFont.systemFont(ofSize: 11))
             let commontHeight = model.ContentMsg.ContentSize(font: UIFont.systemFont(ofSize: 11), maxSize: CGSize(width: CommonFunction.kScreenWidth - 35, height: 0)).height
             let photoViewHeight = UITableView().getCommentPhotoViewHeight(imageArray: [], showCount: (model.Photos?.count)!, rowCount: 3, contenViewWidth: CommonFunction.kScreenWidth - 35, xMargin: 10, yMargin: 10)
             
@@ -106,7 +108,7 @@ class UserCommentCell: UITableViewCell {
             commentLable.frame = CommonFunction.CGRect_fram(commentLable.frame.origin.x, y: commentLable.frame.origin.y, w: CommonFunction.kScreenWidth - 35, h: commontHeight)
             photoView.frame = CommonFunction.CGRect_fram(commentLable.frame.origin.x, y: commentLable.frame.maxY + 5, w: CommonFunction.kScreenWidth - 35, h: photoViewHeight)
             commentLable.text = model.ContentMsg
-            userNickName.text = model.UserInfo?.NickName
+            userNickName.text = model.UserInfo?.UserName
             startView.setscore(CGFloat(model.Score))
             userIcon.ImageLoad(PostUrl: HttpsUrlImage+model.UserInfo!.UserLogo)
             timeLable.text = model.CommentTime
@@ -117,6 +119,7 @@ class UserCommentCell: UITableViewCell {
             }
             //有图片时候的UI
             if (model.Photos?.count)! > 0 {
+                
                 var imageArr = [String]()
                 for i in 0..<(model.Photos?.count)! {
                     imageArr.append((model.Photos?[i].ImgPath)!)

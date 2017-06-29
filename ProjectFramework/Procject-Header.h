@@ -69,6 +69,6 @@
 #import "XHStarRateView.h"         //评分星星
 #import "PanoramaViewController.h"      // 全景图
 #import "HcdPopMenu.h"              //动画菜单
-
+#import "JLPhotoBrowser.h"          //图片浏览
 #import "ZFChooseTimeViewController.h"//酒店时间选择
 

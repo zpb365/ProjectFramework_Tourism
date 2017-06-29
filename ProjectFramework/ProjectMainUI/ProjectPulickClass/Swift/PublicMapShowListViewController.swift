@@ -123,19 +123,6 @@ class PublicMapShowListViewController: UIViewController,BMKMapViewDelegate,BMKLo
             return nil
         }
     }
-    /********************  百度坐标转火星坐标  ********************/
-    func bd_decrypt(bd_lat:Double, bd_lon:Double) -> CLLocation {
-        
-        let x = bd_lon - 0.0065;
-        let y = bd_lat - 0.006;
-        let z = sqrt(x * x + y * y) - 0.00002 * sin(y * .pi);
-        let theta = atan2(y, x) - 0.000003 * cos(x * .pi);
-        let gglon = z * cos(theta);
-        let gglat = z * sin(theta);
-        let location = CLLocation.init(latitude: gglat, longitude: gglon)
-        return location
-    
-    }
     //MARK: 坐标转换
     //不在中国内
     func outOfChina(_ location: CLLocation) -> Bool {
@@ -173,7 +160,19 @@ class PublicMapShowListViewController: UIViewController,BMKMapViewDelegate,BMKLo
         let dLon: Double = marsCoor.longitude - gLon
         return CLLocationCoordinate2DMake(gLat - dLat, gLon - dLon)
     }
-    
+    /********************  百度坐标转火星坐标  ********************/
+    func bd_decrypt(bd_lat:Double, bd_lon:Double) -> CLLocation {
+        
+        let x = bd_lon - 0.0065;
+        let y = bd_lat - 0.006;
+        let z = sqrt(x * x + y * y) - 0.00002 * sin(y * .pi);
+        let theta = atan2(y, x) - 0.000003 * cos(x * .pi);
+        let gglon = z * cos(theta);
+        let gglat = z * sin(theta);
+        let location = CLLocation.init(latitude: gglat, longitude: gglon)
+        return location
+        
+    }
     func transformLatWith(x: Double, y: Double) -> Double {
         var ret: Double = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * sqrt(fabs(x))
         ret += (20.0 * sin(6.0 * x * .pi) + 20.0 * sin(2.0 * x * .pi)) * 2.0 / 3.0

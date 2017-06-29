@@ -226,7 +226,7 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
     }
     
     let _heightForHeaderInSection=[60,40,60,40,40,40,40,40,40,40]   //行头部高度
-    let _heightForHeaderInSectionText=["智慧头条","热门推荐","视觉盛宴","景区","酒店","餐厅","旅行社","会展","特产","游记攻略"]   //行头部文本
+    let _heightForHeaderInSectionText=["资讯头条","热门推荐","视觉盛宴","景区","酒店","餐厅","旅行社","会展","特产","游记攻略"]   //行头部文本
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         return CGFloat(_heightForHeaderInSection[section])

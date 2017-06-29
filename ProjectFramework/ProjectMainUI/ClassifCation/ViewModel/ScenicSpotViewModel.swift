@@ -11,8 +11,8 @@ import Foundation
 class ScenicSpotViewModel {
     var ListData = [ScenicModel]()
     //景区列表
-    func GetChannelsScenicList(PageIndex:Int,PageSize:Int,result:((_ result:Bool?,_ NoMore:Bool?,_ Nodata:Bool?) -> Void)?){
-        let parameters=["PageIndex":PageIndex,"PageSize":PageSize]
+    func GetChannelsScenicList(PageIndex:Int,PageSize:Int,tabName:String,result:((_ result:Bool?,_ NoMore:Bool?,_ Nodata:Bool?) -> Void)?){
+        let parameters=["PageIndex":PageIndex,"PageSize":PageSize,"tabName":tabName] as [String : Any]
         
         CommonFunction.Global_Get(entity: ScenicModel(), IsListData: true, url: HttpsUrl+"api/Channels/GetChannelsScenicList", isHUD: false, isHUDMake: false, parameters: parameters as NSDictionary) { (resultModel) in
             if(resultModel?.Success==true){
@@ -70,5 +70,5 @@ class ScenicSpotViewModel {
             }
         }
     }
-
+    
 }

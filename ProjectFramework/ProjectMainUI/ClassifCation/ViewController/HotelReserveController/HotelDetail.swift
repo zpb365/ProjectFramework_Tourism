@@ -194,6 +194,8 @@ class HotelDetail: CustomTemplateViewController {
     //MARK: 请求评论数据
     func GetCommentData() -> Void {
         cViewModel.GetAllCommentMsg(ChannelsID: ChannelID, ChannelsListID: HotelID, PageIndex: PageIndex, PageSize: PageSize) { (result, noMore) in
+            self.footer.endRefreshing()
+            
             if result == true{
                 //没有更多数据
                 if noMore == true {
@@ -207,7 +209,6 @@ class HotelDetail: CustomTemplateViewController {
                     self._numberOfRowsInSection[1]=1
                     self._numberOfRowsInSection[2]=1
                     self.RefreshRequest(isLoading: false, isHiddenFooter: false, isLoadError: false)
-                    self.footer.endRefreshing()
                 }
                 
             }else{
@@ -590,10 +591,9 @@ class HotelDetail: CustomTemplateViewController {
             return cell
         }
         else if (indexPath.section == 3){
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)as!UserCommentCell
-            if viewModel.ListData.CommentMes!.count != 0 {
-                cell.InitConfig(cViewModel.ListData[indexPath.row] as Any)
-            }
+            
+            let cell = UserCommentCell.init(style: .subtitle, reuseIdentifier: identifier)
+            cell.InitConfig(cViewModel.ListData[indexPath.row] as Any)
             return cell
         }
         else{

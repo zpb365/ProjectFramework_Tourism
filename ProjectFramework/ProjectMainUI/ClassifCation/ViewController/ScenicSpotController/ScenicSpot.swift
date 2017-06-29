@@ -8,17 +8,49 @@
 
 import UIKit
 import SwiftTheme
+import RxSwift
+import RxCocoa
 
 class ScenicSpot: CustomTemplateViewController,PYSearchViewControllerDelegate{
     
+    lazy var tabButton: UIButton = {
+        let tabButton = UIButton.init(type: .custom)
+        tabButton.frame = CGRect.init(x: 0, y: 64, width: CommonFunction.kScreenWidth, height: 30)
+        tabButton.layer.borderWidth = 0.6
+        tabButton.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.7).cgColor
+        tabButton.titleEdgeInsets = UIEdgeInsets.init(top: 0, left: -30, bottom: 0, right: 0)
+        tabButton.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: 65, bottom: 0, right: 0)
+        tabButton.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        tabButton.setTitle("标签", for: .normal)
+        tabButton.setImage(UIImage.init(named: "arrow_down"), for: .normal)
+        tabButton.setTitleColor(UIColor().TransferStringToColor("#00ABEE"), for: .normal)
+        tabButton.rx.tap.subscribe(      //返回
+            onNext: { [weak self] value in
+            self?.siftView.isHidden = !((self?.siftView.isHidden)!)
+        }).addDisposableTo(self.disposeBag)
+        return tabButton
+
+    }()
+    lazy var siftView: ScenicSiftView = {
+        let siftView = ScenicSiftView.init(frame: CGRect.init(x: 0, y: 94, width: CommonFunction.kScreenWidth, height: CommonFunction.kScreenHeight - 94))
+        siftView.isHidden = true
+        siftView.FuncCallbackValue(value: {[weak self] (tabName) in
+            self?.tabName = tabName
+            self?.GetHtpsData()
+        })
+        return siftView
+    }()
     @IBOutlet weak var tableView: UITableView!//景点、景区数据
     let identiFier     = "ScenicSpot"
     var viewModel      = ScenicSpotViewModel()
+    var tabViewModel   = TabParmterViewModel()
     var PageIndex: Int = 1
     var PageSize:  Int = 10
     var ChannelID      = 0
     var isSearch: Bool = false//是否为搜索，用来重置PageIndex，调不同接口
     var searchText: String? = nil
+    var tabName = ""
+    fileprivate let disposeBag   = DisposeBag() //创建一个处理包（通道）
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -30,7 +62,8 @@ class ScenicSpot: CustomTemplateViewController,PYSearchViewControllerDelegate{
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.GetHtpsData()
+        self.GettTabData()
+//        self.GetHtpsData()
         self.setNavbar()
         self.initUI()
         
@@ -58,10 +91,21 @@ class ScenicSpot: CustomTemplateViewController,PYSearchViewControllerDelegate{
         isSearch = true
         self.GetHtpsData()
     }
+    //MARK: 获取标签数据
+    private func GettTabData() -> Void {
+        tabViewModel.GetTabList(ChannelID: self.ChannelID, tabClassID: 0) { (result) in
+            if  result == true {
+                self.siftView.initUI(self.tabViewModel.ListData)
+                self.GetHtpsData()
+            }else{
+                self.RefreshRequest(isLoading: false, isHiddenFooter: true, isLoadError: true)
+            }
+        }
+    }
     //MARK:获取数据
     func GetHtpsData() {
         
-        viewModel.GetChannelsScenicList(PageIndex: PageIndex, PageSize: PageSize) { (result,NoMore, NoData) in
+        viewModel.GetChannelsScenicList(PageIndex: PageIndex, PageSize: PageSize,tabName:self.tabName) { (result,NoMore, NoData) in
             
             if  result == true {
                 self.tableView.tableHeaderView = UIView().headView(width: CommonFunction.kScreenWidth, height: 35, leftViewColor: UIColor().TransferStringToColor("#26C6DA"), title: "景区", titleColor: UIColor.black)
@@ -160,16 +204,18 @@ class ScenicSpot: CustomTemplateViewController,PYSearchViewControllerDelegate{
     }
     // MARK: initUI
     func initUI(){
+        self.view.addSubview(self.tabButton)
         //基控制器
         self.InitCongif(tableView)
-        self.tableView.frame           = CGRect.init(x: 0, y: 64, width: CommonFunction.kScreenWidth, height: CommonFunction.kScreenHeight - 64)
+        self.tableView.frame           = CGRect.init(x: 0, y: 64 + 30, width: CommonFunction.kScreenWidth, height: CommonFunction.kScreenHeight - 64 - 30)
         //tableView
         self.tableView.separatorStyle  = .singleLine
         self.tableView.separatorColor  = UIColor().TransferStringToColor("D6D6D6")
         self.numberOfSections=1//显示行数
         self.tableViewheightForRowAt=100//行高
-
+        self.view.addSubview(siftView)
     }
+    
     // MARK: tableViewDelegate
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         

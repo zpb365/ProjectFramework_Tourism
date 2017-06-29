@@ -346,7 +346,7 @@ class SpecialtyDetail: CustomTemplateViewController {
         }
         
         if (indexPath.section == 3){
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! UserCommentCell
+            let cell = UserCommentCell.init(style: .subtitle, reuseIdentifier: identifier)
             cell.InitConfig(cViewModel.ListData[indexPath.row] as Any)
             return cell
         }

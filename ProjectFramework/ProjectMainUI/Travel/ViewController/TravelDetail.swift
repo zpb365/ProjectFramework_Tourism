@@ -78,7 +78,7 @@ class TravelDetail: CustomTemplateViewController{
         viewModel.GetTravelsDetails(TravelsId: TravelsId,PageIndex: PageIndex, PageSize: PageSize) { (result) in
             
             if  result == true { 
-                self.imageView.ImageLoad(PostUrl:  HttpsUrlImage+self.viewModel.ListData.CoverPhoto)
+                self.imageView.ImageLoad(PostUrl: HttpsUrlImage + self.viewModel.ListData.CoverPhoto)
                 self.contentLabel.text=self.viewModel.ListData.TravelsNote
                 self.customWeb.loadHtmlString(html: self.viewModel.ListData.TravelsContent)
                 self.numberOfRowsInSection = 1

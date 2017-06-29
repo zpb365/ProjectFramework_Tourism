@@ -43,7 +43,9 @@ class MyOderCell: UITableViewCell {
     
     override func InitConfig(_ cell: Any) {
         let model = cell as! MyOrderModel
-     OrderType.text=model.OrderTypeName
+        
+        
+        OrderType.text=model.OrderTypeName
         PayType.text=model.OrderStatus
         Img.ImageLoad(PostUrl: HttpsUrlImage+model.Pic)
         Title.text=model.Title
@@ -51,7 +53,6 @@ class MyOderCell: UITableViewCell {
         OrderDescribe.text=model.TitleProduct
         Describe.text=model.Describe
         logo.ImageLoad(PostUrl: HttpsUrlImage+model.Logo)
-        
         stateButton.layer.borderWidth = 0.5
         stateButton.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
         stateButton.clipsToBounds = true

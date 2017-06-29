@@ -117,12 +117,17 @@
 		6F0638FF1E96631000FB8E23 /* ScenerySpotDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F0638FE1E96631000FB8E23 /* ScenerySpotDetail.storyboard */; };
 		6F0794BE1E9C64F200CA9EEB /* TravelDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0794BD1E9C64F200CA9EEB /* TravelDetail.swift */; };
 		6F0794C01E9C6A1B00CA9EEB /* TravelDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F0794BF1E9C6A1B00CA9EEB /* TravelDetail.storyboard */; };
+		6F0DE7351F009BA800573670 /* TabParmterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0DE7341F009BA800573670 /* TabParmterViewModel.swift */; };
 		6F0E62171EC5A32000D46817 /* SearchListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E62161EC5A32000D46817 /* SearchListCell.swift */; };
 		6F0E62191EC5ABB000D46817 /* SearchProductViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F0E62181EC5ABB000D46817 /* SearchProductViewController.storyboard */; };
 		6F0E621B1EC5AE2A00D46817 /* SearchProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E621A1EC5AE2A00D46817 /* SearchProductModel.swift */; };
 		6F0E621F1EC5B14800D46817 /* SearchProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E621E1EC5B14800D46817 /* SearchProductViewModel.swift */; };
 		6F0E62211EC6BC4800D46817 /* AttactionsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E62201EC6BC4800D46817 /* AttactionsDetail.swift */; };
 		6F0E62231EC94A9800D46817 /* GoumaiXuzhiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E62221EC94A9800D46817 /* GoumaiXuzhiViewModel.swift */; };
+		6F1746111EFE1768009735D7 /* ScenicSiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1746101EFE1768009735D7 /* ScenicSiftView.swift */; };
+		6F1D690E1F00A29600FEA3CC /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1D690D1F00A29600FEA3CC /* TabModel.swift */; };
+		6F1D69111F00BE5400FEA3CC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F1D690F1F00BE5400FEA3CC /* Default-568h@2x.png */; };
+		6F1D69121F00BE5400FEA3CC /* Default-568h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F1D69101F00BE5400FEA3CC /* Default-568h@3x.png */; };
 		6F1F873C1E9CD4DD008E9B09 /* SearchProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F873B1E9CD4DD008E9B09 /* SearchProductViewController.swift */; };
 		6F1F87781E9DFD56008E9B09 /* HeadlinesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F876C1E9DFD56008E9B09 /* HeadlinesViewCell.swift */; };
 		6F1F87791E9DFD56008E9B09 /* HoneMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F1F876D1E9DFD56008E9B09 /* HoneMain.storyboard */; };
@@ -163,8 +168,6 @@
 		6F22E3A41E9B76B90090291F /* MyRelease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F22E3A31E9B76B90090291F /* MyRelease.swift */; };
 		6F22E3A61E9B77350090291F /* MyRelease.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F22E3A51E9B77350090291F /* MyRelease.storyboard */; };
 		6F22E3A81E9B815C0090291F /* MyReleaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F22E3A71E9B815C0090291F /* MyReleaseCell.swift */; };
-		6F371EB01ECD3B8400C8E6A2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F371EAF1ECD3B8400C8E6A2 /* Default-568h@2x.png */; };
-		6F371EB21ECD3BA400C8E6A2 /* Default-568h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F371EB11ECD3BA400C8E6A2 /* Default-568h@3x.png */; };
 		6F371EBA1ECD747300C8E6A2 /* PulickIntroduceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F371EB61ECD747300C8E6A2 /* PulickIntroduceCell.swift */; };
 		6F371EBB1ECD747300C8E6A2 /* PulickIntroduceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F371EB71ECD747300C8E6A2 /* PulickIntroduceView.swift */; };
 		6F371EBD1ECD747300C8E6A2 /* PulickWebCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F371EB91ECD747300C8E6A2 /* PulickWebCell.swift */; };
@@ -177,6 +180,33 @@
 		6F371ECB1ECD777E00C8E6A2 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F371ECA1ECD777E00C8E6A2 /* ShareView.swift */; };
 		6F371ECE1ECD973B00C8E6A2 /* PayForSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F371ECC1ECD973B00C8E6A2 /* PayForSuccess.swift */; };
 		6F371ECF1ECD973B00C8E6A2 /* PublicMapShowListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F371ECD1ECD973B00C8E6A2 /* PublicMapShowListViewController.swift */; };
+		6F45EB501EF8F90C00562709 /* JLALAssetGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45EB211EF8F90B00562709 /* JLALAssetGroupViewController.m */; };
+		6F45EB511EF8F90C00562709 /* JLBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45EB231EF8F90B00562709 /* JLBrowserViewController.m */; };
+		6F45EB521EF8F90C00562709 /* JLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45EB251EF8F90B00562709 /* JLNavigationController.m */; };
+		6F45EB531EF8F90C00562709 /* JLThumbnailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45EB271EF8F90B00562709 /* JLThumbnailViewController.m */; };
+		6F45EB541EF8F90C00562709 /* ALAsset+Associate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45EB2A1EF8F90B00562709 /* ALAsset+Associate.m */; };
+		6F45EB551EF8F90C00562709 /* UIImage+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45EB2C1EF8F90B00562709 /* UIImage+Extend.m */; };
+		6F45EB561EF8F90C00562709 /* UIView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45EB2E1EF8F90B00562709 /* UIView+Animation.m */; };
+		6F45EB571EF8F90C00562709 /* camera_image_capture_badge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F45EB301EF8F90B00562709 /* camera_image_capture_badge@2x.png */; };
+		6F45EB581EF8F90C00562709 /* camera_image_capture_badge@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F45EB311EF8F90B00562709 /* camera_image_capture_badge@3x.png */; };
+		6F45EB591EF8F90C00562709 /* compose_guide_check_box_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F45EB321EF8F90B00562709 /* compose_guide_check_box_default@2x.png */; };
+		6F45EB5A1EF8F90C00562709 /* compose_guide_check_box_default@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F45EB331EF8F90B00562709 /* compose_guide_check_box_default@3x.png */; };
+		6F45EB5B1EF8F90C00562709 /* compose_guide_check_box_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F45EB341EF8F90B00562709 /* compose_guide_check_box_right@2x.png */; };
+		6F45EB5C1EF8F90C00562709 /* compose_guide_check_box_right@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F45EB351EF8F90B00562709 /* compose_guide_check_box_right@3x.png */; };
+		6F45EB5D1EF8F90C00562709 /* navigationbar_back_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F45EB361EF8F90B00562709 /* navigationbar_back_dark@2x.png */; };
+		6F45EB5E1EF8F90C00562709 /* navigationbar_back_dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F45EB371EF8F90B00562709 /* navigationbar_back_dark@3x.png */; };
+		6F45EB5F1EF8F90C00562709 /* navigationbar_back_withtext@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F45EB381EF8F90B00562709 /* navigationbar_back_withtext@2x.png */; };
+		6F45EB601EF8F90C00562709 /* navigationbar_back_withtext@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F45EB391EF8F90B00562709 /* navigationbar_back_withtext@3x.png */; };
+		6F45EB611EF8F90C00562709 /* JLAssetGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45EB3C1EF8F90B00562709 /* JLAssetGroup.m */; };
+		6F45EB621EF8F90C00562709 /* JLAssetsLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45EB3E1EF8F90B00562709 /* JLAssetsLibrary.m */; };
+		6F45EB631EF8F90C00562709 /* JLAlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45EB411EF8F90B00562709 /* JLAlbumCell.m */; };
+		6F45EB641EF8F90C00562709 /* JLBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45EB431EF8F90B00562709 /* JLBadgeView.m */; };
+		6F45EB651EF8F90C00562709 /* JLBadgeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F45EB441EF8F90B00562709 /* JLBadgeView.xib */; };
+		6F45EB661EF8F90C00562709 /* JLGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45EB461EF8F90B00562709 /* JLGroupCell.m */; };
+		6F45EB671EF8F90C00562709 /* JLScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45EB481EF8F90B00562709 /* JLScrollView.m */; };
+		6F45EB681EF8F90C00562709 /* JLPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45EB4B1EF8F90B00562709 /* JLPhoto.m */; };
+		6F45EB691EF8F90C00562709 /* JLPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45EB4D1EF8F90B00562709 /* JLPhotoBrowser.m */; };
+		6F45EB6A1EF8F90C00562709 /* JLPieProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45EB4F1EF8F90B00562709 /* JLPieProgressView.m */; };
 		6F6200E61EB9F7FD0083AE63 /* TravelDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6200E51EB9F7FD0083AE63 /* TravelDetailViewModel.swift */; };
 		6F6200E81EB9F83B0083AE63 /* TravelsDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6200E71EB9F83B0083AE63 /* TravelsDetailModel.swift */; };
 		6F63FA8C1EC2EB5F0004D43C /* FeedbackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F63FA871EC2EB5F0004D43C /* FeedbackViewModel.swift */; };
@@ -608,12 +638,17 @@
 		6F0638FE1E96631000FB8E23 /* ScenerySpotDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ScenerySpotDetail.storyboard; sourceTree = "<group>"; };
 		6F0794BD1E9C64F200CA9EEB /* TravelDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelDetail.swift; sourceTree = "<group>"; };
 		6F0794BF1E9C6A1B00CA9EEB /* TravelDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TravelDetail.storyboard; sourceTree = "<group>"; };
+		6F0DE7341F009BA800573670 /* TabParmterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabParmterViewModel.swift; sourceTree = "<group>"; };
 		6F0E62161EC5A32000D46817 /* SearchListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchListCell.swift; sourceTree = "<group>"; };
 		6F0E62181EC5ABB000D46817 /* SearchProductViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchProductViewController.storyboard; sourceTree = "<group>"; };
 		6F0E621A1EC5AE2A00D46817 /* SearchProductModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchProductModel.swift; sourceTree = "<group>"; };
 		6F0E621E1EC5B14800D46817 /* SearchProductViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchProductViewModel.swift; sourceTree = "<group>"; };
 		6F0E62201EC6BC4800D46817 /* AttactionsDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttactionsDetail.swift; sourceTree = "<group>"; };
 		6F0E62221EC94A9800D46817 /* GoumaiXuzhiViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoumaiXuzhiViewModel.swift; sourceTree = "<group>"; };
+		6F1746101EFE1768009735D7 /* ScenicSiftView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScenicSiftView.swift; sourceTree = "<group>"; };
+		6F1D690D1F00A29600FEA3CC /* TabModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
+		6F1D690F1F00BE5400FEA3CC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		6F1D69101F00BE5400FEA3CC /* Default-568h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@3x.png"; sourceTree = "<group>"; };
 		6F1F873B1E9CD4DD008E9B09 /* SearchProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchProductViewController.swift; sourceTree = "<group>"; };
 		6F1F876C1E9DFD56008E9B09 /* HeadlinesViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadlinesViewCell.swift; sourceTree = "<group>"; };
 		6F1F876D1E9DFD56008E9B09 /* HoneMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HoneMain.storyboard; sourceTree = "<group>"; };
@@ -656,8 +691,6 @@
 		6F22E3A31E9B76B90090291F /* MyRelease.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRelease.swift; sourceTree = "<group>"; };
 		6F22E3A51E9B77350090291F /* MyRelease.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyRelease.storyboard; sourceTree = "<group>"; };
 		6F22E3A71E9B815C0090291F /* MyReleaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyReleaseCell.swift; sourceTree = "<group>"; };
-		6F371EAF1ECD3B8400C8E6A2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		6F371EB11ECD3BA400C8E6A2 /* Default-568h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@3x.png"; sourceTree = "<group>"; };
 		6F371EB61ECD747300C8E6A2 /* PulickIntroduceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulickIntroduceCell.swift; sourceTree = "<group>"; };
 		6F371EB71ECD747300C8E6A2 /* PulickIntroduceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulickIntroduceView.swift; sourceTree = "<group>"; };
 		6F371EB91ECD747300C8E6A2 /* PulickWebCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulickWebCell.swift; sourceTree = "<group>"; };
@@ -672,6 +705,52 @@
 		6F371ECD1ECD973B00C8E6A2 /* PublicMapShowListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicMapShowListViewController.swift; sourceTree = "<group>"; };
 		6F45C85E1EF36F8D0035DB68 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6F45C8631EF37FA10035DB68 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		6F45EB1C1EF8F90B00562709 /* JLCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLCommon.h; sourceTree = "<group>"; };
+		6F45EB1D1EF8F90B00562709 /* JLReturnImageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLReturnImageDelegate.h; sourceTree = "<group>"; };
+		6F45EB1E1EF8F90B00562709 /* JLSelectedPhotoDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLSelectedPhotoDelegate.h; sourceTree = "<group>"; };
+		6F45EB201EF8F90B00562709 /* JLALAssetGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLALAssetGroupViewController.h; sourceTree = "<group>"; };
+		6F45EB211EF8F90B00562709 /* JLALAssetGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLALAssetGroupViewController.m; sourceTree = "<group>"; };
+		6F45EB221EF8F90B00562709 /* JLBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLBrowserViewController.h; sourceTree = "<group>"; };
+		6F45EB231EF8F90B00562709 /* JLBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLBrowserViewController.m; sourceTree = "<group>"; };
+		6F45EB241EF8F90B00562709 /* JLNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLNavigationController.h; sourceTree = "<group>"; };
+		6F45EB251EF8F90B00562709 /* JLNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLNavigationController.m; sourceTree = "<group>"; };
+		6F45EB261EF8F90B00562709 /* JLThumbnailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLThumbnailViewController.h; sourceTree = "<group>"; };
+		6F45EB271EF8F90B00562709 /* JLThumbnailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLThumbnailViewController.m; sourceTree = "<group>"; };
+		6F45EB291EF8F90B00562709 /* ALAsset+Associate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+Associate.h"; sourceTree = "<group>"; };
+		6F45EB2A1EF8F90B00562709 /* ALAsset+Associate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAsset+Associate.m"; sourceTree = "<group>"; };
+		6F45EB2B1EF8F90B00562709 /* UIImage+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extend.h"; sourceTree = "<group>"; };
+		6F45EB2C1EF8F90B00562709 /* UIImage+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extend.m"; sourceTree = "<group>"; };
+		6F45EB2D1EF8F90B00562709 /* UIView+Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Animation.h"; sourceTree = "<group>"; };
+		6F45EB2E1EF8F90B00562709 /* UIView+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Animation.m"; sourceTree = "<group>"; };
+		6F45EB301EF8F90B00562709 /* camera_image_capture_badge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_image_capture_badge@2x.png"; sourceTree = "<group>"; };
+		6F45EB311EF8F90B00562709 /* camera_image_capture_badge@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_image_capture_badge@3x.png"; sourceTree = "<group>"; };
+		6F45EB321EF8F90B00562709 /* compose_guide_check_box_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "compose_guide_check_box_default@2x.png"; sourceTree = "<group>"; };
+		6F45EB331EF8F90B00562709 /* compose_guide_check_box_default@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "compose_guide_check_box_default@3x.png"; sourceTree = "<group>"; };
+		6F45EB341EF8F90B00562709 /* compose_guide_check_box_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "compose_guide_check_box_right@2x.png"; sourceTree = "<group>"; };
+		6F45EB351EF8F90B00562709 /* compose_guide_check_box_right@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "compose_guide_check_box_right@3x.png"; sourceTree = "<group>"; };
+		6F45EB361EF8F90B00562709 /* navigationbar_back_dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationbar_back_dark@2x.png"; sourceTree = "<group>"; };
+		6F45EB371EF8F90B00562709 /* navigationbar_back_dark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationbar_back_dark@3x.png"; sourceTree = "<group>"; };
+		6F45EB381EF8F90B00562709 /* navigationbar_back_withtext@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationbar_back_withtext@2x.png"; sourceTree = "<group>"; };
+		6F45EB391EF8F90B00562709 /* navigationbar_back_withtext@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigationbar_back_withtext@3x.png"; sourceTree = "<group>"; };
+		6F45EB3B1EF8F90B00562709 /* JLAssetGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLAssetGroup.h; sourceTree = "<group>"; };
+		6F45EB3C1EF8F90B00562709 /* JLAssetGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLAssetGroup.m; sourceTree = "<group>"; };
+		6F45EB3D1EF8F90B00562709 /* JLAssetsLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLAssetsLibrary.h; sourceTree = "<group>"; };
+		6F45EB3E1EF8F90B00562709 /* JLAssetsLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLAssetsLibrary.m; sourceTree = "<group>"; };
+		6F45EB401EF8F90B00562709 /* JLAlbumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLAlbumCell.h; sourceTree = "<group>"; };
+		6F45EB411EF8F90B00562709 /* JLAlbumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLAlbumCell.m; sourceTree = "<group>"; };
+		6F45EB421EF8F90B00562709 /* JLBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLBadgeView.h; sourceTree = "<group>"; };
+		6F45EB431EF8F90B00562709 /* JLBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLBadgeView.m; sourceTree = "<group>"; };
+		6F45EB441EF8F90B00562709 /* JLBadgeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JLBadgeView.xib; sourceTree = "<group>"; };
+		6F45EB451EF8F90B00562709 /* JLGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLGroupCell.h; sourceTree = "<group>"; };
+		6F45EB461EF8F90B00562709 /* JLGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLGroupCell.m; sourceTree = "<group>"; };
+		6F45EB471EF8F90B00562709 /* JLScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLScrollView.h; sourceTree = "<group>"; };
+		6F45EB481EF8F90B00562709 /* JLScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLScrollView.m; sourceTree = "<group>"; };
+		6F45EB4A1EF8F90B00562709 /* JLPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLPhoto.h; sourceTree = "<group>"; };
+		6F45EB4B1EF8F90B00562709 /* JLPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLPhoto.m; sourceTree = "<group>"; };
+		6F45EB4C1EF8F90B00562709 /* JLPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLPhotoBrowser.h; sourceTree = "<group>"; };
+		6F45EB4D1EF8F90B00562709 /* JLPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLPhotoBrowser.m; sourceTree = "<group>"; };
+		6F45EB4E1EF8F90B00562709 /* JLPieProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLPieProgressView.h; sourceTree = "<group>"; };
+		6F45EB4F1EF8F90B00562709 /* JLPieProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLPieProgressView.m; sourceTree = "<group>"; };
 		6F6200E51EB9F7FD0083AE63 /* TravelDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TravelDetailViewModel.swift; path = ProjectFramework/ProjectMainUI/Home/ViewController/TravelDetailViewModel.swift; sourceTree = SOURCE_ROOT; };
 		6F6200E71EB9F83B0083AE63 /* TravelsDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TravelsDetailModel.swift; path = ProjectFramework/ProjectMainUI/Home/ViewController/TravelsDetailModel.swift; sourceTree = SOURCE_ROOT; };
 		6F63FA871EC2EB5F0004D43C /* FeedbackViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewModel.swift; sourceTree = "<group>"; };
@@ -1067,8 +1146,8 @@
 		27609BC31CB257810041E8B7 = {
 			isa = PBXGroup;
 			children = (
-				6F371EAF1ECD3B8400C8E6A2 /* Default-568h@2x.png */,
-				6F371EB11ECD3BA400C8E6A2 /* Default-568h@3x.png */,
+				6F1D690F1F00BE5400FEA3CC /* Default-568h@2x.png */,
+				6F1D69101F00BE5400FEA3CC /* Default-568h@3x.png */,
 				27609BFD1CB257E40041E8B7 /* Podfile */,
 				27609BCE1CB257810041E8B7 /* ProjectFramework */,
 				27609BE31CB257810041E8B7 /* ProjectFrameworkTests */,
@@ -1219,6 +1298,7 @@
 		2E12CAC01E6F1E6F009527BA /* OC */ = {
 			isa = PBXGroup;
 			children = (
+				6F45EB191EF8F90B00562709 /* 图片浏览 */,
 				6FF51D381EBD7EC500021790 /* 时间选择器 */,
 				6F91AD611EBC5BE200A9E617 /* HcdPopMenu */,
 				6F1F87991E9F07D4008E9B09 /* Panorama */,
@@ -1701,6 +1781,123 @@
 			path = "Object-C";
 			sourceTree = "<group>";
 		};
+		6F45EB191EF8F90B00562709 /* 图片浏览 */ = {
+			isa = PBXGroup;
+			children = (
+				6F45EB1A1EF8F90B00562709 /* JLAlbum */,
+				6F45EB491EF8F90B00562709 /* JLBrowser */,
+			);
+			path = "图片浏览";
+			sourceTree = "<group>";
+		};
+		6F45EB1A1EF8F90B00562709 /* JLAlbum */ = {
+			isa = PBXGroup;
+			children = (
+				6F45EB1B1EF8F90B00562709 /* JLCommon */,
+				6F45EB1F1EF8F90B00562709 /* JLControllers */,
+				6F45EB281EF8F90B00562709 /* JLCotegory */,
+				6F45EB2F1EF8F90B00562709 /* JLImages */,
+				6F45EB3A1EF8F90B00562709 /* JLModels */,
+				6F45EB3F1EF8F90B00562709 /* JLViews */,
+			);
+			path = JLAlbum;
+			sourceTree = "<group>";
+		};
+		6F45EB1B1EF8F90B00562709 /* JLCommon */ = {
+			isa = PBXGroup;
+			children = (
+				6F45EB1C1EF8F90B00562709 /* JLCommon.h */,
+				6F45EB1D1EF8F90B00562709 /* JLReturnImageDelegate.h */,
+				6F45EB1E1EF8F90B00562709 /* JLSelectedPhotoDelegate.h */,
+			);
+			path = JLCommon;
+			sourceTree = "<group>";
+		};
+		6F45EB1F1EF8F90B00562709 /* JLControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6F45EB201EF8F90B00562709 /* JLALAssetGroupViewController.h */,
+				6F45EB211EF8F90B00562709 /* JLALAssetGroupViewController.m */,
+				6F45EB221EF8F90B00562709 /* JLBrowserViewController.h */,
+				6F45EB231EF8F90B00562709 /* JLBrowserViewController.m */,
+				6F45EB241EF8F90B00562709 /* JLNavigationController.h */,
+				6F45EB251EF8F90B00562709 /* JLNavigationController.m */,
+				6F45EB261EF8F90B00562709 /* JLThumbnailViewController.h */,
+				6F45EB271EF8F90B00562709 /* JLThumbnailViewController.m */,
+			);
+			path = JLControllers;
+			sourceTree = "<group>";
+		};
+		6F45EB281EF8F90B00562709 /* JLCotegory */ = {
+			isa = PBXGroup;
+			children = (
+				6F45EB291EF8F90B00562709 /* ALAsset+Associate.h */,
+				6F45EB2A1EF8F90B00562709 /* ALAsset+Associate.m */,
+				6F45EB2B1EF8F90B00562709 /* UIImage+Extend.h */,
+				6F45EB2C1EF8F90B00562709 /* UIImage+Extend.m */,
+				6F45EB2D1EF8F90B00562709 /* UIView+Animation.h */,
+				6F45EB2E1EF8F90B00562709 /* UIView+Animation.m */,
+			);
+			path = JLCotegory;
+			sourceTree = "<group>";
+		};
+		6F45EB2F1EF8F90B00562709 /* JLImages */ = {
+			isa = PBXGroup;
+			children = (
+				6F45EB301EF8F90B00562709 /* camera_image_capture_badge@2x.png */,
+				6F45EB311EF8F90B00562709 /* camera_image_capture_badge@3x.png */,
+				6F45EB321EF8F90B00562709 /* compose_guide_check_box_default@2x.png */,
+				6F45EB331EF8F90B00562709 /* compose_guide_check_box_default@3x.png */,
+				6F45EB341EF8F90B00562709 /* compose_guide_check_box_right@2x.png */,
+				6F45EB351EF8F90B00562709 /* compose_guide_check_box_right@3x.png */,
+				6F45EB361EF8F90B00562709 /* navigationbar_back_dark@2x.png */,
+				6F45EB371EF8F90B00562709 /* navigationbar_back_dark@3x.png */,
+				6F45EB381EF8F90B00562709 /* navigationbar_back_withtext@2x.png */,
+				6F45EB391EF8F90B00562709 /* navigationbar_back_withtext@3x.png */,
+			);
+			path = JLImages;
+			sourceTree = "<group>";
+		};
+		6F45EB3A1EF8F90B00562709 /* JLModels */ = {
+			isa = PBXGroup;
+			children = (
+				6F45EB3B1EF8F90B00562709 /* JLAssetGroup.h */,
+				6F45EB3C1EF8F90B00562709 /* JLAssetGroup.m */,
+				6F45EB3D1EF8F90B00562709 /* JLAssetsLibrary.h */,
+				6F45EB3E1EF8F90B00562709 /* JLAssetsLibrary.m */,
+			);
+			path = JLModels;
+			sourceTree = "<group>";
+		};
+		6F45EB3F1EF8F90B00562709 /* JLViews */ = {
+			isa = PBXGroup;
+			children = (
+				6F45EB401EF8F90B00562709 /* JLAlbumCell.h */,
+				6F45EB411EF8F90B00562709 /* JLAlbumCell.m */,
+				6F45EB421EF8F90B00562709 /* JLBadgeView.h */,
+				6F45EB431EF8F90B00562709 /* JLBadgeView.m */,
+				6F45EB441EF8F90B00562709 /* JLBadgeView.xib */,
+				6F45EB451EF8F90B00562709 /* JLGroupCell.h */,
+				6F45EB461EF8F90B00562709 /* JLGroupCell.m */,
+				6F45EB471EF8F90B00562709 /* JLScrollView.h */,
+				6F45EB481EF8F90B00562709 /* JLScrollView.m */,
+			);
+			path = JLViews;
+			sourceTree = "<group>";
+		};
+		6F45EB491EF8F90B00562709 /* JLBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				6F45EB4A1EF8F90B00562709 /* JLPhoto.h */,
+				6F45EB4B1EF8F90B00562709 /* JLPhoto.m */,
+				6F45EB4C1EF8F90B00562709 /* JLPhotoBrowser.h */,
+				6F45EB4D1EF8F90B00562709 /* JLPhotoBrowser.m */,
+				6F45EB4E1EF8F90B00562709 /* JLPieProgressView.h */,
+				6F45EB4F1EF8F90B00562709 /* JLPieProgressView.m */,
+			);
+			path = JLBrowser;
+			sourceTree = "<group>";
+		};
 		6F63FA861EC2EB0C0004D43C /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -2031,6 +2228,7 @@
 				6FFE5CE61EC092DD006969F5 /* SpecialitiesModel.swift */,
 				6FFE5CE71EC092DD006969F5 /* TravelAgencyModel.swift */,
 				6FFE5CE81EC092DD006969F5 /* VisuakFeastModel.swift */,
+				6F1D690D1F00A29600FEA3CC /* TabModel.swift */,
 				6FFE5CD61EC092DD006969F5 /* DetailModel */,
 			);
 			path = Model;
@@ -2165,6 +2363,7 @@
 				6FFE5D1D1EC092DD006969F5 /* ScenicSpotHomeNewsCell.swift */,
 				6FFE5D221EC092DD006969F5 /* ScenicSpotMainCell.swift */,
 				6FFE5D271EC092DD006969F5 /* ScenicSpotTicketCell.swift */,
+				6F1746101EFE1768009735D7 /* ScenicSiftView.swift */,
 			);
 			path = Scenic;
 			sourceTree = "<group>";
@@ -2353,6 +2552,7 @@
 				6FFE5D811EC092DD006969F5 /* RestaurantViewModel.swift */,
 				6FFE5D821EC092DD006969F5 /* ScenicSpotViewModel.swift */,
 				6FFE5D831EC092DD006969F5 /* SiftParmterViewModel.swift */,
+				6F0DE7341F009BA800573670 /* TabParmterViewModel.swift */,
 				6FFE5D841EC092DD006969F5 /* SpecialtyViewModel.swift */,
 				6FFE5D851EC092DD006969F5 /* TravelAcyViewModel.swift */,
 				6FFE5D861EC092DD006969F5 /* VRVideoViewModel.swift */,
@@ -2577,6 +2777,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F45EB5D1EF8F90C00562709 /* navigationbar_back_dark@2x.png in Resources */,
 				6FFE5DCA1EC092DD006969F5 /* ScenicSpotMain.storyboard in Resources */,
 				6F22E3A01E9B67850090291F /* TravelManagement.storyboard in Resources */,
 				6FFE5DD71EC092DD006969F5 /* TravelAcy.storyboard in Resources */,
@@ -2585,6 +2786,7 @@
 				6FFE5DD51EC092DD006969F5 /* SpecialtyDetail.storyboard in Resources */,
 				2E2611C41E66312100CC70F9 /* Feedback.storyboard in Resources */,
 				6FFE5DB91EC092DD006969F5 /* RestaurantMenuDetail.storyboard in Resources */,
+				6F45EB5A1EF8F90C00562709 /* compose_guide_check_box_default@3x.png in Resources */,
 				6FFE5DE31EC092DD006969F5 /* PanoramaImage.storyboard in Resources */,
 				6FFE5DB41EC092DD006969F5 /* Restaurant.storyboard in Resources */,
 				6FFE5DBF1EC092DD006969F5 /* ScenicSpot.storyboard in Resources */,
@@ -2592,20 +2794,21 @@
 				6F0E62191EC5ABB000D46817 /* SearchProductViewController.storyboard in Resources */,
 				6F63FA961EC2FEA90004D43C /* ConferenceFacilities.storyboard in Resources */,
 				2E5E84331D399B88008BAA08 /* TemplatesSettings.bundle in Resources */,
+				6F45EB601EF8F90C00562709 /* navigationbar_back_withtext@3x.png in Resources */,
 				6FFE5DA21EC092DD006969F5 /* GuideBook.storyboard in Resources */,
 				2E12CB061E6F1E6F009527BA /* MHSheetHead.xib in Resources */,
-				6F371EB01ECD3B8400C8E6A2 /* Default-568h@2x.png in Resources */,
 				6FFE5DC71EC092DD006969F5 /* ScenicSpotHomeNewsCell.xib in Resources */,
 				27609BD71CB257810041E8B7 /* Assets.xcassets in Resources */,
+				6F45EB5B1EF8F90C00562709 /* compose_guide_check_box_right@2x.png in Resources */,
 				6F22E3981E9B377A0090291F /* OrderSearch.storyboard in Resources */,
 				2E26118E1E5FB58400CC70F9 /* My.storyboard in Resources */,
 				6FFE5DC81EC092DD006969F5 /* ScenicSpotImage.storyboard in Resources */,
 				27609BFE1CB257E40041E8B7 /* Podfile in Resources */,
 				6FFE5DCE1EC092DD006969F5 /* ScenicSpotPanorma.storyboard in Resources */,
+				6F45EB5E1EF8F90C00562709 /* navigationbar_back_dark@3x.png in Resources */,
 				6FFE5DE41EC092DD006969F5 /* VisualFeast.storyboard in Resources */,
 				6FFE5DB21EC092DD006969F5 /* PolicyNews.storyboard in Resources */,
 				6FF51D421EBD7EC500021790 /* ZFChooseTimeCollectionViewCell.xib in Resources */,
-				6F371EB21ECD3BA400C8E6A2 /* Default-568h@3x.png in Resources */,
 				6FFE5DCD1EC092DD006969F5 /* ScenicSpotOderWrite.storyboard in Resources */,
 				6FFE5DE21EC092DD006969F5 /* CustomWaterCell.xib in Resources */,
 				6F22E3A61E9B77350090291F /* MyRelease.storyboard in Resources */,
@@ -2613,9 +2816,11 @@
 				6FDB2DA01EC448E80092FAFC /* SpecialtyOderWrite.storyboard in Resources */,
 				6FFE5DC31EC092DD006969F5 /* ScenicSpotCollectionCell.xib in Resources */,
 				2E12CAFF1E6F1E6F009527BA /* CustomSettings.bundle in Resources */,
+				6F45EB651EF8F90C00562709 /* JLBadgeView.xib in Resources */,
 				6FFE5DE51EC092DD006969F5 /* VRVideo.storyboard in Resources */,
 				2E12CB131E6F1E6F009527BA /* TZImagePickerController.bundle in Resources */,
 				6FFE5DBA1EC092DD006969F5 /* RestaurantOderWrite.storyboard in Resources */,
+				6F45EB5F1EF8F90C00562709 /* navigationbar_back_withtext@2x.png in Resources */,
 				6F1F87791E9DFD56008E9B09 /* HoneMain.storyboard in Resources */,
 				6FDB2E041EC4612E0092FAFC /* AlipaySDK.bundle in Resources */,
 				6FFE5DC51EC092DD006969F5 /* ScenicSpotHome.storyboard in Resources */,
@@ -2628,10 +2833,13 @@
 				2E12CAFE1E6F1E6F009527BA /* CodeScan.bundle in Resources */,
 				6FE1524D1ECAD349005ACE75 /* Disclaimer.storyboard in Resources */,
 				6FFE5DD91EC092DD006969F5 /* TravelAcyDetail.storyboard in Resources */,
+				6F1D69121F00BE5400FEA3CC /* Default-568h@3x.png in Resources */,
 				6FFE5DD31EC092DD006969F5 /* Specialty.storyboard in Resources */,
+				6F45EB591EF8F90C00562709 /* compose_guide_check_box_default@2x.png in Resources */,
 				2E2611C81E66312E00CC70F9 /* Myinfo.storyboard in Resources */,
 				6FFE5DDB1EC092DD006969F5 /* TravelAcyRoute.storyboard in Resources */,
 				2E2611961E5FB5CD00CC70F9 /* Attractions.storyboard in Resources */,
+				6F1D69111F00BE5400FEA3CC /* Default-568h@2x.png in Resources */,
 				2E2611691E52D55F00CC70F9 /* Main.storyboard in Resources */,
 				6FFE5DC01EC092DD006969F5 /* ScenicSpotAttractions.storyboard in Resources */,
 				2E12CA211E6F1D88009527BA /* GlobalClassSettings.bundle in Resources */,
@@ -2647,14 +2855,17 @@
 				6FFE5D9C1EC092DD006969F5 /* Conference.storyboard in Resources */,
 				6F22E33C1E98CEDB0090291F /* OderDetail.storyboard in Resources */,
 				6FFE5DA91EC092DD006969F5 /* HotelFacilities.storyboard in Resources */,
+				6F45EB571EF8F90C00562709 /* camera_image_capture_badge@2x.png in Resources */,
 				2E2611921E5FB5B100CC70F9 /* Travel.storyboard in Resources */,
 				6FBE646F1EBFFA29008868CB /* Login2Resource.bundle in Resources */,
 				6F63FAA71EC334D00004D43C /* ConferenceOderWrite.storyboard in Resources */,
 				2E596AB41DD23F720027E03C /* loading.gif in Resources */,
 				6FA1056F1E89169100A235F4 /* LoginSettings.bundle in Resources */,
 				6FFE5DCF1EC092DD006969F5 /* ScenicSpotPark.storyboard in Resources */,
+				6F45EB581EF8F90C00562709 /* camera_image_capture_badge@3x.png in Resources */,
 				6FF51D451EBD7EC500021790 /* ZFTimerCollectionReusableView.xib in Resources */,
 				6FA105751E89169100A235F4 /* SB_Login.storyboard in Resources */,
+				6F45EB5C1EF8F90C00562709 /* compose_guide_check_box_right@3x.png in Resources */,
 				6FA105761E89169100A235F4 /* SB_Region.storyboard in Resources */,
 				6FFE5DDD1EC092DD006969F5 /* TravelAcySectionHeader.xib in Resources */,
 				6FFE5D9E1EC092DD006969F5 /* ConferenceDetail.storyboard in Resources */,
@@ -2790,7 +3001,9 @@
 				6FFE5DE01EC092DD006969F5 /* BeautyPhotoCell.swift in Sources */,
 				6FFE5E131EC092DD006969F5 /* ScenicDetailViewModel.swift in Sources */,
 				6FF51D441EBD7EC500021790 /* ZFTimerCollectionReusableView.m in Sources */,
+				6F45EB531EF8F90C00562709 /* JLThumbnailViewController.m in Sources */,
 				6FFE5DE71EC092DD006969F5 /* ClassifCation.swift in Sources */,
+				6F1D690E1F00A29600FEA3CC /* TabModel.swift in Sources */,
 				2E12CABC1E6F1E67009527BA /* Reachability.m in Sources */,
 				2EF815BE1DB69AD100B6A378 /* GlobalParameter.swift in Sources */,
 				6FFE5D871EC092DD006969F5 /* ClassifCationModel.swift in Sources */,
@@ -2801,6 +3014,7 @@
 				6F1F878A1E9E01C0008E9B09 /* MessageViewCell.swift in Sources */,
 				2E2611901E5FB59900CC70F9 /* My.swift in Sources */,
 				6FA105711E89169100A235F4 /* LoginViewController.swift in Sources */,
+				6F45EB661EF8F90C00562709 /* JLGroupCell.m in Sources */,
 				6FFB26C91EC43E2500452537 /* SpecialtyProductDetail.swift in Sources */,
 				6FFE5DF21EC092DD006969F5 /* Restaurant.swift in Sources */,
 				6FFE5DB81EC092DD006969F5 /* RestaurantMenuCell.swift in Sources */,
@@ -2836,6 +3050,7 @@
 				6FDB2D9E1EC448B80092FAFC /* SpecialtyOderWrite.swift in Sources */,
 				6FFE5D881EC092DD006969F5 /* CommentMeModel.swift in Sources */,
 				2EFB8C9F1E739E6D00BC032F /* TravelCell.swift in Sources */,
+				6F45EB621EF8F90C00562709 /* JLAssetsLibrary.m in Sources */,
 				6FFE5E111EC092DD006969F5 /* HotelDetailViewModel.swift in Sources */,
 				6FFE5DB51EC092DD006969F5 /* RestaurantCell.swift in Sources */,
 				6FF51D261EBD7E9E00021790 /* CalendarViewController.swift in Sources */,
@@ -2845,6 +3060,7 @@
 				6FFE5D941EC092DD006969F5 /* ScenicModel.swift in Sources */,
 				6FA105721E89169100A235F4 /* RegionViewController.swift in Sources */,
 				6FFB26C51EC4018500452537 /* SpecialtyDetailViewModel.swift in Sources */,
+				6F45EB671EF8F90C00562709 /* JLScrollView.m in Sources */,
 				2E12CA281E6F1D88009527BA /* String+Extension.swift in Sources */,
 				6FFE5DA61EC092DD006969F5 /* DateSectionView.swift in Sources */,
 				6FFE5DB31EC092DD006969F5 /* PolicyNewsCell.swift in Sources */,
@@ -2867,6 +3083,7 @@
 				6FA1056C1E89169100A235F4 /* HttpsRegister.swift in Sources */,
 				6FBE64751EBFFA29008868CB /* regiestViewModel.swift in Sources */,
 				2E2611C61E66312700CC70F9 /* FeedbackViewController.swift in Sources */,
+				6F45EB501EF8F90C00562709 /* JLALAssetGroupViewController.m in Sources */,
 				6FFE5DFA1EC092DD006969F5 /* ScenicSpotImage.swift in Sources */,
 				2E12CA361E6F1D88009527BA /* UIViewController+Extension.swift in Sources */,
 				6FBE64761EBFFA29008868CB /* ValidationResultEnum.swift in Sources */,
@@ -2884,6 +3101,7 @@
 				6FFE5E291EC174C7006969F5 /* TravelOderWriteCell.swift in Sources */,
 				6FFE5DC41EC092DD006969F5 /* ScenicSpotHeaderReusableView.swift in Sources */,
 				6FFE5E101EC092DD006969F5 /* CommentViewModel.swift in Sources */,
+				6F45EB681EF8F90C00562709 /* JLPhoto.m in Sources */,
 				6FBE64721EBFFA29008868CB /* registerViewCell.swift in Sources */,
 				2E12CB121E6F1E6F009527BA /* TZImageManager.m in Sources */,
 				6F91AD681EBC5BE200A9E617 /* HcdPopMenuView.m in Sources */,
@@ -2900,8 +3118,10 @@
 				6FA1056A1E89169100A235F4 /* HttpsLogin.swift in Sources */,
 				6FA1056E1E89169100A235F4 /* Region.swift in Sources */,
 				6F91AD6A1EBC5CE300A9E617 /* PayPublicView.swift in Sources */,
+				6F45EB691EF8F90C00562709 /* JLPhotoBrowser.m in Sources */,
 				6F22E3851E98E0DC0090291F /* OderComment.swift in Sources */,
 				2E12CB0E1E6F1E6F009527BA /* UIView+PYExtension.m in Sources */,
+				6F45EB551EF8F90C00562709 /* UIImage+Extend.m in Sources */,
 				6FA814541EB9F0D900E00C84 /* TravelViewModel.swift in Sources */,
 				6FFE5E1A1EC092DD006969F5 /* RestaurantViewModel.swift in Sources */,
 				2E12CA291E6F1D88009527BA /* UIBarButtonItem+Extension.swift in Sources */,
@@ -2949,6 +3169,7 @@
 				6FFE5E331EC1AB8E006969F5 /* GuideBookDetailsViewController.swift in Sources */,
 				6FFE5E021EC092DD006969F5 /* ScenicSpotVideo.swift in Sources */,
 				6F1F87881E9E0175008E9B09 /* MessageViewController.swift in Sources */,
+				6F0DE7351F009BA800573670 /* TabParmterViewModel.swift in Sources */,
 				6FBE646B1EBFFA29008868CB /* LoginViewControllerTwo.swift in Sources */,
 				6F0E621F1EC5B14800D46817 /* SearchProductViewModel.swift in Sources */,
 				6FFE5D911EC092DD006969F5 /* MeetingModel.swift in Sources */,
@@ -2965,6 +3186,7 @@
 				6FA814501EA8B6A300E00C84 /* InformationViewController.swift in Sources */,
 				2E12CA261E6F1D88009527BA /* Double+Extension.swift in Sources */,
 				6FFE5DF71EC092DD006969F5 /* ScenicSpotAttractions.swift in Sources */,
+				6F45EB561EF8F90C00562709 /* UIView+Animation.m in Sources */,
 				6F1F877E1E9DFD56008E9B09 /* ScenicViewCell.swift in Sources */,
 				2E2611981E5FB5DA00CC70F9 /* Attractions.swift in Sources */,
 				6FFE5DF51EC092DD006969F5 /* RestaurantOderWrite.swift in Sources */,
@@ -2981,9 +3203,12 @@
 				6F1F87801E9DFD56008E9B09 /* TravelAcyViewCell.swift in Sources */,
 				2E12CAB91E6F1E67009527BA /* MBProgressHUD+NJ.m in Sources */,
 				6FFE5D991EC092DD006969F5 /* VisuakFeastModel.swift in Sources */,
+				6F1746111EFE1768009735D7 /* ScenicSiftView.swift in Sources */,
 				2E2611CA1E66313300CC70F9 /* MyInfoViewController.swift in Sources */,
 				6FF51D361EBD7E9E00021790 /* UpLoadPicManagerView.swift in Sources */,
 				6FFE5E2D1EC1AB39006969F5 /* GuideDetailModel.swift in Sources */,
+				6F45EB611EF8F90C00562709 /* JLAssetGroup.m in Sources */,
+				6F45EB6A1EF8F90C00562709 /* JLPieProgressView.m in Sources */,
 				6FFE5DFE1EC092DD006969F5 /* ScenicSpotOderWrite.swift in Sources */,
 				6FBE64741EBFFA29008868CB /* LoginViewModel.swift in Sources */,
 				6FFE5E0E1EC092DD006969F5 /* ClassifCationViewModel.swift in Sources */,
@@ -3017,16 +3242,20 @@
 				2E12CA311E6F1D88009527BA /* UITableViewCell+Extension.swift in Sources */,
 				2E12CA321E6F1D88009527BA /* UITapGestureRecognizer+Extension.swift in Sources */,
 				6F371EBA1ECD747300C8E6A2 /* PulickIntroduceCell.swift in Sources */,
+				6F45EB541EF8F90C00562709 /* ALAsset+Associate.m in Sources */,
 				6FFE5DE61EC092DD006969F5 /* WaterCollectionViewLayout.swift in Sources */,
 				2E12CB0B1E6F1E6F009527BA /* PYSearchSuggestionViewController.m in Sources */,
 				6F22E3A41E9B76B90090291F /* MyRelease.swift in Sources */,
+				6F45EB641EF8F90C00562709 /* JLBadgeView.m in Sources */,
 				6F63FA901EC2EB5F0004D43C /* OrderCommentViewModel.swift in Sources */,
 				6F63FAA51EC3347F0004D43C /* ConferenceOderWrite.swift in Sources */,
 				2E12CA1F1E6F1D88009527BA /* AFNHelper.swift in Sources */,
 				2E12CABB1E6F1E67009527BA /* MBProgressHUD.m in Sources */,
 				6FA814521EB9F05500E00C84 /* TravelsModel.swift in Sources */,
 				2E12CA2D1E6F1D88009527BA /* UIImage+Extension.swift in Sources */,
+				6F45EB631EF8F90C00562709 /* JLAlbumCell.m in Sources */,
 				2E12CB001E6F1E6F009527BA /* MHActionSheet.m in Sources */,
+				6F45EB521EF8F90C00562709 /* JLNavigationController.m in Sources */,
 				6FFE5D931EC092DD006969F5 /* RestaurantModel.swift in Sources */,
 				6F371EBF1ECD749B00C8E6A2 /* PulickWebView.swift in Sources */,
 				6F1F877D1E9DFD56008E9B09 /* RestaurantViewCell.swift in Sources */,
@@ -3034,6 +3263,7 @@
 				6F371EC51ECD74FA00C8E6A2 /* CommentPhotoView.swift in Sources */,
 				6FFE5D8F1EC092DD006969F5 /* HotelModel.swift in Sources */,
 				6FBE646D1EBFFA29008868CB /* LoginModel.swift in Sources */,
+				6F45EB511EF8F90C00562709 /* JLBrowserViewController.m in Sources */,
 				2E12CB011E6F1E6F009527BA /* MHSheetCell.m in Sources */,
 				6FBE646C1EBFFA29008868CB /* registerViewController.swift in Sources */,
 				2E025BD81DC10A31002687EF /* AppResultModel.swift in Sources */,

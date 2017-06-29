@@ -131,13 +131,13 @@ class OderDetail: CustomTemplateViewController {
     //设置UI数据
     func SetUIData(){
          
-        Pic.ImageLoad(PostUrl:  HttpsUrlImage+Global_UserInfo.HeadImgPath)
+        Pic.ImageLoad(PostUrl: HttpsUrlImage+(_MyOrderModel?.Pic)!)
         S_Title.text=viewModel.ListData.Title
         ProductTitle.text=viewModel.ListData.TitleProduct
         Describe.text=viewModel.ListData.Describe
-        S_OrderNumber.text="订单编号:"+viewModel.ListData.OrderNumber
-        CreationTime.text="创建时间:"+viewModel.ListData.S_CreateTime
-        PayType.text="支付类型:"+viewModel.ListData.PayType
+        S_OrderNumber.text="订单编号： "+viewModel.ListData.OrderNumber
+        CreationTime.text="创建时间： "+viewModel.ListData.S_CreateTime
+        PayType.text="支付类型： "+viewModel.ListData.PayType
         priceLabel.text=viewModel.ListData.OrderAmount.description
         
         if(_MyOrderModel?.IsPay=="1"&&_MyOrderModel?.Isevaluate=="0"){    //是否待付款

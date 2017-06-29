@@ -26,6 +26,8 @@ class regiestViewModel {
     // 注册返回数据
     var registeResult: Observable<ValidationResult>? = nil
     
+    var delegate: UIViewController? = nil
+    
     init( ) {
         register()
         GetVerificationCode()
@@ -123,6 +125,9 @@ class regiestViewModel {
         CommonFunction.Global_Post(entity: nil, IsListData: false, url:  HttpsUrl+"api/Login/SetRegister", isHUD: true,HUDMsg: "正在提交中...", isHUDMake: false, parameters:parameters as NSDictionary) { (resultData) in
             if(resultData?.Success==true){
                 CommonFunction.HUD("注册成功", type: .success)
+                self.delegate?.dismiss(animated: true, completion: { 
+                    
+                })
             }else{
                 CommonFunction.HUD(resultData!.Result, type: .success)
             }

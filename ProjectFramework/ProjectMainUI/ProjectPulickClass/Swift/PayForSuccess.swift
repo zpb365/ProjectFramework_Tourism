@@ -67,6 +67,10 @@ class PayForSuccess: UIViewController {
         self.view.addSubview(textFiled2)
         
         self.LoGin()
+        
+        
+        
+        
     }
 
     override func didReceiveMemoryWarning() {

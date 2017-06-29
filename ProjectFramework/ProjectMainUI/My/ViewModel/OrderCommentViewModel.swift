@@ -16,6 +16,7 @@ class OrderCommentViewModel    {
     let Description = Variable<String>("")     //描述内容
     let QQPhone  = Variable<String>("")    //联系方式数据
     
+    
     var Score  = 0    //评分 
     var OrderNumber  = ""    //订单号
     
@@ -33,11 +34,11 @@ class OrderCommentViewModel    {
             .withLatestFrom(parameter)
             .flatMapLatest({ (Description,QQPhone) -> Observable<Bool> in
                 //业务处理逻辑处理
-                
                 if(Description==""){
                     CommonFunction.HUD("内容不可为空", type: .error)
                     return Observable.just(false)
                 }
+                
                 if(self.OrderNumber==""){
                     CommonFunction.HUD("订单号不可为空", type: .error)
                     return Observable.just(false)
@@ -53,7 +54,8 @@ class OrderCommentViewModel    {
     }
     
     func SetPendingEvaluation(result:((_ result:Bool?) -> Void)?){
-        let parameters = [ "Description":Description,"Score":self.Score,"OrderNumber":self.OrderNumber] as [String : Any]
+        
+        let parameters = [ "Description":Description.value,"Score":self.Score,"OrderNumber":self.OrderNumber] as [String : Any]
         CommonFunction.Global_Post(entity: nil, IsListData: false, url: HttpsUrl+"api/My/SetPendingEvaluation",isHUD: true,HUDMsg: "数据提交中...", isHUDMake: false, parameters: parameters as NSDictionary, Model: { (resultData) in
             
             if(resultData?.Success==true){

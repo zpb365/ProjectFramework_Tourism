@@ -10,6 +10,7 @@ import Foundation
 
 class SiftParmterViewModel {
     var ListData = SfitParmterModel()
+    //获取公共的搜索参数
     func GetScreeningCondition(ChannelID:Int,result:((_ result:Bool?) -> Void)?){
         
         let parameters=["ChannelID":ChannelID]

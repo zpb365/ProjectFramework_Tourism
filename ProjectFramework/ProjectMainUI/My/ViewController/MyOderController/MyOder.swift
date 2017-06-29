@@ -70,8 +70,6 @@ class MyOder: CustomTemplateViewController {
      //MARK: Refresh
     override func headerRefresh() {
         PageIndex = 1
-//        viewModel.ListData.removeAll()
-//        self.numberOfRowsInSection=viewModel.ListData.count
         self.RefreshRequest(isLoading: true, isHiddenFooter: true )
         GetHtpsData()
     }
@@ -83,6 +81,7 @@ class MyOder: CustomTemplateViewController {
             self.header.endRefreshing()
             if  result == true {
                 
+                //没有更多数据
                 if(NoMore==true){
                     self.footer.endRefreshingWithNoMoreData()
                 }else{
@@ -91,9 +90,10 @@ class MyOder: CustomTemplateViewController {
                         self.RefreshRequest(isLoading: false, isHiddenFooter: true)
                         return
                     }
+                    //self.viewModel.ListData = self.viewModel.ListData.reversed()
+                    
                     if(self.numberOfRowsInSection  < self.PageSize ){
-                         self.RefreshRequest(isLoading: false, isHiddenFooter: true)
-                        return
+                        self.footer.endRefreshingWithNoMoreData()
                     }
                     self.RefreshRequest(isLoading: false, isHiddenFooter: false)
                 }

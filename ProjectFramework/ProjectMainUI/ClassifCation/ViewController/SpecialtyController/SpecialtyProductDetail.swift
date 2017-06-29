@@ -36,6 +36,8 @@ class SpecialtyProductDetail: UIViewController ,UIWebViewDelegate{
         let webView = UIWebView.init(frame: CGRect.init(x: 0, y: 64, width: CommonFunction.kScreenWidth, height: CommonFunction.kScreenHeight - 64 - 40))
         webView.delegate = self
         webView.scrollView.bounces = false
+        webView.scrollView.showsVerticalScrollIndicator = false
+        webView.scrollView.showsHorizontalScrollIndicator = false
         return webView
     }()
     
@@ -47,7 +49,7 @@ class SpecialtyProductDetail: UIViewController ,UIWebViewDelegate{
         self.initUI()
     }
     override func viewDidLayoutSubviews() {
-        webView.loadHTMLString(spePoduct!.Introduce, baseURL: nil)
+        webView.loadHTMLString(spePoduct!.Introduce + "", baseURL: nil)
     }
     //MARK: initUI
     func initUI() -> Void{

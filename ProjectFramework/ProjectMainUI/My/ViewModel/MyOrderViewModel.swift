@@ -24,10 +24,12 @@ class MyOrderViewModel     {
                     return
                 }
                 if(resultModel?.ret==5 && resultModel?.Content==nil){
+                    self.ListData.removeAll()
                     result?(true,false)
                     return    //空数据
                 }
                 let model =  resultModel?.Content   as!  [MyOrderModel]
+                
                 if(PageIndex>=2){
                     for item in model {
                         self.ListData.append(item)

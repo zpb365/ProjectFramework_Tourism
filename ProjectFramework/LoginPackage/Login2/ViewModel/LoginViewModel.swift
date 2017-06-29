@@ -53,9 +53,9 @@ class LoginViewModel {
                     return Observable.just(ValidationResult.empty)
                     
                 }
-                if(pwd.characters.count < 6){
+                if(pwd.characters.count == 0){
                     //密码位数不能小于6位
-                    CommonFunction.HUD("密码不可少于6位数", type: .error)
+                    CommonFunction.HUD("请输入密码", type: .error)
                     return Observable.just(ValidationResult.error)
                 }
                 

@@ -376,7 +376,7 @@ class RestaurantDetail: CustomTemplateViewController {
             return cell
         }
         if (indexPath.section == 3){
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)as!UserCommentCell
+            let cell = UserCommentCell.init(style: .subtitle, reuseIdentifier: identifier)
             if cViewModel.ListData.count > 0 {
                 cell.InitConfig(cViewModel.ListData[indexPath.row] as Any)
             }
