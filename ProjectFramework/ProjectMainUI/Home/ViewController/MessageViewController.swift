@@ -57,8 +57,7 @@ class MessageViewController: CustomTemplateViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let vc = PayForSuccess()
-//        self.present(vc, animated: true, completion: nil)
+        
     }
 
     override func didReceiveMemoryWarning() {

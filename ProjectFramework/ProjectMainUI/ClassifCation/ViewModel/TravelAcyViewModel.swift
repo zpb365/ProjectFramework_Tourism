@@ -11,8 +11,8 @@ import UIKit
 class TravelAcyViewModel {
     var ListData = [TravelAgencyModel]()
     //旅行社列表
-    func GetChannelsTravelAgencyList(SearchTitle:String,ScreenTitle:String,SalesPriorityEnum:Int,ComprehensiveSortingEnum:Int,PageIndex:Int,PageSize:Int,result:((_ result:Bool?,_ NoMore:Bool?,_ Nodata:Bool?) -> Void)?){
-        let parameters=["PageIndex":PageIndex,"PageSize":PageSize,"ScreenTitle":ScreenTitle,"SearchTitle":SearchTitle,"SalesPriorityEnum":SalesPriorityEnum,"ComprehensiveSortingEnum":ComprehensiveSortingEnum] as [String : Any]
+    func GetChannelsTravelAgencyList(SearchTitle:String,ScreenTitle:String,SalesPriorityEnum:Int,ComprehensiveSortingEnum:Int,PageIndex:Int,PageSize:Int,ClassID:Int,result:((_ result:Bool?,_ NoMore:Bool?,_ Nodata:Bool?) -> Void)?){
+        let parameters=["PageIndex":PageIndex,"PageSize":PageSize,"ScreenTitle":ScreenTitle,"SearchTitle":SearchTitle,"SalesPriorityEnum":SalesPriorityEnum,"ComprehensiveSortingEnum":ComprehensiveSortingEnum,"ClassID":ClassID] as [String : Any]
         
         CommonFunction.Global_Get(entity: TravelAgencyModel(), IsListData: true, url: HttpsUrl+"api/Channels/GetChannelsTravelAgencyList", isHUD: false, isHUDMake: false, parameters: parameters as NSDictionary) { (resultModel) in
             if(resultModel?.Success==true){

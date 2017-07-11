@@ -19,7 +19,15 @@ class TravelDetail: CustomTemplateViewController{
         }
         return customWeb
     }()
-    
+    lazy var lable: UILabel = {
+        let lable = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: 80, height: 30))
+        lable.font = UIFont.systemFont(ofSize: 16)
+        lable.textAlignment = .center
+        lable.text = "游记"
+        lable.textColor = UIColor.white
+        lable.alpha = 0.0
+        return lable
+    }()
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var BaseView: UIView!
     @IBOutlet weak var imageView: UIImageView!
@@ -37,6 +45,7 @@ class TravelDetail: CustomTemplateViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.setNavBar()
         self.initUI()
         //基控制器
@@ -44,7 +53,7 @@ class TravelDetail: CustomTemplateViewController{
         self.tableView.tableHeaderView = BaseView   //赋值头部
         self.tableView.frame = CGRect.init(x: 0, y: CommonFunction.NavigationControllerHeight, width: self.view.frame.width, height: self.view.frame.height-CommonFunction.NavigationControllerHeight-49)
         self.numberOfSections=1//显示行数
-        self.tableViewheightForRowAt=150//行高
+        self.tableViewheightForRowAt=0//行高
         self.header.isHidden=true
         GetHtpsData()
        
@@ -77,8 +86,8 @@ class TravelDetail: CustomTemplateViewController{
         
         viewModel.GetTravelsDetails(TravelsId: TravelsId,PageIndex: PageIndex, PageSize: PageSize) { (result) in
             
-            if  result == true { 
-                self.imageView.ImageLoad(PostUrl: HttpsUrlImage + self.viewModel.ListData.CoverPhoto)
+            if  result == true {
+                self.imageView.ImageLoad(PostUrl: self.viewModel.ListData.CoverPhoto)//图片地址，后台已经拼接域名了
                 self.contentLabel.text=self.viewModel.ListData.TravelsNote
                 self.customWeb.loadHtmlString(html: self.viewModel.ListData.TravelsContent)
                 self.numberOfRowsInSection = 1
@@ -120,7 +129,9 @@ class TravelDetail: CustomTemplateViewController{
         backBtn.setImage(UIImage(named: "back"), for: .normal)
         backBtn.addTarget(self, action:#selector(buttonClick) , for: .touchUpInside)
         CustomNavItem.leftBarButtonItem=UIBarButtonItem.init(customView: backBtn)
+        CustomNavItem.titleView = self.lable
         CustomNavBar.pushItem(CustomNavItem, animated: true)
+        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView){
@@ -128,11 +139,15 @@ class TravelDetail: CustomTemplateViewController{
         if (offset <= 64) {
             CustomNavBar.setBackgroundImage(UIImage().ImageWithColor(color: CommonFunction.SystemColor().withAlphaComponent(0), size: CGSize(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)), for: .default)
             backBtn.backgroundColor = UIColor.gray
+            UIView.animate(withDuration: 0.2, animations: { 
+                self.lable.alpha = 0.0
+            })
         }
         else{
             alph = 1-((200 - offset)/200)
             CustomNavBar.setBackgroundImage(UIImage().ImageWithColor(color:  CommonFunction.SystemColor().withAlphaComponent(alph), size: CGSize(width: CommonFunction.kScreenWidth, height: CommonFunction.NavigationControllerHeight)), for: .default)
             backBtn.backgroundColor = UIColor.gray.withAlphaComponent(1-alph)
+            lable.alpha = alph
         }
         
         //放大TableView头部图片

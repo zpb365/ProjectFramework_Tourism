@@ -22,6 +22,7 @@ class Restaurant: CustomTemplateViewController,PYSearchViewControllerDelegate {
     var Title_Name          = ""
     var SalesPriorityEnum   = 1
     var ComprehensiveSortingEnum = 1
+    var ClassID             = 0
 //    var isSearch: Bool      = false//是否为搜索，用来重置PageIndex，调不同接口
     var searchText: String? = ""
     
@@ -67,7 +68,7 @@ class Restaurant: CustomTemplateViewController,PYSearchViewControllerDelegate {
 
     //MARK: 获取数据
     func GetHtpsData() {
-        viewModel.GetChannelsRestaurantList(SearchTitle: searchText!, ScreenTitle: Title_Name, SalesPriorityEnum: SalesPriorityEnum, ComprehensiveSortingEnum: ComprehensiveSortingEnum, PageIndex: PageIndex, PageSize: PageSize) { (result, NoMore,NoData) in
+        viewModel.GetChannelsRestaurantList(SearchTitle: searchText!, ScreenTitle: Title_Name, SalesPriorityEnum: SalesPriorityEnum, ComprehensiveSortingEnum: ComprehensiveSortingEnum, PageIndex: PageIndex, PageSize: PageSize ,ClassID:ClassID) { (result, NoMore,NoData) in
             if  result == true {
                 //没有数据
                 if NoData == true{
@@ -149,10 +150,23 @@ class Restaurant: CustomTemplateViewController,PYSearchViewControllerDelegate {
             }
             model3.OneMenu.append(onemol)
         }
-        
+        let model4       = MenuModel()
+        for   i:Int in 0  ..< (self.siftViewModel.ListData.Classing?.count)!{
+            let onemol   = OneMenuModel()
+            onemol.name  = self.siftViewModel.ListData.Classing?[i].Screening
+            for j:Int in 0 ..< (self.siftViewModel.ListData.Classing?[i].ScreeningItem?.count)! {
+                let twomol   =  TowMenuModel()
+                twomol.type  =  4
+                twomol.name  =  self.siftViewModel.ListData.Classing?[i].ScreeningItem?[j].Title
+                twomol.value =  self.siftViewModel.ListData.Classing?[i].ScreeningItem?[j].ID.description
+                onemol.TowMenu.append(twomol)
+            }
+            model4.OneMenu.append(onemol)
+        }
         Menuview?.AddMenuData(model1)
         Menuview?.AddMenuData(model2)
         Menuview?.AddMenuData(model3)
+        Menuview?.AddMenuData(model4)
         //-----------------------刷新数据等操作在这个闭包执行-------------------------
         Menuview?.Callback_SelectedValue { [weak self](name, value,type) in
             print(name,value,type)
@@ -165,6 +179,9 @@ class Restaurant: CustomTemplateViewController,PYSearchViewControllerDelegate {
                 break;
             case 3:
                 self?.Title_Name = name
+                break;
+            case 4:
+                self?.ClassID = Int(value)!
                 break;
             default:
                 break;
@@ -205,6 +222,7 @@ class Restaurant: CustomTemplateViewController,PYSearchViewControllerDelegate {
             self.SalesPriorityEnum          = 1
             self.ComprehensiveSortingEnum   = 1
             self.searchText                 = searchText
+            self.ClassID                    = 0
             self.viewModel.ListData.removeAll()
             self.numberOfRowsInSection      = self.viewModel.ListData.count
             self.RefreshRequest(isLoading: true, isHiddenFooter: false,isLoadError: false)

@@ -13,9 +13,7 @@ class PolicyNews: CustomTemplateViewController {
 
 
     
-    let identiFier = "PolicyNewsCell"
-    
-    let sectionArray = ["政策法规","行业信息","景区公告","通知公告"]
+    let identiFier = "PolicyNewsCell"    
     var viewModel = PolicyNewsViewMdeel()
     
     override func viewDidLoad() {

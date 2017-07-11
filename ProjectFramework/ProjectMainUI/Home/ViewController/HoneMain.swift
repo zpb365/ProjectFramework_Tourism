@@ -44,15 +44,18 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
     var titleArray=[String]()
     var HeadShowCountArray=[Int]()
     var currentHeadlinesBtn = UIButton() //智慧头条
-    lazy var SectionHeadlinesButtonBar: UIView = {
-        let topButtonBar = UIView.init(frame: CommonFunction.CGRect_fram(0, y: 25, w: CommonFunction.kScreenWidth, h: 40))
+    lazy var SectionHeadlinesButtonBar: UIScrollView = {
+        let topButtonBar = UIScrollView.init(frame: CommonFunction.CGRect_fram(0, y: 25, w: CommonFunction.kScreenWidth, h: 40))
         topButtonBar.backgroundColor = UIColor.white
-   
+        topButtonBar.contentSize = CGSize.init(width: CGFloat(self.titleArray.count/4 + 1) * CommonFunction.kScreenWidth, height: 40)
+        topButtonBar.showsVerticalScrollIndicator = false
+        topButtonBar.showsHorizontalScrollIndicator = false
+        topButtonBar.bounces = false
         for i in 0..<self.titleArray.count {
             let title = self.titleArray[i]
             let button = UIButton.init(type: .system)
-            let frame_x = CGFloat((CommonFunction.kScreenWidth/CGFloat(self.titleArray.count))*CGFloat(i))
-            button.frame = CommonFunction.CGRect_fram(frame_x, y:0, w:CommonFunction.kScreenWidth / CGFloat(self.titleArray.count) , h: 35)
+            let frame_x = CGFloat(CommonFunction.kScreenWidth/CGFloat(4)*CGFloat(i))
+            button.frame = CommonFunction.CGRect_fram(frame_x, y:0, w:CommonFunction.kScreenWidth / 4 , h: 35)
             button.tag =  i
             button.ExpTagString=title
             button.setTitle(title, for: .normal)
@@ -60,6 +63,11 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
             button.setTitleColor(UIColor.gray, for: .normal)
             button.rx.tap.subscribe(
                 onNext:{ [weak self] value in
+                    if button.tag > 1 {
+                        topButtonBar.setContentOffset(CGPoint.init(x: frame_x - CommonFunction.kScreenWidth / 4, y: 0), animated: true)
+                    }else{
+                        topButtonBar.setContentOffset(CGPoint.init(x: 0, y: 0), animated: true)
+                    }
                     UIView.animate(withDuration: 0.3) { //点击滑动绑定事件
                         let line = self?.SectionHeadlinesButtonBar.viewWithTag(666)
                         line?.center.x = button.center.x
@@ -67,6 +75,7 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
                         self?.currentHeadlinesBtn.setTitleColor(UIColor.gray, for: .normal)
                         self?.currentHeadlinesBtn = button
                         self?.tableView.reloadData()
+                        
                     }
                     
             }).addDisposableTo(self.disposeBag)
@@ -85,7 +94,7 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
         }
         return topButtonBar
     }()
-    
+
   
  
     var currentVisualBtn = UIButton() //视觉盛宴
@@ -469,6 +478,7 @@ class HoneMain: CustomTemplateViewController,PYSearchViewControllerDelegate {
 
     ///搜索事件
     func SearchEvent(){
+
         let searchViewController =   PYSearchViewController(hotSearches: nil, searchBarPlaceholder: "请输入您要查询的信息")
         searchViewController?.hotSearchStyle = .default
         searchViewController?.searchHistoryStyle = .normalTag

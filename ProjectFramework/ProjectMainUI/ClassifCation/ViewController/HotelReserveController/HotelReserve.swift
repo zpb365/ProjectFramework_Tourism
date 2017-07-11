@@ -21,6 +21,7 @@ class HotelReserve: CustomTemplateViewController,PYSearchViewControllerDelegate 
     var SalesPriorityEnum   = 1
     var Title_Name          = ""
     var searchText: String? = ""
+    var ClassID             = 0
     var siftViewModel       = SiftParmterViewModel()
     var viewModel           = HotelReserveViewModel()
     
@@ -65,7 +66,7 @@ class HotelReserve: CustomTemplateViewController,PYSearchViewControllerDelegate 
     }
     //MARK: 获取数据
     func GetHtpsData() {
-        viewModel.GetChannelsHotelList(SearchTitle:searchText!,ScreenTitle:Title_Name, SalesPriorityEnum: SalesPriorityEnum, ComprehensiveSortingEnum: ComprehensiveSortingEnum, PageIndex: PageIndex, PageSize: PageSize) { (result, NoMore, NoData) in
+        viewModel.GetChannelsHotelList(SearchTitle:searchText!,ScreenTitle:Title_Name, SalesPriorityEnum: SalesPriorityEnum, ComprehensiveSortingEnum: ComprehensiveSortingEnum, PageIndex: PageIndex, PageSize: PageSize,ClassID:ClassID) { (result, NoMore, NoData) in
             if  result == true {
                 //没有数据
                 if NoData == true{
@@ -161,10 +162,23 @@ class HotelReserve: CustomTemplateViewController,PYSearchViewControllerDelegate 
             }
             model3.OneMenu.append(onemol)
         }
-        
+        let model4       = MenuModel()
+        for   i:Int in 0  ..< (self.siftViewModel.ListData.Classing?.count)!{
+            let onemol   = OneMenuModel()
+            onemol.name  = self.siftViewModel.ListData.Classing?[i].Screening
+            for j:Int in 0 ..< (self.siftViewModel.ListData.Classing?[i].ScreeningItem?.count)! {
+                let twomol   =  TowMenuModel()
+                twomol.type  =  4
+                twomol.name  =  self.siftViewModel.ListData.Classing?[i].ScreeningItem?[j].Title
+                twomol.value =  self.siftViewModel.ListData.Classing?[i].ScreeningItem?[j].ID.description
+                onemol.TowMenu.append(twomol)
+            }
+            model4.OneMenu.append(onemol)
+        }
         Menuview?.AddMenuData(model1)
         Menuview?.AddMenuData(model2)
         Menuview?.AddMenuData(model3)
+        Menuview?.AddMenuData(model4)
         //-----------------------刷新数据等操作在这个闭包执行-------------------------
         Menuview?.Callback_SelectedValue { [weak self](name, value,type) in
             print(name,value,type)
@@ -177,6 +191,9 @@ class HotelReserve: CustomTemplateViewController,PYSearchViewControllerDelegate 
                 break;
             case 3:
                 self?.Title_Name = name
+                break;
+            case 4:
+                self?.ClassID = Int(value)!
                 break;
             default:
                 break;
@@ -211,6 +228,7 @@ class HotelReserve: CustomTemplateViewController,PYSearchViewControllerDelegate 
             self.SalesPriorityEnum          = 1
             self.ComprehensiveSortingEnum   = 1
             self.searchText                 = searchText
+            self.ClassID                    = 0
             self.viewModel.ListData.removeAll()
             self.numberOfRowsInSection      = self.viewModel.ListData.count
             self.RefreshRequest(isLoading: true, isHiddenFooter: true,isLoadError: false)

@@ -48,6 +48,8 @@ class Travel: CustomTemplateViewController {
     func GetHtpsData() {
         
         viewModel.GetTravelsChannelsList(PageIndex: PageIndex, PageSize: PageSize) { (result,NoMore) in
+            
+            self.footer.endRefreshing()
             if  result == true {
                 self.headView.isHidden = false
                 self.tableView.tableHeaderView = self.headView

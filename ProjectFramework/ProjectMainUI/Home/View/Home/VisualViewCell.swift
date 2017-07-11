@@ -31,7 +31,7 @@ class VisualViewCell: UITableViewCell {
     }
     
     override func InitConfig(_ cell: Any) {
-        Img1.image=UIImage(named: "")
+
         Img2.image=UIImage(named: "")
         Img3.image=UIImage(named: "")
         Img1.isUserInteractionEnabled=true

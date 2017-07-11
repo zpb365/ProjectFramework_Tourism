@@ -12,8 +12,9 @@ class SfitParmterModel: NSObject {
     var ComprehensiveSorting:[ComprehensiveSortingEnumList_Item]?
     var SalesPriority:[SalesPriorityEnumList_Item]?
     var Screening:[TitleList_Item]?
+    var Classing:[Classing_Item]?
     override static func mj_objectClassInArray() -> [AnyHashable : Any]! {
-        return ["ComprehensiveSorting":ComprehensiveSortingEnumList_Item.self,"SalesPriority":SalesPriorityEnumList_Item.self,"Screening":TitleList_Item.self]
+        return ["ComprehensiveSorting":ComprehensiveSortingEnumList_Item.self,"SalesPriority":SalesPriorityEnumList_Item.self,"Screening":TitleList_Item.self,"Classing":Classing_Item.self]
     }
 }
 //综合排序
@@ -38,4 +39,17 @@ class TitleList_Item: NSObject {
 class TitleList_SubItem: NSObject {
     var ID=0
     var Title=""
+}
+//分类
+class Classing_Item: NSObject {
+    var Screening = ""
+    var ScreeningItem:[ScreeningList_Item]?
+    override static func mj_objectClassInArray() -> [AnyHashable : Any]! {
+        return ["ScreeningItem":ScreeningList_Item.self]
+    }
+}
+//分类下的子类
+class ScreeningList_Item: NSObject {
+    var ID = 0
+    var Title = ""
 }

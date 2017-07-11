@@ -79,7 +79,6 @@ class ClassifCation: CustomTemplateViewController ,UICollectionViewDelegateFlowL
     // MARK: 跳转
     func push(num: Int){
         let chanleID = self.viewModel.ListData[num]._channelid
-        
         switch chanleID {
             //景区
         case 1:
@@ -132,8 +131,18 @@ class ClassifCation: CustomTemplateViewController ,UICollectionViewDelegateFlowL
             vc.title = self.viewModel.ListData[num]._channelname
             self.navigationController?.show(vc, sender: self  )
             break
+        case 12:
+            let vc = CommonFunction.ViewControllerWithStoryboardName("Market", Identifier: "Market") as! Market
+            vc.title = self.viewModel.ListData[num]._channelname
+            self.navigationController?.show(vc, sender: self  )
+            break
+        case 13:
+            let vc = CommonFunction.ViewControllerWithStoryboardName("Street", Identifier: "Street") as! Street
+            vc.title = self.viewModel.ListData[num]._channelname
+            self.navigationController?.show(vc, sender: self  )
+            break
         default:
-            print(num)
+            
             break
         }
     }

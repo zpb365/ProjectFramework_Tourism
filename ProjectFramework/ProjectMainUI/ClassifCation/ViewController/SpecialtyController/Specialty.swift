@@ -49,6 +49,9 @@ class Specialty: CustomTemplateViewController,PYSearchViewControllerDelegate {
         self.remexParmeter(tag: true, searchText: "")
         self.header.endRefreshing()
     }
+    override func Error_Click() {
+        self.remexParmeter(tag: true, searchText: "")
+    }
     //MARK: 获取筛选数据
     func getSiftDate() -> Void {
         siftViewModel.GetScreeningCondition(ChannelID:self.ChannelID) { (result) in
